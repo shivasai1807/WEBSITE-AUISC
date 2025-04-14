@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,6 +15,15 @@ const navLinks = [
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   return (
     <header className="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
@@ -70,12 +79,12 @@ const Header = () => {
                   <Link
                     key={link.path}
                     to={link.path}
+                    onClick={handleLinkClick}
                     className={`px-4 py-2 ${
                       location.pathname === link.path
                         ? 'text-blue-600 font-medium bg-blue-50'
                         : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                     } transition-all duration-200 rounded-md`}
-                    onClick={() => setIsOpen(false)}
                   >
                     {link.label}
                   </Link>
