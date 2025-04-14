@@ -1,13 +1,13 @@
-import { Github, Linkedin, Twitter, Instagram } from 'lucide-react';
+import { Linkedin, Instagram, Mail, MessageCircleMore } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/auisc', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/company/auisc', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com/auisc', label: 'Twitter' },
-    { icon: Instagram, href: 'https://instagram.com/auisc', label: 'Instagram' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/iucee-au-37163a310', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://www.instagram.com/iucee.au', label: 'Instagram' },
+    { icon: Mail, href: 'mailto:auiucee@gmail.com', label: 'Email' },
+    { icon: MessageCircleMore, href: 'https://whatsapp.com/channel/0029VacEQKs9cDDaV22u2K2g', label: 'WhatsApp Channel' },
   ];
 
   return (
@@ -50,7 +50,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Connect With Us */}
           <div>
             <h3 className="text-xl font-bold mb-4">Connect With Us</h3>
             <div className="flex space-x-4">
@@ -79,4 +79,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;
