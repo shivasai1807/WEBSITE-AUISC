@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
+import AUISC_Logo from '../assets/AUISC_Logo.png'; // adjust the path if needed
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,9 +38,9 @@ const Home = () => {
         >
           <div className="parallax-logo absolute inset-0 flex items-center justify-center">
             <img
-              src="/logo.png"
+              src={AUISC_Logo}
               alt="AUISC Logo"
-              className="w-64 h-64 object-contain opacity-10"
+              className="w-64 h-64 object-contain opacity-20"
             />
           </div>
         </div>
@@ -88,15 +90,15 @@ const Home = () => {
             <h2 className="text-4xl font-bold mb-4">AUNSF 3.0</h2>
             <p className="text-xl mb-8">
               Join us for the third edition of Anurag University National Student
-              Festival. Experience innovation, creativity, and excellence.
+              Forum. Experience innovation, creativity, and excellence.
             </p>
             <a
-              href="https://aunsf.anuraguniversity.in"
+              href="/events"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors"
             >
-              Learn More
+              "Sub_Domian_Link"
               <ArrowRight className="ml-2" size={20} />
             </a>
           </motion.div>
