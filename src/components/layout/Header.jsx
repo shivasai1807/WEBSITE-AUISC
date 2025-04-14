@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
   { path: '/', label: 'Home' },
@@ -32,7 +32,7 @@ const Header = () => {
                 to={link.path}
                 className={`${
                   location.pathname === link.path
-                    ? 'text-blue-600'
+                    ? 'text-blue-600 font-medium'
                     : 'text-gray-600 hover:text-blue-600'
                 } transition-colors duration-200`}
               >
@@ -43,39 +43,47 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden p-2 rounded-lg hover:bg-blue-50 transition-colors duration-200"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? (
+              <X className="text-blue-600" size={24} />
+            ) : (
+              <Menu className="text-blue-600" size={24} />
+            )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden mt-4"
-          >
-            <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`${
-                    location.pathname === link.path
-                      ? 'text-blue-600'
-                      : 'text-gray-600 hover:text-blue-600'
-                  } transition-colors duration-200`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden overflow-hidden"
+            >
+              <div className="flex flex-col space-y-4 py-4 bg-white rounded-lg shadow-lg mt-2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`px-4 py-2 ${
+                      location.pathname === link.path
+                        ? 'text-blue-600 font-medium bg-blue-50'
+                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                    } transition-all duration-200 rounded-md`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   );

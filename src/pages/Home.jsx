@@ -36,13 +36,13 @@ const Home = () => {
           ref={parallaxRef}
           className="absolute inset-0 bg-gradient-to-b from-blue-50 to-white"
         >
-          <div className="parallax-logo absolute inset-0 flex items-center justify-center">
+          {/* <div className="parallax-logo absolute inset-0 flex items-center justify-center">
             <img
               src={AUISC_Logo}
               alt="AUISC Logo"
               className="w-64 h-64 object-contain opacity-20"
             />
-          </div>
+          </div> */}
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
