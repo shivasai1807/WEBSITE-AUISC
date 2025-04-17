@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import AUISC_Logo from '../assets/AUISC_Logo.png'; // adjust the path if needed
+import { Link } from 'react-router-dom';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -66,13 +67,20 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <a
+            {/* <a
               href="/events"
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               Explore Events
               <ArrowRight className="ml-2" size={20} />
-            </a>
+            </a> */}
+            <Link
+              to="/events"
+              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+>
+                   Explore Events
+                    <ArrowRight className="ml-2" size={20} />
+            </Link>
           </motion.div>
         </div>
       </section>
