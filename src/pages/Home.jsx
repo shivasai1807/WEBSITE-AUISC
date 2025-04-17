@@ -100,7 +100,7 @@ const Home = () => {
               Join us for the third edition of Anurag University National Student
               Forum. Experience innovation, creativity, and excellence.
             </p>
-            <a
+            {/* <a
               href="/events"
               target="_blank"
               rel="noopener noreferrer"
@@ -108,7 +108,14 @@ const Home = () => {
             >
               "Sub_Domian_Link"
               <ArrowRight className="ml-2" size={20} />
-            </a>
+            </a> */}
+            <Link
+              to="/events"
+              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+>
+                   Explore Event
+                    <ArrowRight className="ml-2" size={20} />
+            </Link>
           </motion.div>
         </div>
       </section>
