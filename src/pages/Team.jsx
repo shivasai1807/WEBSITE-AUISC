@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const Team = () => {
   return (
@@ -12,12 +12,10 @@ const Team = () => {
         >
           Our Team
         </motion.h1>
-        <p className="text-center text-gray-600 mb-12">
-          Coming soon...
-        </p>
+        <p className="text-center text-gray-600 mb-12">Coming ..</p>
       </div>
     </div>
   );
 };
 
-export default Team; 
+export default Team;
