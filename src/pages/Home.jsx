@@ -1,11 +1,10 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight } from 'lucide-react';
-import AUISC_Logo from '../assets/AUISC_Logo.png'; // adjust the path if needed
-import { Link } from 'react-router-dom';
-
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight } from "lucide-react";
+import AUISC_Logo from "../assets/AUISC_Logo.png"; // adjust the path if needed
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,13 +13,13 @@ const Home = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to('.parallax-logo', {
+      gsap.to(".parallax-logo", {
         yPercent: -50,
-        ease: 'none',
+        ease: "none",
         scrollTrigger: {
           trigger: parallaxRef.current,
-          start: 'top top',
-          end: 'bottom top',
+          start: "top top",
+          end: "bottom top",
           scrub: true,
         },
       });
@@ -30,7 +29,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div
@@ -77,9 +76,9 @@ const Home = () => {
             <Link
               to="/events"
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
->
-                   Explore Events
-                    <ArrowRight className="ml-2" size={20} />
+            >
+              Explore Events
+              <ArrowRight className="ml-2" size={20} />
             </Link>
           </motion.div>
         </div>
@@ -97,8 +96,8 @@ const Home = () => {
           >
             <h2 className="text-4xl font-bold mb-4">AUNSF 3.0</h2>
             <p className="text-xl mb-8">
-              Join us for the third edition of Anurag University National Student
-              Forum. Experience innovation, creativity, and excellence.
+              Join us for the third edition of Anurag University National
+              Student Forum. Experience innovation, creativity, and excellence.
             </p>
             {/* <a
               href="/events"
@@ -112,9 +111,9 @@ const Home = () => {
             <Link
               to="/events"
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
->
-                   Explore Event
-                    <ArrowRight className="ml-2" size={20} />
+            >
+              Explore Event
+              <ArrowRight className="ml-2" size={20} />
             </Link>
           </motion.div>
         </div>
@@ -126,19 +125,19 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                title: 'Innovation',
+                title: "Innovation",
                 description:
-                  'Fostering creativity and innovative thinking among students',
+                  "Fostering creativity and innovative thinking among students",
               },
               {
-                title: 'Learning',
+                title: "Learning",
                 description:
-                  'Providing opportunities for hands-on learning and skill development',
+                  "Providing opportunities for hands-on learning and skill development",
               },
               {
-                title: 'Community',
+                title: "Community",
                 description:
-                  'Building a strong network of future engineering leaders',
+                  "Building a strong network of future engineering leaders",
               },
             ].map((feature, index) => (
               <motion.div
@@ -160,4 +159,4 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;

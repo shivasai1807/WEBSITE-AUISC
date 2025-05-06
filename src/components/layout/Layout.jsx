@@ -1,11 +1,12 @@
-import Header from './Header';
-import Footer from './Footer';
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen text-black flex flex-col">
       <Header />
-      <main className="flex-grow">
+      {/* Add padding-top to avoid content being hidden behind fixed navbar */}
+      <main className="flex-grow pt-[64px] px-4 sm:px-6 md:px-8">
         {children}
       </main>
       <Footer />
@@ -13,4 +14,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout; 
+export default Layout;
