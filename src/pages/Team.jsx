@@ -7,59 +7,59 @@ const teams = [
       {
         name: "Aishwarya Alichella",
         role: "President",
-        image: "src/assets/team_pics/aishwarya.webp",
+        image: "team_pics/aishwarya.webp",
       },
       {
         name: "Eshwar",
         role: "Vice President",
-        image: "src/assets/team_pics/eshwar.webp",
+        image: "team_pics/eshwar.webp",
       },
     ],
     members: [
       {
         name: "Sandhya",
         role: "General Secretary",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Ankitha",
         role: "Joint Secretary",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Kaif Shaik",
         role: "Treasurer",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Vigneshwar",
         role: "Organising Lead",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Eshika",
         role: "Senior Executive Board",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Bindu Priya",
         role: "Senior Executive Board",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Raaga Samanvitha",
         role: "Ethics & Operations Head",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Vaishnavi V",
         role: "Sustainable Operations Head",
-        image: "src/assets/team_pics/",
+        image: "team_pics/vaishnavi_v.webp",
       },
       {
         name: "Jerusha",
         role: "Alumni Relations",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
     ],
   },
@@ -69,7 +69,7 @@ const teams = [
       {
         name: "Srujan M",
         role: "Research And Development Team Head",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
     ],
     members: [
@@ -79,15 +79,15 @@ const teams = [
       },
       {
         name: "Police Sreeja",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "K Rekha",
-        image: "src/assets/team_pics/rekha.webp",
+        image: "team_pics/rekha.webp",
       },
       {
         name: "Anji Reddy B",
-        image: "src/assets/team_pics/anji.webp",
+        image: "team_pics/anji.webp",
       },
     ],
   },
@@ -97,17 +97,17 @@ const teams = [
       {
         name: "Amrutha Sri",
         role: "Technical Lead",
-        image: "src/assets/team_pics/amrutha.webp",
+        image: "team_pics/amrutha.webp",
       },
     ],
     members: [
       {
         name: "Pavan Kumar",
-        image: "src/assets/team_pics/pavan.webp",
+        image: "team_pics/pavan.webp",
       },
       {
         name: "Deekshitha Reddy",
-        image: "src/assets/team_pics/deekshitha.webp",
+        image: "team_pics/deekshitha.webp",
       },
     ],
   },
@@ -117,7 +117,7 @@ const teams = [
       {
         name: "Poornima Guda",
         role: "Design Team Head",
-        image: "src/assets/team_pics/poornima.webp",
+        image: "team_pics/poornima.webp",
       },
     ],
     members: [
@@ -127,7 +127,7 @@ const teams = [
       },
       {
         name: "Pranathi",
-        image: "src/assets/team_pics/pranathi.webp",
+        image: "team_pics/pranathi.webp",
       },
       {
         name: "Uma Sri",
@@ -135,11 +135,11 @@ const teams = [
       },
       {
         name: "Tella Vaishnavi",
-        image: "src/assets/team_pics/vaishnavi.webp",
+        image: "team_pics/vaishnavi.webp",
       },
       {
         name: "Vamshi Krishna",
-        image: "src/assets/team_pics/vamshi_design.webp",
+        image: "team_pics/vamshi_design.webp",
       },
     ],
   },
@@ -149,17 +149,17 @@ const teams = [
       {
         name: "Akshitha T",
         role: "Marketing Team Head",
-        image: "src/assets/team_pics/akshitha.webp",
+        image: "team_pics/akshitha.webp",
       },
     ],
     members: [
       {
         name: "Abhiram",
-        image: "src/assets/team_pics/abhiram.webp",
+        image: "team_pics/abhiram.webp",
       },
       {
         name: "Sahithi",
-        image: "src/assets/team_pics/sahithi.webp",
+        image: "team_pics/sahithi.webp",
       },
     ],
   },
@@ -175,19 +175,19 @@ const teams = [
     members: [
       {
         name: "Thanughna D",
-        image: "src/assets/team_pics/thanughana.webp",
+        image: "team_pics/thanughana.webp",
       },
       {
         name: "Sukruth B",
-        image: "src/assets/team_pics/sukruth.webp",
+        image: "team_pics/sukruth.webp",
       },
       {
         name: "S. F. Cecilia",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Keerthana",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
     ],
   },
@@ -203,7 +203,7 @@ const teams = [
     members: [
       {
         name: "Sumad",
-        image: "src/assets/team_pics/sumad.webp",
+        image: "team_pics/sumad.webp",
       },
       {
         name: "Jahnavi",
@@ -211,7 +211,7 @@ const teams = [
       },
       {
         name: "Agrathi Sheela",
-        image: "src/assets/team_pics/agrathi.webp",
+        image: "team_pics/agrathi.webp",
       },
       {
         name: "Sri Charan Raj",
@@ -225,29 +225,29 @@ const teams = [
       {
         name: "Abhay",
         role: "Social Media Team Head",
-        image: "src/assets/team_pics/abhay.webp",
+        image: "team_pics/abhay.webp",
       },
     ],
     members: [
       {
         name: "Ayesha Shaik",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Vyshali Katta",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Shiva Sai",
-        image: "src/assets/team_pics/",
+        image: "team_pics/",
       },
       {
         name: "Ram Swaroop",
-        image: "src/assets/team_pics/ram",
+        image: "team_pics/ram",
       },
       {
         name: "Siri Chandana Reddy",
-        image: "src/assets/team_pics/siriChandana.webp",
+        image: "team_pics/siriChandana.webp",
       },
     ],
   },
