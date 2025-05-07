@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import AUISCLogo from "./AUISC_Logo.png";
+import AUISCLogo from "/AUISC_Logo.png";
 
 const navLinks = [
   { path: "/", label: "Home" },
