@@ -30,7 +30,7 @@ const Footer = () => {
           <div>
             <div className="w-36 h-16 md:w-48 md:h-20 mb-4">
               <img
-                src="src/components/layout/AUISC_Logo.png"
+                src="/AUISC_Logo.png"
                 alt="AUISC Logo"
                 className="w-full h-full object-contain"
               />
