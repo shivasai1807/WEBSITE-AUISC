@@ -14,7 +14,7 @@ const Footer = () => {
       href: "https://www.instagram.com/iucee.au",
       label: "Instagram",
     },
-    { icon: Mail, href: "mailto:auiucee@gmail.com", label: "Email" },
+    { icon: Mail, href: "mailto:iucee@anurag.edu.in", label: "Email" },
     {
       icon: MessageCircleMore,
       href: "https://whatsapp.com/channel/0029VacEQKs9cDDaV22u2K2g",
