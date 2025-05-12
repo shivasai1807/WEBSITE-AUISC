@@ -60,8 +60,8 @@ const Contact = () => {
           >
             <div className="flex items-center space-x-4">
               <Mail className="text-blue-500" size={24} />
-              <a href="mailto:iucee.au@gmail.com" className="text-gray-700 hover:text-blue-600 transition">
-                iucee.au@gmail.com
+              <a href="mailto:iucee@anurag.edu.in" className="text-gray-700 hover:text-blue-600 transition">
+                iucee@anurag.edu.in
               </a>
             </div>
 
