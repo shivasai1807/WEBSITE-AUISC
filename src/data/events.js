@@ -6,11 +6,11 @@ export const events = [
     description: "Description of Event 1",
     images: [
       {
-        url: "/pics_png/GALLERY1.jpg",
+        url: "/pics_png/GALLERY1.webp",
         description: "Description for image 1"
       },
       {
-        url: "/pics_png/GALLERY2.jpg",
+        url: "/pics_png/GALLERY2.webp",
         description: "Description for image 2"
       },
       // Add more images as needed
@@ -23,11 +23,11 @@ export const events = [
     description: "Description of Event 2",
     images: [
       {
-        url: "/pics_png/GALLERY5.jpg",
+        url: "/pics_png/GALLERY5.webp",
         description: "Description for image 1"
       },
       {
-        url: "/pics_png/GALLERY6.jpg",
+        url: "/pics_png/GALLERY6.webp",
         description: "Description for image 2"
       },
       // Add more images as needed

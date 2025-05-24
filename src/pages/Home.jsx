@@ -22,11 +22,11 @@ function getTimeLeft(targetDate) {
 gsap.registerPlugin(ScrollTrigger);
 
 const galleryImages = [
-  "/pics_png/GALLERY1.jpg",
-  "/pics_png/GALLERY2.jpg",
-  "/pics_png/GALLERY5.jpg",
-  "/pics_png/GALLERY6.jpg",
-  "/pics_png/GALLERY8.jpg",
+  "/pics_png/GALLERY1.webp",
+  "/pics_png/GALLERY2.webp",
+  "/pics_png/GALLERY5.webp",
+  "/pics_png/GALLERY6.webp",
+  "/pics_png/GALLERY8.webp",
   
 ];
 
