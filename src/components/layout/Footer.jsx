@@ -28,9 +28,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {/* Logo and About */}
           <div>
-            <div className="w-36 h-16 md:w-48 md:h-20 mb-4">
+            <div className="w-48 h-20 md:w-64 md:h-24 mb-4">
               <img
-                src="/AUISC_Logo.png"
+                src="/pics_png/AUISC White Logo.png"
                 alt="AUISC Logo"
                 className="w-full h-full object-contain"
               />
