@@ -17,37 +17,37 @@ export const teams = [
       {
         name: "Sandhya",
         role: "General Secretary",
-        image: "team_pics/",
+        image: "team_pics/sandhya.webp",
       },
       {
         name: "Ankitha",
         role: "Joint Secretary",
-        image: "team_pics/",
+        image: "team_pics/ankitha.webp",
       },
       {
         name: "Kaif Shaik",
         role: "Treasurer",
-        image: "team_pics/",
+        image: "team_pics/kaif.webp",
       },
       {
         name: "Vigneshwar",
         role: "Organising Lead",
-        image: "team_pics/",
+        image: "team_pics/vigneshwar.webp",
       },
       {
         name: "Eshika",
         role: "Senior Executive Board",
-        image: "team_pics/",
+        image: "team_pics/eshika.webp",
       },
       {
         name: "Bindu Priya",
         role: "Senior Executive Board",
-        image: "team_pics/",
+        image: "team_pics/bindu.webp",
       },
       {
         name: "Raaga Samanvitha",
         role: "Ethics & Operations Head",
-        image: "team_pics/",
+        image: "team_pics/raaga.webp",
       },
       {
         name: "Vaishnavi V",
@@ -57,7 +57,7 @@ export const teams = [
       {
         name: "Jerusha",
         role: "Alumni Relations",
-        image: "team_pics/",
+        image: "team_pics/jerusha.webp",
       },
     ],
   },
@@ -67,17 +67,13 @@ export const teams = [
       {
         name: "Srujan M",
         role: "Research And Development Team Head",
-        image: "team_pics/",
+        image: "team_pics/srujan.webp",
       },
     ],
     members: [
       {
-        name: "Pranav",
-        image: "",
-      },
-      {
         name: "Police Sreeja",
-        image: "team_pics/",
+        image: "team_pics/sreeja.webp",
       },
       {
         name: "K Rekha",
@@ -86,6 +82,30 @@ export const teams = [
       {
         name: "Anji Reddy B",
         image: "team_pics/anji.webp",
+      },
+      {
+        name: "Pranav Kothapalli",
+        image: "/team_pics/pranav.webp",
+      },
+      {
+        name: "Chinmayee Mada",
+        image: "/team_pics/chinmayee.webp",
+      },
+      {
+        name: "Kota Sai Sruthi",
+        image: "/team_pics/sruthi.webp",
+      },
+      {
+        name: "Saketh Gade",
+        image: "/team_pics/saketh.webp",
+      },
+      {
+        name: "Gudla Greeshmi Ratna",
+        image: "/team_pics/greeshmi.webp",
+      },
+      {
+        name: "Nalleboina Prasanna Lakshmi",
+        image: "/team_pics/prasanna.webp",
       },
     ],
   },
@@ -106,6 +126,22 @@ export const teams = [
       {
         name: "Deekshitha Reddy",
         image: "team_pics/deekshitha.webp",
+      },
+      {
+        name: "Siddu",
+        image: "/team_pics/siddu.webp",
+      },
+      {
+        name: "Sneha",
+        image: "/team_pics",
+      },
+      {
+        name: "Yagneshwar",
+        image: "/team_pics",
+      },
+      {
+        name: "Sriya Sushil",
+        image: "/team_pics",
       },
     ],
   },
@@ -139,6 +175,26 @@ export const teams = [
         name: "Vamshi Krishna",
         image: "team_pics/vamshi_design.webp",
       },
+      {
+        name: "Anwesha",
+        image: "/team_pics",
+      },
+      {
+        name: "Harshitha",
+        image: "/team_pics",
+      },
+      {
+        name: "Sailaja",
+        image: "/team_pics",
+      },
+      {
+        name: "Vijaya Lakshmi",
+        image: "/team_pics",
+      },
+      {
+        name: "Pradeepa",
+        image: "/team_pics",
+      },
     ],
   },
   {
@@ -159,6 +215,38 @@ export const teams = [
         name: "Sahithi",
         image: "team_pics/sahithi.webp",
       },
+      {
+        name: "Aishwarya",
+        image: "/team_pics",
+      },
+      {
+        name: "Amulya",
+        image: "/team_pics",
+      },
+      {
+        name: "Ashritha",
+        image: "/team_pics",
+      },
+      {
+        name: "Dharun",
+        image: "/team_pics",
+      },
+      {
+        name: "Durga Prasad",
+        image: "/team_pics",
+      },
+      {
+        name: "Hakshala",
+        image: "/team_pics",
+      },
+      {
+        name: "Sneha",
+        image: "/team_pics",
+      },
+      {
+        name: "Srivarsha",
+        image: "/team_pics",
+      },
     ],
   },
   {
@@ -167,7 +255,7 @@ export const teams = [
       {
         name: "Sonal G",
         role: "Content Team Head",
-        image: "https://via.placeholder.com/200",
+        image: "team_pics/sonal.webp",
       },
     ],
     members: [
@@ -187,6 +275,22 @@ export const teams = [
         name: "Keerthana",
         image: "team_pics/",
       },
+      {
+        name: "Nakshatra",
+        image: "/team_pics",
+      },
+      {
+        name: "Rachitha",
+        image: "/team_pics",
+      },
+      {
+        name: "Noel",
+        image: "/team_pics",
+      },
+      {
+        name: "Yashaswini",
+        image: "/team_pics",
+      },
     ],
   },
   {
@@ -195,7 +299,7 @@ export const teams = [
       {
         name: "Shyamala",
         role: "Public Relations Team Head",
-        image: "https://via.placeholder.com/200",
+        image: "team_pics/shyamala.webp",
       },
     ],
     members: [
@@ -205,7 +309,7 @@ export const teams = [
       },
       {
         name: "Jahnavi",
-        image: "https://via.placeholder.com/200",
+        image: "team_pics/jahnavi.webp",
       },
       {
         name: "Agrathi Sheela",
@@ -213,7 +317,31 @@ export const teams = [
       },
       {
         name: "Sri Charan Raj",
-        image: "https://via.placeholder.com/200",
+        image: "team_pics/sri_charan.webp",
+      },
+      {
+        name: "Rishi",
+        image: "/team_pics",
+      },
+      {
+        name: "Chethana",
+        image: "/team_pics",
+      },
+      {
+        name: "Inderneel",
+        image: "/team_pics",
+      },
+      {
+        name: "Saketh",
+        image: "/team_pics",
+      },
+      {
+        name: "Theerdha",
+        image: "/team_pics",
+      },
+      {
+        name: "Trisha Reddy",
+        image: "/team_pics",
       },
     ],
   },
@@ -229,7 +357,7 @@ export const teams = [
     members: [
       {
         name: "Ayesha Shaik",
-        image: "team_pics/",
+        image: "team_pics/ayesha.webp",
       },
       {
         name: "Vyshali Katta",
@@ -237,15 +365,43 @@ export const teams = [
       },
       {
         name: "Shiva Sai",
-        image: "team_pics/",
+        image: "team_pics/shiva.webp",
       },
       {
         name: "Ram Swaroop",
-        image: "team_pics/ram",
+        image: "team_pics/ram.webp",
       },
       {
         name: "Siri Chandana Reddy",
         image: "team_pics/siriChandana.webp",
+      },
+      {
+        name: "Akhil",
+        image: "/team_pics",
+      },
+      {
+        name: "Lakshyatha",
+        image: "/team_pics",
+      },
+      {
+        name: "Rajith",
+        image: "/team_pics",
+      },
+      {
+        name: "Sayyad Pasha",
+        image: "/team_pics",
+      },
+      {
+        name: "Neeraj",
+        image: "/team_pics",
+      },
+      {
+        name: "Abhiram",
+        image: "/team_pics",
+      },
+      {
+        name: "Shiva Vardhan",
+        image: "/team_pics",
       },
     ],
   },
