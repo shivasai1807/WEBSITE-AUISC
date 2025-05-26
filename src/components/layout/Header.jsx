@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from "gsap";
+// import SplitText from "gsap/SplitText"; // Uncomment if you have Club GSAP
 import AUISCLogo from "/AUISC_Logo.png";
 
 const navLinks = [
@@ -13,13 +14,125 @@ const navLinks = [
   { path: "/contact", label: "Contact" },
 ];
 
+const Path = (props) => (
+  <motion.path
+    fill="transparent"
+    strokeWidth="3"
+    stroke="hsl(0, 0%, 18%)"
+    strokeLinecap="round"
+    {...props}
+  />
+);
+
+const MenuToggle = ({ toggle, isOpen }) => (
+  <motion.button
+    className="outline-none border-none select-none cursor-pointer relative w-12 h-12 rounded-full bg-transparent md:hidden z-50"
+    onClick={toggle}
+    aria-label="Toggle menu"
+    initial={false}
+    animate={isOpen ? "open" : "closed"}
+  >
+    <svg width="23" height="23" viewBox="0 0 23 23" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <Path
+        variants={{
+          closed: { d: "M 2 2.5 L 20 2.5" },
+          open: { d: "M 3 16.5 L 17 2.5" },
+        }}
+      />
+      <Path
+        d="M 2 9.423 L 20 9.423"
+        variants={{
+          closed: { opacity: 1 },
+          open: { opacity: 0 },
+        }}
+        transition={{ duration: 0.1 }}
+      />
+      <Path
+        variants={{
+          closed: { d: "M 2 16.346 L 20 16.346" },
+          open: { d: "M 3 2.5 L 17 16.346" },
+        }}
+      />
+    </svg>
+  </motion.button>
+);
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const navRefs = useRef([]);
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
-    if (isOpen) setIsOpen(false);
-  }, [location.pathname]);
+    gsap.set(navRefs.current, { opacity: 0, y: -50 });
+    gsap.to(navRefs.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "back.out(1.7)",
+    });
+  }, []);
+
+  const navVariants = {
+    open: {
+      transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+    },
+    closed: {
+      transition: { staggerChildren: 0.05, staggerDirection: -1 },
+    },
+  };
+
+  const itemVariants = {
+    open: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        y: { stiffness: 1000, velocity: -100 },
+      },
+    },
+    closed: {
+      y: 50,
+      opacity: 0,
+      transition: {
+        y: { stiffness: 1000 },
+      },
+    },
+  };
+
+  const sidebarVariants = {
+    open: {
+      clipPath: "circle(1000px at 40px 40px)",
+      transition: {
+        type: "spring",
+        stiffness: 20,
+        restDelta: 2,
+      },
+    },
+    closed: {
+      clipPath: "circle(30px at 40px 40px)",
+      transition: {
+        delay: 0.2,
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+      },
+    },
+  };
+
+  const handleLinkClick = (path) => {
+    // Close menu immediately
+    setIsOpen(false);
+    // Navigate after a small delay to allow animation to start
+    setTimeout(() => {
+      navigate(path);
+    }, 50);
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-sm shadow-sm">
@@ -36,9 +149,10 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
+            {navLinks.map((link, index) => (
               <Link
                 key={link.path}
+                ref={(el) => (navRefs.current[index] = el)}
                 to={link.path}
                 className={`${
                   location.pathname === link.path
@@ -52,45 +166,47 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden p-2 ml-2 rounded-md border border-gray-200 shadow-sm hover:bg-gray-100 transition-colors duration-200"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? (
-              <X className="text-blue-600" size={24} />
-            ) : (
-              <Menu className="text-blue-600" size={24} />
-            )}
-          </button>
+          <MenuToggle toggle={() => setIsOpen(!isOpen)} isOpen={isOpen} />
         </div>
 
         {/* Mobile Navigation */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden w-full overflow-hidden"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={sidebarVariants}
+              className="md:hidden fixed top-0 left-0 w-full h-screen bg-white z-40"
             >
-              <div className="flex flex-col space-y-2 py-4 bg-white shadow-md border-t border-gray-200 w-full">
-                {navLinks.map((link) => (
-                  <Link
+              <motion.div
+                className="absolute top-20 left-0 w-full px-4"
+                variants={navVariants}
+              >
+                {navLinks.map((link, index) => (
+                  <motion.div
                     key={link.path}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`px-4 py-2 ${
-                      location.pathname === link.path
-                        ? "text-blue-600 font-semibold bg-blue-50"
-                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
-                    } transition-all duration-200 rounded-md`}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {link.label}
-                  </Link>
+                    <Link
+                      to={link.path}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleLinkClick(link.path);
+                      }}
+                      className={`block w-full text-left px-4 py-3 ${
+                        location.pathname === link.path
+                          ? "text-blue-600 font-semibold bg-blue-50"
+                          : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                      } transition-all duration-200 rounded-md mb-2`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>

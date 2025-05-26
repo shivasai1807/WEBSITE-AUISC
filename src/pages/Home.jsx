@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, ChevronDown, X } from "lucide-react";
 import AUISC_Logo from "../assets/AUISC_Logo.png"; // adjust the path if needed
 import { Link } from "react-router-dom";
+import ParticleBackground from "../components/ParticleBackground";
 
 // Countdown utility
 function getTimeLeft(targetDate) {
@@ -98,9 +99,10 @@ const Home = () => {
     <div className="w-full overflow-hidden min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <ParticleBackground />
         <div
           ref={parallaxRef}
-          className="absolute inset-0 bg-gradient-to-b from-blue-50 to-white"
+          className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-white/50 backdrop-blur-sm"
         >
           {/* <div className="parallax-logo absolute inset-0 flex items-center justify-center">
             <img
