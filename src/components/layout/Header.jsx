@@ -191,19 +191,19 @@ const Header = () => {
                     whileTap={{ scale: 0.95 }}
                   >
                     <Link
-                      to={link.path}
+                    to={link.path}
                       onClick={(e) => {
                         e.preventDefault();
                         handleLinkClick(link.path);
                       }}
                       className={`block w-full text-left px-4 py-3 ${
-                        location.pathname === link.path
-                          ? "text-blue-600 font-semibold bg-blue-50"
-                          : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                      location.pathname === link.path
+                        ? "text-blue-600 font-semibold bg-blue-50"
+                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
                       } transition-all duration-200 rounded-md mb-2`}
-                    >
-                      {link.label}
-                    </Link>
+                  >
+                    {link.label}
+                  </Link>
                   </motion.div>
                 ))}
               </motion.div>

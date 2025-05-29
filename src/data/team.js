@@ -6,11 +6,13 @@ export const teams = [
         name: "Aishwarya Alichella",
         role: "President",
         image: "team_pics/aishwarya.webp",
+        linkedin: "https://www.linkedin.com/in/aishwarya-alichella"
       },
       {
         name: "Eshwar",
         role: "Vice President",
         image: "team_pics/eshwar.webp",
+        linkedin: "https://www.linkedin.com/in/eshwar"
       },
     ],
     members: [
@@ -18,6 +20,7 @@ export const teams = [
         name: "Sandhya",
         role: "General Secretary",
         image: "team_pics/sandhya.webp",
+        linkedin: "https://www.linkedin.com/in/sandhya"
       },
       {
         name: "Ankitha",
@@ -32,7 +35,7 @@ export const teams = [
       {
         name: "Vigneshwar",
         role: "Organising Lead",
-        image: "team_pics/vigneshwar.webp",
+        image: "team_pics/vignesh.webp",
       },
       {
         name: "Eshika",
@@ -73,7 +76,7 @@ export const teams = [
     members: [
       {
         name: "Police Sreeja",
-        image: "team_pics/sreeja.webp",
+        image: "team_pics/sreeja_p.webp",
       },
       {
         name: "K Rekha",
@@ -100,8 +103,8 @@ export const teams = [
         image: "/team_pics/saketh.webp",
       },
       {
-        name: "Gudla Greeshmi Ratna",
-        image: "/team_pics/greeshmi.webp",
+        name: "Gudla Greshmi Ratna",
+        image: "/team_pics/greshmi.webp",
       },
       {
         name: "Nalleboina Prasanna Lakshmi",

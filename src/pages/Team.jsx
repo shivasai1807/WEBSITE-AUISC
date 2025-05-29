@@ -3,6 +3,13 @@ import TeamCard from "../components/TeamCard";
 import { teams } from "../data/team";
 
 const Team = () => {
+  const scrollToTeam = (teamId) => {
+    const element = document.getElementById(teamId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="min-h-screen pt-20 pb-20">
       <div className="container mx-auto px-4">
@@ -15,10 +22,62 @@ const Team = () => {
           Our Team
         </motion.h1>
 
+        {/* Team Navigation Menu */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="bg-white shadow-md rounded-lg mb-8 p-4"
+        >
+          <div className="flex flex-wrap justify-center gap-2">
+            <motion.button
+              onClick={() => scrollToTeam("faculty-coordinator")}
+              className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              Faculty Coordinator
+            </motion.button>
+            {teams.map((team) => (
+              <motion.button
+                key={team.title}
+                onClick={() => scrollToTeam(team.title.toLowerCase().replace(/\s+/g, "-"))}
+                className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                {team.title}
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+
         <div className="space-y-16">
+          {/* Faculty Coordinator Section */}
+          <motion.div
+            id="faculty-coordinator"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-gray-50 rounded-xl p-8"
+          >
+            <h2 className="text-2xl font-bold mb-6 text-center">Faculty Coordinator</h2>
+            <div className="flex flex-wrap justify-center gap-8">
+              <TeamCard
+                member={{
+                  name: "DR.Narendhar Singh",
+                  role: "Faculty Coordinator",
+                  image: "/team_pics/ns_sir.webp",
+                  linkedin: "https://www.linkedin.com/in/dr-narendhar-singh-ba7188178/"
+                }}
+              />
+            </div>
+          </motion.div>
+
           {teams.map((team, index) => (
             <motion.div
               key={team.title}
+              id={team.title.toLowerCase().replace(/\s+/g, "-")}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
