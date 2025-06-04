@@ -53,7 +53,7 @@ const faqs = [
 const Home = () => {
   const parallaxRef = useRef(null);
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(new Date("2025-07-11T00:00:00")));
-  const [openFaq, setOpenFaq] = useState(null);
+  const [openFaqs, setOpenFaqs] = useState([]);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImg, setLightboxImg] = useState(null);
 
@@ -95,6 +95,14 @@ const Home = () => {
     setLightboxImg(null);
   };
 
+  const toggleFaq = (idx) => {
+    setOpenFaqs(prev => 
+      prev.includes(idx) 
+        ? prev.filter(i => i !== idx)
+        : [...prev, idx]
+    );
+  };
+
   return (
     <div className="w-full overflow-hidden min-h-screen bg-white">
       {/* Hero Section */}
@@ -102,7 +110,7 @@ const Home = () => {
         <ParticleBackground />
         <div
           ref={parallaxRef}
-          className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-white/50 backdrop-blur-sm"
+          className="absolute inset-0 bg-gradient-to-b from-blue-50/20 to-white/30 backdrop-blur-sm"
         >
           {/* <div className="parallax-logo absolute inset-0 flex items-center justify-center">
             <img
@@ -294,38 +302,63 @@ const Home = () => {
 
       {/* FAQ Section - Accordion Style */}
       <section className="py-12 bg-white border-t border-gray-200">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center mb-8 text-black">FAQs</h2>
-          <div>
-            {faqs.map((faq, idx) => (
-              <div key={idx}>
-                <button
-                  className="w-full flex justify-between items-center py-6 text-left focus:outline-none bg-white"
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  aria-expanded={openFaq === idx}
-                  style={{ borderBottom: '1px solid #000' }}
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row md:items-start md:gap-12">
+            {/* Title Section - Left side on desktop */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="md:w-1/3 mb-8 md:mb-0"
+            >
+              <h2 className="text-2xl md:text-4xl font-semibold text-gray-800 md:sticky md:top-24">
+                Frequently Asked Questions
+              </h2>
+            </motion.div>
+
+            {/* Questions Section - Right side on desktop */}
+            <div className="md:w-2/3 space-y-3">
+              {faqs.map((faq, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md"
                 >
-                  <span className="text-lg md:text-xl font-bold text-black">{faq.q}</span>
-                  <ChevronDown className={`ml-2 transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} size={28} color="#000" />
-                </button>
-                <AnimatePresence initial={false}>
-                  {openFaq === idx && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden bg-white"
-                    >
-                      <div className="pb-6 text-black text-base md:text-lg">
-                        {faq.a}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
+                  <button
+                    className="w-full flex justify-between items-center p-4 text-left focus:outline-none bg-white hover:bg-gray-50 transition-colors"
+                    onClick={() => toggleFaq(idx)}
+                    aria-expanded={openFaqs.includes(idx)}
+                  >
+                    <span className="text-base md:text-lg text-gray-800">{faq.q}</span>
+                    <ChevronDown 
+                      className={`ml-2 transition-transform duration-300 ${openFaqs.includes(idx) ? 'rotate-180' : ''}`} 
+                      size={24} 
+                      color="#4B5563" 
+                    />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {openFaqs.includes(idx) && (
+                      <motion.div
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden bg-white"
+                      >
+                        <div className="px-4 pb-4 text-gray-600 text-sm md:text-base">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
