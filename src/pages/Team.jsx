@@ -11,13 +11,13 @@ const Team = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20 pb-20">
+    <div className="min-h-screen pt-20 pb-20 bg-light-blue-purple">
       <div className="container mx-auto px-4">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl font-bold text-center mb-8"
+          className="text-4xl font-bold text-center mb-8 text-dark-blue-purple"
         >
           Our Team
         </motion.h1>
@@ -32,7 +32,7 @@ const Team = () => {
           <div className="flex flex-wrap justify-center gap-2">
             <motion.button
               onClick={() => scrollToTeam("faculty-coordinator")}
-              className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium"
+              className="px-4 py-2 bg-white hover:bg-light-blue-purple text-dark-blue-purple rounded-full text-sm font-medium"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
@@ -42,7 +42,7 @@ const Team = () => {
               <motion.button
                 key={team.title}
                 onClick={() => scrollToTeam(team.title.toLowerCase().replace(/\s+/g, "-"))}
-                className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium"
+                className="px-4 py-2 bg-white hover:bg-light-blue-purple text-dark-blue-purple rounded-full text-sm font-medium"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
@@ -59,7 +59,7 @@ const Team = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-gray-50 rounded-xl p-8"
+            className="bg-white rounded-xl p-8 text-dark-blue-purple shadow-lg"
           >
             <h2 className="text-2xl font-bold mb-6 text-center">Faculty Coordinator</h2>
             <div className="flex flex-wrap justify-center gap-8">
@@ -81,7 +81,7 @@ const Team = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-50 rounded-xl p-8"
+              className="bg-white rounded-xl p-8 text-dark-blue-purple shadow-lg"
             >
               <h2 className="text-2xl font-bold mb-6 text-center">{team.title}</h2>
               
@@ -96,7 +96,7 @@ const Team = () => {
                   {/* Team Leads */}
                   {team.leads && team.leads.length > 0 && (
                     <div className="mb-8">
-                      <h3 className="text-xl font-semibold mb-4 text-center">Team Lead</h3>
+                      <h3 className="text-xl font-semibold mb-4 text-center text-dark-blue-purple">Team Lead</h3>
                       <div className="flex flex-wrap justify-center gap-8">
                         {team.leads.map((lead) => (
                           <TeamCard key={lead.name} member={lead} />
@@ -108,7 +108,7 @@ const Team = () => {
                   {/* Team Members */}
                   {team.members && team.members.length > 0 && (
                     <div>
-                      <h3 className="text-xl font-semibold mb-4 text-center">Team Members</h3>
+                      <h3 className="text-xl font-semibold mb-4 text-center text-dark-blue-purple">Team Members</h3>
                       <div className="flex flex-wrap justify-center gap-8">
                         {team.members.map((member) => (
                           <TeamCard key={member.name} member={member} />

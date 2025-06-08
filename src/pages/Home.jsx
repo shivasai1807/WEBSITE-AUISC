@@ -104,13 +104,13 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full overflow-hidden min-h-screen bg-white">
+    <div className="w-full overflow-hidden min-h-screen bg-light-blue-purple">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <ParticleBackground />
         <div
           ref={parallaxRef}
-          className="absolute inset-0 bg-gradient-to-b from-blue-50/20 to-white/30 backdrop-blur-sm"
+          className="absolute inset-0 bg-gradient-to-b from-medium-blue/20 to-dark-blue-purple/30 backdrop-blur-sm"
         >
           {/* <div className="parallax-logo absolute inset-0 flex items-center justify-center">
             <img
@@ -125,7 +125,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold text-gray-900 mb-6"
+            className="text-5xl md:text-7xl font-bold text-dark-blue-purple mb-6"
           >
             Welcome to AUISC
           </motion.h1>
@@ -133,7 +133,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-gray-600 mb-8"
+            className="text-xl text-dark-blue-purple mb-8"
           >
             Anurag University IUCEE Student Chapter
           </motion.p>
@@ -144,7 +144,7 @@ const Home = () => {
           >
             <Link
               to="/events"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center px-6 py-3 bg-bright-orange text-white rounded-lg hover:bg-orange-yellow transition-colors"
             >
               Explore Events
               <ArrowRight className="ml-2" size={20} />
@@ -154,7 +154,7 @@ const Home = () => {
       </section>
 
       {/* AUNSF 3.0 Banner with Centered Title, Countdown, and Register Button */}
-      <section className="py-10 bg-blue-600 text-white flex items-center justify-center">
+      <section className="py-10 bg-dark-blue-purple text-white flex items-center justify-center">
         <div className="container mx-auto px-4 flex flex-col items-center justify-center">
           <h2 className="text-4xl md:text-5xl font-bold text-center">AUNSF 3.0</h2>
           <span className="text-base font-semibold mt-2 mb-6 text-center w-full" style={{color:'#fff', letterSpacing:'2px'}}>Begins in</span>
@@ -162,19 +162,19 @@ const Home = () => {
             {/* Countdown */}
             <div className="flex-1 flex flex-col items-center md:items-start w-full">
               <div className="flex gap-2 md:gap-3">
-                <div className="bg-black rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
+                <div className="bg-medium-blue rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
                   <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.days}</span>
                   <span className="uppercase text-white text-xs mt-1 tracking-widest">Days</span>
                 </div>
-                <div className="bg-black rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
+                <div className="bg-medium-blue rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
                   <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.hours}</span>
                   <span className="uppercase text-white text-xs mt-1 tracking-widest">Hours</span>
                 </div>
-                <div className="bg-black rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
+                <div className="bg-medium-blue rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
                   <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.minutes}</span>
                   <span className="uppercase text-white text-xs mt-1 tracking-widest">Minutes</span>
                 </div>
-                <div className="bg-black rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
+                <div className="bg-medium-blue rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
                   <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.seconds}</span>
                   <span className="uppercase text-white text-xs mt-1 tracking-widest">Seconds</span>
                 </div>
@@ -184,7 +184,7 @@ const Home = () => {
             <div className="flex-1 flex justify-center md:justify-end w-full mt-6 md:mt-0">
               <a
                 href="#register"
-                className="inline-flex items-center px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold shadow text-base"
+                className="inline-flex items-center px-6 py-3 bg-bright-orange text-white rounded-lg hover:bg-orange-yellow transition-colors font-semibold shadow text-base"
               >
                 Register Now
                 <ArrowRight className="ml-2" size={20} />
@@ -195,7 +195,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -221,10 +221,10 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="p-6 bg-white rounded-lg shadow-lg"
+                className="p-6 bg-light-blue-purple rounded-lg shadow-lg text-dark-blue-purple"
               >
                 <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-dark-blue-purple">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -232,133 +232,137 @@ const Home = () => {
       </section>
 
       {/* Gallery Section - Modern Collage Style */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-light-blue-purple">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8 text-blue-600">Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Main image */}
-            <div className="md:row-span-2 md:col-span-2 relative group overflow-hidden rounded-xl shadow-lg cursor-pointer" onClick={() => openLightbox(mainImage)}>
-              <img
-                src={mainImage}
-                alt="Gallery Main"
-                className="w-full h-80 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition flex items-center justify-center">
-                <span className="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition">View Image</span>
-              </div>
-            </div>
-            {/* Side images */}
-            <div className="flex flex-col gap-4">
-              {sideImages.map((src, idx) => (
-                <div key={idx} className="relative group overflow-hidden rounded-xl shadow-lg h-36 cursor-pointer" onClick={() => openLightbox(src)}>
-                  <img
-                    src={src}
-                    alt={`Gallery ${idx + 2}`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-blue-900 bg-opacity-0 group-hover:bg-opacity-30 transition flex items-center justify-center">
-                    <span className="text-white text-base font-semibold opacity-0 group-hover:opacity-100 transition">View Image</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* Bottom images grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
-            {bottomImages.map((src, idx) => (
-              <div key={idx} className="overflow-hidden rounded-xl shadow-lg group h-32 cursor-pointer" onClick={() => openLightbox(src)}>
-                <img
-                  src={src}
-                  alt={`Gallery ${idx + 6}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl font-bold text-center mb-8 text-dark-blue-purple"
+          >
+            Gallery
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[300px] gap-6">
+            {galleryImages.map((img, idx) => (
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className={`relative group overflow-hidden rounded-xl shadow-lg cursor-pointer ${
+                  idx === 0 ? 'md:col-span-2 md:row-span-2' : ''
+                }`}
+                onClick={() => openLightbox(img)}
+              >
+                <motion.img
+                  src={img}
+                  alt={`Gallery Image ${idx + 1}`}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.5 }}
                 />
-                <div className="absolute inset-0 bg-blue-900 bg-opacity-0 group-hover:bg-opacity-30 transition flex items-center justify-center">
-                  <span className="text-white text-base font-semibold opacity-0 group-hover:opacity-100 transition">View Image</span>
-                </div>
-              </div>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-t from-dark-blue-purple/80 via-dark-blue-purple/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"
+                  initial={false}
+                  whileHover={{ opacity: 1 }}
+                >
+                  <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                    <motion.span 
+                      className="text-white text-lg font-semibold block"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      View Image
+                    </motion.span>
+                  </div>
+                </motion.div>
+                <motion.div 
+                  className="absolute top-4 right-4 bg-white/90 rounded-full p-2 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-500"
+                  whileHover={{ rotate: 90 }}
+                >
+                  <ArrowRight className="text-dark-blue-purple" size={20} />
+                </motion.div>
+              </motion.div>
             ))}
           </div>
         </div>
-        {/* Lightbox Modal */}
-        {lightboxOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80" onClick={closeLightbox}>
-            <div className="relative max-w-3xl w-full mx-4" onClick={e => e.stopPropagation()}>
-              <button
-                className="absolute top-2 right-2 bg-white rounded-full p-1 shadow hover:bg-gray-200 z-10"
-                onClick={closeLightbox}
-                aria-label="Close"
-              >
-                <X size={28} className="text-black" />
-              </button>
-              <img
-                src={lightboxImg}
-                alt="Gallery Large"
-                className="w-full max-h-[80vh] object-contain rounded-xl shadow-lg bg-white"
-              />
-            </div>
-          </div>
-        )}
       </section>
 
-      {/* FAQ Section - Accordion Style */}
-      <section className="py-12 bg-white border-t border-gray-200">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row md:items-start md:gap-12">
-            {/* Title Section - Left side on desktop */}
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="md:w-1/3 mb-8 md:mb-0"
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-dark-blue-purple/90 backdrop-blur-sm flex items-center justify-center z-50"
+            onClick={closeLightbox}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-2xl md:text-4xl font-semibold text-gray-800 md:sticky md:top-24">
-                Frequently Asked Questions
-              </h2>
+              <motion.img 
+                src={lightboxImg} 
+                alt="Full size image" 
+                className="max-w-full max-h-[90vh] object-contain"
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+              <motion.button
+                onClick={closeLightbox}
+                className="absolute top-4 right-4 text-white bg-dark-blue-purple/50 rounded-full p-3 hover:bg-dark-blue-purple/70 transition-colors"
+                whileHover={{ scale: 1.1, rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <X size={24} />
+              </motion.button>
             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-            {/* Questions Section - Right side on desktop */}
-            <div className="md:w-2/3 space-y-3">
-              {faqs.map((faq, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md"
-                >
-                  <button
-                    className="w-full flex justify-between items-center p-4 text-left focus:outline-none bg-white hover:bg-gray-50 transition-colors"
-                    onClick={() => toggleFaq(idx)}
-                    aria-expanded={openFaqs.includes(idx)}
+      {/* FAQ Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8 text-dark-blue-purple">Frequently Asked Questions</h2>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="bg-light-blue-purple rounded-lg shadow p-6 cursor-pointer" onClick={() => toggleFaq(idx)}>
+                <div className="flex justify-between items-center">
+                  <h3 className="font-semibold text-lg text-dark-blue-purple">{faq.q}</h3>
+                  <motion.div
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: openFaqs.includes(idx) ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <span className="text-base md:text-lg text-gray-800">{faq.q}</span>
-                    <ChevronDown 
-                      className={`ml-2 transition-transform duration-300 ${openFaqs.includes(idx) ? 'rotate-180' : ''}`} 
-                      size={24} 
-                      color="#4B5563" 
-                    />
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {openFaqs.includes(idx) && (
-                      <motion.div
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden bg-white"
-                      >
-                        <div className="px-4 pb-4 text-gray-600 text-sm md:text-base">
-                          {faq.a}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-            </div>
+                    <ChevronDown className="text-bright-orange" />
+                  </motion.div>
+                </div>
+                <AnimatePresence>
+                  {openFaqs.includes(idx) && (
+                    <motion.p
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4 text-dark-blue-purple overflow-hidden"
+                    >
+                      {faq.a}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
           </div>
         </div>
       </section>
