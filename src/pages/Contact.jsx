@@ -49,20 +49,20 @@ const Contact = () => {
   const contacts = [
     {
       role: "Faculty Coordinator",
-      name: "Dr. Narendhar Singh",
-      phone: "+91 XXXX XXXXX",
+      name: "Dr. Narender Singh",
+      phone: "+91 90140 67636",
       email: "faculty.email@example.com",
     },
     {
       role: "President",
-      name: "Aishwarya",
-      phone: "+91 XXXX XXXXX",
+      name: "Aishwarya Alichella",
+      phone: "+91 78935 17093",
       email: "president.email@example.com",
     },
     {
       role: "Vice President",
       name: "Eshwar",
-      phone: "+91 XXXX XXXXX",
+      phone: "+91 91821 04900",
       email: "vp.email@example.com",
     },
   ];

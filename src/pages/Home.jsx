@@ -183,7 +183,9 @@ const Home = () => {
             {/* Register Now Button */}
             <div className="flex-1 flex justify-center md:justify-end w-full mt-6 md:mt-0">
               <a
-                href="#register"
+                href="https://linktr.ee/aunsf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-bright-orange text-white rounded-lg hover:bg-orange-yellow transition-colors font-semibold shadow text-base"
               >
                 Register Now

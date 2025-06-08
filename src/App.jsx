@@ -18,14 +18,10 @@ function AppContent() {
   const location = useLocation();
 
   useEffect(() => {
-    // Check if this is the first visit
-    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
-    
-    if (location.pathname === '/' && !hasSeenWelcome) {
+    // Show welcome modal on home page refresh
+    if (location.pathname === '/') {
       const timer = setTimeout(() => {
         setShowWelcomeModal(true);
-        // Mark that user has seen the welcome modal
-        localStorage.setItem('hasSeenWelcome', 'true');
       }, 1000);
 
       return () => clearTimeout(timer);
@@ -68,7 +64,7 @@ function AppContent() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="relative w-[90%] max-w-4xl bg-white rounded-2xl overflow-hidden shadow-2xl"
+              className="relative w-[90%] max-w-[331px] max-h-[468px] md:max-w-[496px] md:max-h-[702px] rounded-2xl overflow-hidden shadow-2xl"
             >
               {/* Close Button */}
               <button
@@ -79,19 +75,23 @@ function AppContent() {
               </button>
 
               {/* Banner Image */}
-              <div className="relative aspect-[16/9]">
-                <img
-                  src="/banner.jpg"
-                  alt="Welcome to AUISC"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-blue-purple/80 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-2">Welcome to AUISC</h2>
-                  <p className="text-lg md:text-xl text-light-blue-purple">
-                    Empowering the next generation of engineering leaders
-                  </p>
-                </div>
+              <div className="w-full h-full relative">
+                <a 
+                  href="https://linktr.ee/aunsf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block cursor-pointer"
+                >
+                  <img
+                    src="/poster.webp"
+                    alt="Welcome to AUISC"
+                    className="w-full h-full object-contain"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-blue-purple/80 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-2">Click to Register</h2>
+                  </div>
+                </a>
               </div>
             </motion.div>
           </motion.div>

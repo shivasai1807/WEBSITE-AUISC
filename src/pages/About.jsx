@@ -1,8 +1,12 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Users, Lightbulb, Globe, Award, BookOpen } from 'lucide-react';
 // import iuceeImage from '../assets/iucee.jpg';
 
 const About = () => {
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]);
+
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -17,11 +21,37 @@ const About = () => {
     }
   };
 
+  const hoverScale = {
+    scale: 1.05,
+    transition: { duration: 0.3 }
+  };
+
+  const cardHover = {
+    scale: 1.02,
+    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+    transition: { duration: 0.3 }
+  };
+
   return (
     <div className="min-h-screen pt-20 bg-white">
       {/* Hero Section */}
-      <section className="relative bg-dark-blue-purple text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/pics_png/pattern.png')] opacity-10"></div>
+      <motion.section 
+        className="relative bg-dark-blue-purple text-white py-20 overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.div 
+          className="absolute inset-0 bg-[url('/pics_png/pattern.png')] opacity-10"
+          animate={{ 
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{ 
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
         <div className="container mx-auto px-4 relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -29,15 +59,25 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+            <motion.h1 
+              className="text-4xl md:text-5xl font-bold mb-4 tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               About AUISC
-            </h1>
-            <p className="text-lg md:text-xl text-light-blue-purple leading-relaxed">
+            </motion.h1>
+            <motion.p 
+              className="text-lg md:text-xl text-light-blue-purple leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               Empowering the next generation of engineering leaders through innovation, collaboration, and excellence.
-            </p>
+            </motion.p>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* IUCEE Section */}
       <section className="py-20 bg-light-blue-purple">
@@ -82,7 +122,7 @@ const About = () => {
               >
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <img 
-                    src="/iucee.jpg" 
+                    src="/iucee (2).png" 
                     alt="IUCEE Image" 
                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
                   />
@@ -94,7 +134,7 @@ const About = () => {
                     </div>
                     <div>
                       <p className="text-sm text-gray-600">Active Members</p>
-                      <p className="text-xl font-bold text-dark-blue-purple">100+ Colleges</p>
+                      <p className="text-xl font-bold text-dark-blue-purple">30+ Colleges</p>
                     </div>
                   </div>
                 </div>
@@ -202,11 +242,16 @@ const About = () => {
                 <motion.div
                   key={index}
                   variants={fadeInUp}
+                  whileHover={cardHover}
                   className="bg-white rounded-2xl p-8 hover:shadow-lg transition-shadow"
                 >
-                  <div className="bg-bright-orange/10 p-3 rounded-lg w-fit mb-4">
+                  <motion.div 
+                    className="bg-bright-orange/10 p-3 rounded-lg w-fit mb-4"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     {feature.icon}
-                  </div>
+                  </motion.div>
                   <h3 className="text-xl font-bold text-dark-blue-purple mb-3">{feature.title}</h3>
                   <p className="text-dark-blue-purple leading-relaxed">{feature.description}</p>
                 </motion.div>
@@ -261,22 +306,38 @@ const About = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={cardHover}
                     className={`relative flex flex-col md:flex-row items-center md:items-stretch ${
                       index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'
                     }`}
                   >
                     <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} mb-4 md:mb-0`}>
-                      <div className="bg-light-blue-purple rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                        <div className="flex items-center gap-4 mb-4">
-                          <div className="bg-bright-orange/10 p-3 rounded-lg">
+                      <motion.div 
+                        className="bg-light-blue-purple rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+                        whileHover={{ scale: 1.02 }}
+                      >
+                        <motion.div 
+                          className="flex items-center gap-4 mb-4"
+                          whileHover={{ x: 5 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <motion.div 
+                            className="bg-bright-orange/10 p-3 rounded-lg"
+                            whileHover={{ scale: 1.1 }}
+                            transition={{ duration: 0.2 }}
+                          >
                             <span className="text-bright-orange font-bold">{item.year}</span>
-                          </div>
+                          </motion.div>
                           <h3 className="text-xl font-bold text-dark-blue-purple">{item.title}</h3>
-                        </div>
+                        </motion.div>
                         <p className="text-dark-blue-purple leading-relaxed">{item.description}</p>
-                      </div>
+                      </motion.div>
                     </div>
-                    <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-bright-orange rounded-full"></div>
+                    <motion.div 
+                      className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-bright-orange rounded-full"
+                      whileHover={{ scale: 1.5 }}
+                      transition={{ duration: 0.2 }}
+                    />
                   </motion.div>
                 ))}
               </div>
@@ -329,16 +390,35 @@ const About = () => {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="text-3xl font-bold mb-6 text-dark-blue-purple">About Anurag University</h2>
-                <p className="text-dark-blue-purple mb-6 leading-relaxed">
+                <motion.p 
+                  className="text-dark-blue-purple mb-6 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
                   Anurag University, nestled in the vibrant city of Hyderabad, is a distinguished educational institution renowned for its commitment to academic excellence and holistic development. With a rich heritage spanning over decades, the university stands as a beacon of knowledge and innovation.
-                </p>
-                <p className="text-dark-blue-purple mb-8 leading-relaxed">
+                </motion.p>
+                <motion.p 
+                  className="text-dark-blue-purple mb-8 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
                   Through a comprehensive range of undergraduate and postgraduate programs, Anurag University equips its graduates with the skills and knowledge required to thrive in today's rapidly evolving professional landscape.
-                </p>
-                <div className="flex items-center gap-2 text-bright-orange font-semibold">
+                </motion.p>
+                <motion.div 
+                  className="flex items-center gap-2 text-bright-orange font-semibold cursor-pointer"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <span>Inspiring Tomorrow</span>
-                  <ArrowRight size={20} />
-                </div>
+                  <motion.div
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ArrowRight size={20} />
+                  </motion.div>
+                </motion.div>
               </motion.div>
             </div>
           </motion.div>
