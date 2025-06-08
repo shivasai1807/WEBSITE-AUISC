@@ -170,23 +170,27 @@ const Events = () => {
                               <Calendar size={18} className="text-dark-blue-purple" />
                               <span className="text-sm font-medium">{event.date}</span>
                             </div>
-                            {event.location && (
-                              <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
-                                <MapPin size={18} className="text-dark-blue-purple" />
-                                <span className="text-sm font-medium">{event.location}</span>
-                              </div>
-                            )}
-                            {event.time && (
-                              <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
-                                <Clock size={18} className="text-dark-blue-purple" />
-                                <span className="text-sm font-medium">{event.time}</span>
-                              </div>
-                            )}
-                            {event.participants && (
-                              <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
-                                <Users size={18} className="text-dark-blue-purple" />
-                                <span className="text-sm font-medium">{event.participants} Participants</span>
-                              </div>
+                            {event.isUpcoming ? null : (
+                              <>
+                                {event.location && (
+                                  <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
+                                    <MapPin size={18} className="text-dark-blue-purple" />
+                                    <span className="text-sm font-medium">{event.location}</span>
+                                  </div>
+                                )}
+                                {event.time && (
+                                  <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
+                                    <Clock size={18} className="text-dark-blue-purple" />
+                                    <span className="text-sm font-medium">{event.time}</span>
+                                  </div>
+                                )}
+                                {event.participants && (
+                                  <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
+                                    <Users size={18} className="text-dark-blue-purple" />
+                                    <span className="text-sm font-medium">{event.participants} Participants</span>
+                                  </div>
+                                )}
+                              </>
                             )}
                           </div>
                         </div>
@@ -257,19 +261,19 @@ const Events = () => {
                             <Calendar size={18} className="text-dark-blue-purple" />
                             <span className="text-sm font-medium">{event.date}</span>
                           </div>
-                          {event.location && (
+                          {!event.isUpcoming && event.location && (
                             <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
                               <MapPin size={18} className="text-dark-blue-purple" />
                               <span className="text-sm font-medium">{event.location}</span>
                             </div>
                           )}
-                          {event.time && (
+                          {!event.isUpcoming && event.time && (
                             <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
                               <Clock size={18} className="text-dark-blue-purple" />
                               <span className="text-sm font-medium">{event.time}</span>
                             </div>
                           )}
-                          {event.participants && (
+                          {!event.isUpcoming && event.participants && (
                             <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
                               <Users size={18} className="text-dark-blue-purple" />
                               <span className="text-sm font-medium">{event.participants} Participants</span>
@@ -306,4 +310,4 @@ const Events = () => {
   );
 };
 
-export default Events; 
+export default Events;
