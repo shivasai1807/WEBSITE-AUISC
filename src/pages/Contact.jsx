@@ -51,19 +51,19 @@ const Contact = () => {
       role: "Faculty Coordinator",
       name: "Dr. Narender Singh",
       phone: "+91 90140 67636",
-      email: "faculty.email@example.com",
+      email: "narendhar.singh@anurag.edu.in",
     },
     {
       role: "President",
       name: "Aishwarya Alichella",
       phone: "+91 78935 17093",
-      email: "president.email@example.com",
+      email: "aishwaryaalechalla@gmail.com",
     },
     {
       role: "Vice President",
       name: "Eshwar",
       phone: "+91 91821 04900",
-      email: "vp.email@example.com",
+      email: "eswar.kumar@anurag.edu.in",
     },
   ];
 

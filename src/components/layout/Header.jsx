@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import AUISCLogo from "/AUISC_Logo.png";
 
 const navLinks = [
+  { path: "/aunsf", label: "AUNSF", isHighlighted: true },
   { path: "/", label: "Home" },
   { path: "/about", label: "About" },
   { path: "/events", label: "Events" },
@@ -155,7 +156,9 @@ const Header = () => {
                 ref={(el) => (navRefs.current[index] = el)}
                 to={link.path}
                 className={`${
-                  location.pathname === link.path
+                  link.isHighlighted
+                    ? "text-orange-500 font-bold hover:text-orange-600"
+                    : location.pathname === link.path
                     ? "text-blue-600 font-medium"
                     : "text-gray-600 hover:text-blue-600"
                 } transition-colors duration-200 text-base`}
@@ -191,19 +194,21 @@ const Header = () => {
                     whileTap={{ scale: 0.95 }}
                   >
                     <Link
-                    to={link.path}
+                      to={link.path}
                       onClick={(e) => {
                         e.preventDefault();
                         handleLinkClick(link.path);
                       }}
                       className={`block w-full text-left px-4 py-3 ${
-                      location.pathname === link.path
-                        ? "text-blue-600 font-semibold bg-blue-50"
-                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                        link.isHighlighted
+                          ? "text-orange-500 font-bold bg-orange-50 hover:bg-orange-100"
+                          : location.pathname === link.path
+                          ? "text-blue-600 font-semibold bg-blue-50"
+                          : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
                       } transition-all duration-200 rounded-md mb-2`}
-                  >
-                    {link.label}
-                  </Link>
+                    >
+                      {link.label}
+                    </Link>
                   </motion.div>
                 ))}
               </motion.div>

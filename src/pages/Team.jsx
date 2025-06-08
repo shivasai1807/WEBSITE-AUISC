@@ -65,7 +65,7 @@ const Team = () => {
             <div className="flex flex-wrap justify-center gap-8">
               <TeamCard
                 member={{
-                  name: "DR.Narendhar Singh",
+                  name: "DR.Narender Singh",
                   role: "Faculty Coordinator",
                   image: "/team_pics/ns_sir.webp",
                   linkedin: "https://www.linkedin.com/in/dr-narendhar-singh-ba7188178/"
