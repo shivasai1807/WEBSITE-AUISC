@@ -1,76 +1,224 @@
 export const events = [
   {
     id: 1,
-    title: "AUNSF 3.0",
-    date: "July 11, 2025",
-    time: "9:00 AM - 5:00 PM",
-    location: "Main Auditorium, Anurag University",
-    participants: "300+",
-    isUpcoming: true,
-    description: "Join us for AUNSF 3.0, our flagship event bringing together students from across the country for a day of innovation, learning, and networking. This year's theme focuses on sustainable technology and green innovation. Don't miss out on this opportunity to showcase your ideas and connect with like-minded peers!",
-    registrationLink: "https://forms.google.com/example",
+    title: "AUNSF 1.0",
+    date: "June 16–18, 2023",
+    time: "9:00 AM – 5:00 PM",
+    location: "Anurag University, Hyderabad",
+    participants: "100+",
+    isUpcoming: false,
+    description:
+      "Our flagship event focusing on SDGs such as Climate Action, Clean Energy, and Water. Featuring keynotes from Mrs. Sampada Pachaury and Dr. Krishna Vedula.",
+    registrationLink: "",
     images: [
       {
         url: "/pics_png/GALLERY1.webp",
-        description: "Previous AUNSF event highlights"
+        description: "Keynote session with distinguished speakers at AUNSF 1.0",
       },
       {
         url: "/pics_png/GALLERY2.webp",
-        description: "Students presenting their projects"
-      },
-      {
-        url: "/pics_png/GALLERY5.webp",
-        description: "Interactive workshop sessions"
+        description: "Interactive workshops and innovation stalls showcasing sustainable solutions",
       }
-    ]
+    ],
   },
   {
     id: 2,
-    title: "Tech Innovation Workshop",
-    date: "February 20, 2024",
-    time: "2:00 PM - 5:00 PM",
-    location: "Innovation Lab, Engineering Block",
-    participants: "150+",
+    title: "Green Wave",
+    date: "August 17–19, 2023",
+    time: "10:00 AM – 4:00 PM",
+    location: "Anurag University",
+    participants: "200+",
     isUpcoming: false,
-    description: "Experience hands-on learning in our Tech Innovation Workshop. This interactive session will cover emerging technologies, practical implementation, and real-world problem-solving. Participants will work on exciting projects and get mentored by industry experts. Don't miss this opportunity to enhance your technical skills and network with like-minded peers.",
+    description:
+      "Eco-conscious event including rally, campus clean-up, and idea pitching to promote plastic reduction.",
+    registrationLink: "",
     images: [
       {
-        url: "/pics_png/GALLERY5.webp",
-        description: "Students working on innovative projects"
-      },
-      {
-        url: "/pics_png/GALLERY6.webp",
-        description: "Expert mentoring session"
-      },
-      {
-        url: "/pics_png/GALLERY7.webp",
-        description: "Group discussion and collaboration"
+        url: "/pics_png/Green1.webp",
+        description: "Students participating in the Green Wave rally for plastic reduction awareness",
       }
-    ]
+    ],
   },
   {
     id: 3,
-    title: "Sustainability Summit 2025",
-    date: "March 15, 2025",
-    time: "10:00 AM - 4:00 PM",
-    location: "Conference Hall, Anurag University",
-    participants: "200+",
+    title: "Clash of Minds",
+    date: "November 17–18, 2023",
+    time: "10:00 AM – 4:00 PM",
+    location: "Anurag University",
+    participants: "150+",
     isUpcoming: false,
-    description: "Join us for a day dedicated to sustainable development and green technology. The Sustainability Summit will feature expert talks, panel discussions, and hands-on workshops focused on environmental conservation and sustainable practices in engineering. Network with industry leaders and learn about the latest trends in sustainable technology.",
+    description:
+      "Problem-solving competition addressing health tech and sustainability. Winning teams advanced to IASF 2024.",
+    registrationLink: "",
+    images: [
+      {
+        url: "/pics_png/cfm.webp",
+        description: "Teams presenting innovative solutions at Clash of Minds competition",
+      }
+    ],
+  },
+  {
+    id: 4,
+    title: "Tejas 2K24 Innovation Expo",
+    date: "January 26, 2024",
+    time: "9:30 AM – 4:30 PM",
+    location: "Anurag University",
+    participants: "100+",
+    isUpcoming: false,
+    description:
+      "Republic Day innovation showcase. Several projects were later awarded at IASF 2024.",
+    registrationLink: "",
+    images: [
+      {
+        url: "/events/tejas_2024/img5.webp",
+        description: "Innovation projects on display at Tejas 2K24",
+      },
+      {
+        url: "/events/tejas_2024/img6.webp",
+        description: "Students demonstrating their innovative solutions",
+      },
+      {
+        url: "/events/tejas_2024/img4.webp",
+        description: "Interactive sessions with project creators",
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "AUNSF 2.0",
+    date: "June 18–20, 2024",
+    time: "9:00 AM – 5:00 PM",
+    location: "Anurag University",
+    participants: "210+",
+    isUpcoming: false,
+    description:
+      "Intercollegiate summit with 210+ participants across 20+ institutions. Included cyclathon, speaker sessions, and SDG workshops.",
+    registrationLink: "",
+    images: [
+      {
+        url: "/events/aunsf_2/img1.webp",
+        description: "AUNSF 2.0 Participants",
+      },
+      {
+        url: "/events/aunsf_2/img2.webp",
+        description: "Expert speaker session on sustainability",
+      },
+      {
+        url: "/events/aunsf_2/img11.webp",
+        description: "Cyclothon event promoting sustainable transportation",
+      },
+      {
+        url: "/events/aunsf_2/img13.webp",
+        description: "Interactive SDG workshops in progress",
+      },
+      {
+        url: "/events/aunsf_2/img16.webp",
+        description: "Networking session with participants from different institutions",
+      }
+    ],
+  },
+  {
+    id: 6,
+    title: "Vermicomposting Training",
+    date: "July 6, 2024",
+    time: "11:00 AM – 2:00 PM",
+    location: "Anurag University",
+    participants: "50+",
+    isUpcoming: false,
+    description:
+      "Hands-on training on sustainable agricultural methods using organic composting techniques.",
+    registrationLink: "",
+    images: [
+      {
+        url: "/events/vermicompost/img5.webp",
+        description: "Practical demonstration of vermicomposting techniques",
+      },
+      {
+        url: "/events/vermicompost/img3.webp",
+        description: "Students learning about organic waste management",
+      }
+    ],
+  },
+  {
+    id: 7,
+    title: "Mana Matti Vinayaka",
+    date: "September 4, 2024",
+    time: "10:00 AM – 1:00 PM",
+    location: "Anurag University",
+    participants: "100+",
+    isUpcoming: false,
+    description:
+      "Eco-friendly Ganesh Chaturthi celebration with 100+ seed-infused clay idols promoting sustainable traditions.",
+    registrationLink: "",
+    images: [
+      {
+        url: "/events/matti_vinayaka/img9.webp",
+        description: "Students creating eco-friendly clay idols",
+      },
+      {
+        url: "/events/matti_vinayaka/img3.webp",
+        description: "Seed-infused idol making workshop",
+      },
+      {
+        url: "/events/matti_vinayaka/img4.webp",
+        description: "Traditional celebration with sustainable practices",
+      },
+      {
+        url: "/events/matti_vinayaka/img5.webp",
+        description: "Community participation in eco-friendly festivities",
+      }
+    ],
+  },
+  {
+    id: 8,
+    title: "Researcher's Blueprint",
+    date: "November 22–23, 2024",
+    time: "10:00 AM – 3:00 PM",
+    location: "Anurag University",
+    participants: "111",
+    isUpcoming: false,
+    description:
+      "Technical writing workshop that guided 111 undergraduate students through the paper publication process.",
+    registrationLink: "",
+    images: [
+      {
+        url: "/events/researcher's_blueprint/img4.webp",
+        description: "Expert session on research paper writing",
+      },
+      {
+        url: "/events/researcher's_blueprint/img2.webp",
+        description: "Students working on their research papers",
+      },
+      {
+        url: "/events/researcher's_blueprint/img1.webp",
+        description: "Interactive workshop on academic publishing",
+      }
+    ],
+  },
+  {
+    id: 9,
+    title: "AUNSF 3.0",
+    date: "July 11-12-, 2025",
+    time: "9:00 AM – 5:00 PM",
+    location: "Main Auditorium, Anurag University",
+    participants: "300+",
+    isUpcoming: true,
+    description:
+      "Join us for AUNSF 3.0, our flagship event bringing together students from across the country to collaborate on sustainability innovation.",
     registrationLink: "https://forms.google.com/example",
     images: [
       {
         url: "/pics_png/GALLERY1.webp",
-        description: "Previous sustainability event highlights"
+        description: "Previous AUNSF event highlights",
       },
       {
         url: "/pics_png/GALLERY2.webp",
-        description: "Expert panel discussion"
+        description: "Students presenting their projects",
       },
       {
         url: "/pics_png/GALLERY5.webp",
-        description: "Workshop session"
+        description: "Sustainability panel discussion",
       }
-    ]
+    ],
   }
-]; 
+];
