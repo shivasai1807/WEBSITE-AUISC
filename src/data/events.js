@@ -186,7 +186,7 @@ export const events = [
   {
     id: 9,
     title: "AUNSF 3.0",
-    date: "July 11-12-, 2025",
+    date: "July 11-13, 2025",
     time: "9:00 AM – 5:00 PM",
     location: "Main Auditorium, Anurag University",
     participants: "300+",
