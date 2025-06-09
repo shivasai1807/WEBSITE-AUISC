@@ -271,7 +271,7 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="max-w-6xl mx-auto"
           >
-            <h2 className="text-3xl font-bold text-center mb-16 text-dark-blue-purple">Our Journey</h2>
+            <h2 className="text-3xl font-bold text-center mb-16 text-dark-blue-purple">Our History</h2>
             <div className="relative">
               {/* Timeline line */}
               <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-medium-blue"></div>
@@ -285,17 +285,17 @@ const About = () => {
                     description: "Establishment of AUISC with a vision to promote engineering education and innovation among students."
                   },
                   {
-                    year: "2022",
+                    year: "2023",
                     title: "AUNSF 1.0",
                     description: "Successfully organized AUNSF 1.0, bringing together students from various institutions for knowledge sharing and networking."
                   },
                   {
-                    year: "2023",
+                    year: "2024",
                     title: "AUNSF 2.0",
                     description: "Expanded our reach with AUNSF 2.0, introducing new initiatives and programs for student development."
                   },
                   {
-                    year: "2024",
+                    year: "2025",
                     title: "AUNSF 3.0",
                     description: "Preparing for AUNSF 3.0, aiming to create an even more impactful platform for engineering students."
                   }

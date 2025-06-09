@@ -55,7 +55,7 @@ const Contact = () => {
     },
     {
       role: "President",
-      name: "Aishwarya Alichella",
+      name: "Aishwarya Alechalla",
       phone: "+91 78935 17093",
       email: "aishwaryaalechalla@gmail.com",
     },

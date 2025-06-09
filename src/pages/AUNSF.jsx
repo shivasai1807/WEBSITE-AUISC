@@ -6,12 +6,12 @@ const AUNSF = () => {
     {
       name: "Dr. Krishna Vedula",
       role: "Executive Director",
-      description: "Leading expert in aerospace engineering with 20+ years of experience"
+      description: "Dean Emeritus of UMass Lowell and founder of IUCEE, with 40+ years of academic and leadership experience in the U.S., now leading engineering education reform in India. Has impacted 100+ institutions through IUCEE, authored 75+ publications, and received global awards for contributions to STEM and engineering education."
     },
     {
       name: "Ms. Sampada Pachaury",
       role: "Director & PT staff",
-      description: "Pioneer in fire safety protocols and emergency response systems"
+      description: "A certified Systems Thinking and NLP practitioner, with a background in semiconductors and education reform. With leadership roles across global tech firms and academia, now drives skill-based, interdisciplinary programs that have impacted 2000+ students, aiming to transform engineering education in India."
     },
     // {
     //   name: "Dr. Michael Chen",
@@ -190,13 +190,14 @@ const AUNSF = () => {
               <div>
                 <h3 className="text-2xl font-bold mb-3 text-blue-400">Dr. Archana Mantri</h3>
                 <p className="text-purple-400 mb-4 font-medium">Vice Chancellor</p>
+                <p className="text-gray-300">Vice Chancellor of Anurag University, is a seasoned leader with 30+ years in academia and industry, 100+ publications, and 43 patents, known for driving innovation, research, and educational reform.</p>
               </div>
             </motion.div>
           </div>
         </motion.div>
 
         {/* Mentors with enhanced cards */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-20"
@@ -224,7 +225,7 @@ const AUNSF = () => {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Dates with enhanced styling */}
         <motion.div
