@@ -28,7 +28,7 @@ const galleryImages = [
   "/pics_png/GALLERY5.webp",
   "/pics_png/GALLERY6.webp",
   "/pics_png/GALLERY8.webp",
-  
+  "/events/aunsf_2/img2.JPG",
 ];
 
 const faqs = [
@@ -183,7 +183,7 @@ const Home = () => {
             {/* Register Now Button */}
             <div className="flex-1 flex justify-center md:justify-end w-full mt-6 md:mt-0">
               <a
-                href="https://linktr.ee/aunsf"
+                href="/aunsf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-bright-orange text-white rounded-lg hover:bg-orange-yellow transition-colors font-semibold shadow text-base"
