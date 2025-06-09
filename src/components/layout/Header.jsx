@@ -149,7 +149,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link, index) => (
               <Link
                 key={link.path}
@@ -166,6 +166,14 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+            <a
+              href="https://linktr.ee/aunsf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-bright-orange text-white rounded-full font-semibold hover:bg-orange-yellow transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              Register Now
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -211,6 +219,21 @@ const Header = () => {
                     </Link>
                   </motion.div>
                 ))}
+                <motion.div
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="mt-4"
+                >
+                  <a
+                    href="https://linktr.ee/aunsf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full text-center px-4 py-3 bg-bright-orange text-white rounded-full font-semibold hover:bg-orange-yellow transition-all duration-300 shadow-lg"
+                  >
+                    Register Now
+                  </a>
+                </motion.div>
               </motion.div>
             </motion.div>
           )}

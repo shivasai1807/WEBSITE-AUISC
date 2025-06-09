@@ -46,7 +46,11 @@ const faqs = [
   },
   {
     q: "Where can I see photos from past events?",
-    a: "Check out our gallery section above for highlights from our previous events!",
+    a: "You can check out the Gallery section above to explore highlights from our previous events!",
+  },
+  {
+    q: "How to join our club?",
+    a: "Join our club by filling out the application form when it's released! The form is open only once a year, and only second-year students are eligible to apply. Stay connected with us on our social media platforms for updates.",
   },
 ];
 

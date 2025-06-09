@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Trophy, Award, Star, Target, Users, Lightbulb } from 'lucide-react';
+import { Trophy, Award, Star, Target, Users, Lightbulb, FileText, Users2, Medal, Globe, DollarSign } from 'lucide-react';
 
 const Achievements = () => {
   // const achievements = [
@@ -54,7 +54,7 @@ const Achievements = () => {
       title: "Interdisciplinary Bootcamp - Winners",
       description:
         "P. Deekshitha Reddy and K. Rekha were awarded winners for their original and impactful solution in transforming educational practices, showcasing strong problem-solving skills with a focus on inclusivity.",
-      image: "/achievements/bootcamp_winners_1.jpg"
+      image: "/achiev/IASF deekshitha rekha.webp"
     },
     {
       id: 2,
@@ -63,7 +63,7 @@ const Achievements = () => {
       title: "Design Thinking Bootcamp - Runner-up",
       description:
         "B. Raaga Samanvita, Abhay Ramagiri, and Pranav Kothapalli secured runner-up for their innovative gap-finding approach to climate change, highlighting creativity and a deep understanding of environmental issues.",
-      image: "/achievements/bootcamp_runnerup_1.jpg"
+      image: "/achiev/iasf raaga, abhay, pranav.webp"
     },
     {
       id: 3,
@@ -72,16 +72,16 @@ const Achievements = () => {
       title: "Interdisciplinary Bootcamp - Runner-up",
       description:
         "D. Thanughna and Ayesha Shaik were recognized as runner-up for addressing critical healthcare issues through collaborative innovation, blending analytical thinking with domain expertise.",
-      image: "/achievements/bootcamp_runnerup_2.jpg"
+      image: "/achiev/iasf thanughna ayesha.webp"
     },
     {
       id: 4,
       icon: <Users className="text-bright-orange" size={24} />,
-      date: "2023",
+      date: "2024",
       title: "Clash of Minds - National Debate Winners",
       description:
-        "B. Raaga Samanvitha, Aishwarya Alechella, Sonal Gramopadhye, S. F. Cecilia, Pranav Kothapalli, and K. Nihal Kumar were felicitated at IASF 2024 for their exceptional performance in all three rounds of the national-level debate competition.",
-      image: "/achievements/debate_winners.jpg"
+        "B. Raaga Samanvitha, Aishwarya Alechella, Sonal Gramopadhye were felicitated at IASF 2024 for their exceptional performance in all three rounds of the national-level debate competition.",
+      image: "/achiev/iasf raaga, sonal, aishwarya.webp"
     }
   ];
   
@@ -114,30 +114,45 @@ const Achievements = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
-          <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
+          >
             Awards & Recognition
-          </h2>
+          </motion.h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Individual Award */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="bg-bright-orange/10 p-4 rounded-xl">
+              <motion.div 
+                className="flex items-center gap-4 mb-6"
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.div 
+                  className="bg-bright-orange/10 p-4 rounded-xl"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-bright-orange">
                     <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/>
                   </svg>
-                </div>
+                </motion.div>
                 <div>
                   <span className="text-sm font-medium text-dark-blue-purple/70">2023-24</span>
                   <h3 className="text-xl font-bold text-dark-blue-purple">Outstanding Student Leader</h3>
                 </div>
-              </div>
+              </motion.div>
               <div className="space-y-4">
                 <h4 className="text-lg font-semibold text-bright-orange">P VENKATA NARSIMHA RAO</h4>
                 <p className="text-dark-blue-purple leading-relaxed">
@@ -148,11 +163,12 @@ const Achievements = () => {
 
             {/* Chapter Award 1 */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="bg-bright-orange/10 p-4 rounded-xl">
@@ -180,11 +196,12 @@ const Achievements = () => {
 
             {/* Chapter Award 2 */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="bg-bright-orange/10 p-4 rounded-xl">
@@ -226,7 +243,7 @@ const Achievements = () => {
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-medium-blue"></div>
             
             {/* Timeline items */}
-            <div className="space-y-12">
+            <div className="space-y-16">
               {achievements.map((achievement, index) => (
                 <motion.div
                   key={achievement.id}
@@ -240,7 +257,7 @@ const Achievements = () => {
                 >
                   {/* Content (Text and Icon) */}
                   <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} mb-4 md:mb-0 order-2 md:order-1`}>
-                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow h-full">
                       <div className="flex items-center gap-4 mb-4">
                         <div className="bg-bright-orange/10 p-3 rounded-lg">
                           {achievement.icon}
@@ -255,7 +272,7 @@ const Achievements = () => {
                   </div>
                   
                   {/* Image */}
-                  <div className={`w-48 h-48 md:w-1/2 md:h-auto overflow-hidden flex-shrink-0 order-1 md:order-2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'} mb-4 md:mb-0`}>
+                  <div className={`w-full md:w-1/2 aspect-[4/3] overflow-hidden flex-shrink-0 order-1 md:order-2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'} mb-4 md:mb-0`}>
                     <img
                       src={achievement.image}
                       alt={achievement.title}
@@ -271,7 +288,7 @@ const Achievements = () => {
         </motion.div>
       </div>
 
-      {/* Individual Achievements Section */}
+      {/* HITAM INNOFIESTA Section */}
       <div className="container mx-auto px-4 py-20">
         <motion.div
           initial={{ opacity: 0 }}
@@ -280,101 +297,262 @@ const Achievements = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
-          <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-            Individual Achievements
-          </h2>
-          
-          <div className="space-y-12">
-            {[
-              {
-                name: "PRANAV KOTHAPALLI",
-                // role: "Technical Member",
-                image: "/achievements/pranav.jpg",
-                achievements: [
-                  "Special Mention in Product Design category at AUNSF 2.0",
-                  "Best Perspective in Paper 2 perspective at HITAM INNOFIESTA 2024",
-                  "Participated in AUNSF 2.0 and HITAM INNOFIESTA 2024"
-                ]
-              },
-              {
-                name: "POLICE SREEJA",
-                // role: "Technical Member",
-                image: "/achievements/sreeja.jpg",
-                achievements: [
-                  "Completed 8-week 'Entrepreneur's Mindset' course from IUCEE",
-                  "Special Mention in Product Design category at AUNSF 2.0",
-                  "Best Perspective in Paper 2 - Perspective at HITAM INNOFIESTA 2024",
-                  "Best Team Collaboration in InnovateX at HITAM INNOFIESTA 2024"
-                ]
-              },
-              {
-                name: "SUMAD",
-                // role: "Technical Member",
-                image: "/achievements/sumad.jpg",
-                achievements: [
-                  "Completed 8-week 'Design Thinking' course from IUCEE",
-                  "Best Team Collaboration in InnovateX at HITAM INNOFIESTA 2024"
-                ]
-              },
-              {
-                name: "BODA ANJI REDDY",
-                // role: "Technical Member",
-                image: "/achievements/anji.jpg",
-                achievements: [
-                  "Best Perspective in Paper 2 Perspective at HITAM INNOFIESTA 2024",
-                  "Best Team Collaboration in InnovateX at HITAM INNOFIESTA 2024"
-                ]
-              },
-              {
-                name: "G. GRESHMI RATNA",
-                // role: "Technical Member", 
-                image: "/achievements/greshmi.jpg",
-                achievements: [
-                  "Best Perspective in Paper 2 Perspective at HITAM INNOFIESTA 2024"
-                ]
-              },
-              {
-                name: "VAMSHI KRISHNA TADIVALASA",
-                // role: "Technical Member",
-                image: "/achievements/vamshi.jpg",
-                achievements: [
-                  "Best Perspective in Paper 2 Perspective at HITAM INNOFIESTA 2024"
-                ]
-              }
-            ].map((person, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
+          >
+            HITAM INNOFIESTA 2024
+          </motion.h2>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            whileHover={{ scale: 1.01 }}
+            className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+          >
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="space-y-6">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    <div className="flex items-center gap-4 mb-3">
+                      <motion.div 
+                        className="bg-bright-orange/10 p-3 rounded-lg"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <FileText className="text-bright-orange" size={24} />
+                      </motion.div>
+                      <h3 className="text-xl font-bold text-dark-blue-purple">Best Perspective in Paper 2</h3>
+                    </div>
+                    <p className="text-dark-blue-purple leading-relaxed pl-16">
+                      Police Sreeja, Pranav Kothapalli, Boda Anji Reddy, G. Greshmi Ratna, and Vamshi Krishna
+                    </p>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    <div className="flex items-center gap-4 mb-3">
+                      <motion.div 
+                        className="bg-bright-orange/10 p-3 rounded-lg"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Users2 className="text-bright-orange" size={24} />
+                      </motion.div>
+                      <h3 className="text-xl font-bold text-dark-blue-purple">Best Team Collaboration in InnovateX</h3>
+                    </div>
+                    <p className="text-dark-blue-purple leading-relaxed pl-16">
+                      Police Sreeja, Sumad, Boda Anji Reddy
+                    </p>
+                  </motion.div>
+                </div>
+              </div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col md:flex-row items-center gap-8"
+                transition={{ duration: 0.6, delay: 0.4 }}
+                whileHover={{ scale: 1.05 }}
+                className="rounded-lg overflow-hidden shadow-md"
               >
-                {/* Text Content */}
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-dark-blue-purple mb-2">{person.name}</h3>
-                  <p className="text-bright-orange font-medium mb-4">{person.role}</p>
-                  <ul className="space-y-2">
-                    {person.achievements.map((achievement, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="text-bright-orange mt-1">•</span>
-                        <span className="text-dark-blue-purple">{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                {/* Image */}
-                <div className="w-48 h-48 overflow-hidden flex-shrink-0 rounded-lg shadow-md">
-                  <img
-                    src={person.image}
-                    alt={person.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <img
+                  src="/achiev/All these people in one frame.webp"
+                  alt="HITAM INNOFIESTA 2024 Winners"
+                  className="w-full h-full object-cover"
+                />
               </motion.div>
-            ))}
-          </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Tejas 2K25 Section */}
+      <div className="container mx-auto px-4 py-20">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-6xl mx-auto"
+        >
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
+          >
+            Tejas 2K25
+          </motion.h2>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            whileHover={{ scale: 1.01 }}
+            className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+          >
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="space-y-6">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    <div className="flex items-center gap-4 mb-3">
+                      <motion.div 
+                        className="bg-bright-orange/10 p-3 rounded-lg"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Medal className="text-bright-orange" size={24} />
+                      </motion.div>
+                      <h3 className="text-xl font-bold text-dark-blue-purple">Runner Up - Team RideEase</h3>
+                    </div>
+                    <p className="text-dark-blue-purple leading-relaxed pl-16">
+                      Team RideEase, consisting of D. Thanughna, Anwesha Sahu, and Sayyad Pasha, secured the Runner Up position at Tejas 2k25. Their outstanding solution and impressive presentation earned them a well-deserved place among the top teams of the event.
+                    </p>
+                  </motion.div>
+                </div>
+              </div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                whileHover={{ scale: 1.05 }}
+                className="rounded-lg overflow-hidden shadow-md"
+              >
+                <img
+                  src="/achiev/tejas sayyad thanughna anwesha.webp"
+                  alt="Tejas 2K25 Runner Up Team"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* HDSE Academy Section */}
+      <div className="container mx-auto px-4 py-20">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-6xl mx-auto"
+        >
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
+          >
+            HDSE Academy
+          </motion.h2>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            whileHover={{ scale: 1.01 }}
+            className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+          >
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="space-y-6">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    <div className="flex items-center gap-4 mb-3">
+                      <motion.div 
+                        className="bg-bright-orange/10 p-3 rounded-lg"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Trophy className="text-bright-orange" size={24} />
+                      </motion.div>
+                      <h3 className="text-xl font-bold text-dark-blue-purple">2nd Prize Winners - Team Nuovo</h3>
+                    </div>
+                    <p className="text-dark-blue-purple leading-relaxed pl-16 mb-4">
+                      Winners: Aishwarya Alechalla, Sonal, Pranav, Anji, Sreeja
+                    </p>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    <div className="flex items-center gap-4 mb-3">
+                      <motion.div 
+                        className="bg-bright-orange/10 p-3 rounded-lg"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Globe className="text-bright-orange" size={24} />
+                      </motion.div>
+                      <p className="text-dark-blue-purple leading-relaxed">
+                        Team Nuovo secured 2nd place at the HDSE Academy conducted by Lehigh University, USA, held at the Agastya Foundation from 2nd to 6th June 2025.
+                      </p>
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                  >
+                    <div className="flex items-center gap-4">
+                      <motion.div 
+                        className="bg-bright-orange/10 p-3 rounded-lg"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <DollarSign className="text-bright-orange" size={24} />
+                      </motion.div>
+                      <p className="text-dark-blue-purple leading-relaxed">
+                        Won a cash prize of ₹5,000. A remarkable achievement on an international platform.
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                className="rounded-lg overflow-hidden shadow-md"
+              >
+                <img
+                  src="/achiev/HDSE.webp"
+                  alt="HDSE Academy Winners"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </div>

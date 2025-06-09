@@ -213,10 +213,22 @@ const Events = () => {
                       </div>
 
                       <div className="relative">
-                        <CustomEventCarousel 
-                          images={event.images} 
-                          title={event.title}
-                        />
+                        <div className="relative w-full max-w-2xl mx-auto">
+                          <div className="relative h-[500px] overflow-hidden rounded-xl shadow-lg">
+                            <a 
+                              href="https://linktr.ee/aunsf" 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="block w-full h-full cursor-pointer"
+                            >
+                              <img
+                                src="/poster.webp"
+                                alt="AUNSF 3.0 Event Poster"
+                                className="w-full h-full object-contain"
+                              />
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

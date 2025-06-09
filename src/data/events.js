@@ -54,6 +54,10 @@ export const events = [
       {
         url: "/pics_png/cfm.webp",
         description: "Teams presenting innovative solutions at Clash of Minds competition",
+      },
+      {
+        url: "/pics_png/com_2.png",
+        description: "Teams presenting innovative solutions at Clash of Minds competition",
       }
     ],
   },
@@ -70,13 +74,14 @@ export const events = [
     registrationLink: "",
     images: [
       {
-        url: "/events/tejas_2024/img1.jpg",
-        description: "Innovation projects on display at Tejas 2K24",
-      },
-      {
         url: "/events/tejas_2024/img2.jpg",
         description: "Students demonstrating their innovative solutions",
       },
+      {
+        url: "/events/tejas_2024/img1.jpg",
+        description: "Innovation projects on display at Tejas 2K24",
+      },
+      
     ],
   },
   {
@@ -192,8 +197,8 @@ export const events = [
     participants: "300+",
     isUpcoming: true,
     description:
-      "Join us for AUNSF 3.0, our flagship event bringing together students from across the country to collaborate on sustainability innovation.",
-    registrationLink: "https://forms.google.com/example",
+      "Join us for AUNSF 3.0, our flagship event bringing together students from across the country to collaborate on innovative solutions for sustainability.",
+    registrationLink: "https://linktr.ee/aunsf",
     images: [
       {
         url: "/pics_png/GALLERY1.webp",
