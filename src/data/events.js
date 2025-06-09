@@ -70,16 +70,12 @@ export const events = [
     registrationLink: "",
     images: [
       {
-        url: "/events/tejas_2024/img5.webp",
+        url: "/events/tejas_2024/img1.jpg",
         description: "Innovation projects on display at Tejas 2K24",
       },
       {
-        url: "/events/tejas_2024/img6.webp",
+        url: "/events/tejas_2024/img2.jpg",
         description: "Students demonstrating their innovative solutions",
-      },
-      {
-        url: "/events/tejas_2024/img4.webp",
-        description: "Interactive sessions with project creators",
       },
     ],
   },
@@ -96,23 +92,19 @@ export const events = [
     registrationLink: "",
     images: [
       {
-        url: "/events/aunsf_2/img1.webp",
+        url: "/events/aunsf_2/img1.JPG",
         description: "AUNSF 2.0 Participants",
       },
       {
-        url: "/events/aunsf_2/img2.webp",
+        url: "/events/aunsf_2/img2.JPG",
         description: "Expert speaker session on sustainability",
       },
       {
-        url: "/events/aunsf_2/img11.webp",
+        url: "/events/aunsf_2/img3.JPG",
         description: "Cyclothon event promoting sustainable transportation",
       },
       {
-        url: "/events/aunsf_2/img13.webp",
-        description: "Interactive SDG workshops in progress",
-      },
-      {
-        url: "/events/aunsf_2/img16.webp",
+        url: "/events/aunsf_2/img4.JPG",
         description: "Networking session with participants from different institutions",
       }
     ],
@@ -130,11 +122,11 @@ export const events = [
     registrationLink: "",
     images: [
       {
-        url: "/events/vermicompost/img5.webp",
+        url: "/events/vermicompost/img1.JPG",
         description: "Practical demonstration of vermicomposting techniques",
       },
       {
-        url: "/events/vermicompost/img3.webp",
+        url: "/events/vermicompost/img2.JPG",
         description: "Students learning about organic waste management",
       }
     ],
@@ -152,21 +144,17 @@ export const events = [
     registrationLink: "",
     images: [
       {
-        url: "/events/matti_vinayaka/img9.webp",
+        url: "/events/matti_vinayaka/img1.JPG",
         description: "Students creating eco-friendly clay idols",
       },
       {
-        url: "/events/matti_vinayaka/img3.webp",
+        url: "/events/matti_vinayaka/img2.JPG",
         description: "Seed-infused idol making workshop",
       },
       {
-        url: "/events/matti_vinayaka/img4.webp",
+        url: "/events/matti_vinayaka/img3.JPG",
         description: "Traditional celebration with sustainable practices",
       },
-      {
-        url: "/events/matti_vinayaka/img5.webp",
-        description: "Community participation in eco-friendly festivities",
-      }
     ],
   },
   {
@@ -182,15 +170,15 @@ export const events = [
     registrationLink: "",
     images: [
       {
-        url: "/events/researcher's_blueprint/img4.webp",
-        description: "Expert session on research paper writing",
-      },
-      {
-        url: "/events/researcher's_blueprint/img2.webp",
+        url: "/events/researcher's_blueprint/img3.jpg",
         description: "Students working on their research papers",
       },
       {
-        url: "/events/researcher's_blueprint/img1.webp",
+        url: "/events/researcher's_blueprint/img2.jpg",
+        description: "Expert session on research paper writing",
+      },
+      {
+        url: "/events/researcher's_blueprint/img1.jpg",
         description: "Interactive workshop on academic publishing",
       }
     ],
