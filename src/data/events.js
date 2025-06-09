@@ -193,7 +193,7 @@ export const events = [
     isUpcoming: true,
     description:
       "Join us for AUNSF 3.0, our flagship event bringing together students from across the country to collaborate on sustainability innovation.",
-    registrationLink: "https://forms.google.com/example",
+    registrationLink: "/aunsf",
     images: [
       {
         url: "/pics_png/GALLERY1.webp",
