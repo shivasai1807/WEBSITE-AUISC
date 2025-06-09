@@ -208,5 +208,35 @@ export const events = [
         description: "Sustainability panel discussion",
       }
     ],
+  },
+  {
+    id: 10,
+    title: "Eco-Insights Tour",
+    date: "November 24-25, 2024",
+    time: "9:00 AM – 5:00 PM",
+    location: "Anurag University",
+    participants: "N/A",
+    isUpcoming: false,
+    description: "Sowing IDEAS, Growing SOLUTION. An immersive experience exploring real-world challenges in Agriculture, Health Care, and Education to inspire innovative solutions.",
+    registrationLink: "",
+    images: [
+      {
+        url: "/events/eco_insights/img1.jpg",
+        description: "Field exploration in Agriculture"
+      },
+      {
+        url: "/events/eco_insights/img2.jpg",
+        description: "Health care sessions in rural areas"
+      },
+      {
+        url: "/events/eco_insights/img3.jpg",
+        description: "Workshops focused on Education challenges"
+      },
+      {
+        url: "/events/eco_insights/img4.jpg",
+        description: "Interactive sessions addressing gaps in rural education"
+      }
+    ]
   }
+  
 ];
