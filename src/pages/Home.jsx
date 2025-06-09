@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState, useMemo } from "react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, ChevronDown, X } from "lucide-react";
@@ -56,6 +56,49 @@ const Home = () => {
   const [openFaqs, setOpenFaqs] = useState([]);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImg, setLightboxImg] = useState(null);
+
+  const textToAnimate = useMemo(() => "Welcome to AUISC".split(""), []);
+  const controls = useAnimation(); // Initialize useAnimation
+
+  useEffect(() => {
+    const sequence = async () => {
+      while (true) {
+        // Step 1: Type out the text (staggered reveal)
+        await controls.start("visible");
+
+        // Step 2: Keep it visible for a moment
+        await new Promise((resolve) => setTimeout(resolve, 3000)); // Increased visible duration to 3 seconds
+
+        // Step 3: Vanish the text (staggered hide)
+        await controls.start("hidden"); // Use hidden variant to vanish
+
+        // Step 4: Short delay before repeating
+        await new Promise((resolve) => setTimeout(resolve, 1500)); // Increased delay before next typing to 1.5 seconds
+      }
+    };
+    sequence(); // Start the animation sequence
+  }, [controls]); // Depend on controls
+
+  // Variants for the container (h1)
+  const containerVariants = {
+    visible: {
+      transition: {
+        staggerChildren: 0.08, // Slightly increased stagger for smoother appearance
+      },
+    },
+    hidden: {
+      transition: {
+        staggerChildren: 0.04, // Slightly increased stagger for smoother disappearance
+        staggerDirection: -1, // Disappear from right to left
+      },
+    },
+  };
+
+  // Variants for individual characters
+  const charVariants = {
+    hidden: { opacity: 0, y: 10, transition: { duration: 0.08, ease: "easeOut" } }, // Adjusted duration for hidden
+    visible: { opacity: 1, y: 0, transition: { duration: 0.08, ease: "easeOut" } }, // Adjusted duration for visible
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -122,12 +165,20 @@ const Home = () => {
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold text-dark-blue-purple mb-6"
+            className="text-5xl md:text-7xl font-bold text-dark-blue-purple mb-6 flex justify-center flex-wrap"
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
           >
-            Welcome to AUISC
+            {textToAnimate.map((char, index) => (
+              <motion.span
+                key={index}
+                variants={charVariants}
+                style={{ display: 'inline-block' }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

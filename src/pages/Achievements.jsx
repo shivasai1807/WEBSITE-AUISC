@@ -54,6 +54,7 @@ const Achievements = () => {
       title: "Interdisciplinary Bootcamp - Winners",
       description:
         "P. Deekshitha Reddy and K. Rekha were awarded winners for their original and impactful solution in transforming educational practices, showcasing strong problem-solving skills with a focus on inclusivity.",
+      image: "/achievements/bootcamp_winners_1.jpg"
     },
     {
       id: 2,
@@ -62,6 +63,7 @@ const Achievements = () => {
       title: "Design Thinking Bootcamp - Runner-up",
       description:
         "B. Raaga Samanvita, Abhay Ramagiri, and Pranav Kothapalli secured runner-up for their innovative gap-finding approach to climate change, highlighting creativity and a deep understanding of environmental issues.",
+      image: "/achievements/bootcamp_runnerup_1.jpg"
     },
     {
       id: 3,
@@ -70,6 +72,7 @@ const Achievements = () => {
       title: "Interdisciplinary Bootcamp - Runner-up",
       description:
         "D. Thanughna and Ayesha Shaik were recognized as runner-up for addressing critical healthcare issues through collaborative innovation, blending analytical thinking with domain expertise.",
+      image: "/achievements/bootcamp_runnerup_2.jpg"
     },
     {
       id: 4,
@@ -78,6 +81,7 @@ const Achievements = () => {
       title: "Clash of Minds - National Debate Winners",
       description:
         "B. Raaga Samanvitha, Aishwarya Alechella, Sonal Gramopadhye, S. F. Cecilia, Pranav Kothapalli, and K. Nihal Kumar were felicitated at IASF 2024 for their exceptional performance in all three rounds of the national-level debate competition.",
+      image: "/achievements/debate_winners.jpg"
     }
   ];
   
@@ -234,7 +238,8 @@ const Achievements = () => {
                     index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'
                   }`}
                 >
-                  <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} mb-4 md:mb-0`}>
+                  {/* Content (Text and Icon) */}
+                  <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} mb-4 md:mb-0 order-2 md:order-1`}>
                     <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
                       <div className="flex items-center gap-4 mb-4">
                         <div className="bg-bright-orange/10 p-3 rounded-lg">
@@ -248,6 +253,16 @@ const Achievements = () => {
                       <p className="text-dark-blue-purple leading-relaxed">{achievement.description}</p>
                     </div>
                   </div>
+                  
+                  {/* Image */}
+                  <div className={`w-48 h-48 md:w-1/2 md:h-auto overflow-hidden flex-shrink-0 order-1 md:order-2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'} mb-4 md:mb-0`}>
+                    <img
+                      src={achievement.image}
+                      alt={achievement.title}
+                      className="w-full h-full object-cover rounded-lg shadow-md"
+                    />
+                  </div>
+
                   <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-bright-orange rounded-full"></div>
                 </motion.div>
               ))}
@@ -333,31 +348,29 @@ const Achievements = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col md:flex-row items-center gap-8"
               >
-                <div className="flex flex-col md:flex-row items-center gap-8">
-                  {/* Text Content */}
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-dark-blue-purple mb-2">{person.name}</h3>
-                    <p className="text-bright-orange font-medium mb-4">{person.role}</p>
-                    <ul className="space-y-2">
-                      {person.achievements.map((achievement, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="text-bright-orange mt-1">•</span>
-                          <span className="text-dark-blue-purple">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {/* Image */}
-                  <div className="w-48 h-48 overflow-hidden flex-shrink-0">
-                    <img
-                      src={person.image}
-                      alt={person.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                {/* Text Content */}
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-dark-blue-purple mb-2">{person.name}</h3>
+                  <p className="text-bright-orange font-medium mb-4">{person.role}</p>
+                  <ul className="space-y-2">
+                    {person.achievements.map((achievement, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-bright-orange mt-1">•</span>
+                        <span className="text-dark-blue-purple">{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Image */}
+                <div className="w-48 h-48 overflow-hidden flex-shrink-0 rounded-lg shadow-md">
+                  <img
+                    src={person.image}
+                    alt={person.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </motion.div>
             ))}

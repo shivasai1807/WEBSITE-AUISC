@@ -89,9 +89,21 @@ function AppContent() {
                     alt="Welcome to AUISC"
                     className="w-full h-full object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-blue-purple/80 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-blue-purple/90 via-dark-blue-purple/50 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-2">Click to Register</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3">Welcome to AUISC</h2>
+
+                    <a 
+                      href="https://linktr.ee/aunsf" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-6 py-3 bg-white text-dark-blue-purple rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                      Register Now
+                      <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </a>
                   </div>
                 </a>
               </div>
