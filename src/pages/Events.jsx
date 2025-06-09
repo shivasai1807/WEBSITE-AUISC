@@ -213,10 +213,13 @@ const Events = () => {
                       </div>
 
                       <div className="relative">
-                        <CustomEventCarousel 
-                          images={event.images} 
-                          title={event.title}
-                        />
+                        <div className="h-[300px] w-full max-w-md mx-auto">
+                          <img
+                            src="/poster.webp"
+                            alt="Event Poster"
+                            className="w-full h-full object-contain rounded-xl shadow-lg"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
