@@ -61,9 +61,9 @@ const Contact = () => {
     },
     {
       role: "Vice President",
-      name: "Eshwar",
+      name: "Eshwar Karne",
       phone: "+91 91821 04900",
-      email: "eswar.kumar@anurag.edu.in",
+      email: "Karneeshwar3812@gmail.com",
     },
   ];
 
@@ -75,7 +75,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-light-blue-purple">
       {/* Hero Section */}
-      <div className="relative pt-28 pb-24 bg-dark-blue-purple">
+      <div className="relative pt-20 pb-16 bg-dark-blue-purple">
         <div className="absolute inset-0 bg-[url('/pics_png/pattern.png')] opacity-10"></div>
         <div className="container mx-auto px-4 relative">
           <motion.div
@@ -84,17 +84,17 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Contact Us</h1>
-            <p className="text-light-blue-purple text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6 tracking-tight">Contact Us</h1>
+            <p className="text-light-blue-purple text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed">
               Have a question, suggestion, or want to collaborate? We'd love to hear from you!
             </p>
           </motion.div>
         </div>
       </div>
-<br /><br />  
-      <div className="container mx-auto px-6 -mt-6 pb-20">
+
+      <div className="container mx-auto px-4 -mt-4 md:-mt-6 pb-12 md:pb-20">
         {/* Contact Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-16">
           {contacts.map((contact, index) => (
             <motion.div
               key={index}
@@ -102,19 +102,19 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-10 shadow-lg hover:shadow-xl transition-shadow"
+              className="bg-white rounded-2xl p-6 md:p-10 shadow-lg hover:shadow-xl transition-shadow"
             >
-              <div className="bg-bright-orange/10 p-4 rounded-xl w-fit mb-6">
-                <Phone className="text-bright-orange" size={24} />
+              <div className="bg-bright-orange/10 p-3 md:p-4 rounded-xl w-fit mb-4 md:mb-6">
+                <Phone className="text-bright-orange" size={20} />
               </div>
-              <h3 className="text-medium-blue text-lg font-semibold mb-3">{contact.role}</h3>
-              <p className="text-dark-blue-purple text-xl font-bold mb-4">{contact.name}</p>
-              <div className="space-y-3">
-                <p className="text-dark-blue-purple text-sm flex items-center gap-3">
+              <h3 className="text-medium-blue text-base md:text-lg font-semibold mb-2 md:mb-3">{contact.role}</h3>
+              <p className="text-dark-blue-purple text-lg md:text-xl font-bold mb-3 md:mb-4">{contact.name}</p>
+              <div className="space-y-2 md:space-y-3">
+                <p className="text-dark-blue-purple text-sm flex items-center gap-2 md:gap-3">
                   <Phone size={16} className="text-bright-orange" />
                   {contact.phone}
                 </p>
-                <p className="text-dark-blue-purple text-sm flex items-center gap-3">
+                <p className="text-dark-blue-purple text-sm flex items-center gap-2 md:gap-3">
                   <Mail size={16} className="text-bright-orange" />
                   {contact.email}
                 </p>
@@ -123,32 +123,31 @@ const Contact = () => {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-12">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-white rounded-2xl p-10 shadow-lg"
+            className="bg-white rounded-2xl p-6 md:p-10 shadow-lg"
           >
-            <h2 className="text-2xl font-bold text-dark-blue-purple mb-8">Get in Touch</h2>
-            <div className="space-y-6">
-              <div className="flex items-center gap-5 p-5 bg-light-blue-purple/10 rounded-xl hover:bg-light-blue-purple/20 transition-colors">
-                <div className="bg-bright-orange/10 p-4 rounded-xl">
-                  <Mail className="text-bright-orange" size={24} />
+            <h2 className="text-xl md:text-2xl font-bold text-dark-blue-purple mb-6 md:mb-8">Get in Touch</h2>
+            <div className="space-y-4 md:space-y-6">
+              <div className="flex items-center gap-4 md:gap-5 p-4 md:p-5 bg-light-blue-purple/10 rounded-xl hover:bg-light-blue-purple/20 transition-colors">
+                <div className="bg-bright-orange/10 p-3 md:p-4 rounded-xl">
+                  <Mail className="text-bright-orange" size={20} />
                 </div>
                 <div>
                   <p className="text-sm text-dark-blue-purple/70 mb-1">Email Us</p>
-                  <a href="mailto:iucee@anurag.edu.in" className="text-dark-blue-purple hover:text-medium-blue transition">
+                  <a href="mailto:iucee@anurag.edu.in" className="text-dark-blue-purple hover:text-medium-blue transition text-sm md:text-base">
                     iucee@anurag.edu.in
                   </a>
                 </div>
               </div>
 
-
-              <div className="flex items-center gap-5 p-5 bg-light-blue-purple/10 rounded-xl hover:bg-light-blue-purple/20 transition-colors">
-                <div className="bg-bright-orange/10 p-4 rounded-xl">
-                  <Linkedin className="text-bright-orange" size={24} />
+              <div className="flex items-center gap-4 md:gap-5 p-4 md:p-5 bg-light-blue-purple/10 rounded-xl hover:bg-light-blue-purple/20 transition-colors">
+                <div className="bg-bright-orange/10 p-3 md:p-4 rounded-xl">
+                  <Linkedin className="text-bright-orange" size={20} />
                 </div>
                 <div>
                   <p className="text-sm text-dark-blue-purple/70 mb-1">LinkedIn</p>
@@ -156,16 +155,16 @@ const Contact = () => {
                     href="https://www.linkedin.com/in/iucee-au-37163a310"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-dark-blue-purple hover:text-medium-blue transition"
+                    className="text-dark-blue-purple hover:text-medium-blue transition text-sm md:text-base"
                   >
                     Connect with us
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-5 p-5 bg-light-blue-purple/10 rounded-xl hover:bg-light-blue-purple/20 transition-colors">
-                <div className="bg-bright-orange/10 p-4 rounded-xl">
-                  <Instagram className="text-bright-orange" size={24} />
+              <div className="flex items-center gap-4 md:gap-5 p-4 md:p-5 bg-light-blue-purple/10 rounded-xl hover:bg-light-blue-purple/20 transition-colors">
+                <div className="bg-bright-orange/10 p-3 md:p-4 rounded-xl">
+                  <Instagram className="text-bright-orange" size={20} />
                 </div>
                 <div>
                   <p className="text-sm text-dark-blue-purple/70 mb-1">Instagram</p>
@@ -173,16 +172,16 @@ const Contact = () => {
                     href="https://www.instagram.com/iucee.au"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-dark-blue-purple hover:text-medium-blue transition"
+                    className="text-dark-blue-purple hover:text-medium-blue transition text-sm md:text-base"
                   >
                     Follow us
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-5 p-5 bg-light-blue-purple/10 rounded-xl hover:bg-light-blue-purple/20 transition-colors">
-                <div className="bg-bright-orange/10 p-4 rounded-xl">
-                  <MessageCircleMore className="text-bright-orange" size={24} />
+              <div className="flex items-center gap-4 md:gap-5 p-4 md:p-5 bg-light-blue-purple/10 rounded-xl hover:bg-light-blue-purple/20 transition-colors">
+                <div className="bg-bright-orange/10 p-3 md:p-4 rounded-xl">
+                  <MessageCircleMore className="text-bright-orange" size={20} />
                 </div>
                 <div>
                   <p className="text-sm text-dark-blue-purple/70 mb-1">WhatsApp</p>
@@ -190,7 +189,7 @@ const Contact = () => {
                     href="https://www.whatsapp.com/channel/0029VacEQKs9cDDaV22u2K2g" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-dark-blue-purple hover:text-medium-blue transition"
+                    className="text-dark-blue-purple hover:text-medium-blue transition text-sm md:text-base"
                   >
                     Join the channel
                   </a>
@@ -205,10 +204,10 @@ const Contact = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-white rounded-2xl p-10 shadow-lg"
+            className="bg-white rounded-2xl p-6 md:p-10 shadow-lg"
           >
-            <h2 className="text-2xl font-bold text-dark-blue-purple mb-8">Send a Message</h2>
-            <div className="space-y-6">
+            <h2 className="text-xl md:text-2xl font-bold text-dark-blue-purple mb-6 md:mb-8">Send a Message</h2>
+            <div className="space-y-4 md:space-y-6">
               <div>
                 <label className="block text-sm font-medium text-dark-blue-purple mb-2">Your Name</label>
                 <input
@@ -217,7 +216,7 @@ const Contact = () => {
                   placeholder="Enter your name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-bright-orange focus:border-transparent transition"
+                  className="w-full p-3 md:p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-bright-orange focus:border-transparent transition text-sm md:text-base"
                   required
                   pattern="^[a-zA-Z\s]*$"
                   title="Only letters and spaces are allowed"
@@ -231,7 +230,7 @@ const Contact = () => {
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-bright-orange focus:border-transparent transition"
+                  className="w-full p-3 md:p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-bright-orange focus:border-transparent transition text-sm md:text-base"
                   required
                 />
               </div>
@@ -243,13 +242,13 @@ const Contact = () => {
                   placeholder="Type your message here..."
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-bright-orange focus:border-transparent transition"
+                  className="w-full p-3 md:p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-bright-orange focus:border-transparent transition text-sm md:text-base"
                   required
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-bright-orange text-white py-4 rounded-xl font-semibold hover:bg-orange-yellow transition-colors duration-300"
+                className="w-full bg-bright-orange text-white py-3 md:py-4 rounded-xl font-semibold hover:bg-orange-yellow transition-colors duration-300 text-sm md:text-base"
               >
                 Send Message
               </button>

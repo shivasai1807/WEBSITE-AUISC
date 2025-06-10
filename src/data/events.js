@@ -52,6 +52,10 @@ export const events = [
     registrationLink: "",
     images: [
       {
+        url: "/pics_png/com_3.webp",
+        description: "Teams Participating in the Debate at the Clash of Minds.",
+      },
+      {
         url: "/pics_png/cfm.webp",
         description: "Teams felicitating the panel jury at Clash of Minds",
       },
