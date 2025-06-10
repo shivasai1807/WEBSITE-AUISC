@@ -147,19 +147,19 @@ const AUNSF = () => {
               <motion.div
                 key={index}
                 whileHover={{ y: -5 }}
-                className="bg-dark-blue-purple/30 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 transition-colors flex items-center gap-6"
+                className="bg-dark-blue-purple/30 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 transition-colors flex flex-col md:flex-row items-center gap-4 md:gap-6"
               >
-                <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden flex-shrink-0">
                   <img
                     src={index === 0 ? "/krishna vedula.png" : "/sampadha.jpg"}
                     alt={guest.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold mb-3 text-blue-400">{guest.name}</h3>
-                  <p className="text-purple-400 mb-4 font-medium">{guest.role}</p>
-                  <p className="text-gray-300">{guest.description}</p>
+                <div className="text-center md:text-left">
+                  <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-blue-400">{guest.name}</h3>
+                  <p className="text-purple-400 mb-2 md:mb-4 font-medium">{guest.role}</p>
+                  <p className="text-gray-300 text-sm md:text-base">{guest.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -178,19 +178,19 @@ const AUNSF = () => {
           <div className="flex justify-center">
             <motion.div
               whileHover={{ y: -5 }}
-              className="bg-dark-blue-purple/30 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 transition-colors max-w-2xl w-full flex items-center gap-8"
+              className="bg-dark-blue-purple/30 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 transition-colors max-w-2xl w-full flex flex-col md:flex-row items-center gap-6 md:gap-8"
             >
-              <div className="w-40 h-40 rounded-full overflow-hidden flex-shrink-0">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden flex-shrink-0">
                 <img
                   src="/Dr-Archana-Mantri.png"
                   alt="Dr. Archana Mantri"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-3 text-blue-400">Dr. Archana Mantri</h3>
-                <p className="text-purple-400 mb-4 font-medium">Vice Chancellor</p>
-                <p className="text-gray-300">Vice Chancellor of Anurag University, is a seasoned leader with 30+ years in academia and industry, 100+ publications, and 43 patents, known for driving innovation, research, and educational reform.</p>
+              <div className="text-center md:text-left">
+                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-blue-400">Dr. Archana Mantri</h3>
+                <p className="text-purple-400 mb-2 md:mb-4 font-medium">Vice Chancellor</p>
+                <p className="text-gray-300 text-sm md:text-base">Vice Chancellor of Anurag University, is a seasoned leader with 30+ years in academia and industry, 100+ publications, and 43 patents, known for driving innovation, research, and educational reform.</p>
               </div>
             </motion.div>
           </div>

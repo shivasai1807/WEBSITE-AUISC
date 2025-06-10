@@ -169,7 +169,7 @@ const Home = () => {
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-dark-blue-purple mb-6 flex justify-center flex-wrap"
+            className="text-4xl sm:text-6xl md:text-7xl font-bold text-dark-blue-purple mb-6 flex justify-center whitespace-nowrap overflow-x-auto"
             variants={containerVariants}
             initial="hidden"
             animate={controls}
