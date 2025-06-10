@@ -49,9 +49,9 @@ const Contact = () => {
   const contacts = [
     {
       role: "Faculty Coordinator",
-      name: "Dr. Narender Singh",
+      name: "Dr. Narendar Singh",
       phone: "+91 90140 67636",
-      email: "narendhar.singh@anurag.edu.in",
+      email: "narendarsinghece@anurag.edu.in",
     },
     {
       role: "President",
