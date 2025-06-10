@@ -29,6 +29,24 @@ function AppContent() {
     }
   }, [location.pathname]);
 
+  // Handle scroll disabling when modal is open
+  useEffect(() => {
+    if (showWelcomeModal) {
+      // Store current scroll position and disable scrolling
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = `-${scrollY}px`;
+    } else {
+      // Re-enable scrolling and restore position
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    }
+  }, [showWelcomeModal]);
+
   return (
     <>
       <Layout>
@@ -57,7 +75,7 @@ function AppContent() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-dark-blue-purple/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
               onClick={() => setShowWelcomeModal(false)}
             />
 

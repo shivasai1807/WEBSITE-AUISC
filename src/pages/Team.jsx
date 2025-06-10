@@ -1,14 +1,70 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import TeamCard from "../components/TeamCard";
 import { teams } from "../data/team";
 
 const Team = () => {
-  const scrollToTeam = (teamId) => {
-    const element = document.getElementById(teamId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const [activeTab, setActiveTab] = useState("all");
+
+  const facultyCoordinator = {
+    id: "faculty-coordinator",
+    title: "Faculty Coordinator",
+    content: {
+      members: [{
+        name: "Dr.Narender Singh",
+        role: "Faculty Coordinator",
+        image: "/team_pics/ns_sir.webp",
+        linkedin: "https://www.linkedin.com/in/dr-narendhar-singh-ba7188178/"
+      }]
     }
   };
+
+  const allTabs = [
+    {
+      id: "all",
+      title: "All Teams"
+    },
+    facultyCoordinator,
+    ...teams.map(team => ({
+      id: team.title.toLowerCase().replace(/\s+/g, "-"),
+      title: team.title,
+      content: team
+    }))
+  ];
+
+  const renderTeamMembers = (team) => {
+    // Combine leads and members, with leads appearing first
+    const allMembers = [];
+    
+    // Add leads first if they exist
+    if (team.content?.leads) {
+      allMembers.push(...team.content.leads);
+    }
+    
+    // Add regular members
+    if (team.content?.members) {
+      allMembers.push(...team.content.members);
+    }
+
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 justify-items-center">
+        {allMembers.map((member) => (
+          <TeamCard key={member.name} member={member} />
+        ))}
+      </div>
+    );
+  };
+
+  const renderTeamSection = (team, showTitle = true) => (
+    <div className="mb-12">
+      {showTitle && (
+        <h2 className="text-2xl font-bold mb-6 text-center text-dark-blue-purple">
+          {team.title}
+        </h2>
+      )}
+      {renderTeamMembers(team)}
+    </div>
+  );
 
   return (
     <div className="min-h-screen pt-20 pb-20 bg-light-blue-purple">
@@ -22,105 +78,71 @@ const Team = () => {
           Our Team
         </motion.h1>
 
-        {/* Team Navigation Menu */}
+        {/* Tabs Navigation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-white shadow-md rounded-lg mb-8 p-4"
+          className="mb-8"
         >
-          <div className="flex flex-wrap justify-center gap-2">
-            <motion.button
-              onClick={() => scrollToTeam("faculty-coordinator")}
-              className="px-4 py-2 bg-white hover:bg-light-blue-purple text-dark-blue-purple rounded-full text-sm font-medium"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              Faculty Coordinator
-            </motion.button>
-            {teams.map((team) => (
+          <div className="flex flex-wrap justify-center gap-2 p-4">
+            {allTabs.map((tab) => (
               <motion.button
-                key={team.title}
-                onClick={() => scrollToTeam(team.title.toLowerCase().replace(/\s+/g, "-"))}
-                className="px-4 py-2 bg-white hover:bg-light-blue-purple text-dark-blue-purple rounded-full text-sm font-medium"
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeTab === tab.id
+                    ? "bg-dark-blue-purple text-white shadow-lg"
+                    : "bg-white hover:bg-light-blue-purple text-dark-blue-purple"
+                }`}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                {team.title}
+                {tab.title}
               </motion.button>
             ))}
           </div>
         </motion.div>
 
-        <div className="space-y-16">
-          {/* Faculty Coordinator Section */}
-          <motion.div
-            id="faculty-coordinator"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-xl p-8 text-dark-blue-purple shadow-lg"
-          >
-            <h2 className="text-2xl font-bold mb-6 text-center">Faculty Coordinator</h2>
-            <div className="flex flex-wrap justify-center gap-8">
-              <TeamCard
-                member={{
-                  name: "Dr.Narender Singh",
-                  role: "Faculty Coordinator",
-                  image: "/team_pics/ns_sir.webp",
-                  linkedin: "https://www.linkedin.com/in/dr-narendhar-singh-ba7188178/"
-                }}
-              />
-            </div>
-          </motion.div>
-
-          {teams.map((team, index) => (
+        {/* Tab Content */}
+        <motion.div
+          layout
+          className="bg-white rounded-xl p-4 md:p-8 shadow-lg"
+        >
+          {activeTab === "all" ? (
             <motion.div
-              key={team.title}
-              id={team.title.toLowerCase().replace(/\s+/g, "-")}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl p-8 text-dark-blue-purple shadow-lg"
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
             >
-              <h2 className="text-2xl font-bold mb-6 text-center">{team.title}</h2>
-              
-              {team.title === "Executive Board" ? (
-                <div className="flex flex-wrap justify-center gap-8">
-                  {[...team.leads, ...team.members].map((member) => (
-                    <TeamCard key={member.name} member={member} />
-                  ))}
-                </div>
-              ) : (
-                <>
-                  {/* Team Leads */}
-                  {team.leads && team.leads.length > 0 && (
-                    <div className="mb-8">
-                      <h3 className="text-xl font-semibold mb-4 text-center text-dark-blue-purple">Team Lead</h3>
-                      <div className="flex flex-wrap justify-center gap-8">
-                        {team.leads.map((lead) => (
-                          <TeamCard key={lead.name} member={lead} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Team Members */}
-                  {team.members && team.members.length > 0 && (
-                    <div>
-                      <h3 className="text-xl font-semibold mb-4 text-center text-dark-blue-purple">Team Members</h3>
-                      <div className="flex flex-wrap justify-center gap-8">
-                        {team.members.map((member) => (
-                          <TeamCard key={member.name} member={member} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
+              {renderTeamSection(facultyCoordinator)}
+              {teams.map((team) => (
+                <motion.div key={team.title}>
+                  {renderTeamSection({
+                    id: team.title.toLowerCase().replace(/\s+/g, "-"),
+                    title: team.title,
+                    content: team
+                  })}
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </div>
+          ) : (
+            allTabs.map((tab) => (
+              activeTab === tab.id && (
+                <motion.div
+                  key={tab.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {renderTeamSection(tab, false)}
+                </motion.div>
+              )
+            ))
+          )}
+        </motion.div>
       </div>
     </div>
   );

@@ -10,6 +10,43 @@
   body {
     @apply text-gray-900 bg-white w-full min-h-screen m-0 p-0;
   }
+
+  /* Light theme scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #BCD4F3;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #0D47A1;
+    border-radius: 6px;
+    border: 3px solid #111827;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0D47A1;
+    opacity: 0.8;
+  }
+
+  /* Dark theme scrollbar */
+  @media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar-track {
+      background: #111827;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #0D47A1;
+      border: 3px solid #111827;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0D47A1;
+      opacity: 0.8;
+    }
+  }
 }
 
 @layer components {
@@ -121,4 +158,43 @@ button:focus-visible {
   .btn {
     @apply px-3 py-1.5;
   }
+}
+
+/* Shimmer effect for role lozenges */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer-gradient {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 25%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 3s infinite;
+  transform: translateX(-100%);
+}
+
+/* Add a subtle glow effect to the lozenge */
+.shimmer-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 70%
+  );
+  opacity: 0.5;
 }

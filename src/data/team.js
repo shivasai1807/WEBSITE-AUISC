@@ -77,7 +77,7 @@ export const teams = [
     leads: [
       {
         name: "Srujan M",
-        role: "Research And Development Team Head",
+        role: "R&D Team Head",
         image: "team_pics/srujan.webp",
         linkedin: "https://www.linkedin.com/in/malluri-srujan "
       },
