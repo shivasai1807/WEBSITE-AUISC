@@ -8,7 +8,7 @@ export const events = [
     participants: "100+",
     isUpcoming: false,
     description:
-      "Our flagship event focusing on SDGs such as Climate Action, Clean Energy, and Water. Featuring keynotes from Mrs. Sampada Pachaury and Dr. Krishna Vedula.",
+      "Our flagship event focusing on SDGs such as Climate Action, Clean Energy and Water. Featuring keynotes from Mrs. Sampada Pachaury and Dr. Krishna Vedula.",
     registrationLink: "",
     images: [
       {
@@ -26,11 +26,11 @@ export const events = [
     title: "Green Wave",
     date: "August 17–19, 2023",
     time: "10:00 AM – 4:00 PM",
-    location: "Anurag University",
+    location: "Anurag University, Hyderabad",
     participants: "200+",
     isUpcoming: false,
     description:
-      "Eco-conscious event including rally, campus clean-up, and idea pitching to promote plastic reduction.",
+      "Eco-conscious event including rally, campus clean-up and idea pitching to promote plastic reduction.",
     registrationLink: "",
     images: [
       {
@@ -44,7 +44,7 @@ export const events = [
     title: "Clash of Minds",
     date: "November 17–18, 2023",
     time: "10:00 AM – 4:00 PM",
-    location: "Anurag University",
+    location: "Anurag University, Hyderabad",
     participants: "150+",
     isUpcoming: false,
     description:
@@ -53,7 +53,7 @@ export const events = [
     images: [
       {
         url: "/pics_png/cfm.webp",
-        description: "Teams presenting innovative solutions at Clash of Minds competition",
+        description: "Teams felicitating the panel jury at Clash of Minds",
       },
       {
         url: "/pics_png/com_2.png",
@@ -66,7 +66,7 @@ export const events = [
     title: "Tejas 2K24 Innovation Expo",
     date: "January 26, 2024",
     time: "9:30 AM – 4:30 PM",
-    location: "Anurag University",
+    location: "Anurag University, Hyderabad",
     participants: "100+",
     isUpcoming: false,
     description:
@@ -89,11 +89,11 @@ export const events = [
     title: "AUNSF 2.0",
     date: "June 18–20, 2024",
     time: "9:00 AM – 5:00 PM",
-    location: "Anurag University",
+    location: "Anurag University, Hyderabad",
     participants: "210+",
     isUpcoming: false,
     description:
-      "Intercollegiate summit with 210+ participants across 20+ institutions. Included cyclathon, speaker sessions, and SDG workshops.",
+      "Intercollegiate summit with 210+ participants across 20+ institutions. Included cyclathon, speaker sessions and SDG workshops.",
     registrationLink: "",
     images: [
       {
@@ -102,7 +102,7 @@ export const events = [
       },
       {
         url: "/events/aunsf_2/img2.JPG",
-        description: "Expert speaker session on sustainability",
+        description: "Team AUISC with expert mentors at AUNSF 2.0",
       },
       {
         url: "/events/aunsf_2/img3.JPG",
@@ -119,7 +119,7 @@ export const events = [
     title: "Vermicomposting Training",
     date: "July 6, 2024",
     time: "11:00 AM – 2:00 PM",
-    location: "Anurag University",
+    location: "Anurag University, Hyderabad",
     participants: "50+",
     isUpcoming: false,
     description:
@@ -141,7 +141,7 @@ export const events = [
     title: "Mana Matti Vinayaka",
     date: "September 4, 2024",
     time: "10:00 AM – 1:00 PM",
-    location: "Anurag University",
+    location: "Anurag University, Hyderabad",
     participants: "100+",
     isUpcoming: false,
     description:
@@ -167,7 +167,7 @@ export const events = [
     title: "Researcher's Blueprint",
     date: "November 22–23, 2024",
     time: "10:00 AM – 3:00 PM",
-    location: "Anurag University",
+    location: "Anurag University, Hyderabad",
     participants: "111",
     isUpcoming: false,
     description:
@@ -193,7 +193,7 @@ export const events = [
     title: "AUNSF 3.0",
     date: "July 11-13, 2025",
     time: "9:00 AM – 5:00 PM",
-    location: "Main Auditorium, Anurag University",
+    location: "Anurag University, Hyderabad",
     participants: "300+",
     isUpcoming: true,
     description:
@@ -219,10 +219,10 @@ export const events = [
     title: "Eco-Insights Tour",
     date: "November 24-25, 2024",
     time: "9:00 AM – 5:00 PM",
-    location: "Anurag University",
+    location: "Anurag University, Hyderabad",
     participants: "N/A",
     isUpcoming: false,
-    description: "Sowing IDEAS, Growing SOLUTION. An immersive experience exploring real-world challenges in Agriculture, Health Care, and Education to inspire innovative solutions.",
+    description: "Sowing IDEAS, Growing SOLUTION. An immersive experience exploring real-world challenges in Agriculture, Health Care and Education to inspire innovative solutions.",
     registrationLink: "",
     images: [
       {

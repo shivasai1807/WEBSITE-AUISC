@@ -73,7 +73,7 @@ const About = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Empowering the next generation of engineering leaders through innovation, collaboration, and excellence.
+              Empowering the next generation of engineering leaders through innovation, collaboration and excellence.
             </motion.p>
           </motion.div>
         </div>
@@ -210,7 +210,7 @@ const About = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-dark-blue-purple max-w-3xl mx-auto"
               >
-                Anurag University IUCEE Student Chapter (AUISC) serves as a hub for collaboration, knowledge exchange, and skill development among engineering students.
+                Anurag University IUCEE Student Chapter (AUISC) serves as a hub for collaboration, knowledge exchange and skill development among engineering students.
               </motion.p>
             </div>
 
@@ -226,7 +226,7 @@ const About = () => {
                 {
                   icon: <Award className="text-bright-orange" size={24} />,
                   title: "National Events",
-                  description: "Hosted two national level events with participation from different student chapters."
+                  description: "Hosted three national level events with participation from different student chapters."
                 },
                 {
                   icon: <BookOpen className="text-bright-orange" size={24} />,
@@ -236,7 +236,7 @@ const About = () => {
                 {
                   icon: <Users className="text-bright-orange" size={24} />,
                   title: "Leadership",
-                  description: "Equipping members with leadership, teamwork, and communication skills."
+                  description: "Equipping members with leadership, teamwork and communication skills."
                 }
               ].map((feature, index) => (
                 <motion.div

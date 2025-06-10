@@ -62,7 +62,7 @@ const Achievements = () => {
       date: "2024",
       title: "Design Thinking Bootcamp - Runner-up",
       description:
-        "B. Raaga Samanvita, Abhay Ramagiri, and Pranav Kothapalli secured runner-up for their innovative gap-finding approach to climate change, highlighting creativity and a deep understanding of environmental issues.",
+        "B. Raaga Samanvita, Abhay Ramagiri and Pranav Kothapalli secured runner-up for their innovative gap-finding approach to climate change, highlighting creativity and a deep understanding of environmental issues.",
       image: "/achiev/iasf raaga, abhay, pranav.webp"
     },
     {
@@ -99,7 +99,7 @@ const Achievements = () => {
           >
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Our Achievements</h1>
             <p className="text-light-blue-purple text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-              Celebrating our milestones and successes in engineering education, innovation, and leadership.
+              Celebrating our milestones and successes in engineering education, innovation and leadership.
             </p>
           </motion.div>
         </div>
@@ -156,7 +156,7 @@ const Achievements = () => {
               <div className="space-y-4">
                 <h4 className="text-lg font-semibold text-bright-orange">P VENKATA NARSIMHA RAO</h4>
                 <p className="text-dark-blue-purple leading-relaxed">
-                  Recognized for exceptional leadership, initiative, and impactful contributions to student-led activities throughout the year.
+                  Recognized for exceptional leadership, initiative and impactful contributions to student-led activities throughout the year.
                 </p>
               </div>
             </motion.div>
@@ -189,7 +189,7 @@ const Achievements = () => {
               <div className="space-y-4">
                 <h4 className="text-lg font-semibold text-bright-orange">IASF 2024</h4>
                 <p className="text-dark-blue-purple leading-relaxed">
-                  Awarded at KLE Tech, Hubbali for the chapter's dedication, growing impact, and active student involvement.
+                  Awarded at KLE Technological University, Hubballi, Karnataka for the chapter's dedication, growing impact and active student involvement.
                 </p>
               </div>
             </motion.div>
@@ -218,7 +218,7 @@ const Achievements = () => {
               <div className="space-y-4">
                 <h4 className="text-lg font-semibold text-bright-orange">IASF 2025</h4>
                 <p className="text-dark-blue-purple leading-relaxed">
-                  Received at VNR VJIET for outstanding contributions, leadership, and consistent excellence.
+                  Received at VNR VJIET, Hyderabad for outstanding contributions, leadership and consistent excellence.
                 </p>
               </div>
             </motion.div>
@@ -334,7 +334,7 @@ const Achievements = () => {
                       <h3 className="text-xl font-bold text-dark-blue-purple">Best Perspective in Paper 2</h3>
                     </div>
                     <p className="text-dark-blue-purple leading-relaxed pl-16">
-                      Police Sreeja, Pranav Kothapalli, Boda Anji Reddy, G. Greshmi Ratna, and Vamshi Krishna
+                      Police Sreeja, Pranav Kothapalli, Boda Anji Reddy, G. Greshmi Ratna and Vamshi Krishna
                     </p>
                   </motion.div>
                   <motion.div
@@ -354,7 +354,7 @@ const Achievements = () => {
                       <h3 className="text-xl font-bold text-dark-blue-purple">Best Team Collaboration in InnovateX</h3>
                     </div>
                     <p className="text-dark-blue-purple leading-relaxed pl-16">
-                      Police Sreeja, Sumad, Boda Anji Reddy
+                      Police Sreeja, Sumad Reddy, Boda Anji Reddy
                     </p>
                   </motion.div>
                 </div>
@@ -424,7 +424,7 @@ const Achievements = () => {
                       <h3 className="text-xl font-bold text-dark-blue-purple">Runner Up - Team RideEase</h3>
                     </div>
                     <p className="text-dark-blue-purple leading-relaxed pl-16">
-                      Team RideEase, consisting of D. Thanughna, Anwesha Sahu, and Sayyad Pasha, secured the Runner Up position at Tejas 2k25. Their outstanding solution and impressive presentation earned them a well-deserved place among the top teams of the event.
+                      Team RideEase, consisting of D. Thanughna, Anwesha Sahu and Sayyad Pasha, secured the Runner Up position at Tejas 2k25. Their outstanding solution and impressive presentation earned them a well-deserved place among the top teams of the event.
                     </p>
                   </motion.div>
                 </div>
@@ -494,7 +494,7 @@ const Achievements = () => {
                       <h3 className="text-xl font-bold text-dark-blue-purple">2nd Prize Winners - Team Nuovo</h3>
                     </div>
                     <p className="text-dark-blue-purple leading-relaxed pl-16 mb-4">
-                      Winners: Aishwarya Alechalla, Sonal, Pranav, Anji, Sreeja
+                      Winners: Aishwarya Alechalla, Sonal Gramopadhye, Pranav Kottapalli, Boda Anji Reddy, Police Sreeja
                     </p>
                   </motion.div>
                   <motion.div

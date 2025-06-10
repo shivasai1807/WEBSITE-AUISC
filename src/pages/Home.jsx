@@ -34,7 +34,7 @@ const galleryImages = [
 const faqs = [
   {
     q: "What is AUISC?",
-    a: "AUISC stands for Anurag University IUCEE Student Chapter, a club dedicated to fostering innovation, learning, and leadership among students.",
+    a: "AUISC stands for Anurag University IUCEE Student Chapter, a club dedicated to fostering innovation, learning and leadership among students.",
   },
   {
     q: "How can I join AUISC events?",
@@ -50,7 +50,7 @@ const faqs = [
   },
   {
     q: "How to join our club?",
-    a: "Join our club by filling out the application form when it's released! The form is open only once a year, and only second-year students are eligible to apply. Stay connected with us on our social media platforms for updates.",
+    a: "Join our club by filling out the application form when it's released! The form is open only once a year and only second-year students are eligible to apply. Stay connected with us on our social media platforms for updates.",
   },
 ];
 

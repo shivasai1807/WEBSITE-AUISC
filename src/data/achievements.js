@@ -31,7 +31,7 @@ export const achievements = [
     id: 5,
     title: "A Tribute to Excellence – Nostalgia in Pages",
     date: "August 3, 2024",
-    description: "For our graduating board, we crafted a 10-page 'memory magazine' complete with candid photos, inside jokes, and even a Spotify code for our anthem. Seeing their reactions? Worth every late-night editing session.",
+    description: "For our graduating board, we crafted a 10-page 'memory magazine' complete with candid photos, inside jokes and even a Spotify code for our anthem. Seeing their reactions? Worth every late-night editing session.",
     icon: "📖"
   },
   {
@@ -45,7 +45,7 @@ export const achievements = [
     id: 7,
     title: "Tejas 2K24 – Innovation on Display",
     date: "January 26, 2024",
-    description: "Republic Day got a tech twist! Students showcased projects tackling health, business, and climate change. From AI-driven tools to low-cost solutions, the creativity was next-level.",
+    description: "Republic Day got a tech twist! Students showcased projects tackling health, business and climate change. From AI-driven tools to low-cost solutions, the creativity was next-level.",
     icon: "💡"
   },
   {
