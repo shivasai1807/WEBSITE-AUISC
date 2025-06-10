@@ -411,13 +411,20 @@ const About = () => {
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <span>Inspiring Tomorrow</span>
-                  <motion.div
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
+                  <a 
+                    href="https://www.anurag.edu.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-orange-yellow transition-colors"
                   >
-                    <ArrowRight size={20} />
-                  </motion.div>
+                    <span>Inspiring Tomorrow</span>
+                    <motion.div
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ArrowRight size={20} />
+                    </motion.div>
+                  </a>
                 </motion.div>
               </motion.div>
             </div>
