@@ -12,12 +12,16 @@ export const events = [
     registrationLink: "",
     images: [
       {
-        url: "/pics_png/GALLERY1.webp",
+        url: "/events/aunsf_1/img1.jpeg",
         description: "Keynote session with distinguished speakers at AUNSF 1.0",
       },
       {
-        url: "/pics_png/GALLERY2.webp",
+        url: "/events/aunsf_1/img2.JPG",
         description: "Interactive workshops and innovation stalls showcasing sustainable solutions",
+      },
+      {
+        url: "/events/aunsf_1/img3.JPG",
+        description: "Students engaging in hands-on workshops and collaborative problem-solving sessions",
       }
     ],
   },
@@ -224,7 +228,7 @@ export const events = [
     date: "November 24-25, 2024",
     time: "9:00 AM – 5:00 PM",
     location: "Anurag University, Hyderabad",
-    participants: "N/A",
+    participants: "100+",
     isUpcoming: false,
     description: "Sowing IDEAS, Growing SOLUTION. An immersive experience exploring real-world challenges in Agriculture, Health Care and Education to inspire innovative solutions.",
     registrationLink: "",
