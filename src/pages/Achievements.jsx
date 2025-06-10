@@ -243,7 +243,7 @@ const Achievements = () => {
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-medium-blue"></div>
             
             {/* Timeline items */}
-            <div className="space-y-16">
+            <div className="space-y-24">
               {achievements.map((achievement, index) => (
                 <motion.div
                   key={achievement.id}
@@ -251,36 +251,41 @@ const Achievements = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-center md:items-stretch ${
-                    index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'
-                  }`}
+                  className="relative"
                 >
-                  {/* Content (Text and Icon) */}
-                  <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} mb-4 md:mb-0 order-2 md:order-1`}>
-                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow h-full">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="bg-bright-orange/10 p-3 rounded-lg">
-                          {achievement.icon}
+                  {/* Timeline dot */}
+                  <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-bright-orange rounded-full z-10"></div>
+
+                  <div className={`flex flex-col md:flex-row items-center gap-8 ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}>
+                    {/* Content (Text and Icon) */}
+                    <div className="w-full md:w-1/2">
+                      <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow h-full">
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className="bg-bright-orange/10 p-3 rounded-lg">
+                            {achievement.icon}
+                          </div>
+                          <div>
+                            <span className="text-sm font-medium text-dark-blue-purple/70">{achievement.date}</span>
+                            <h3 className="text-xl font-bold text-dark-blue-purple">{achievement.title}</h3>
+                          </div>
                         </div>
-                        <div>
-                          <span className="text-sm font-medium text-dark-blue-purple/70">{achievement.date}</span>
-                          <h3 className="text-xl font-bold text-dark-blue-purple">{achievement.title}</h3>
-                        </div>
+                        <p className="text-dark-blue-purple leading-relaxed">{achievement.description}</p>
                       </div>
-                      <p className="text-dark-blue-purple leading-relaxed">{achievement.description}</p>
+                    </div>
+                    
+                    {/* Image */}
+                    <div className="w-full md:w-1/2">
+                      <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
+                        <img
+                          src={achievement.image}
+                          alt={achievement.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
                   </div>
-                  
-                  {/* Image */}
-                  <div className={`w-full md:w-1/2 aspect-[4/3] overflow-hidden flex-shrink-0 order-1 md:order-2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'} mb-4 md:mb-0`}>
-                    <img
-                      src={achievement.image}
-                      alt={achievement.title}
-                      className="w-full h-full object-cover rounded-lg shadow-md"
-                    />
-                  </div>
-
-                  <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-bright-orange rounded-full"></div>
                 </motion.div>
               ))}
             </div>
