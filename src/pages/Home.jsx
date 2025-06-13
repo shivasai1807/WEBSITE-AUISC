@@ -169,7 +169,7 @@ const Home = () => {
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
-            className="text-4xl sm:text-6xl md:text-7xl font-bold text-dark-blue-purple mb-6 flex justify-center whitespace-nowrap overflow-x-auto"
+            className="text-4xl sm:text-6xl md:text-7xl font-bold text-dark-blue-purple mb-6 flex flex-wrap justify-center"
             variants={containerVariants}
             initial="hidden"
             animate={controls}
@@ -178,7 +178,7 @@ const Home = () => {
               <motion.span
                 key={index}
                 variants={charVariants}
-                style={{ display: 'inline-block' }}
+                className="inline-block"
               >
                 {char === " " ? "\u00A0" : char}
               </motion.span>

@@ -75,7 +75,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-light-blue-purple">
       {/* Hero Section */}
-      <div className="relative pt-20 pb-16 bg-dark-blue-purple">
+      <div className="relative pt-20 pb-8 bg-dark-blue-purple">
         <div className="absolute inset-0 bg-[url('/pics_png/pattern.png')] opacity-10"></div>
         <div className="container mx-auto px-4 relative">
           <motion.div
@@ -102,7 +102,7 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-6 md:p-10 shadow-lg hover:shadow-xl transition-shadow"
+              className="bg-white rounded-2xl p-5 md:p-10 shadow-lg hover:shadow-xl transition-shadow"
             >
               <div className="bg-bright-orange/10 p-3 md:p-4 rounded-xl w-fit mb-4 md:mb-6">
                 <Phone className="text-bright-orange" size={20} />

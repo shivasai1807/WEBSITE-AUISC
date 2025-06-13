@@ -5,7 +5,7 @@ const AUNSF = () => {
   const chiefGuests = [
     {
       name: "Dr. Krishna Vedula",
-      role: "Executive Director",
+      role: "Executive Director, IUCEE",
       description: "Dean Emeritus of UMass Lowell and founder of IUCEE, with 40+ years of academic and leadership experience in the U.S., now leading engineering education reform in India. Has impacted 100+ institutions through IUCEE, authored 75+ publications, and received global awards for contributions to STEM and engineering education."
     },
     {
@@ -76,7 +76,7 @@ const AUNSF = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
               <a
-                href="https://linktr.ee/aunsf"
+                href="https://anurag.edu.in/event-itinerary"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block cursor-pointer"
@@ -103,7 +103,7 @@ const AUNSF = () => {
               </p>
             </div>
             <a
-              href="https://linktr.ee/aunsf"
+              href="https://anurag.edu.in/event-itinerary"
               target="_blank"
               rel="noopener noreferrer"
               className="px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30"

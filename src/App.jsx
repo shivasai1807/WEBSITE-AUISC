@@ -79,7 +79,7 @@ function AppContent() {
               {/* Banner Image */}
               <div className="w-full h-full relative">
                 <a 
-                  href="https://linktr.ee/aunsf" 
+                  href="https://anurag.edu.in/event-itinerary" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="block cursor-pointer"
@@ -91,7 +91,7 @@ function AppContent() {
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-dark-blue-purple/70 py-2 text-center">
                     <a 
-                      href="https://linktr.ee/aunsf" 
+                      href="https://anurag.edu.in/event-itinerary" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-white text-lg font-semibold hover:text-gray-200 transition-colors duration-300"

@@ -216,7 +216,7 @@ const Events = () => {
                         <div className="relative w-full max-w-2xl mx-auto">
                           <div className="relative h-[500px] overflow-hidden rounded-xl shadow-lg">
                             <a 
-                              href="https://linktr.ee/aunsf" 
+                              href="https://anurag.edu.in/event-itinerary" 
                               target="_blank" 
                               rel="noopener noreferrer"
                               className="block w-full h-full cursor-pointer"

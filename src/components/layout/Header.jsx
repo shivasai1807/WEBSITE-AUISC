@@ -32,6 +32,7 @@ const MenuToggle = ({ toggle, isOpen }) => (
     aria-label="Toggle menu"
     initial={false}
     animate={isOpen ? "open" : "closed"}
+    whileTap={{ scale: 0.95 }}
   >
     <svg width="23" height="23" viewBox="0 0 23 23" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <Path
@@ -39,6 +40,7 @@ const MenuToggle = ({ toggle, isOpen }) => (
           closed: { d: "M 2 2.5 L 20 2.5" },
           open: { d: "M 3 16.5 L 17 2.5" },
         }}
+        transition={{ duration: 0.15 }}
       />
       <Path
         d="M 2 9.423 L 20 9.423"
@@ -53,6 +55,7 @@ const MenuToggle = ({ toggle, isOpen }) => (
           closed: { d: "M 2 16.346 L 20 16.346" },
           open: { d: "M 3 2.5 L 17 16.346" },
         }}
+        transition={{ duration: 0.15 }}
       />
     </svg>
   </motion.button>
@@ -66,8 +69,22 @@ const Header = () => {
 
   // Close menu when route changes
   useEffect(() => {
-    setIsOpen(false);
+    if (isOpen) {
+      setIsOpen(false);
+    }
   }, [location.pathname]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     gsap.set(navRefs.current, { opacity: 0, y: -50 });
@@ -82,10 +99,10 @@ const Header = () => {
 
   const navVariants = {
     open: {
-      transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.05, delayChildren: 0.1 },
     },
     closed: {
-      transition: { staggerChildren: 0.05, staggerDirection: -1 },
+      transition: { staggerChildren: 0.03, staggerDirection: -1 },
     },
   };
 
@@ -95,6 +112,7 @@ const Header = () => {
       opacity: 1,
       transition: {
         y: { stiffness: 1000, velocity: -100 },
+        duration: 0.2,
       },
     },
     closed: {
@@ -102,6 +120,7 @@ const Header = () => {
       opacity: 0,
       transition: {
         y: { stiffness: 1000 },
+        duration: 0.15,
       },
     },
   };
@@ -111,28 +130,25 @@ const Header = () => {
       clipPath: "circle(1000px at 40px 40px)",
       transition: {
         type: "spring",
-        stiffness: 20,
-        restDelta: 2,
+        stiffness: 40,
+        damping: 20,
+        mass: 0.5,
       },
     },
     closed: {
       clipPath: "circle(30px at 40px 40px)",
       transition: {
-        delay: 0.2,
         type: "spring",
         stiffness: 400,
-        damping: 40,
+        damping: 30,
+        mass: 0.5,
       },
     },
   };
 
   const handleLinkClick = (path) => {
-    // Close menu immediately
     setIsOpen(false);
-    // Navigate after a small delay to allow animation to start
-    setTimeout(() => {
-      navigate(path);
-    }, 50);
+    navigate(path);
   };
 
   return (
@@ -167,7 +183,7 @@ const Header = () => {
               </Link>
             ))}
             <a
-              href="https://linktr.ee/aunsf"
+              href="https://anurag.edu.in/event-itinerary"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 bg-bright-orange text-white rounded-full font-semibold hover:bg-orange-yellow transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
@@ -198,7 +214,7 @@ const Header = () => {
                   <motion.div
                     key={link.path}
                     variants={itemVariants}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <Link
@@ -221,7 +237,7 @@ const Header = () => {
                 ))}
                 <motion.div
                   variants={itemVariants}
-                  whileHover={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="mt-4"
                 >
