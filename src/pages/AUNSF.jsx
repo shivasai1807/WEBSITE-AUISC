@@ -146,21 +146,48 @@ const AUNSF = () => {
             {chiefGuests.map((guest, index) => (
               <motion.div
                 key={index}
-                whileHover={{ y: -5 }}
-                className="bg-dark-blue-purple/30 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 transition-colors flex flex-col md:flex-row items-center gap-4 md:gap-6"
+                whileHover={{ 
+                  y: -10,
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
+                className="group bg-dark-blue-purple/30 backdrop-blur-sm p-6 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 flex flex-col items-center relative overflow-hidden"
               >
-                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden flex-shrink-0">
-                  <img
-                    src={index === 0 ? "/krishna vedula.png" : "/sampadha.jpg"}
-                    alt={guest.name}
-                    className="w-full h-full object-cover"
-                  />
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-purple-600/0 to-blue-600/0 group-hover:from-blue-600/10 group-hover:via-purple-600/10 group-hover:to-blue-600/10 transition-all duration-500" />
+                
+                {/* Top section with image and designation */}
+                <div className="flex flex-col items-center mb-6 relative z-10">
+                  {/* Image container with enhanced styling */}
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden flex-shrink-0 ring-4 ring-blue-500/20 group-hover:ring-blue-500/40 transition-all duration-300 relative mb-4">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <img
+                      src={index === 0 ? "/krishna vedula.png" : "/sampadha.jpg"}
+                      alt={guest.name}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* Name and Role */}
+                  <h3 className="text-2xl md:text-3xl font-bold mb-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300 text-center">
+                    {guest.name}
+                  </h3>
+                  <p className="text-purple-400 text-lg font-medium group-hover:text-purple-300 transition-colors duration-300 text-center">
+                    {guest.role}
+                  </p>
                 </div>
-                <div className="text-center md:text-left">
-                  <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-blue-400">{guest.name}</h3>
-                  <p className="text-purple-400 mb-2 md:mb-4 font-medium">{guest.role}</p>
-                  <p className="text-gray-300 text-sm md:text-base">{guest.description}</p>
+
+                {/* Bottom section with description */}
+                <div className="relative z-10 w-full">
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-blue-500/30 to-transparent mb-6" />
+                  <p className="text-gray-300 text-base md:text-lg group-hover:text-gray-200 transition-colors duration-300 text-center leading-relaxed">
+                    {guest.description}
+                  </p>
                 </div>
+
+                {/* Decorative elements */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl transform translate-x-16 -translate-y-16 group-hover:bg-blue-500/10 transition-all duration-500" />
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl transform -translate-x-16 translate-y-16 group-hover:bg-purple-500/10 transition-all duration-500" />
               </motion.div>
             ))}
           </div>
@@ -261,6 +288,136 @@ const AUNSF = () => {
               >
                 <Gift className="w-8 h-8 mx-auto mb-4 text-blue-400" />
                 <p className="text-lg text-center">{perk}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Team Behind 3.0 Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-20"
+        >
+          <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            Team Behind 3.0
+          </h2>
+
+          {/* Project Managers */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold mb-8 text-center text-blue-400">Project Managers</h3>
+            <div className="flex justify-center">
+              <div className="grid grid-cols-2 lg:grid-cols-2 gap-8 max-w-2xl mx-auto justify-items-center">
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  className="p-6 rounded-2xl transition-all duration-300"
+                >
+                  <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-blue-500/20">
+                    <img
+                      src="/team/thanughna.jpg"
+                      alt="Thanughna"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h4 className="text-xl font-bold mb-2 text-purple-400 text-center">Thanughna</h4>
+                  <p className="text-blue-400 mb-2 text-center">Project Manager</p>
+                  <div className="flex items-center justify-center space-x-2">
+                    <a
+                      href="https://www.linkedin.com/in/thanughna"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      </svg>
+                    </a>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  className="p-6 rounded-2xl transition-all duration-300"
+                >
+                  <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-blue-500/20">
+                    <img
+                      src="/team/pavan.jpg"
+                      alt="Pavan"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h4 className="text-xl font-bold mb-2 text-purple-400 text-center">Pavan</h4>
+                  <p className="text-blue-400 mb-2 text-center">Project Manager</p>
+                  <div className="flex items-center justify-center space-x-2">
+                    <a
+                      href="https://www.linkedin.com/in/pavan"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      </svg>
+                    </a>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+
+          {/* Team Leads */}
+          <h3 className="text-2xl font-bold mb-8 text-center text-blue-400">Team Leads</h3>
+
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto justify-items-center">
+            {[
+              { name: "Cecilia", team: "Content Team", description: "Crafting engaging event content and materials", image: "/team/cecilia.jpg" },
+              { name: "Abhiram", team: "Organizing Team", description: "Coordinating event logistics and operations", image: "/team/abhiram.jpg" },
+              { name: "Agrati Sheela", team: "Organizing Team", description: "Managing event flow and coordination", image: "/team/agrati.jpg" },
+              { name: "Shiva Sai", team: "Technical Team", description: "Handling technical setup and support", image: "/team/shiva.jpg" },
+              { name: "Kavya Sri", team: "Designing Team", description: "Creating visual identity and graphics", image: "/team/kavya.jpg" },
+              { name: "Sumad", team: "Creative Team", description: "Leading creative direction and branding", image: "/team/sumad.jpg" },
+              { name: "Vaishnavi", team: "Creative Team", description: "Developing innovative event concepts", image: "/team/vaishnavi.jpg" },
+              { name: "Jahnavi", team: "Sponsorship Team", description: "Securing event partnerships and funding", image: "/team/jahnavi.jpg" },
+              { name: "Rekha", team: "Sponsorship Team", description: "Managing sponsor relationships", image: "/team/rekha.jpg" },
+              { name: "Ayesha", team: "Marketing Team", description: "Driving event promotion and outreach", image: "/team/ayesha.jpg" },
+              { name: "Pranav", team: "Marketing Team", description: "Executing digital marketing strategies", image: "/team/pranav.jpg" },
+              { name: "Ram Swaroop", team: "Media Team", description: "Capturing event moments and coverage", image: "/team/ram.jpg" },
+              { name: "Sri Charan", team: "Logistics Team", description: "Managing venue and resource logistics", image: "/team/sri.jpg" },
+              { name: "Pranathi", team: "Logistics Team", description: "Coordinating event supplies and setup", image: "/team/pranathi.jpg" },
+              { name: "Deekshitha", team: "Registrations Team", description: "Handling participant registrations", image: "/team/deekshitha.jpg" },
+              { name: "Siri Chandana", team: "Registrations Team", description: "Managing attendee information", image: "/team/siri.jpg" },
+              { name: "Sukruth", team: "Hospitality Team", description: "Ensuring guest comfort and care", image: "/team/sukruth.jpg" },
+              { name: "Sreeja", team: "Hospitality Team", description: "Coordinating accommodation services", image: "/team/sreeja.jpg" },
+              { name: "Vyshali", team: "Crafts Team", description: "Creating event decorations and crafts", image: "/team/vyshali.jpg" },
+              { name: "Umasri", team: "Culturals Team", description: "Organizing cultural performances", image: "/team/umasri.jpg" }
+            ].map((lead, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ y: -5 }}
+                className="p-6 rounded-2xl transition-all duration-300"
+              >
+                <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-blue-500/20">
+                  <img
+                    src={lead.image}
+                    alt={lead.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h4 className="text-xl font-bold mb-2 text-purple-400 text-center">{lead.name}</h4>
+                <p className="text-blue-400 mb-2 text-center">{lead.team}</p>
+                {/* <p className="text-gray-300 mb-4 text-center text-sm">{lead.description}</p> */}
+                <div className="flex items-center justify-center space-x-2">
+                  <a
+                    href={`https://www.linkedin.com/in/${lead.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                  </a>
+                </div>
               </motion.div>
             ))}
           </div>
