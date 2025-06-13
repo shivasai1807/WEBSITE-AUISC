@@ -314,7 +314,7 @@ const AUNSF = () => {
                 >
                   <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-blue-500/20">
                     <img
-                      src="/team/thanughna.jpg"
+                      src="/team_pics/thanughana.webp"
                       alt="Thanughna"
                       className="w-full h-full object-cover"
                     />
@@ -341,7 +341,7 @@ const AUNSF = () => {
                 >
                   <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-blue-500/20">
                     <img
-                      src="/team/pavan.jpg"
+                      src="/team_pics/pavan.webp"
                       alt="Pavan"
                       className="w-full h-full object-cover"
                     />
@@ -370,26 +370,26 @@ const AUNSF = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto justify-items-center">
             {[
-              { name: "Cecilia", team: "Content Team", description: "Crafting engaging event content and materials", image: "/team/cecilia.jpg" },
-              { name: "Abhiram", team: "Organizing Team", description: "Coordinating event logistics and operations", image: "/team/abhiram.jpg" },
-              { name: "Agrati Sheela", team: "Organizing Team", description: "Managing event flow and coordination", image: "/team/agrati.jpg" },
-              { name: "Shiva Sai", team: "Technical Team", description: "Handling technical setup and support", image: "/team/shiva.jpg" },
-              { name: "Kavya Sri", team: "Designing Team", description: "Creating visual identity and graphics", image: "/team/kavya.jpg" },
-              { name: "Sumad", team: "Creative Team", description: "Leading creative direction and branding", image: "/team/sumad.jpg" },
-              { name: "Vaishnavi", team: "Creative Team", description: "Developing innovative event concepts", image: "/team/vaishnavi.jpg" },
-              { name: "Jahnavi", team: "Sponsorship Team", description: "Securing event partnerships and funding", image: "/team/jahnavi.jpg" },
-              { name: "Rekha", team: "Sponsorship Team", description: "Managing sponsor relationships", image: "/team/rekha.jpg" },
-              { name: "Ayesha", team: "Marketing Team", description: "Driving event promotion and outreach", image: "/team/ayesha.jpg" },
-              { name: "Pranav", team: "Marketing Team", description: "Executing digital marketing strategies", image: "/team/pranav.jpg" },
-              { name: "Ram Swaroop", team: "Media Team", description: "Capturing event moments and coverage", image: "/team/ram.jpg" },
-              { name: "Sri Charan", team: "Logistics Team", description: "Managing venue and resource logistics", image: "/team/sri.jpg" },
-              { name: "Pranathi", team: "Logistics Team", description: "Coordinating event supplies and setup", image: "/team/pranathi.jpg" },
-              { name: "Deekshitha", team: "Registrations Team", description: "Handling participant registrations", image: "/team/deekshitha.jpg" },
-              { name: "Siri Chandana", team: "Registrations Team", description: "Managing attendee information", image: "/team/siri.jpg" },
-              { name: "Sukruth", team: "Hospitality Team", description: "Ensuring guest comfort and care", image: "/team/sukruth.jpg" },
-              { name: "Sreeja", team: "Hospitality Team", description: "Coordinating accommodation services", image: "/team/sreeja.jpg" },
-              { name: "Vyshali", team: "Crafts Team", description: "Creating event decorations and crafts", image: "/team/vyshali.jpg" },
-              { name: "Umasri", team: "Culturals Team", description: "Organizing cultural performances", image: "/team/umasri.jpg" }
+              { name: "Cecilia", team: "Content Team", description: "Crafting engaging event content and materials", image: "/team_pics/cecilia.webp" },
+              { name: "Abhiram", team: "Organizing Team", description: "Coordinating event logistics and operations", image: "/team_pics/abhiram.webp" },
+              { name: "Agrati Sheela", team: "Organizing Team", description: "Managing event flow and coordination", image: "/team_pics/agrathi.webp" },
+              { name: "Shiva Sai", team: "Technical Team", description: "Handling technical setup and support", image: "/team_pics/shiva.webp" },
+              { name: "Kavya Sri", team: "Designing Team", description: "Creating visual identity and graphics", image: "/team_pics/kavya_sri.webp" },
+              { name: "Sumad", team: "Creative Team", description: "Leading creative direction and branding", image: "/team_pics/sumad.webp" },
+              { name: "Vaishnavi", team: "Creative Team", description: "Developing innovative event concepts", image: "/team_pics/vaishnavi.webp" },
+              { name: "Jahnavi", team: "Sponsorship Team", description: "Securing event partnerships and funding", image: "/team_pics/jahnavi.webp" },
+              { name: "Rekha", team: "Sponsorship Team", description: "Managing sponsor relationships", image: "/team_pics/rekha.webp" },
+              { name: "Ayesha", team: "Marketing Team", description: "Driving event promotion and outreach", image: "/team_pics/ayesha.webp" },
+              { name: "Pranav", team: "Marketing Team", description: "Executing digital marketing strategies", image: "/team_pics/pranav.webp" },
+              { name: "Ram Swaroop", team: "Media Team", description: "Capturing event moments and coverage", image: "/team_pics/ram.webp" },
+              { name: "Sri Charan", team: "Logistics Team", description: "Managing venue and resource logistics", image: "/team_pics/sri_charan.webp" },
+              { name: "Pranathi", team: "Logistics Team", description: "Coordinating event supplies and setup", image: "/team_pics/pranathi.webp" },
+              { name: "Deekshitha", team: "Registrations Team", description: "Handling participant registrations", image: "/team_pics/deekshitha.webp" },
+              { name: "Siri Chandana", team: "Registrations Team", description: "Managing attendee information", image: "/team_pics/siriChandana.webp" },
+              { name: "Sukruth", team: "Hospitality Team", description: "Ensuring guest comfort and care", image: "/team_pics/sukruth.webp" },
+              { name: "Sreeja", team: "Hospitality Team", description: "Coordinating accommodation services", image: "/team_pics/sreeja_p.webp" },
+              { name: "Vyshali", team: "Crafts Team", description: "Creating event decorations and crafts", image: "/team_pics/vyshali.webp" },
+              { name: "Umasri", team: "Culturals Team", description: "Organizing cultural performances", image: "/team_pics/uma.webp" }
             ].map((lead, index) => (
               <motion.div
                 key={index}
