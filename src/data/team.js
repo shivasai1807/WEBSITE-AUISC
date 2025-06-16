@@ -115,7 +115,7 @@ export const teams = [
       },
       {
         name: "Saketh",
-        image: "/team_pics",
+        image: "/team_pics/Gsaketh.webp",
         linkedin: "https://www.linkedin.com/in/sakethchittaluri?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       {
@@ -186,7 +186,7 @@ export const teams = [
     members: [
       {
         name: "Kavya Sri",
-        image: "https://via.placeholder.com/200",
+        image: "team_pics/kavya_sri.webp",
         linkedin: "https://www.linkedin.com/in/kavya-sri-1b8868300/"
       },
       {
@@ -196,7 +196,7 @@ export const teams = [
       },
       {
         name: "Uma Sri",
-        image: "https://via.placeholder.com/200",
+        image: "team_pics/uma.webp",
         linkedin: "https://www.linkedin.com/in/umasri-kataboina-9a863b2a4/"
       },
       {
@@ -211,7 +211,7 @@ export const teams = [
       },
       {
         name: "Anwesha",
-        image: "/team_pics",
+        image: "/team_pics/anwesha.webp",
         linkedin: "https://www.linkedin.com/in/anwesha-sahu-104279281/"
       },
       {
@@ -221,12 +221,12 @@ export const teams = [
       },
       {
         name: "Sailaja",
-        image: "/team_pics",
+        image: "/team_pics/sailaja.webp",
         linkedin: "https://www.linkedin.com/in/sailaja"
       },
       {
         name: "Vijaya Lakshmi",
-        image: "/team_pics",
+        image: "/team_pics/vijaya.webp",
         linkedin: "https://www.linkedin.com/in/vijaya-lakshmi"
       },
       {
@@ -259,42 +259,42 @@ export const teams = [
       },
       {
         name: "Aishwarya",
-        image: "/team_pics",
+        image: "/team_pics/JR_aishwarya.webp",
         linkedin: "https://www.linkedin.com/in/kasula-aishwarya-5b5853299?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       {
         name: "Amulya",
-        image: "/team_pics",
+        image: "/team_pics/amulya.webp",
         linkedin: "https://www.linkedin.com/in/amulya-pagidimarri-091051236?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
       },
       {
         name: "Ashritha",
-        image: "/team_pics",
+        image: "/team_pics/Ashritha.webp",
         linkedin: "https://www.linkedin.com/in/ashritha-reddy-318040316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
       },
       {
         name: "Dharun",
-        image: "/team_pics",
+        image: "/team_pics/dharun.webp",
         linkedin: "https://www.linkedin.com/in/dharun-kamisetty-b12ba3266?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       {
         name: "Durga Prasad",
-        image: "/team_pics",
+        image: "/team_pics/durga.webp",
         linkedin: "https://www.linkedin.com/in/durgaprasad-arsoju-81255b23a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
       },
       {
         name: "Hakshala",
-        image: "/team_pics",
+        image: "/team_pics/hakshala.webp",
         linkedin: "https://www.linkedin.com/in/hakshala"
       },
       {
         name: "Sneha",
-        image: "/team_pics",
+        image: "/team_pics/sneha.webp",
         linkedin: "https://www.linkedin.com/in/sneha"
       },
       {
         name: "Srivarsha",
-        image: "/team_pics",
+        image: "/team_pics/Srivarsha.webp",
         linkedin: "https://www.linkedin.com/in/srivarsha"
       },
     ],
@@ -390,7 +390,7 @@ export const teams = [
       },
       {
         name: "Chethana",
-        image: "/team_pics",
+        image: "/team_pics/chetana.webp",
         linkedin: "https://www.linkedin.com/in/chethana"
       },
       {
@@ -400,7 +400,7 @@ export const teams = [
       },
       {
         name: "Saketh",
-        image: "/team_pics",
+        image: "/team_pics/PRsaketh.webp",
         linkedin: "https://www.linkedin.com/in/saketh"
       },
       {
@@ -410,7 +410,7 @@ export const teams = [
       },
       {
         name: "Trisha Reddy",
-        image: "/team_pics",
+        image: "/team_pics/trisha.webp",
         linkedin: "https://www.linkedin.com/in/surakanti-trisha-reddy-48a614363?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
       },
     ],
@@ -463,7 +463,7 @@ export const teams = [
       },
       {
         name: "Rajith",
-        image: "/team_pics",
+        image: "/team_pics/rajith.webp",
         linkedin: "https://www.linkedin.com/in/rajith-rao-muthyala-842a6128b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       {
@@ -473,7 +473,7 @@ export const teams = [
       },
       {
         name: "Neeraj",
-        image: "/team_pics",
+        image: "/team_pics/neeraj.webp",
         linkedin: "https://www.linkedin.com/in/neeraj-yadav-454620315?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
       },
       {
