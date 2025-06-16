@@ -369,7 +369,7 @@ export const teams = [
         linkedin: "https://in.linkedin.com/in/sumad-reddy"
       },
       {
-        name: "Jahnavi",
+        name: "Jahnavi Dora",
         image: "team_pics/jahnavi.webp",
         linkedin: "https://www.linkedin.com/in/jahnavi-dora-481b31287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
       },
