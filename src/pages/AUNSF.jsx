@@ -377,7 +377,7 @@ const AUNSF = () => {
               { name: "Kavya Sri", team: "Designing Team", description: "Creating visual identity and graphics", image: "/team_pics/kavya_sri.webp" },
               { name: "Sumad", team: "Creative Team", description: "Leading creative direction and branding", image: "/team_pics/sumad.webp" },
               { name: "Vaishnavi", team: "Creative Team", description: "Developing innovative event concepts", image: "/team_pics/vaishnavi.webp" },
-              { name: "Jahnavi", team: "Sponsorship Team", description: "Securing event partnerships and funding", image: "/team_pics/jahnavi.webp" },
+              { name: "Jahnavi Dora", team: "Sponsorship Team", description: "Securing event partnerships and funding", image: "/team_pics/jahnavi.webp" },
               { name: "Rekha", team: "Sponsorship Team", description: "Managing sponsor relationships", image: "/team_pics/rekha.webp" },
               { name: "Ayesha", team: "Marketing Team", description: "Driving event promotion and outreach", image: "/team_pics/ayesha.webp" },
               { name: "Pranav", team: "Marketing Team", description: "Executing digital marketing strategies", image: "/team_pics/pranav.webp" },

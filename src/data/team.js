@@ -287,11 +287,11 @@ export const teams = [
         image: "/team_pics/hakshala.webp",
         linkedin: "https://www.linkedin.com/in/hakshala"
       },
-      {
-        name: "Sneha",
-        image: "/team_pics/sneha.webp",
-        linkedin: "https://www.linkedin.com/in/sneha"
-      },
+      // {
+      //   name: "Sneha",
+      //   image: "/team_pics/sneha.webp",
+      //   linkedin: "https://www.linkedin.com/in/sneha"
+      // },
       {
         name: "Srivarsha",
         image: "/team_pics/Srivarsha.webp",
@@ -322,7 +322,7 @@ export const teams = [
       },
       {
         name: "S. F. Cecilia",
-        image: "team_pics/",
+        image: "team_pics/cecilia.webp",
         linkedin: "https://www.linkedin.com/in/sfcecilia/"
       },
       {
@@ -337,12 +337,12 @@ export const teams = [
       },
       {
         name: "Rachitha",
-        image: "/team_pics",
+        image: "/team_pics/Rachitha.webp",
         linkedin: "https://www.linkedin.com/in/gade-rachitha-3642ab299?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
       },
       {
         name: "Noel",
-        image: "/team_pics",
+        image: "/team_pics/noel.webp",
         linkedin: "https://www.linkedin.com/in/noel-reddy-7a688b2a9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
       },
       {
