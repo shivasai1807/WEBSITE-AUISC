@@ -198,10 +198,10 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Link
-              to="/events"
+              to="/aunsf"
               className="inline-flex items-center px-6 py-3 bg-bright-orange text-white rounded-lg hover:bg-orange-yellow transition-colors"
             >
-              Explore Events
+              AUNSF 3.0
               <ArrowRight className="ml-2" size={20} />
             </Link>
           </motion.div>

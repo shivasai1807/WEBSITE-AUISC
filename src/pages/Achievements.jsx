@@ -154,7 +154,7 @@ const Achievements = () => {
                 </div>
               </motion.div>
               <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-bright-orange">P VENKATA NARSIMHA RAO</h4>
+                <h4 className="text-lg font-semibold text-bright-orange">P VENKAT NARSIMHA RAO</h4>
                 <p className="text-dark-blue-purple leading-relaxed">
                   Recognized for exceptional leadership, initiative and impactful contributions to student-led activities throughout the year.
                 </p>

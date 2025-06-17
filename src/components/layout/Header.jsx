@@ -27,13 +27,13 @@ const Path = (props) => (
 
 const MenuToggle = ({ toggle, isOpen }) => (
   <motion.button
-    className="outline-none border-none select-none cursor-pointer relative w-12 h-12 rounded-full bg-transparent md:hidden z-50"
+    className="outline-none border-none select-none cursor-pointer relative w-12 h-12 flex items-center justify-center md:hidden z-50"
     onClick={toggle}
     aria-label="Toggle menu"
     initial={false}
     animate={isOpen ? "open" : "closed"}
   >
-    <svg width="23" height="23" viewBox="0 0 23 23" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <svg width="23" height="23" viewBox="0 0 23 23">
       <Path
         variants={{
           closed: { d: "M 2 2.5 L 20 2.5" },
