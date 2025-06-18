@@ -369,28 +369,28 @@ const AUNSF = () => {
           <h3 className="text-2xl font-bold mb-8 text-center text-blue-400">Team Leads</h3>
 
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto justify-items-center">
-            {[
-              { name: "Cecilia", team: "Content Team", description: "Crafting engaging event content and materials", image: "/team_pics/cecilia.webp" },
-              { name: "Abhiram", team: "Organizing Team", description: "Coordinating event logistics and operations", image: "/team_pics/abhiram.webp" },
-              { name: "Agrati Sheela", team: "Organizing Team", description: "Managing event flow and coordination", image: "/team_pics/agrathi.webp" },
-              { name: "Shiva Sai", team: "Technical Team", description: "Handling technical setup and support", image: "/team_pics/shiva.webp" },
-              { name: "Kavya Sri", team: "Designing Team", description: "Creating visual identity and graphics", image: "/team_pics/kavya_sri.webp" },
-              { name: "Sumad", team: "Creative Team", description: "Leading creative direction and branding", image: "/team_pics/sumad.webp" },
-              { name: "Vaishnavi", team: "Creative Team", description: "Developing innovative event concepts", image: "/team_pics/vaishnavi.webp" },
-              { name: "Jahnavi Dora", team: "Sponsorship Team", description: "Securing event partnerships and funding", image: "/team_pics/jahnavi.webp" },
-              { name: "Rekha", team: "Sponsorship Team", description: "Managing sponsor relationships", image: "/team_pics/rekha.webp" },
-              { name: "Ayesha", team: "Marketing Team", description: "Driving event promotion and outreach", image: "/team_pics/ayesha.webp" },
-              { name: "Pranav", team: "Marketing Team", description: "Executing digital marketing strategies", image: "/team_pics/pranav.webp" },
-              { name: "Ram Swaroop", team: "Media Team", description: "Capturing event moments and coverage", image: "/team_pics/ram.webp" },
-              { name: "Sri Charan", team: "Logistics Team", description: "Managing venue and resource logistics", image: "/team_pics/sri_charan.webp" },
-              { name: "Pranathi", team: "Logistics Team", description: "Coordinating event supplies and setup", image: "/team_pics/pranathi.webp" },
-              { name: "Deekshitha", team: "Registrations Team", description: "Handling participant registrations", image: "/team_pics/deekshitha.webp" },
-              { name: "Siri Chandana", team: "Registrations Team", description: "Managing attendee information", image: "/team_pics/siriChandana.webp" },
-              { name: "Sukruth", team: "Hospitality Team", description: "Ensuring guest comfort and care", image: "/team_pics/sukruth.webp" },
-              { name: "Sreeja", team: "Hospitality Team", description: "Coordinating accommodation services", image: "/team_pics/sreeja_p.webp" },
-              { name: "Vyshali", team: "Crafts Team", description: "Creating event decorations and crafts", image: "/team_pics/vyshali.webp" },
-              { name: "Umasri", team: "Culturals Team", description: "Organizing cultural performances", image: "/team_pics/uma.webp" }
-            ].map((lead, index) => (
+          {[
+  { "name": "Cecilia", "team": "Content Team", "linkedin": "https://www.linkedin.com/in/sfcecilia/", "image": "/team_pics/cecilia.webp" },
+  { "name": "Abhiram", "team": "Organizing Team", "linkedin": "https://www.linkedin.com/in/abhiram-beemari", "image": "/team_pics/abhiram.webp" },
+  { "name": "Agrati Sheela", "team": "Organizing Team", "linkedin": "https://www.linkedin.com/in/agrati-sheela-01b874253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/agrathi.webp" },
+  { "name": "Shiva Sai", "team": "Technical Team", "linkedin": "https://www.linkedin.com/in/shiva-sai-balbari/", "image": "/team_pics/shiva.webp" },
+  { "name": "Kavya Sri", "team": "Designing Team", "linkedin": "https://www.linkedin.com/in/kavya-sri-1b8868300/", "image": "/team_pics/kavya_sri.webp" },
+  { "name": "Sumad", "team": "Creative Team", "linkedin": "https://in.linkedin.com/in/sumad-reddy", "image": "/team_pics/sumad.webp" },
+  { "name": "Vaishnavi", "team": "Creative Team", "linkedin": "https://www.linkedin.com/in/vaishnavi-tella-b07b30287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", "image": "/team_pics/vaishnavi.webp" },
+  { "name": "Jahnavi Dora", "team": "Sponsorship Team", "linkedin": "https://www.linkedin.com/in/jahnavi-dora-481b31287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", "image": "/team_pics/jahnavi.webp" },
+  { "name": "Rekha", "team": "Sponsorship Team", "linkedin": "https://www.linkedin.com/in/rekha-korubothu-3a85b9288", "image": "/team_pics/rekha.webp" },
+  { "name": "Ayesha", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/ayesha-shaik-685327287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ayesha.webp" },
+  { "name": "Pranav", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/pranavkothapalli", "image": "/team_pics/pranav.webp" },
+  { "name": "Ram Swaroop", "team": "Media Team", "linkedin": "https://www.linkedin.com/in/ramswaroop-dara-77a74b258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ram.webp" },
+  { "name": "Sri Charan", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/sri-charan-raj", "image": "/team_pics/sri_charan.webp" },
+  { "name": "Pranathi", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/pranathi", "image": "/team_pics/pranathi.webp" },
+  { "name": "Deekshitha", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/deekshitha-reddy-p-bb3366278", "image": "/team_pics/deekshitha.webp" },
+  { "name": "Siri Chandana", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/sirireddy26", "image": "/team_pics/siriChandana.webp" },
+  { "name": "Sukruth", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/sukruth-b", "image": "/team_pics/sukruth.webp" },
+  { "name": "Sreeja", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/sosona-8", "image": "/team_pics/sreeja_p.webp" },
+  { "name": "Vyshali", "team": "Crafts Team", "linkedin": "https://www.linkedin.com/in/vyshali-katta-aunsf", "image": "/team_pics/vyshali.webp" },
+  { "name": "Umasri", "team": "Culturals Team", "linkedin": "https://www.linkedin.com/in/umasri-kataboina-9a863b2a4/", "image": "/team_pics/uma.webp" }
+].map((lead, index) => (
               <motion.div
                 key={index}
                 whileHover={{ y: -5 }}
@@ -405,10 +405,9 @@ const AUNSF = () => {
                 </div>
                 <h4 className="text-xl font-bold mb-2 text-purple-400 text-center">{lead.name}</h4>
                 <p className="text-blue-400 mb-2 text-center">{lead.team}</p>
-                {/* <p className="text-gray-300 mb-4 text-center text-sm">{lead.description}</p> */}
                 <div className="flex items-center justify-center space-x-2">
                   <a
-                    href={`https://www.linkedin.com/in/${lead.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    href={lead.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-400 hover:text-blue-300 transition-colors"
