@@ -362,13 +362,7 @@ const AUNSF = () => {
         </motion.div>
 
         {/* Team Behind 3.0 Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mb-20"
-        >
+        <div className="mb-20">
           <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
             Team Behind 3.0
           </h2>
@@ -378,10 +372,7 @@ const AUNSF = () => {
             <h3 className="text-2xl font-bold mb-8 text-center text-blue-400">Project Managers</h3>
             <div className="flex justify-center">
               <div className="grid grid-cols-2 lg:grid-cols-2 gap-8 max-w-2xl mx-auto justify-items-center">
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="p-6 rounded-2xl transition-all duration-300"
-                >
+                <div className="p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-lg cursor-pointer">
                   <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-blue-500/20">
                     <img
                       src="/team_pics/thanughana.webp"
@@ -403,12 +394,8 @@ const AUNSF = () => {
                       </svg>
                     </a>
                   </div>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="p-6 rounded-2xl transition-all duration-300"
-                >
+                </div>
+                <div className="p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-lg cursor-pointer">
                   <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-blue-500/20">
                     <img
                       src="/team_pics/pavan.webp"
@@ -430,7 +417,7 @@ const AUNSF = () => {
                       </svg>
                     </a>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -439,32 +426,31 @@ const AUNSF = () => {
           <h3 className="text-2xl font-bold mb-8 text-center text-blue-400">Team Leads</h3>
 
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto justify-items-center">
-          {[
-  { "name": "Cecilia", "team": "Content Team", "linkedin": "https://www.linkedin.com/in/sfcecilia/", "image": "/team_pics/cecilia.webp" },
-  { "name": "Abhiram", "team": "Organizing Team", "linkedin": "https://www.linkedin.com/in/abhiram-beemari", "image": "/team_pics/abhiram.webp" },
-  { "name": "Agrati Sheela", "team": "Organizing Team", "linkedin": "https://www.linkedin.com/in/agrati-sheela-01b874253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/agrathi.webp" },
-  { "name": "Shiva Sai", "team": "Technical Team", "linkedin": "https://www.linkedin.com/in/shiva-sai-balbari/", "image": "/team_pics/shiva.webp" },
-  { "name": "Kavya Sri", "team": "Designing Team", "linkedin": "https://www.linkedin.com/in/kavya-sri-1b8868300/", "image": "/team_pics/kavya_sri.webp" },
-  { "name": "Sumad", "team": "Creative Team", "linkedin": "https://in.linkedin.com/in/sumad-reddy", "image": "/team_pics/sumad.webp" },
-  { "name": "Vaishnavi", "team": "Creative Team", "linkedin": "https://www.linkedin.com/in/vaishnavi-tella-b07b30287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", "image": "/team_pics/vaishnavi.webp" },
-  { "name": "Jahnavi Dora", "team": "Sponsorship Team", "linkedin": "https://www.linkedin.com/in/jahnavi-dora-481b31287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", "image": "/team_pics/jahnavi.webp" },
-  { "name": "Rekha", "team": "Sponsorship Team", "linkedin": "https://www.linkedin.com/in/rekha-korubothu-3a85b9288", "image": "/team_pics/rekha.webp" },
-  { "name": "Ayesha", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/ayesha-shaik-685327287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ayesha.webp" },
-  { "name": "Pranav", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/pranavkothapalli", "image": "/team_pics/pranav.webp" },
-  { "name": "Ram Swaroop", "team": "Media Team", "linkedin": "https://www.linkedin.com/in/ramswaroop-dara-77a74b258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ram.webp" },
-  { "name": "Sri Charan", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/sri-charan-raj", "image": "/team_pics/sri_charan.webp" },
-  { "name": "Pranathi", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/pranathi", "image": "/team_pics/pranathi.webp" },
-  { "name": "Deekshitha", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/deekshitha-reddy-p-bb3366278", "image": "/team_pics/deekshitha.webp" },
-  { "name": "Siri Chandana", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/sirireddy26", "image": "/team_pics/siriChandana.webp" },
-  { "name": "Sukruth", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/sukruth-b", "image": "/team_pics/sukruth.webp" },
-  { "name": "Sreeja", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/sosona-8", "image": "/team_pics/sreeja_p.webp" },
-  { "name": "Vyshali", "team": "Crafts Team", "linkedin": "https://www.linkedin.com/in/vyshali-katta-aunsf", "image": "/team_pics/vyshali.webp" },
-  { "name": "Umasri", "team": "Culturals Team", "linkedin": "https://www.linkedin.com/in/umasri-kataboina-9a863b2a4/", "image": "/team_pics/uma.webp" }
-].map((lead, index) => (
-              <motion.div
+            {[
+              { "name": "Cecilia", "team": "Content Team", "linkedin": "https://www.linkedin.com/in/sfcecilia/", "image": "/team_pics/cecilia.webp" },
+              { "name": "Abhiram", "team": "Organizing Team", "linkedin": "https://www.linkedin.com/in/abhiram-beemari", "image": "/team_pics/abhiram.webp" },
+              { "name": "Agrati Sheela", "team": "Organizing Team", "linkedin": "https://www.linkedin.com/in/agrati-sheela-01b874253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/agrathi.webp" },
+              { "name": "Shiva Sai", "team": "Technical Team", "linkedin": "https://www.linkedin.com/in/shiva-sai-balbari/", "image": "/team_pics/shiva.webp" },
+              { "name": "Kavya Sri", "team": "Designing Team", "linkedin": "https://www.linkedin.com/in/kavya-sri-1b8868300/", "image": "/team_pics/kavya_sri.webp" },
+              { "name": "Sumad", "team": "Creative Team", "linkedin": "https://in.linkedin.com/in/sumad-reddy", "image": "/team_pics/sumad.webp" },
+              { "name": "Vaishnavi", "team": "Creative Team", "linkedin": "https://www.linkedin.com/in/vaishnavi-tella-b07b30287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", "image": "/team_pics/vaishnavi.webp" },
+              { "name": "Jahnavi Dora", "team": "Sponsorship Team", "linkedin": "https://www.linkedin.com/in/jahnavi-dora-481b31287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", "image": "/team_pics/jahnavi.webp" },
+              { "name": "Rekha", "team": "Sponsorship Team", "linkedin": "https://www.linkedin.com/in/rekha-korubothu-3a85b9288", "image": "/team_pics/rekha.webp" },
+              { "name": "Ayesha", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/ayesha-shaik-685327287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ayesha.webp" },
+              { "name": "Pranav", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/pranavkothapalli", "image": "/team_pics/pranav.webp" },
+              { "name": "Ram Swaroop", "team": "Media Team", "linkedin": "https://www.linkedin.com/in/ramswaroop-dara-77a74b258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ram.webp" },
+              { "name": "Sri Charan", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/sri-charan-raj", "image": "/team_pics/sri_charan.webp" },
+              { "name": "Pranathi", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/pranathi", "image": "/team_pics/pranathi.webp" },
+              { "name": "Deekshitha", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/deekshitha-reddy-p-bb3366278", "image": "/team_pics/deekshitha.webp" },
+              { "name": "Siri Chandana", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/sirireddy26", "image": "/team_pics/siriChandana.webp" },
+              { "name": "Sukruth", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/sukruth-b", "image": "/team_pics/sukruth.webp" },
+              { "name": "Sreeja", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/sosona-8", "image": "/team_pics/sreeja_p.webp" },
+              { "name": "Vyshali", "team": "Crafts Team", "linkedin": "https://www.linkedin.com/in/vyshali-katta-aunsf", "image": "/team_pics/vyshali.webp" },
+              { "name": "Umasri", "team": "Culturals Team", "linkedin": "https://www.linkedin.com/in/umasri-kataboina-9a863b2a4/", "image": "/team_pics/uma.webp" }
+            ].map((lead, index) => (
+              <div
                 key={index}
-                whileHover={{ y: -5 }}
-                className="p-6 rounded-2xl transition-all duration-300"
+                className="p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-lg cursor-pointer"
               >
                 <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-blue-500/20">
                   <img
@@ -487,10 +473,10 @@ const AUNSF = () => {
                     </svg>
                   </a>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

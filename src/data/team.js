@@ -105,7 +105,7 @@ export const teams = [
       },
       {
         name: "Chinmayee Mada",
-        image: "/team_pics/chinmayee.webp",
+        image: "/team_pics/chinmai.webp",
         linkedin: "https://www.linkedin.com/in/chinmayee-madha/"
       },
       {
@@ -163,12 +163,12 @@ export const teams = [
       },
       {
         name: "Devireddy Yagneshwar",
-        image: "/team_pics",
+        image: "/team_pics/yagnesh.webp",
         linkedin: "https://www.linkedin.com/in/devireddy-yagneshwar-a441a0288?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BqJwzImHrRQCQAiNu8F9TmQ%3D%3D"
       },
       {
         name: "Sriya Sushil",
-        image: "/team_pics",
+        image: "/team_pics/sriya.webp",
         linkedin: "https://www.linkedin.com/in/sriya-sushil-393408290?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
     ],
@@ -216,7 +216,7 @@ export const teams = [
       },
       {
         name: "Harshitha",
-        image: "/team_pics",
+        image: "/team_pics/harshita.webp",
         linkedin: "https://www.linkedin.com/in/harshitha-rayudu-92a9662b0/"
       },
       {
@@ -231,7 +231,7 @@ export const teams = [
       },
       {
         name: "Pradeepa",
-        image: "/team_pics",
+        image: "/team_pics/pradeepa.webp",
         // linkedin: "https://www.linkedin.com/in/v-pradeepa-7092a327a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
     ],
@@ -252,11 +252,11 @@ export const teams = [
         image: "team_pics/abhiram.webp",
         linkedin: "https://www.linkedin.com/in/abhiram-beemari"
       },
-      {
-        name: "Sahithi",
-        image: "team_pics/sahithi.webp",
-        // linkedin: "https://www.linkedin.com/in/sahithi"
-      },
+      // {
+      //   name: "Sahithi",
+      //   image: "team_pics/sahithi.webp",
+      //   // linkedin: "https://www.linkedin.com/in/sahithi"
+      // },
       {
         name: "Aishwarya",
         image: "/team_pics/JR_aishwarya.webp",
@@ -287,11 +287,11 @@ export const teams = [
         image: "/team_pics/hakshala.webp",
         // linkedin: "https://www.linkedin.com/in/hakshala"
       },
-      {
-        name: "Sneha",
-        image: "/team_pics/sneha.webp",
-        // linkedin: "https://www.linkedin.com/in/sneha"
-      },
+      // {
+      //   name: "Sneha",
+      //   image: "/team_pics/sneha.webp",
+      //   // linkedin: "https://www.linkedin.com/in/sneha"
+      // },
       {
         name: "Srivarsha",
         image: "/team_pics/Srivarsha.webp",
@@ -323,16 +323,16 @@ export const teams = [
       {
         name: "S. F. Cecilia",
         image: "team_pics/cecilia.webp",
-        linkedin: "https://www.linkedin.com/in/sfcecilia/"
+        // linkedin: "https://www.linkedin.com/in/sfcecilia/"
       },
-      {
-        name: "Keerthana",
-        image: "team_pics/",
-        linkedin: "https://www.linkedin.com/in/keerthana-g-008450279/"
-      },
+      // {
+      //   name: "Keerthana",
+      //   image: "team_pics/",
+      //   linkedin: "https://www.linkedin.com/in/keerthana-g-008450279/"
+      // },
       {
         name: "Nakshatra",
-        image: "/team_pics",
+        image: "/team_pics/nakshatra.webp",
         linkedin: "https://www.linkedin.com/in/nakshatra-gariga-ba987727a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       {
@@ -369,20 +369,21 @@ export const teams = [
         linkedin: "https://in.linkedin.com/in/sumad-reddy"
       },
       {
+        name: "Sri Charan Raj",
+        image: "team_pics/sri_charan.webp",
+        // linkedin: "https://www.linkedin.com/in/sri-charan-raj"
+      },
+      {
         name: "Jahnavi Dora",
         image: "team_pics/jahnavi.webp",
         linkedin: "https://www.linkedin.com/in/jahnavi-dora-481b31287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
       },
       {
-        name: "Agrathi Sheela",
+        name: "Agrati Sheela",
         image: "team_pics/agrathi.webp",
         linkedin: "https://www.linkedin.com/in/agrati-sheela-01b874253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
-      {
-        name: "Sri Charan Raj",
-        image: "team_pics/sri_charan.webp",
-        // linkedin: "https://www.linkedin.com/in/sri-charan-raj"
-      },
+      
       {
         name: "Rishi",
         image: "/team_pics",
@@ -405,7 +406,7 @@ export const teams = [
       },
       {
         name: "Theerdha",
-        image: "/team_pics",
+        image: "/team_pics/theerdha.webp",
         // linkedin: "https://www.linkedin.com/in/theerdha-v-345678901"
       },
       {
@@ -453,12 +454,12 @@ export const teams = [
       },
       {
         name: "Akhil",
-        image: "/team_pics",
+        image: "/team_pics/akhil.webp",
         // linkedin: "https://www.linkedin.com/in/akhil"
       },
       {
         name: "Lakshyatha",
-        image: "/team_pics",
+        image: "/team_pics/lakshyatha.webp",
         // linkedin: "https://www.linkedin.com/in/lakshyatha-chamarthy-123456789"
       },
       {
@@ -468,7 +469,7 @@ export const teams = [
       },
       {
         name: "Sayyad Pasha",
-        image: "/team_pics",
+        image: "/team_pics/sayyad.webp",
         linkedin: "https://www.linkedin.com/in/sayyadpasha?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       {
@@ -478,12 +479,12 @@ export const teams = [
       },
       {
         name: "Abhiram",
-        image: "/team_pics",
+        image: "/team_pics/JR_abhiram.webp",
         linkedin: "https://www.linkedin.com/in/abhiram-banka-aa542b287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       {
         name: "Shiva Vardhan",
-        image: "/team_pics",
+        image: "/team_pics/shiva_vardhan.webp",
         // linkedin: "https://www.linkedin.com/in/shiva-vardhan"
       },
     ],
