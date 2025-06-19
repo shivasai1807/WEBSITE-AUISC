@@ -52,8 +52,10 @@ const AUNSF = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header with animated background */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="text-center mb-16 relative"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-blue-600/20 blur-3xl -z-10" />
@@ -66,7 +68,13 @@ const AUNSF = () => {
         </motion.div>
 
         {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="grid md:grid-cols-2 gap-12 items-center mb-20"
+        >
           {/* Poster with hover effect */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -111,12 +119,14 @@ const AUNSF = () => {
               Register Now
             </a>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Description with enhanced styling */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-20 text-center"
         >
           <h2 className="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
@@ -135,8 +145,10 @@ const AUNSF = () => {
 
         {/* Chief Guests with enhanced cards */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-20"
         >
           <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
@@ -195,8 +207,10 @@ const AUNSF = () => {
 
         {/* Patron with enhanced card */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-20"
         >
           <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
@@ -223,41 +237,12 @@ const AUNSF = () => {
           </div>
         </motion.div>
 
-        {/* Mentors with enhanced cards */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-20"
-        >
-          <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-            Mentors
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {mentors.map((mentor, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -5 }}
-                className="bg-dark-blue-purple/30 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-colors flex flex-col items-center text-center"
-              >
-                <div className="w-32 h-32 rounded-full overflow-hidden mb-6">
-                  <img
-                    src={`/mentors/mentor-${index + 1}.jpg`}
-                    alt={mentor.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-purple-400">{mentor.name}</h3>
-                <p className="text-blue-400 mb-4 font-medium">{mentor.role}</p>
-                <p className="text-gray-300">{mentor.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div> */}
-
         {/* Dates with enhanced styling */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-20 text-center"
         >
           <h2 className="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
@@ -270,10 +255,93 @@ const AUNSF = () => {
           </div>
         </motion.div>
 
+        {/* Itinerary Section (styled like PNG) */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="mb-20 text-center"
+        >
+          <h2 className="text-4xl font-extrabold mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 tracking-wide uppercase">Event Itinerary</h2>
+          <div className="max-w-2xl mx-auto flex flex-col gap-8">
+            {/* Day 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="md:flex md:items-start md:gap-8 text-left"
+            >
+              <h3 className="text-3xl font-extrabold mb-4 text-blue-400 tracking-wide md:mb-0 md:min-w-[120px]">DAY 1</h3>
+              <div>
+                <p className="font-bold mb-1 text-blue-300">OPENING CEREMONY</p>
+                <ul className="list-disc ml-6 mb-2 text-white">
+                  <li>Mentoring Session</li>
+                  <li>Team Building Activities</li>
+                  <li>Aerobics</li>
+                </ul>
+                <p className="font-bold mt-2 text-blue-300">DAY 1 CONCLUDES</p>
+              </div>
+            </motion.div>
+            <div className="flex items-center mb-4">
+              <div className="bg-blue-400 h-3 w-40 rounded-l-lg" />
+              <div className="flex-1 h-1 bg-blue-200" />
+            </div>
+            {/* Day 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="md:flex md:items-start md:gap-8 text-left"
+            >
+              <h3 className="text-3xl font-extrabold mb-4 text-blue-400 tracking-wide md:mb-0 md:min-w-[120px]">DAY 2</h3>
+              <div>
+                <ul className="list-disc ml-6 mb-2 text-white">
+                  <li>Group Discussion</li>
+                  <li>Brainstorming Sessions</li>
+                  <li>Cultural Events</li>
+                </ul>
+                <p className="font-bold mt-2 text-blue-300">DAY 2 CONCLUDES</p>
+              </div>
+            </motion.div>
+            <div className="flex items-center mb-4">
+              <div className="bg-blue-400 h-3 w-40 rounded-l-lg" />
+              <div className="flex-1 h-1 bg-blue-200" />
+            </div>
+            {/* Day 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="md:flex md:items-start md:gap-8 text-left"
+            >
+              <h3 className="text-3xl font-extrabold mb-4 text-blue-400 tracking-wide md:mb-0 md:min-w-[120px]">DAY 3</h3>
+              <div>
+                <ul className="list-disc ml-6 mb-2 text-white">
+                  <li>Surprise Activity</li>
+                  <li>Photoshoot</li>
+                  <li>Presentation</li>
+                  <li>Award Ceremony</li>
+                </ul>
+                <p className="font-bold mt-2 text-blue-300">CLOSING CEREMONY</p>
+              </div>
+            </motion.div>
+            <div className="flex items-center mb-4">
+              <div className="bg-blue-400 h-3 w-40 rounded-l-lg" />
+              <div className="flex-1 h-1 bg-blue-200" />
+            </div>
+          </div>
+        </motion.div>
+
         {/* Perks with enhanced styling */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-16"
         >
           <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
@@ -295,8 +363,10 @@ const AUNSF = () => {
 
         {/* Team Behind 3.0 Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-20"
         >
           <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
