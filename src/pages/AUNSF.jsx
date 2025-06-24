@@ -384,7 +384,7 @@ const AUNSF = () => {
                   <p className="text-blue-400 mb-2 text-center">Project Manager</p>
                   <div className="flex items-center justify-center space-x-2">
                     <a
-                      href="https://www.linkedin.com/in/thanughna"
+                      href="https://www.linkedin.com/in/thanughna-dhatrika-076699257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-400 hover:text-blue-300 transition-colors"
@@ -407,7 +407,7 @@ const AUNSF = () => {
                   <p className="text-blue-400 mb-2 text-center">Project Manager</p>
                   <div className="flex items-center justify-center space-x-2">
                     <a
-                      href="https://www.linkedin.com/in/pavan"
+                      href="https://www.linkedin.com/in/pavan1207/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-400 hover:text-blue-300 transition-colors"
@@ -428,7 +428,7 @@ const AUNSF = () => {
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto justify-items-center">
             {[
               { "name": "Cecilia", "team": "Content Team", "linkedin": "https://www.linkedin.com/in/sfcecilia/", "image": "/team_pics/cecilia.webp" },
-              { "name": "Abhiram", "team": "Organizing Team", "linkedin": "https://www.linkedin.com/in/abhiram-beemari", "image": "/team_pics/abhiram.webp" },
+              { "name": "Abhiram", "team": "Organizing Team", "linkedin": "https://www.linkedin.com/in/abhiram-banka-aa542b287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/abhiram.webp" },
               { "name": "Agrati Sheela", "team": "Organizing Team", "linkedin": "https://www.linkedin.com/in/agrati-sheela-01b874253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/agrathi.webp" },
               { "name": "Shiva Sai", "team": "Technical Team", "linkedin": "https://www.linkedin.com/in/shiva-sai-balbari/", "image": "/team_pics/shiva.webp" },
               { "name": "Kavya Sri", "team": "Designing Team", "linkedin": "https://www.linkedin.com/in/kavya-sri-1b8868300/", "image": "/team_pics/kavya_sri.webp" },
@@ -439,13 +439,13 @@ const AUNSF = () => {
               { "name": "Ayesha", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/ayesha-shaik-685327287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ayesha.webp" },
               { "name": "Pranav", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/pranavkothapalli", "image": "/team_pics/pranav.webp" },
               { "name": "Ram Swaroop", "team": "Media Team", "linkedin": "https://www.linkedin.com/in/ramswaroop-dara-77a74b258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ram.webp" },
-              { "name": "Sri Charan", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/sri-charan-raj", "image": "/team_pics/sri_charan.webp" },
-              { "name": "Pranathi", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/pranathi", "image": "/team_pics/pranathi.webp" },
-              { "name": "Deekshitha", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/deekshitha-reddy-p-bb3366278", "image": "/team_pics/deekshitha.webp" },
+              { "name": "Sri Charan", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/sricharan-divila-9627a534b/", "image": "/team_pics/sri_charan.webp" },
+              { "name": "Pranathi", "team": "Logistics Team", "linkedin": "", "image": "/team_pics/pranathi.webp" },
+              { "name": "Deekshitha", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/deekshitha-r-bb3366278", "image": "/team_pics/deekshitha.webp" },
               { "name": "Siri Chandana", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/sirireddy26", "image": "/team_pics/siriChandana.webp" },
-              { "name": "Sukruth", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/sukruth-b", "image": "/team_pics/sukruth.webp" },
-              { "name": "Sreeja", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/sosona-8", "image": "/team_pics/sreeja_p.webp" },
-              { "name": "Vyshali", "team": "Crafts Team", "linkedin": "https://www.linkedin.com/in/vyshali-katta-aunsf", "image": "/team_pics/vyshali.webp" },
+              { "name": "Sukruth", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/baikan-sukruth-b4059a327/", "image": "/team_pics/sukruth.webp" },
+              { "name": "Sreeja", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/police-sreeja-102396287/", "image": "/team_pics/sreeja_p.webp" },
+              { "name": "Vyshali", "team": "Crafts Team", "linkedin": "", "image": "/team_pics/vyshali.webp" },
               { "name": "Umasri", "team": "Culturals Team", "linkedin": "https://www.linkedin.com/in/umasri-kataboina-9a863b2a4/", "image": "/team_pics/uma.webp" }
             ].map((lead, index) => (
               <div

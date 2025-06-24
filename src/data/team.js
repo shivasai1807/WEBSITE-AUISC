@@ -121,7 +121,7 @@ export const teams = [
       {
         name: "Gudla Greshmi Ratna",
         image: "/team_pics/greshmi.webp",
-        linkedin: "https://www.linkedin.com/in/gudla-greshmi-ratna"
+        linkedin: "http://www.linkedin.com/in/greshmiratna13"
       },
       {
         name: "Nalleboina Prasanna Lakshmi",
@@ -347,7 +347,7 @@ export const teams = [
       },
       {
         name: "Yashaswini",
-        image: "/team_pics",
+        image: "/team_pics/yashaswini.webp",
         linkedin: "https://www.linkedin.com/in/marlapati-yoga-lakshmi-venkata-yashaswini-2a851a2b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
     ],
@@ -386,7 +386,7 @@ export const teams = [
       
       {
         name: "Rishi",
-        image: "/team_pics",
+        image: "/team_pics/rishi.webp",
         linkedin: "https://www.linkedin.com/in/rishi-thatipelly-352006293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app3"
       },
       {
@@ -396,7 +396,7 @@ export const teams = [
       },
       {
         name: "Inderneel",
-        image: "/team_pics",
+        image: "/team_pics/neel.webp",
         // linkedin: "https://www.linkedin.com/in/inderneel"
       },
       {
@@ -480,7 +480,7 @@ export const teams = [
       {
         name: "Abhiram",
         image: "/team_pics/JR_abhiram.webp",
-        linkedin: "https://www.linkedin.com/in/abhiram-banka-aa542b287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+        linkedin: "https://www.linkedin.com/in/abhiram-beemari?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       {
         name: "Shiva Vardhan",
