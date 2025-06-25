@@ -158,7 +158,7 @@ export const teams = [
       },
       {
         name: "Sneha",
-        image: "/team_pics",
+        image: "/team_pics/sneha.webp",
         linkedin: "https://www.linkedin.com/in/singa-sneha-074863294"
       },
       {
@@ -285,7 +285,7 @@ export const teams = [
       {
         name: "Hakshala",
         image: "/team_pics/hakshala.webp",
-        // linkedin: "https://www.linkedin.com/in/hakshala"
+        linkedin: "https://www.linkedin.com/in/pendam-hakshala"
       },
       // {
       //   name: "Sneha",
