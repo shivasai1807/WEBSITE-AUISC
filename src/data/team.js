@@ -192,7 +192,7 @@ export const teams = [
       {
         name: "Pranathi",
         image: "team_pics/pranathi.webp",
-        // linkedin: "https://www.linkedin.com/in/pranathi"
+        linkedin: "http://www.linkedin.com/in/pranathi-goli-006669287"
       },
       {
         name: "Uma Sri",

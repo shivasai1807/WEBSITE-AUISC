@@ -10,7 +10,7 @@ const AUNSF = () => {
     },
     {
       name: "Ms. Sampada Pachaury",
-      role: "Director & PT staff",
+      role: "Independent Engineering Education Coach",
       description: "A certified Systems Thinking and NLP practitioner, with a background in semiconductors and education reform. With leadership roles across global tech firms and academia, now drives skill-based, interdisciplinary programs that have impacted 2000+ students, aiming to transform engineering education in India."
     },
     // {
@@ -22,19 +22,22 @@ const AUNSF = () => {
 
   const mentors = [
     {
-      name: "Prof. Emily Brown",
-      role: "Aerospace Engineering",
-      description: "Specializes in drone technology and aerial systems"
+      name: "Ms. Ritika Chawla",
+      role: "Ignova",
+      description: "With 14+ years in education, L&D and curriculum leadership Ms. Ritika actively involves in climate education and sustainability. She is certified by Terra.do, Climate-KIC & Azim Premji University. She facilitates Climate Fresk and 2tonnes workshops across India and is on a mission to empower learning for change at AUNSF 3.0.",
+      image: "/rithika.webp"
     },
     {
-      name: "Prof. David Wilson",
-      role: "Fire Safety Engineering",
-      description: "Expert in fire prevention and control systems"
+      name: "Ms. Sampada Pachaury",
+      role: "Aeronox",
+      description: "A certified Systems Thinking and NLP practitioner, with a background in semiconductors and education reform. With leadership roles across global tech firms and academia, now drives skill-based, interdisciplinary programs that have impacted 2000+ students, aiming to transform engineering education in India.",
+      image: "/sampadha.jpg"
     },
     {
-      name: "Prof. Lisa Martinez",
+      name: "Mr. Saurabh Tantia",
       role: "Public Administration",
-      description: "Focuses on urban governance and policy development"
+      description: "Mr. Suarabh is a practicing defence lawyer at Jharkhand High Court and other districts of Jharkhand who also works with NGOs on sustainability and legal governance. He supports underprivileged schools and youth initiatives alongside driving change through environmental compliance efforts. ",
+      image: "/saurabh.webp"
     }
   ];
 
@@ -234,6 +237,60 @@ const AUNSF = () => {
                 <p className="text-gray-300 text-sm md:text-base">Vice Chancellor of Anurag University, is a seasoned leader with 30+ years in academia and industry, 100+ publications, and 43 patents, known for driving innovation, research, and educational reform.</p>
               </div>
             </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Mentors Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="mb-20"
+        >
+          <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            Mentors
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-7xl mx-auto px-2 md:px-8">
+            {mentors.map((mentor, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ y: -10, scale: 1.02, transition: { duration: 0.3 } }}
+                className="group bg-dark-blue-purple/30 backdrop-blur-sm p-8 md:p-10 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 flex flex-col items-center relative overflow-hidden w-full min-w-0 max-w-full"
+              >
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-purple-600/0 to-blue-600/0 group-hover:from-blue-600/10 group-hover:via-purple-600/10 group-hover:to-blue-600/10 transition-all duration-500" />
+                {/* Top section with image and designation */}
+                <div className="flex flex-col items-center mb-6 relative z-10">
+                  {/* Image container with enhanced styling */}
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden flex-shrink-0 ring-4 ring-blue-500/20 group-hover:ring-blue-500/40 transition-all duration-300 relative mb-4">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <img
+                      src={mentor.image || "/AUISC_Logo.png"}
+                      alt={mentor.name}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  {/* Name and Role */}
+                  <h3 className="text-2xl md:text-3xl font-bold mb-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300 text-center">
+                    {mentor.name}
+                  </h3>
+                  <p className="text-purple-400 text-lg font-medium group-hover:text-purple-300 transition-colors duration-300 text-center">
+                    {mentor.role}
+                  </p>
+                </div>
+                {/* Bottom section with description */}
+                <div className="relative z-10 w-full">
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-blue-500/30 to-transparent mb-6" />
+                  <p className="text-gray-300 text-base md:text-lg group-hover:text-gray-200 transition-colors duration-300 text-center leading-relaxed">
+                    {mentor.description}
+                  </p>
+                </div>
+                {/* Decorative elements */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl transform translate-x-16 -translate-y-16 group-hover:bg-blue-500/10 transition-all duration-500" />
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl transform -translate-x-16 translate-y-16 group-hover:bg-purple-500/10 transition-all duration-500" />
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 
@@ -438,9 +495,11 @@ const AUNSF = () => {
               { "name": "Rekha", "team": "Sponsorship Team", "linkedin": "https://www.linkedin.com/in/rekha-korubothu-3a85b9288", "image": "/team_pics/rekha.webp" },
               { "name": "Ayesha", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/ayesha-shaik-685327287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ayesha.webp" },
               { "name": "Pranav", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/pranavkothapalli", "image": "/team_pics/pranav.webp" },
+              { "name": "Anji Reddy", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/anjireddyboda", "image": "/team_pics/anji.webp" },
+
               { "name": "Ram Swaroop", "team": "Media Team", "linkedin": "https://www.linkedin.com/in/ramswaroop-dara-77a74b258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ram.webp" },
               { "name": "Sri Charan", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/sricharan-divila-9627a534b/", "image": "/team_pics/sri_charan.webp" },
-              { "name": "Pranathi", "team": "Logistics Team", "linkedin": "", "image": "/team_pics/pranathi.webp" },
+              { "name": "Pranathi", "team": "Logistics Team", "linkedin": "http://www.linkedin.com/in/pranathi-goli-006669287", "image": "/team_pics/pranathi.webp" },
               { "name": "Deekshitha", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/deekshitha-r-bb3366278", "image": "/team_pics/deekshitha.webp" },
               { "name": "Siri Chandana", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/sirireddy26", "image": "/team_pics/siriChandana.webp" },
               { "name": "Sukruth", "team": "Hospitality Team", "linkedin": "https://www.linkedin.com/in/baikan-sukruth-b4059a327/", "image": "/team_pics/sukruth.webp" },
