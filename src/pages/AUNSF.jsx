@@ -24,17 +24,19 @@ const AUNSF = () => {
     {
       name: "Ms. Ritika Chawla",
       role: "Ignova",
-      description: "Ms. Ritika Chawla is a seasoned L&D professional with 14+ years of experience in curriculum design and teacher training. As VP at LEAD Group, she leads school-based learning programs. With a Master’s from Azim Premji University, she focuses on climate education, is trained in Climate Fresk and 2 tonnes workshops and follows a Zero Waste lifestyle.",
+      description: "Ms. Ritika Chawla is a seasoned L&D professional with 14+ years of experience in curriculum design and teacher training. As VP at LEAD Group, she leads school-based learning programs. With a Master's from Azim Premji University, she focuses on climate education, is trained in Climate Fresk and 2 tonnes workshops and follows a Zero Waste lifestyle.",
       image: "/rithika.webp"
     },
     {
       name: "Ms. Sampada Pachaury",
       role: "Aeronox",
-      description: "Ms. Sampada Pachaury is a certified Systems Thinking and NLP practitioner with experience in education and technology. She has trained over 2,000 students in practical, skill-based learning. With expertise in semiconductors and learning systems, she’s passionate about reshaping engineering education in India by promoting hands-on learning, creativity, and real-world problem-solving in classrooms."},
+      description: "Ms. Sampada Pachaury is a certified Systems Thinking and NLP practitioner with experience in education and technology. She has trained over 2,000 students in practical, skill-based learning. With expertise in semiconductors and learning systems, she's passionate about reshaping engineering education in India by promoting hands-on learning, creativity, and real-world problem-solving in classrooms.",
+      image: "/sampadha.jpg"
+    },
     {
       name: "Mr. Saurabh Tantia",
       role: "Public Administration",
-      description: "Mr. Saurabh Tantia is a defence lawyer at the Jharkhand High Court, practicing in criminal, civil and corporate matters. He actively supports environmental and social causes through legal strategies. For the past three years, he has worked on environmental compliance, partnering with NGOs and local bodies to promote sustainable development and governance.",
+      description: "Mr. Saurabh Tantia is a defence lawyer at the Jharkhand High Court, practicing in criminal, civil and corporate matters. He actively supports environmental and social causes through legal strategies. For the past three years, he has worked on environmental compliance, partnering with NGOs and local bodies to promote sustainable development and governance.",
       image: "/saurabh.webp"
     }
   ];
@@ -85,7 +87,7 @@ const AUNSF = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
               <a
-                href="https://anurag.edu.in/event-itinerary"
+                href="https://linktr.ee/aunsf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block cursor-pointer"
@@ -112,7 +114,7 @@ const AUNSF = () => {
               </p>
             </div>
             <a
-              href="https://anurag.edu.in/event-itinerary"
+              href="https://linktr.ee/aunsf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30"

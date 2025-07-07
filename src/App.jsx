@@ -79,7 +79,7 @@ function AppContent() {
               {/* Banner Image */}
               <div className="w-full h-full relative">
                 <a 
-                  href="https://anurag.edu.in/event-itinerary" 
+                  href="https://linktr.ee/aunsf" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="block cursor-pointer"
