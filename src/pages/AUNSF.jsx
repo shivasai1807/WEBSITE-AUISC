@@ -424,6 +424,67 @@ const AUNSF = () => {
             Team Behind 3.0
           </h2>
 
+          {/* Advisory Section */}
+          <div className="mb-20">
+            <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+              Advisory
+            </h2>
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto justify-items-center">
+              {[
+                { name: "Aishwarya", team: "Project Managers", image: "/team_pics/aishwarya.webp", linkedin: "https://www.linkedin.com/in/aishwaryaalechalla?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                { name: "Eshwar", team: "Project Managers", image: "/team_pics/eshwar.webp", linkedin: "https://www.linkedin.com/in/karne-eshwar-35a29026a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" },
+                { name: "Sonal", team: "Content Team", image: "/team_pics/sonal.webp", linkedin: "https://www.linkedin.com/in/sonal-gramopadhye-122094320/" },
+                { name: "Vigneshwar", team: "Organizing Team", image: "/team_pics/vignesh.webp", linkedin: "https://www.linkedin.com/in/vigneshwar-e-96964b213?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                { name: "Amrutha", team: "Technical Team", image: "/team_pics/amrutha.webp", linkedin: "https://www.linkedin.com/in/amrutha-sri-pinapaka-a23b32229" },
+                // { name: "Vaishnavi", team: "Technical Team", image: "/team_pics/vaishnavi.webp", linkedin: "https://www.linkedin.com/in/vaishnavi-tella-b07b30287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" },
+                { name: "Poornima", team: "Designing Team", image: "/team_pics/poornima.webp", linkedin: "https://www.linkedin.com/in/guda-poornima-5a7495252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                { name: "Abhay Ramagiri", team: "Creative Team", image: "/team_pics/abhay.webp", linkedin: "https://www.linkedin.com/in/abhay-ramagiri?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                { name: "Raaga Samanvita", team: "Sponsorship Team", image: "/team_pics/raaga.webp", linkedin: "https://www.linkedin.com/in/burra-raaga-samanvita" },
+                { name: "Ankitha", team: "Marketing Team", image: "/team_pics/ankitha.webp", linkedin: "https://www.linkedin.com/in/ankitha-manupati-6688bb250?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                { name: "Bindu", team: "Marketing Team", image: "/team_pics/bindu.webp" },
+                { name: "Srujan", team: "Media Team", image: "/team_pics/srujan.webp", linkedin: "https://www.linkedin.com/in/malluri-srujan " },
+                { name: "Kaif Shaik", team: "Logistics Team", image: "/team_pics/kaif.webp", linkedin: "https://www.linkedin.com/in/kaif-shaik-185b90268?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                // { name: "Srujan", team: "Registrations Team", image: "/team_pics/srujan.webp", linkedin: "https://www.linkedin.com/in/malluri-srujan " },
+                { name: "Jerusha", team: "Registrations Team", image: "/team_pics/jerusha.webp" },
+                { name: "Sandhya", team: "Hospitality Team", image: "/team_pics/sandhya.webp" },
+                { name: "Shyamala", team: "Hospitality Team", image: "/team_pics/shyamala.webp", linkedin: "https://www.linkedin.com/in/katikitala-shyamala-4bbb30265?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                { name: "Poornima", team: "Crafts Team", image: "/team_pics/poornima.webp", linkedin: "https://www.linkedin.com/in/guda-poornima-5a7495252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+                { name: "Eshika", team: "Culturals Team", image: "/team_pics/eshika.webp", linkedin: "https://www.linkedin.com/in/sunaga-eshika-kakuturu-0b7ba4237?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BYeZMaXJ3RfutS3G3e16New%3D%3D" },
+                { name: "Akshitha", team: "Culturals Team", image: "/team_pics/akshitha.webp", linkedin: "https://www.linkedin.com/in/tirmal-akshitha-7b6954264?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+              ].map((advisor, index) => (
+                <div
+                  key={index}
+                  className="p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-lg cursor-pointer"
+                >
+                  <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-blue-500/20">
+                    <img
+                      src={advisor.image || "/AUISC_Logo.png"}
+                      alt={advisor.name}
+                      className="w-full h-full object-cover"
+                      onError={e => { e.target.onerror = null; e.target.src = "/AUISC_Logo.png"; }}
+                    />
+                  </div>
+                  <h4 className="text-xl font-bold mb-2 text-purple-400 text-center">{advisor.name}</h4>
+                  <p className="text-blue-400 mb-2 text-center">{advisor.team}</p>
+                  {advisor.linkedin && (
+                    <div className="flex items-center justify-center space-x-2 mt-2">
+                      <a
+                        href={advisor.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 hover:text-blue-300 transition-colors"
+                      >
+                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                      </a>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Project Managers */}
           <div className="mb-16">
             <h3 className="text-2xl font-bold mb-8 text-center text-blue-400">Project Managers</h3>
