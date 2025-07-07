@@ -11,7 +11,7 @@ const AUNSF = () => {
     {
       name: "Ms. Sampada Pachaury",
       role: "Independent Engineering Education Coach",
-      description: "A certified Systems Thinking and NLP practitioner, with a background in semiconductors and education reform. With leadership roles across global tech firms and academia, now drives skill-based, interdisciplinary programs that have impacted 2000+ students, aiming to transform engineering education in India."
+      description: "Ms. Sampada Pachaury is a Certified Systems Thinking and NLP Practitioner with global experience in academics and technology. She has mentored over 2,000 students through interdisciplinary, skill-based programs.An expert in semiconductors and education reform, focusing on transforming engineering education in India."
     },
     // {
     //   name: "Dr. Michael Chen",
@@ -24,19 +24,17 @@ const AUNSF = () => {
     {
       name: "Ms. Ritika Chawla",
       role: "Ignova",
-      description: "With 14+ years in education, L&D and curriculum leadership Ms. Ritika actively involves in climate education and sustainability. She is certified by Terra.do, Climate-KIC & Azim Premji University. She facilitates Climate Fresk and 2tonnes workshops across India and is on a mission to empower learning for change at AUNSF 3.0.",
+      description: "Ms. Ritika Chawla is a seasoned L&D professional with 14+ years of experience in curriculum design and teacher training. As VP at LEAD Group, she leads school-based learning programs. With a Master’s from Azim Premji University, she focuses on climate education, is trained in Climate Fresk and 2 tonnes workshops and follows a Zero Waste lifestyle.",
       image: "/rithika.webp"
     },
     {
       name: "Ms. Sampada Pachaury",
       role: "Aeronox",
-      description: "A certified Systems Thinking and NLP practitioner, with a background in semiconductors and education reform. With leadership roles across global tech firms and academia, now drives skill-based, interdisciplinary programs that have impacted 2000+ students, aiming to transform engineering education in India.",
-      image: "/sampadha.jpg"
-    },
+      description: "Ms. Sampada Pachaury is a certified Systems Thinking and NLP practitioner with experience in education and technology. She has trained over 2,000 students in practical, skill-based learning. With expertise in semiconductors and learning systems, she’s passionate about reshaping engineering education in India by promoting hands-on learning, creativity, and real-world problem-solving in classrooms."},
     {
       name: "Mr. Saurabh Tantia",
       role: "Public Administration",
-      description: "Mr. Suarabh is a practicing defence lawyer at Jharkhand High Court and other districts of Jharkhand who also works with NGOs on sustainability and legal governance. He supports underprivileged schools and youth initiatives alongside driving change through environmental compliance efforts. ",
+      description: "Mr. Saurabh Tantia is a defence lawyer at the Jharkhand High Court, practicing in criminal, civil and corporate matters. He actively supports environmental and social causes through legal strategies. For the past three years, he has worked on environmental compliance, partnering with NGOs and local bodies to promote sustainable development and governance.",
       image: "/saurabh.webp"
     }
   ];
@@ -272,7 +270,7 @@ const AUNSF = () => {
                     />
                   </div>
                   {/* Name and Role */}
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300 text-center">
+                  <h3 className="text-2xl md:text-2xl font-bold mb-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300 text-center">
                     {mentor.name}
                   </h3>
                   <p className="text-purple-400 text-lg font-medium group-hover:text-purple-300 transition-colors duration-300 text-center">
@@ -498,6 +496,7 @@ const AUNSF = () => {
               { "name": "Anji Reddy", "team": "Marketing Team", "linkedin": "https://www.linkedin.com/in/anjireddyboda", "image": "/team_pics/anji.webp" },
 
               { "name": "Ram Swaroop", "team": "Media Team", "linkedin": "https://www.linkedin.com/in/ramswaroop-dara-77a74b258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", "image": "/team_pics/ram.webp" },
+              {"name": "Akhil", "team": "Media Team", "linkedin": "https://www.linkedin.com/in/akhil-davula-b5109a24a/", "image": "/team_pics/akhil.webp" },
               { "name": "Sri Charan", "team": "Logistics Team", "linkedin": "https://www.linkedin.com/in/sricharan-divila-9627a534b/", "image": "/team_pics/sri_charan.webp" },
               { "name": "Pranathi", "team": "Logistics Team", "linkedin": "http://www.linkedin.com/in/pranathi-goli-006669287", "image": "/team_pics/pranathi.webp" },
               { "name": "Deekshitha", "team": "Registrations Team", "linkedin": "https://www.linkedin.com/in/deekshitha-r-bb3366278", "image": "/team_pics/deekshitha.webp" },
