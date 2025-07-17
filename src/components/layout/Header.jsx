@@ -173,6 +173,7 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+            {/*
             <a
               href="https://anurag.edu.in/event-itinerary"
               target="_blank"
@@ -181,6 +182,7 @@ const Header = () => {
             >
               Register Now
             </a>
+            */}
           </div>
 
           {/* Mobile Menu Toggle */}

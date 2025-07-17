@@ -56,7 +56,7 @@ const faqs = [
 
 const Home = () => {
   const parallaxRef = useRef(null);
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(new Date("2025-07-11T00:00:00")));
+  // const [timeLeft, setTimeLeft] = useState(getTimeLeft(new Date("2025-07-11T00:00:00")));
   const [openFaqs, setOpenFaqs] = useState([]);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImg, setLightboxImg] = useState(null);
@@ -120,12 +120,12 @@ const Home = () => {
     return () => ctx.revert();
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft(new Date("2025-07-11T00:00:00")));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setTimeLeft(getTimeLeft(new Date("2025-07-11T00:00:00")));
+  //   }, 1000);
+  //   return () => clearInterval(timer);
+  // }, []);
 
   // Gallery layout: first image large, rest in grid
   const mainImage = galleryImages[0];
@@ -209,12 +209,13 @@ const Home = () => {
       </section>
 
       {/* AUNSF 3.0 Banner with Centered Title, Countdown, and Register Button */}
-      <section className="py-10 bg-dark-blue-purple text-white flex items-center justify-center">
+      {/* <section className="py-10 bg-dark-blue-purple text-white flex items-center justify-center">
         <div className="container mx-auto px-4 flex flex-col items-center justify-center">
           <h2 className="text-4xl md:text-5xl font-bold text-center">AUNSF 3.0</h2>
           <span className="text-base font-semibold mt-2 mb-6 text-center w-full" style={{color:'#fff', letterSpacing:'2px'}}>Begins in</span>
           <div className="flex flex-col md:flex-row w-full max-w-3xl items-center justify-between gap-6 md:gap-8">
-            {/* Countdown */}
+            Countdown (commented out) */}
+            {/*
             <div className="flex-1 flex flex-col items-center md:items-start w-full">
               <div className="flex gap-2 md:gap-3">
                 <div className="bg-medium-blue rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
@@ -235,7 +236,8 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            {/* Register Now Button */}
+            // */}
+            {/* Register Now Button
             <div className="flex-1 flex justify-center md:justify-end w-full mt-6 md:mt-0">
               <a
                 href="/aunsf"
@@ -249,7 +251,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Features Section */}
       <section className="py-16 bg-white">
