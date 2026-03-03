@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import AUISCLogo from "/AUISC_Logo.png";
 
 const navLinks = [
+  { path: "/aunsf", label: "AUNSF", isHighlighted: true },
   { path: "/", label: "Home" },
   { path: "/about", label: "About" },
   { path: "/events", label: "Events" },
@@ -164,7 +165,7 @@ const Header = () => {
                 to={link.path}
                 className={`${
                   link.isHighlighted
-                    ? "text-orange-500 font-bold hover:text-orange-600"
+                    ? "text-red-500 font-bold hover:text-red-600"
                     : location.pathname === link.path
                     ? "text-blue-600 font-medium"
                     : "text-gray-600 hover:text-blue-600"
@@ -218,7 +219,7 @@ const Header = () => {
                       }}
                       className={`block w-full text-left px-4 py-3 ${
                         link.isHighlighted
-                          ? "text-orange-500 font-bold bg-orange-50 hover:bg-orange-100"
+                          ? "text-red-500 font-bold bg-red-50 hover:bg-red-100"
                           : location.pathname === link.path
                           ? "text-blue-600 font-semibold bg-blue-50"
                           : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
