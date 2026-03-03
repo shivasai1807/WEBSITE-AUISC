@@ -159,13 +159,6 @@ const Home = () => {
           ref={parallaxRef}
           className="absolute inset-0 bg-gradient-to-b from-medium-blue/20 to-dark-blue-purple/30 backdrop-blur-sm"
         >
-          {/* <div className="parallax-logo absolute inset-0 flex items-center justify-center">
-            <img
-              src={AUISC_Logo}
-              alt="AUISC Logo"
-              className="w-64 h-64 object-contain opacity-20"
-            />
-          </div> */}
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
@@ -192,66 +185,8 @@ const Home = () => {
           >
             Anurag University IUCEE Student Chapter
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <Link
-              to="/aunsf"
-              className="inline-flex items-center px-6 py-3 bg-bright-orange text-white rounded-lg hover:bg-orange-yellow transition-colors"
-            >
-              AUNSF 3.0
-              <ArrowRight className="ml-2" size={20} />
-            </Link>
-          </motion.div>
         </div>
       </section>
-
-      {/* AUNSF 3.0 Banner with Centered Title, Countdown, and Register Button */}
-      {/* <section className="py-10 bg-dark-blue-purple text-white flex items-center justify-center">
-        <div className="container mx-auto px-4 flex flex-col items-center justify-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-center">AUNSF 3.0</h2>
-          <span className="text-base font-semibold mt-2 mb-6 text-center w-full" style={{color:'#fff', letterSpacing:'2px'}}>Begins in</span>
-          <div className="flex flex-col md:flex-row w-full max-w-3xl items-center justify-between gap-6 md:gap-8">
-            Countdown (commented out) */}
-            {/*
-            <div className="flex-1 flex flex-col items-center md:items-start w-full">
-              <div className="flex gap-2 md:gap-3">
-                <div className="bg-medium-blue rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
-                  <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.days}</span>
-                  <span className="uppercase text-white text-xs mt-1 tracking-widest">Days</span>
-                </div>
-                <div className="bg-medium-blue rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
-                  <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.hours}</span>
-                  <span className="uppercase text-white text-xs mt-1 tracking-widest">Hours</span>
-                </div>
-                <div className="bg-medium-blue rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
-                  <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.minutes}</span>
-                  <span className="uppercase text-white text-xs mt-1 tracking-widest">Minutes</span>
-                </div>
-                <div className="bg-medium-blue rounded-xl flex flex-col items-center justify-center px-3 py-2 min-w-[48px]">
-                  <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.seconds}</span>
-                  <span className="uppercase text-white text-xs mt-1 tracking-widest">Seconds</span>
-                </div>
-              </div>
-            </div>
-            // */}
-            {/* Register Now Button
-            <div className="flex-1 flex justify-center md:justify-end w-full mt-6 md:mt-0">
-              <a
-                href="/aunsf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-bright-orange text-white rounded-lg hover:bg-orange-yellow transition-colors font-semibold shadow text-base"
-              >
-                Register Now
-                <ArrowRight className="ml-2" size={20} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section> */}
 
       {/* Features Section */}
       <section className="py-16 bg-white">

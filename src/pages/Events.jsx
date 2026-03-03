@@ -51,6 +51,16 @@ const Events = () => {
   const CustomEventCarousel = ({ images, title }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    if (!images || images.length === 0) {
+      return (
+        <div className="relative w-full max-w-2xl mx-auto group">
+          <div className="relative h-[300px] overflow-hidden rounded-xl shadow-lg bg-secondary flex items-center justify-center">
+            <p className="text-text-secondary">Pictures will be updated soon.</p>
+          </div>
+        </div>
+      );
+    }
+
     const nextSlide = () => {
       setCurrentIndex((prevIndex) => 
         prevIndex === images.length - 1 ? 0 : prevIndex + 1

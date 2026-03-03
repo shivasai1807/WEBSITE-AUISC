@@ -6,7 +6,6 @@ import { gsap } from "gsap";
 import AUISCLogo from "/AUISC_Logo.png";
 
 const navLinks = [
-  { path: "/aunsf", label: "AUNSF", isHighlighted: true },
   { path: "/", label: "Home" },
   { path: "/about", label: "About" },
   { path: "/events", label: "Events" },

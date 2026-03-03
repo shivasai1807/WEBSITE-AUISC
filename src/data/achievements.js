@@ -1,5 +1,19 @@
 export const achievements = [
   {
+    id: 11,
+    title: "Anurag University IUCEE Student Chapter 2026 - Best Student Chapter Award",
+    date: "January 8, 2026",
+    description: "We are delighted to share that the Anurag University IUCEE Student Chapter has been recognized as the Best Student Chapter, reflecting our dedication and teamwork. We thank our members and mentors for their support as we continue striving for excellence.",
+    icon: "🏆"
+  },
+  {
+    id: 10,
+    title: "Anurag University IUCEE Student Chapter - Best Student Chapter Award",
+    date: "December 10, 2024",
+    description: "We are delighted to share that the Anurag University IUCEE Student Chapter has been recognized as the Best Student Chapter, reflecting our dedication and teamwork. We thank our members and mentors for their support as we continue striving for excellence.",
+    icon: "🏆"
+  },
+  {
     id: 1,
     title: "AUNSF 2.0 – Where Ideas Took Flight",
     date: "June 18–20, 2024",

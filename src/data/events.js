@@ -197,32 +197,6 @@ export const events = [
     ],
   },
   {
-    id: 9,
-    title: "AUNSF 3.0",
-    date: "July 11-13, 2025",
-    time: "9:00 AM – 5:00 PM",
-    location: "Anurag University, Hyderabad",
-    participants: "300+",
-    isUpcoming: true,
-    description:
-      "Join us for AUNSF 3.0, our flagship event bringing together students from across the country to collaborate on innovative solutions for sustainability.",
-    registrationLink: "/aunsf",
-    images: [
-      {
-        url: "/pics_png/GALLERY1.webp",
-        description: "Previous AUNSF event highlights",
-      },
-      {
-        url: "/pics_png/GALLERY2.webp",
-        description: "Students presenting their projects",
-      },
-      {
-        url: "/pics_png/GALLERY5.webp",
-        description: "Sustainability panel discussion",
-      }
-    ],
-  },
-  {
     id: 10,
     title: "Eco-Insights Tour",
     date: "November 24-25, 2024",
@@ -250,6 +224,81 @@ export const events = [
         description: "Interactive sessions addressing gaps in rural education"
       }
     ]
+  },
+  {
+    id: 9,
+    title: "AUNSF 3.0",
+    date: "July 11-13, 2025",
+    time: "9:00 AM – 5:00 PM",
+    location: "Anurag University, Hyderabad",
+    participants: "280+ Participants | 20+ Colleges | 5 States",
+    isUpcoming: false,
+    description:
+      "A three-day national summit focused on sustainability, innovation and leadership. Guided by the theme Designing to Solve, Building to Sustain, students worked across AERONOX (Air), IGNOVA (Fire) and Public Administration to create practical, long-lasting solutions for real-world challenges.\nFeaturing mentor-led sessions, a 3 KM Sustainability Marathon, AEROBA, cultural night and final solution pitching.",
+    registrationLink: "/aunsf",
+    images: [
+      {
+        url: "/events/aunsf_3/img1.JPG",
+        description: "AUNSF 3.0 Decorations",
+      },
+      {
+        url: "/events/aunsf_3/img2.jpg",
+        description: "AUNSF 3.0 Marathon Participants",
+      },
+      {
+        url: "/events/aunsf_3/img3.jpg",
+        description: "AUNSF 3.0 Group Photo",
+      }
+    ],
+  },
+  {
+    id: 11,
+    title: "Mana Matti Vinayaka 2025",
+    date: "August 26, 2025",
+    time: "2:00 PM – 4:00 PM",
+    location: "Anurag University, Hyderabad",
+    participants: "250+ Participants | 70+ Teams",
+    isUpcoming: false,
+    description: "Mana Matti Vinayaka 2025 was a joyful eco-friendly celebration organized by AUISC, where students crafted Lord Ganesha idols using natural clay. Working in teams, participants blended creativity with devotion while promoting sustainable Ganesh Chaturthi celebrations. With enthusiastic participation and positive feedback, the event beautifully showcased how traditions can be celebrated responsibly while caring for the environment. 🌿",
+    registrationLink: "",
+    images: [
+      {
+        url: "/events/mana_matti_vinayaka_2025/img1.jpeg",
+        description: "Students making eco-friendly Ganesha idols.",
+      },
+      {
+        url: "/events/mana_matti_vinayaka_2025/img2.jpeg",
+        description: "A student proudly displaying their handcrafted Ganesha idol.",
+      },
+      {
+        url: "/events/mana_matti_vinayaka_2025/img3.jpeg",
+        description: "A collection of beautifully crafted eco-friendly Ganesha idols.",
+      }
+    ]
+  },
+  {
+    id: 12,
+    title: "The Bottle Canvas",
+    date: "December 5, 2025",
+    time: "12:30 PM – 4:00 PM",
+    location: "Anurag University, Hyderabad",
+    participants: "99 Participants | 33 Teams",
+    isUpcoming: false,
+    description: "The Bottle Canvas - Art from Waste was a sustainability-focused creative event where students transformed used plastic bottles into innovative artworks. Aligned with SDG 11, SDG 12, and SDG 14, the event promoted responsible consumption, waste reduction and environmental awareness.The event successfully encouraged eco-conscious thinking and creative reuse on campus.",
+    registrationLink: "",
+    images: [
+      {
+        url: "/events/the_bottle_canvas/img1.jpg",
+        description: "Creative artwork made from upcycled plastic bottles.",
+      },
+      {
+        url: "/events/the_bottle_canvas/img2.jpg",
+        description: "Participants with their innovative bottle art creations.",
+      },
+      {
+        url: "/events/the_bottle_canvas/img3.jpg",
+        description: "A stunning display of art created from waste materials.",
+      }
+    ]
   }
-  
 ];
