@@ -1,18 +1,5 @@
 export const achievements = [
-  {
-    id: 11,
-    title: "Anurag University IUCEE Student Chapter 2026 - Best Student Chapter Award",
-    date: "January 8, 2026",
-    description: "We are delighted to share that the Anurag University IUCEE Student Chapter has been recognized as the Best Student Chapter, reflecting our dedication and teamwork. We thank our members and mentors for their support as we continue striving for excellence.",
-    icon: "🏆"
-  },
-  {
-    id: 10,
-    title: "Anurag University IUCEE Student Chapter - Best Student Chapter Award",
-    date: "December 10, 2024",
-    description: "We are delighted to share that the Anurag University IUCEE Student Chapter has been recognized as the Best Student Chapter, reflecting our dedication and teamwork. We thank our members and mentors for their support as we continue striving for excellence.",
-    icon: "🏆"
-  },
+
   {
     id: 1,
     title: "AUNSF 2.0 – Where Ideas Took Flight",
@@ -75,5 +62,27 @@ export const achievements = [
     date: "November 22–23, 2024",
     description: "We demystified research for 111 students, guiding them from 'What's a hypothesis?' to 'I can publish this!' Now, AU undergrads are submitting papers—something we once thought impossible.",
     icon: "📝"
-  }
+  },
+    {
+    id: 10,
+    title: "Anurag University IUCEE Student Chapter - Best Student Chapter Award",
+    date: "December 10, 2024",
+    description: "We are delighted to share that the Anurag University IUCEE Student Chapter has been recognized as the Best Student Chapter, reflecting our dedication and teamwork. We thank our members and mentors for their support as we continue striving for excellence.",
+    icon: "🏆"
+  },
+   {
+    id: 11,
+    title: "Anurag University IUCEE Student Chapter 2026 - Best Student Chapter Award",
+    date: "January 8, 2026",
+    description: "We are delighted to share that the Anurag University IUCEE Student Chapter has been recognized as the Best Student Chapter, reflecting our dedication and teamwork. We thank our members and mentors for their support as we continue striving for excellence.",
+    icon: "🏆"
+  },
+  {
+  id: 12,
+  title: "Anurag University IUCEE Student Chapter 2026 - Best Student Chapter Award",
+  date: "January 8, 2026",
+  description:
+    "We are proud to announce that Anurag University IUCEE Student Chapter (AUISC) has received the Best Student Chapter Award. This recognition reflects the enthusiasm, commitment, and consistent efforts of the AUISC team in creating meaningful impact through innovation and collaboration. Congratulations to everyone who contributed to this achievement. We sincerely thank our Management, leadership team, faculty, and staff for their unwavering support, and extend special gratitude to Dean SOE, Prof. Vijay Kumar Sir, for his constant guidance and encouragement.",
+  icon: "🏆"
+},
 ]; 

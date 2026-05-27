@@ -172,6 +172,43 @@ const Achievements = () => {
               </div>
             </motion.div>
           </div>
+
+     {/* Chapter Award 2026 Extra Achievement */}
+        <motion.div
+         initial={{ opacity: 0, y: 30 }}
+         whileInView={{ opacity: 1, y: 0 }}
+         viewport={{ once: true }}
+         transition={{ duration: 0.5, delay: 0.4 }}
+         whileHover={{ scale: 1.02, y: -5 }}
+        className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 mt-8"
+      >
+        <div className="flex items-center gap-4 mb-6">
+         <div className="bg-bright-orange/10 p-4 rounded-xl">
+         <Trophy className="text-bright-orange" size={32} />
+        </div>
+
+       <div>
+         <span className="text-sm font-medium text-dark-blue-purple/70">
+        2026
+        </span>
+
+        <h3 className="text-xl font-bold text-dark-blue-purple">
+        Best Student Chapter
+         </h3>
+        </div>
+       </div>
+
+        <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-bright-orange">Anurag University</h4>
+         <p className="text-dark-blue-purple leading-relaxed">
+          We are proud to announce that Anurag University IUCEE Student Chapter (AUISC) has received the Best Student Chapter Award. This recognition reflects the enthusiasm, commitment, and consistent efforts of the AUISC team in creating meaningful impact through innovation and collaboration.
+           </p>
+
+         <p className="text-dark-blue-purple leading-relaxed">
+           Congratulations to everyone who contributed to this achievement. We sincerely thank our Management, leadership team, faculty, and staff for their unwavering support, and extend special gratitude to Dean SOE, Prof. Vijay Kumar Sir, for his constant guidance and encouragement.
+            </p>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 

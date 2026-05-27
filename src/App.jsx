@@ -15,6 +15,11 @@ const Contact = lazy(() => import('./pages/Contact'));
 const AUNSF = lazy(() => import('./pages/AUNSF'));
 const EPICS = lazy(() => import('./pages/EPICS'));
 
+const Aunsf1 = lazy(() => import('./pages/Aunsf1'));
+const Aunsf2 = lazy(() => import('./pages/Aunsf2'));
+const Aunsf3 = lazy(() => import('./pages/Aunsf3'));
+const Aunsf4 = lazy(() => import('./pages/Aunsf4'));
+
 function AppContent() {
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const location = useLocation();
@@ -40,7 +45,10 @@ function AppContent() {
           <Route path="/achievements" element={<Achievements />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/aunsf" element={<AUNSF  />} />
+          <Route path="/aunsf-1" element={<Aunsf1 />} />
+          <Route path="/aunsf-2" element={<Aunsf2 />} />
+          <Route path="/aunsf-3" element={<Aunsf3 />} />
+          <Route path="/aunsf-4" element={<Aunsf4 />} />
           <Route path="/epics" element={<EPICS />} />
         </Routes>
       </Layout>

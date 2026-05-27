@@ -300,5 +300,21 @@ export const events = [
         description: "A stunning display of art created from waste materials.",
       }
     ]
-  }
+  },
+  {  id: 13,
+  title: "RepoReady – Define. Document. Deliver",
+  date: "December 2025",
+  time: "10:00 AM – 4:00 PM",
+  location: "Anurag University, Hyderabad",
+  participants: "100+",
+  isUpcoming: false,
+  description:
+    "An interactive workshop focused on Git, GitHub workflows, documentation practices, and AI-assisted development tools. The session provided hands-on exposure to modern development practices, collaboration, and productivity tools used in real-world software projects.",
+  images: [
+    {
+      url: "/events/repo_ready/repoready1.jpeg",
+      description: "RepoReady Workshop Highlights"
+    }
+  ]
+}
 ];
