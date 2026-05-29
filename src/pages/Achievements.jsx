@@ -172,6 +172,43 @@ const Achievements = () => {
               </div>
             </motion.div>
           </div>
+
+     {/* Chapter Award 2026 Extra Achievement */}
+        <motion.div
+         initial={{ opacity: 0, y: 30 }}
+         whileInView={{ opacity: 1, y: 0 }}
+         viewport={{ once: true }}
+         transition={{ duration: 0.5, delay: 0.4 }}
+         whileHover={{ scale: 1.02, y: -5 }}
+        className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 mt-8"
+      >
+        <div className="flex items-center gap-4 mb-6">
+         <div className="bg-bright-orange/10 p-4 rounded-xl">
+         <Trophy className="text-bright-orange" size={32} />
+        </div>
+
+       <div>
+         <span className="text-sm font-medium text-dark-blue-purple/70">
+        2026
+        </span>
+
+        <h3 className="text-xl font-bold text-dark-blue-purple">
+        Best Student Chapter
+         </h3>
+        </div>
+       </div>
+
+        <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-bright-orange">Anurag University</h4>
+         <p className="text-dark-blue-purple leading-relaxed">
+          We are proud to announce that Anurag University IUCEE Student Chapter (AUISC) has received the Best Student Chapter Award. This recognition reflects the enthusiasm, commitment, and consistent efforts of the AUISC team in creating meaningful impact through innovation and collaboration.
+           </p>
+
+         <p className="text-dark-blue-purple leading-relaxed">
+           Congratulations to everyone who contributed to this achievement. We sincerely thank our Management, leadership team, faculty, and staff for their unwavering support, and extend special gratitude to Dean SOE, Prof. Vijay Kumar Sir, for his constant guidance and encouragement.
+            </p>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -242,6 +279,63 @@ const Achievements = () => {
         </motion.div>
       </div>
 
+      {/* IASF 2026 Achievement */}
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  whileHover={{ y: -6 }}
+  className="grid md:grid-cols-2 gap-10 items-stretch bg-light-blue-purple/30 rounded-3xl p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 mb-12"
+>
+  {/* Content */}
+  <div className="flex flex-col justify-center">
+    <div className="flex items-center gap-4 mb-4">
+      <div className="bg-bright-orange/10 p-3 rounded-lg">
+        <Trophy className="text-bright-orange" size={24} />
+      </div>
+
+      <h3 className="text-2xl font-bold text-dark-blue-purple">
+        ✨ Another Proud Achievement – IASF 2026 ✨
+      </h3>
+    </div>
+
+    <p className="text-dark-blue-purple leading-relaxed mb-4">
+      We are happy to share that{" "}
+      <span className="font-semibold">Team Blue Genesis</span>
+      has secured a cash prize of{" "}
+      <span className="font-semibold">₹10,000</span> at
+      IASF 2026 – Student Project Expo.
+    </p>
+
+    <p className="text-dark-blue-purple leading-relaxed mb-4">
+      Despite changes in the evaluation schedule, the team
+      successfully presented virtually on March 18 with the
+      support of Krishna Sir and earned this well-deserved
+      recognition.
+    </p>
+
+    <p className="text-dark-blue-purple leading-relaxed">
+      This achievement reflects their innovation, resilience,
+      and dedication. Congratulations to the team on this proud
+      milestone! 🚀
+    </p>
+  </div>
+
+  {/* Image */}
+  <motion.div
+    whileHover={{ scale: 1.02 }}
+    transition={{ duration: 0.3 }}
+    className="rounded-2xl overflow-hidden shadow-lg h-[280px] md:h-[340px] lg:h-[380px] bg-white"
+  >
+    <img
+      src="/achievements/Iasf-2026.jpeg"
+      alt="IASF 2026 Achievement"
+      className="w-full h-full object-contain bg-white p-2"
+    />
+  </motion.div>
+</motion.div>
+
       {/* HITAM INNOFIESTA Section */}
       <div className="container mx-auto px-4 py-20">
         <motion.div
@@ -258,7 +352,7 @@ const Achievements = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
           >
-            HITAM INNOFIESTA 2024
+             INNOFIESTA 2024
           </motion.h2>
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -331,6 +425,92 @@ const Achievements = () => {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* INNOFIESTA 2026 Section */}
+<div className="container mx-auto px-4 py-20">
+  <motion.div
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.8 }}
+    className="max-w-6xl mx-auto"
+  >
+    <motion.h2
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
+    >
+      INNOFIESTA – 2026 
+    </motion.h2>
+
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      whileHover={{ scale: 1.01 }}
+      className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+    >
+      <div className="grid md:grid-cols-2 gap-10 items-center">
+        
+        {/* Content */}
+        <div>
+          <div className="flex items-center gap-4 mb-5">
+            <motion.div
+              className="bg-bright-orange/10 p-3 rounded-lg"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Trophy className="text-bright-orange" size={24} />
+            </motion.div>
+
+            <h3 className="text-2xl font-bold text-dark-blue-purple">
+              Winner – Team InsightDash
+            </h3>
+          </div>
+
+          <p className="text-dark-blue-purple leading-relaxed mb-5">
+            Students of Anurag University IUCEE Student Chapter (AUISC)
+            participated in INNOFIESTA – 2026, a technical event conducted
+            by Hyderabad Institute of Technology and Management under the
+            IUCEE-EWB Student Chapter initiative.
+          </p>
+
+          <p className="text-dark-blue-purple leading-relaxed mb-5">
+            Team InsightDash was recognized as the
+            <span className="font-semibold"> Winner </span>
+            for their outstanding performance and innovative presentation
+            during the event.
+          </p>
+
+          <p className="text-dark-blue-purple leading-relaxed">
+            <span className="font-semibold">Participants:</span>
+            <br />
+            Pranav, Rishika & Vinuthna
+          </p>
+        </div>
+
+        {/* Image */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          whileHover={{ scale: 1.03 }}
+          className="rounded-2xl overflow-hidden shadow-lg h-full min-h-[300px]"
+        >
+          <img
+            src="/achievements/innofiesta1.jpeg"
+            alt="INNOFIESTA 2026 Winners"
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+      </div>
+    </motion.div>
+  </motion.div>
+</div>
 
       {/* Tejas 2K25 Section */}
       <div className="container mx-auto px-4 py-20">
@@ -509,6 +689,236 @@ const Achievements = () => {
           </motion.div>
         </motion.div>
       </div>
+    
+{/* Aavishkaran Manthan 2025 Section */}
+<div className="container mx-auto px-4 py-20">
+  <motion.div
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.8 }}
+    className="max-w-6xl mx-auto"
+  >
+    <motion.h2
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
+    >
+      Aavishkaran Manthan 2025
+    </motion.h2>
+
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      whileHover={{ scale: 1.01 }}
+      className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+    >
+      <div className="space-y-12">
+
+        {/* Intro */}
+        <div>
+          <p className="text-dark-blue-purple leading-relaxed text-lg">
+            Students of Anurag University IUCEE Student Chapter (AUISC)
+            participated in Aavishkaran Manthan, hosted by Malnad College
+            of Engineering, and showcased excellence across multiple events
+            through innovation, creativity, and effective communication.
+          </p>
+        </div>
+
+       {/* Team Gajanan */}
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  whileHover={{ y: -6 }}
+  className="grid md:grid-cols-2 gap-10 items-stretch bg-light-blue-purple/30 rounded-3xl p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 mb-12"
+>
+  <div className="flex flex-col justify-center">
+    <div className="flex items-center gap-4 mb-4">
+      <div className="bg-bright-orange/10 p-3 rounded-lg">
+        <Trophy className="text-bright-orange" size={24} />
+      </div>
+
+      <h3 className="text-2xl font-bold text-dark-blue-purple">
+        Ideathon – Second Prize
+      </h3>
+    </div>
+
+    <p className="text-dark-blue-purple leading-relaxed mb-4">
+      Team Gajanan secured{" "}
+      <span className="font-semibold">Second Prize</span> in the
+      Ideathon event for their innovative ideas and impactful
+      presentation.
+    </p>
+
+    <p className="text-dark-blue-purple leading-relaxed">
+      <span className="font-semibold">Participants:</span>
+      <br />
+      Shaik Ayesha & Neeraj
+    </p>
+  </div>
+
+  <motion.div
+    whileHover={{ scale: 1.02 }}
+    transition={{ duration: 0.3 }}
+    className="rounded-2xl overflow-hidden shadow-lg h-full min-h-[280px]"
+  >
+    <img
+      src="/achievements/IdeathonGajanan.jpeg"
+      alt="Team Gajanan"
+      className="w-full h-full object-cover aspect-[4/3]"
+    />
+  </motion.div>
+</motion.div>
+
+{/* Team Stark */}
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  whileHover={{ y: -6 }}
+  className="grid md:grid-cols-2 gap-10 items-stretch bg-light-blue-purple/30 rounded-3xl p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 mb-12"
+>
+  <div className="flex flex-col justify-center">
+    <div className="flex items-center gap-4 mb-4">
+      <div className="bg-bright-orange/10 p-3 rounded-lg">
+        <Trophy className="text-bright-orange" size={24} />
+      </div>
+
+      <h3 className="text-2xl font-bold text-dark-blue-purple">
+        Elocution – Second Prize
+      </h3>
+    </div>
+
+    <p className="text-dark-blue-purple leading-relaxed mb-4">
+      Team Stark achieved{" "}
+      <span className="font-semibold">Second Prize</span> in the
+      Elocution event with their excellent communication and
+      presentation skills.
+    </p>
+
+    <p className="text-dark-blue-purple leading-relaxed">
+      <span className="font-semibold">Participants:</span>
+      <br />
+      Noel & Rajith
+    </p>
+  </div>
+
+  <motion.div
+    whileHover={{ scale: 1.02 }}
+    transition={{ duration: 0.3 }}
+    className="rounded-2xl overflow-hidden shadow-lg h-full min-h-[280px]"
+  >
+    <img
+      src="/achievements/ElocutionStark.jpeg"
+      alt="Team Stark"
+      className="w-full h-full object-cover aspect-[4/3]"
+    />
+  </motion.div>
+</motion.div>
+
+{/* Health IQ */}
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  whileHover={{ y: -6 }}
+  className="grid md:grid-cols-2 gap-10 items-stretch bg-light-blue-purple/30 rounded-3xl p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 mb-12"
+>
+  <div className="flex flex-col justify-center">
+    <div className="flex items-center gap-4 mb-4">
+      <div className="bg-bright-orange/10 p-3 rounded-lg">
+        <Trophy className="text-bright-orange" size={24} />
+      </div>
+
+      <h3 className="text-2xl font-bold text-dark-blue-purple">
+        Ideathon – Special Achievements
+      </h3>
+    </div>
+
+    <p className="text-dark-blue-purple leading-relaxed mb-4">
+      Health IQ received a{" "}
+      <span className="font-semibold">Special Mention</span> in the
+      Ideathon event for their creative and impactful idea.
+    </p>
+
+    <p className="text-dark-blue-purple leading-relaxed">
+      <span className="font-semibold">Participants:</span>
+      <br />
+      Akhil, Uma Sree & Vijayalakshmi
+    </p>
+  </div>
+
+  <motion.div
+    whileHover={{ scale: 1.02 }}
+    transition={{ duration: 0.3 }}
+    className="rounded-2xl overflow-hidden shadow-lg h-full min-h-[280px]"
+  >
+    <img
+      src="/achievements/IdeathonIQ.jpeg"
+      alt="Health IQ Team"
+      className="w-full h-full object-cover aspect-[4/3]"
+    />
+  </motion.div>
+</motion.div>
+
+{/* Team Shouryanga */}
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  whileHover={{ y: -6 }}
+  className="grid md:grid-cols-2 gap-10 items-stretch bg-light-blue-purple/30 rounded-3xl p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 mb-12"
+>
+  <div className="flex flex-col justify-center">
+    <div className="flex items-center gap-4 mb-4">
+      <div className="bg-bright-orange/10 p-3 rounded-lg">
+        <Trophy className="text-bright-orange" size={24} />
+      </div>
+
+      <h3 className="text-2xl font-bold text-dark-blue-purple">
+        Ideathon – Internship Offer by Smile Essentials
+      </h3>
+    </div>
+
+    <p className="text-dark-blue-purple leading-relaxed mb-4">
+      Team Shouryanga received an{" "}
+      <span className="font-semibold">Internship Offer</span> from
+      Smile Essentials during the Ideathon event.
+    </p>
+
+    <p className="text-dark-blue-purple leading-relaxed">
+      <span className="font-semibold">Participants:</span>
+      <br />
+      Ram Swaroop, Sricharan & Rishi
+    </p>
+  </div>
+
+<motion.div
+  whileHover={{ scale: 1.02 }}
+  transition={{ duration: 0.3 }}
+  className="rounded-2xl overflow-hidden shadow-lg h-[280px] md:h-[340px] lg:h-[380px] bg-white"
+>
+  <img
+    src="/achievements/ideathonShouryangana.jpeg"
+    alt="Team Shouryanga"
+    className="w-full h-full object-contain bg-white p-2"
+  />
+</motion.div>
+ </motion.div>
+      </div>
+    </motion.div>
+  </motion.div>
+</div>
+
     </div>
   );
 };
