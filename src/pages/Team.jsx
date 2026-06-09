@@ -1,8 +1,38 @@
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import TeamCard from "../components/TeamCard";
-import { teams } from "../data/team";
+import teamDataJson from "../data/teamData.json";
+
+const getLiveTeamData = () => {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('auisc_working_data');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse localStorage data", e);
+      }
+    }
+  }
+  return teamDataJson;
+};
 
 const Team = () => {
+  const [teamData, setTeamData] = useState(getLiveTeamData);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setTeamData(getLiveTeamData());
+    };
+    window.addEventListener("storage", handleStorageChange);
+    // Custom event for same-tab updates
+    window.addEventListener("auisc_data_updated", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("auisc_data_updated", handleStorageChange);
+    };
+  }, []);
+
   const scrollToTeam = (teamId) => {
     const element = document.getElementById(teamId);
     if (element) {
@@ -30,96 +60,108 @@ const Team = () => {
           className="bg-white shadow-md rounded-lg mb-8 p-4"
         >
           <div className="flex flex-wrap justify-center gap-2">
-            <motion.button
-              onClick={() => scrollToTeam("faculty-coordinator")}
-              className="px-4 py-2 bg-white hover:bg-light-blue-purple text-dark-blue-purple rounded-full text-sm font-medium"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              Faculty Coordinator
-            </motion.button>
-            {teams.map((team) => (
+            {teamData.facultyCoordinators && teamData.facultyCoordinators.length > 0 && (
               <motion.button
-                key={team.title}
-                onClick={() => scrollToTeam(team.title.toLowerCase().replace(/\s+/g, "-"))}
+                onClick={() => scrollToTeam("faculty-coordinator")}
                 className="px-4 py-2 bg-white hover:bg-light-blue-purple text-dark-blue-purple rounded-full text-sm font-medium"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                {team.title}
+                {teamData.facultyTitle || "Faculty Coordinator"}
+              </motion.button>
+            )}
+
+            {teamData.teams.map((team) => (
+              <motion.button
+                key={team.id}
+                onClick={() => scrollToTeam(team.teamName.toLowerCase().replace(/\s+/g, "-"))}
+                className="px-4 py-2 bg-white hover:bg-light-blue-purple text-dark-blue-purple rounded-full text-sm font-medium"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                {team.teamName}
               </motion.button>
             ))}
           </div>
         </motion.div>
 
         <div className="space-y-16">
-          {/* Faculty Coordinator Section */}
-          <motion.div
-            id="faculty-coordinator"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-xl p-8 text-dark-blue-purple shadow-lg"
-          >
-            <h2 className="text-2xl font-bold mb-6 text-center">Faculty Coordinator</h2>
-            <div className="flex flex-wrap justify-center gap-8">
-              <TeamCard
-                member={{
-                  name: "Dr.Narendar Singh",
-                  role: "Faculty Coordinator",
-                  image: "/team_pics/ns_sir.webp",
-                  linkedin: "https://www.linkedin.com/in/dr-narendhar-singh-ba7188178/"
-                }}
-              />
-            </div>
-          </motion.div>
-
-          {teams.map((team, index) => (
+          {teamData.facultyCoordinators && teamData.facultyCoordinators.length > 0 && (
             <motion.div
-              key={team.title}
-              id={team.title.toLowerCase().replace(/\s+/g, "-")}
+              id="faculty-coordinator"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5 }}
               className="bg-white rounded-xl p-8 text-dark-blue-purple shadow-lg"
             >
-              <h2 className="text-2xl font-bold mb-6 text-center">{team.title}</h2>
-              
-              {team.title === "Executive Board" ? (
-                <div className="flex flex-wrap justify-center gap-8">
-                  {[...team.leads, ...team.members].map((member) => (
-                    <TeamCard key={member.name} member={member} />
-                  ))}
-                </div>
-              ) : (
-                <>
-                  {/* Team Leads */}
-                  {team.leads && team.leads.length > 0 && (
-                    <div className="mb-8">
-                      <h3 className="text-xl font-semibold mb-4 text-center text-dark-blue-purple">Team Lead</h3>
-                      <div className="flex flex-wrap justify-center gap-8">
-                        {team.leads.map((lead) => (
-                          <TeamCard key={lead.name} member={lead} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Team Members */}
-                  {team.members && team.members.length > 0 && (
-                    <div>
-                      <h3 className="text-xl font-semibold mb-4 text-center text-dark-blue-purple">Team Members</h3>
-                      <div className="flex flex-wrap justify-center gap-8">
-                        {team.members.map((member) => (
-                          <TeamCard key={member.name} member={member} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
+              <h2 className="text-2xl font-bold mb-6 text-center">{teamData.facultyTitle || "Faculty Coordinator"}</h2>
+              <div className="flex flex-wrap justify-center gap-8">
+                {teamData.facultyCoordinators.map((fc, idx) => (
+                  <TeamCard
+                    key={`fc-${idx}`}
+                    member={{
+                      name: fc.name,
+                      role: fc.role,
+                      image: fc.image,
+                      linkedin: fc.linkedin || ""
+                    }}
+                  />
+                ))}
+              </div>
             </motion.div>
-          ))}
+          )}
+
+          {teamData.teams.map((team, index) => {
+            const teamLeads = team.leads.map(id => teamData.membersPool.find(m => m.id === id)).filter(Boolean);
+            const teamMembers = team.members.map(id => teamData.membersPool.find(m => m.id === id)).filter(Boolean);
+
+            return (
+              <motion.div
+                key={team.id}
+                id={team.teamName.toLowerCase().replace(/\s+/g, "-")}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-xl p-8 text-dark-blue-purple shadow-lg"
+              >
+                <h2 className="text-2xl font-bold mb-6 text-center">{team.teamName}</h2>
+                
+                {team.teamName === "Executive Board" ? (
+                  <div className="flex flex-wrap justify-center gap-8">
+                    {[...teamLeads, ...teamMembers].map((member) => (
+                      <TeamCard key={member.id} member={member} />
+                    ))}
+                  </div>
+                ) : (
+                  <>
+                    {/* Team Leads */}
+                    {teamLeads.length > 0 && (
+                      <div className="mb-8">
+                        <h3 className="text-xl font-semibold mb-4 text-center text-dark-blue-purple">Team Lead</h3>
+                        <div className="flex flex-wrap justify-center gap-8">
+                          {teamLeads.map((lead) => (
+                            <TeamCard key={lead.id} member={lead} />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Team Members */}
+                    {teamMembers.length > 0 && (
+                      <div>
+                        <h3 className="text-xl font-semibold mb-4 text-center text-dark-blue-purple">Team Members</h3>
+                        <div className="flex flex-wrap justify-center gap-8">
+                          {teamMembers.map((member) => (
+                            <TeamCard key={member.id} member={member} />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </div>
