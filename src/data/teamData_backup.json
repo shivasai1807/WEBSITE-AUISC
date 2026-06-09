@@ -1,0 +1,685 @@
+{
+  "membersPool": [
+    {
+      "id": "sukruth",
+      "name": "Sukruth Baikan",
+      "image": "team_pics/sukruth.webp",
+      "role": "President",
+      "linkedin": "https://www.linkedin.com/in/baikan-sukruth-b4059a327/"
+    },
+    {
+      "id": "thanughana",
+      "name": "Thanughna Dhatrika",
+      "image": "team_pics/thanughana.webp",
+      "role": "Vice-president",
+      "linkedin": "https://www.linkedin.com/in/thanughna-dhatrika-076699257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "jahnavi",
+      "name": "Jahnavi Dora",
+      "image": "team_pics/jahnavi.webp",
+      "role": "General secretary",
+      "linkedin": "https://www.linkedin.com/in/jahnavi-dora-481b31287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "sumad",
+      "name": "Sumad",
+      "image": "team_pics/sumad.webp",
+      "role": "Joint Secretary",
+      "linkedin": "https://in.linkedin.com/in/sumad-reddy"
+    },
+    {
+      "id": "sri_charan",
+      "name": "Sri Charan Raj",
+      "image": "team_pics/sri_charan.webp",
+      "role": "Treasurer",
+      "linkedin": "https://www.linkedin.com/in/sricharan-divila-9627a534b/"
+    },
+    {
+      "id": "ayesha",
+      "name": "Ayesha Shaik",
+      "image": "team_pics/ayesha.webp",
+      "role": "Student Ambassador",
+      "linkedin": "https://www.linkedin.com/in/ayesha-shaik-685327287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "agrathi",
+      "name": "Agrati Sheela",
+      "image": "team_pics/agrathi.webp",
+      "role": "Organising lead",
+      "linkedin": "https://www.linkedin.com/in/agrati-sheela-01b874253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "pranav",
+      "name": "Pranav kothapalli",
+      "image": "/team_pics/pranav.webp",
+      "role": "Epics lead",
+      "linkedin": "https://www.linkedin.com/in/pranavkothapalli"
+    },
+    {
+      "id": "shiva",
+      "name": "Shiva Sai",
+      "image": "team_pics/shiva.webp",
+      "role": "Projects & Publications director",
+      "linkedin": "https://www.linkedin.com/in/shiva-sai-balbari/"
+    },
+    {
+      "id": "sreeja_p",
+      "name": "Police Sreeja",
+      "image": "team_pics/sreeja_p.webp",
+      "role": "Projects & Publications director",
+      "linkedin": "https://www.linkedin.com/in/police-sreeja-102396287/"
+    },
+    {
+      "id": "uma",
+      "name": "Uma sri",
+      "image": "team_pics/uma.webp",
+      "role": "Creative Director",
+      "linkedin": "https://www.linkedin.com/in/umasri-kataboina-9a863b2a4/"
+    },
+    {
+      "id": "vyshali",
+      "name": "Vyshali katta",
+      "image": "team_pics/vyshali.webp",
+      "role": "Creative Director",
+      "linkedin": ""
+    },
+    {
+      "id": "anji",
+      "name": "Anji Reddy Boda",
+      "image": "team_pics/anji.webp",
+      "role": "Research And Development Team Lead",
+      "linkedin": "https://www.linkedin.com/in/anjireddyboda"
+    },
+    {
+      "id": "prasanna",
+      "name": "Prasanna",
+      "image": "/team_pics/prasanna.webp",
+      "role": "",
+      "linkedin": ""
+    },
+    {
+      "id": "Gsaketh",
+      "name": "Saketh",
+      "image": "/team_pics/Gsaketh.webp",
+      "role": "",
+      "linkedin": ""
+    },
+    {
+      "id": "greshmi",
+      "name": "Greshmi Ratna",
+      "image": "/team_pics/greshmi.webp",
+      "role": "",
+      "linkedin": "http://www.linkedin.com/in/greshmiratna13"
+    },
+    {
+      "id": "chinmai",
+      "name": "Chinmayi",
+      "image": "/team_pics/chinmai.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/chinmayee-madha/"
+    },
+    {
+      "id": "sruthi",
+      "name": "Sruthi",
+      "image": "/team_pics/sruthi.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/saisruthikota"
+    },
+    {
+      "id": "rekha",
+      "name": "Korubothu Rekha",
+      "image": "team_pics/rekha.webp",
+      "role": "Content Team Lead",
+      "linkedin": "https://www.linkedin.com/in/rekha-korubothu-3a85b9288"
+    },
+    {
+      "id": "cecilia",
+      "name": "S F Cecilia",
+      "image": "team_pics/cecilia.webp",
+      "role": "Content Team Co-Lead",
+      "linkedin": "https://www.linkedin.com/in/sfcecilia/"
+    },
+    {
+      "id": "nakshatra",
+      "name": "Nakshatra",
+      "image": "/team_pics/nakshatra.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/nakshatra-gariga-ba987727a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "yashaswini",
+      "name": "Yashaswini",
+      "image": "/team_pics/yashaswini.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/marlapati-yoga-lakshmi-venkata-yashaswini-2a851a2b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "noel",
+      "name": "Noel",
+      "image": "/team_pics/noel.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/noel-reddy-7a688b2a9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "pavan",
+      "name": "Pavan Kumar",
+      "image": "team_pics/pavan.webp",
+      "role": "Technical Team Lead",
+      "linkedin": "https://www.linkedin.com/in/pavan1207/"
+    },
+    {
+      "id": "deekshitha",
+      "name": "Deekshitha",
+      "image": "team_pics/deekshitha.webp",
+      "role": "Senior Member",
+      "linkedin": "https://www.linkedin.com/in/deekshitha-r-bb3366278"
+    },
+    {
+      "id": "sriya",
+      "name": "Sriya Sushil",
+      "image": "/team_pics/sriya.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/sriya-sushil-393408290?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "yagnesh",
+      "name": "Yagneshwar",
+      "image": "/team_pics/yagnesh.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/yagneshwar-devireddy-a441a0288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "sneha",
+      "name": "Sneha",
+      "image": "/team_pics/sneha.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/singa-sneha-074863294"
+    },
+    {
+      "id": "siddu",
+      "name": "Garlapati Sidhu",
+      "image": "/team_pics/siddu.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/garlapati-siddu-452673243"
+    },
+    {
+      "id": "vaishnavi",
+      "name": "Vaishnavi Chowdary",
+      "image": "team_pics/vaishnavi.webp",
+      "role": "Design Team Lead",
+      "linkedin": "https://www.linkedin.com/in/vaishnavi-tella-b07b30287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "kavya_sri",
+      "name": "Kavya Sri",
+      "image": "team_pics/kavya_sri.webp",
+      "role": "Design Team Co-Lead",
+      "linkedin": "https://www.linkedin.com/in/kavya-sri-1b8868300/"
+    },
+    {
+      "id": "vamshi_design",
+      "name": "Vamshi Krishna",
+      "image": "team_pics/vamshi_design.webp",
+      "role": "Senior Member",
+      "linkedin": ""
+    },
+    {
+      "id": "pranathi",
+      "name": "Pranathi",
+      "image": "team_pics/pranathi.webp",
+      "role": "Senior Member",
+      "linkedin": "http://www.linkedin.com/in/pranathi-goli-006669287"
+    },
+    {
+      "id": "anwesha",
+      "name": "Anwesha Sahu",
+      "image": "/team_pics/anwesha.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/anwesha-sahu-104279281/"
+    },
+    {
+      "id": "harshita",
+      "name": "Harshitha",
+      "image": "/team_pics/harshita.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/harshitha-rayudu-92a9662b0/"
+    },
+    {
+      "id": "vijaya",
+      "name": "Vijayalakshmi",
+      "image": "/team_pics/vijaya.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/vijaya-lakshmi"
+    },
+    {
+      "id": "pradeepa",
+      "name": "Pradeepa",
+      "image": "/team_pics/pradeepa.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/v-pradeepa-7092a327a/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "akhil",
+      "name": "Akhil",
+      "image": "/team_pics/akhil.webp",
+      "role": "Social Media Team Lead",
+      "linkedin": "https://www.linkedin.com/in/akhil-davula-b5109a24a/"
+    },
+    {
+      "id": "siriChandana",
+      "name": "Siri Chandana Reddy",
+      "image": "team_pics/siriChandana.webp",
+      "role": "Senior Member",
+      "linkedin": "https://www.linkedin.com/in/sirireddy26"
+    },
+    {
+      "id": "JR_abhiram",
+      "name": "Abhiram",
+      "image": "/team_pics/JR_abhiram.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/abhiram-beemari?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "sayyad",
+      "name": "Sayyad",
+      "image": "/team_pics/sayyad.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/sayyadpasha?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "lakshyatha",
+      "name": "Lakshyatha",
+      "image": "/team_pics/lakshyatha.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/lakshyatha-chamarthy-30480030b/"
+    },
+    {
+      "id": "shiva_vardhan",
+      "name": "Shiva Vardhan",
+      "image": "/team_pics/shiva_vardhan.webp",
+      "role": "",
+      "linkedin": ""
+    },
+    {
+      "id": "rajith",
+      "name": "Rajith",
+      "image": "/team_pics/rajith.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/rajith-rao-muthyala-842a6128b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "neeraj",
+      "name": "Neeraj",
+      "image": "/team_pics/neeraj.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/neeraj-yadav-454620315?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "abhiram",
+      "name": "Abhiram",
+      "image": "team_pics/abhiram.webp",
+      "role": "Public Relations Team Lead",
+      "linkedin": "https://www.linkedin.com/in/abhiram-banka-aa542b287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "chetana",
+      "name": "Chethana Reddy",
+      "image": "/team_pics/chetana.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/chethana-pagidala-60b7b32b6/"
+    },
+    {
+      "id": "rishi",
+      "name": "Rishi",
+      "image": "/team_pics/rishi.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/rishi-thatipelly-352006293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app3"
+    },
+    {
+      "id": "PRsaketh",
+      "name": "Saketh",
+      "image": "/team_pics/PRsaketh.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/sakethchittaluri?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "neel",
+      "name": "Inderneel",
+      "image": "/team_pics/neel.webp",
+      "role": "",
+      "linkedin": ""
+    },
+    {
+      "id": "theerdha",
+      "name": "Theerdha",
+      "image": "/team_pics/theerdha.webp",
+      "role": "",
+      "linkedin": ""
+    },
+    {
+      "id": "trisha",
+      "name": "Trisha",
+      "image": "/team_pics/trisha.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/surakanti-trisha-reddy-48a614363?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "ram",
+      "name": "Ramswaroop Dara",
+      "image": "team_pics/ram.webp",
+      "role": "Marketing Team Lead",
+      "linkedin": "https://www.linkedin.com/in/ramswaroop-dara-77a74b258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "amulya",
+      "name": "Amulya",
+      "image": "/team_pics/amulya.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/amulya-pagidimarri-091051236?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "JR_aishwarya",
+      "name": "Aishwarya",
+      "image": "/team_pics/JR_aishwarya.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/kasula-aishwarya-5b5853299?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "dharun",
+      "name": "Dharun",
+      "image": "/team_pics/dharun.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/dharun-kamisetty-b12ba3266?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "Srivarsha",
+      "name": "Sri Varsha",
+      "image": "/team_pics/Srivarsha.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/srivarsha-bollampalli-5b165a337/"
+    },
+    {
+      "id": "Ashritha",
+      "name": "Ashritha",
+      "image": "/team_pics/Ashritha.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/ashritha-reddy-318040316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "durga",
+      "name": "Durga Prasad",
+      "image": "/team_pics/durga.webp",
+      "role": "",
+      "linkedin": "https://www.linkedin.com/in/durgaprasad-arsoju-81255b23a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "aishwarya",
+      "name": "Aishwarya Alechalla",
+      "image": "team_pics/aishwarya.webp",
+      "role": "President",
+      "linkedin": " https://www.linkedin.com/in/aishwaryaalechalla?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "eshwar",
+      "name": "Eshwar",
+      "image": "team_pics/eshwar.webp",
+      "role": "Vice President",
+      "linkedin": "https://www.linkedin.com/in/karne-eshwar-35a29026a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "sandhya",
+      "name": "Sandhya",
+      "image": "team_pics/sandhya.webp",
+      "role": "General Secretary"
+    },
+    {
+      "id": "ankitha",
+      "name": "Ankitha",
+      "image": "team_pics/ankitha.webp",
+      "role": "Joint Secretary",
+      "linkedin": "https://www.linkedin.com/in/ankitha-manupati-6688bb250?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "kaif",
+      "name": "Kaif Shaik",
+      "image": "team_pics/kaif.webp",
+      "role": "Treasurer",
+      "linkedin": "https://www.linkedin.com/in/kaif-shaik-185b90268?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "vignesh",
+      "name": "Vigneshwar",
+      "image": "team_pics/vignesh.webp",
+      "role": "Organising Lead",
+      "linkedin": "https://www.linkedin.com/in/vigneshwar-e-96964b213?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "eshika",
+      "name": "Eshika",
+      "image": "team_pics/eshika.webp",
+      "role": "Senior Executive Board",
+      "linkedin": "https://www.linkedin.com/in/sunaga-eshika-kakuturu-0b7ba4237?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BYeZMaXJ3RfutS3G3e16New%3D%3D"
+    },
+    {
+      "id": "bindu",
+      "name": "Bindu Priya",
+      "image": "team_pics/bindu.webp",
+      "role": "Senior Executive Board",
+      "linkedin": "https://www.linkedin.com/in/sunaga-eshika-kakuturu-0b7ba4237?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BYeZMaXJ3RfutS3G3e16New%3D%3D"
+    },
+    {
+      "id": "raaga",
+      "name": "Raaga Samanvitha",
+      "image": "team_pics/raaga.webp",
+      "role": "Ethics & Operations Head",
+      "linkedin": "https://www.linkedin.com/in/burra-raaga-samanvita"
+    },
+    {
+      "id": "vaishnavi_v",
+      "name": "Vaishnavi V",
+      "image": "team_pics/vaishnavi_v.webp",
+      "role": "Sustainable Operations Head",
+      "linkedin": "https://www.linkedin.com/in/vaishnavi-tella-b07b30287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "jerusha",
+      "name": "Jerusha",
+      "image": "team_pics/jerusha.webp",
+      "role": "Alumni Relations"
+    },
+    {
+      "id": "srujan",
+      "name": "Srujan M",
+      "image": "team_pics/srujan.webp",
+      "role": "Research And Development Team Head",
+      "linkedin": "https://www.linkedin.com/in/malluri-srujan "
+    },
+    {
+      "id": "amrutha",
+      "name": "Amrutha Sri",
+      "image": "team_pics/amrutha.webp",
+      "role": "Technical Team Head",
+      "linkedin": "https://www.linkedin.com/in/amrutha-sri-pinapaka-a23b32229"
+    },
+    {
+      "id": "poornima",
+      "name": "Poornima Guda",
+      "image": "team_pics/poornima.webp",
+      "role": "Design Team Head",
+      "linkedin": "https://www.linkedin.com/in/guda-poornima-5a7495252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "sailaja",
+      "name": "Sailaja",
+      "image": "/team_pics/sailaja.webp"
+    },
+    {
+      "id": "akshitha",
+      "name": "Akshitha T",
+      "image": "team_pics/akshitha.webp",
+      "role": "Marketing Team Head",
+      "linkedin": "https://www.linkedin.com/in/tirmal-akshitha-7b6954264?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "sonal",
+      "name": "Sonal G",
+      "image": "team_pics/sonal.webp",
+      "role": "Content Team Head",
+      "linkedin": "https://www.linkedin.com/in/sonal-gramopadhye-122094320/"
+    },
+    {
+      "id": "Rachitha",
+      "name": "Rachitha",
+      "image": "/team_pics/Rachitha.webp",
+      "linkedin": "https://www.linkedin.com/in/gade-rachitha-3642ab299?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "shyamala",
+      "name": "Shyamala",
+      "image": "team_pics/shyamala.webp",
+      "role": "Public Relations Team Head",
+      "linkedin": "https://www.linkedin.com/in/katikitala-shyamala-4bbb30265?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "abhay",
+      "name": "Abhay",
+      "image": "team_pics/abhay.webp",
+      "role": "Social Media Team Head",
+      "linkedin": "https://www.linkedin.com/in/abhay-ramagiri?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    }
+  ],
+  "teams": [
+    {
+      "id": "t1",
+      "teamName": "Executive Board",
+      "leads": [],
+      "members": [
+        "sukruth",
+        "thanughana",
+        "jahnavi",
+        "sumad",
+        "sri_charan",
+        "ayesha",
+        "agrathi",
+        "pranav",
+        "shiva",
+        "sreeja_p",
+        "uma",
+        "vyshali"
+      ]
+    },
+    {
+      "id": "t2",
+      "teamName": "Research And Development Team",
+      "leads": [
+        "anji"
+      ],
+      "members": [
+        "prasanna",
+        "Gsaketh",
+        "greshmi",
+        "chinmai",
+        "sruthi"
+      ]
+    },
+    {
+      "id": "t3",
+      "teamName": "Content Team",
+      "leads": [
+        "rekha",
+        "cecilia"
+      ],
+      "members": [
+        "nakshatra",
+        "yashaswini",
+        "noel"
+      ]
+    },
+    {
+      "id": "t4",
+      "teamName": "Technical Team",
+      "leads": [
+        "pavan"
+      ],
+      "members": [
+        "deekshitha",
+        "sriya",
+        "yagnesh",
+        "sneha",
+        "siddu"
+      ]
+    },
+    {
+      "id": "t5",
+      "teamName": "Design Team",
+      "leads": [
+        "vaishnavi",
+        "kavya_sri"
+      ],
+      "members": [
+        "vamshi_design",
+        "pranathi",
+        "anwesha",
+        "harshita",
+        "vijaya",
+        "pradeepa"
+      ]
+    },
+    {
+      "id": "t6",
+      "teamName": "Social Media Team",
+      "leads": [
+        "akhil"
+      ],
+      "members": [
+        "siriChandana",
+        "JR_abhiram",
+        "sayyad",
+        "lakshyatha",
+        "shiva_vardhan",
+        "rajith",
+        "neeraj"
+      ]
+    },
+    {
+      "id": "t7",
+      "teamName": "Public Relations Team",
+      "leads": [
+        "abhiram"
+      ],
+      "members": [
+        "chetana",
+        "rishi",
+        "PRsaketh",
+        "neel",
+        "theerdha",
+        "trisha"
+      ]
+    },
+    {
+      "id": "t8",
+      "teamName": "Marketing Team",
+      "leads": [
+        "ram"
+      ],
+      "members": [
+        "amulya",
+        "JR_aishwarya",
+        "dharun",
+        "Srivarsha",
+        "Ashritha",
+        "durga"
+      ]
+    }
+  ],
+  "facultyCoordinators": [
+    {
+      "name": "Dr.Narendar Singh",
+      "role": "Faculty Coordinator",
+      "image": "/team_pics/ns_sir.webp",
+      "linkedin": "https://www.linkedin.com/in/dr-narendhar-singh-ba7188178/"
+    }
+  ],
+  "facultyTitle": "Faculty Coordinator"
+}

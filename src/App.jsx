@@ -14,6 +14,7 @@ const Team = lazy(() => import('./pages/Team'));
 const Contact = lazy(() => import('./pages/Contact'));
 const AUNSF = lazy(() => import('./pages/AUNSF'));
 const EPICS = lazy(() => import('./pages/EPICS'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 const Aunsf1 = lazy(() => import('./pages/Aunsf1'));
 const Aunsf2 = lazy(() => import('./pages/Aunsf2'));
@@ -50,6 +51,7 @@ function AppContent() {
           <Route path="/aunsf-3" element={<Aunsf3 />} />
           <Route path="/aunsf-4" element={<Aunsf4 />} />
           <Route path="/epics" element={<EPICS />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </Layout>
 
