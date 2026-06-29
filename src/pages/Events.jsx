@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Calendar, MapPin, Clock, Users, ArrowRight, CalendarClock, ChevronDown } from 'lucide-react';
 import { events } from '../data/events';
@@ -322,6 +323,24 @@ const Events = () => {
           </div>
         </div>
       </div>
+
+      {/* Temporary AUNSF4 Button */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="pb-16 flex flex-col items-center"
+      >
+        <Link to="/register">
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
+            whileTap={{ scale: 0.95 }}
+            className="px-10 py-5 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] hover:from-[#c23d20] hover:to-[#e04c2a] text-white font-extrabold rounded-2xl shadow-xl transition-all duration-300 flex items-center gap-3 text-lg cursor-pointer"
+          >
+            🚀 Register for AUNSF4
+          </motion.button>
+        </Link>
+      </motion.div>
 
       {/* Image Modal */}
       <ImageModal 
