@@ -34,7 +34,7 @@ const Team = () => {
   }, []);
 
   const scrollToTeam = (teamId) => {
-    const element = document.getElementById(teamId);
+    const element = document.getElementById(element => element.id === teamId) || document.getElementById(teamId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
