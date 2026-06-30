@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 // REPLACE THIS STRING WITH YOUR LIVE DEPLOYED WEB APP URL
-const BACKEND_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycby5bz0GI20VxLh_FQOESgzX9V1N54KaPxHuDKlSZT_uu7rswK8QfU0gbxW4k3BSCfqpXQ/exec";
 
 const Register = () => {
   const [formData, setFormData] = useState({
