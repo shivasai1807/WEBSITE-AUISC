@@ -376,14 +376,12 @@ const Header = () => {
                   className="mt-8"
                 >
 
-                  <a
-                    href="https://linktr.ee/aunsf"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    to="/register"
                     className="block w-full text-center py-4 rounded-2xl bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white font-bold shadow-lg hover:scale-[1.02] hover:shadow-xl transition-all duration-300"
                   >
                     Register Now
-                  </a>
+                  </Link>
 
                 </motion.div>
               </div>

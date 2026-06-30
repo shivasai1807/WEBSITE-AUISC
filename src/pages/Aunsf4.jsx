@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Aunsf4 = () => {
   return (
@@ -106,6 +107,25 @@ const Aunsf4 = () => {
             >
               AUNSF 4.0 is on the way!
             </motion.h2>
+
+            {/* Centered CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="mt-6 mb-8 flex justify-center"
+            >
+              <Link to="/register">
+                <motion.button
+                  whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-4 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] hover:from-[#c23d20] hover:to-[#e04c2a] text-white font-extrabold rounded-2xl shadow-xl transition-all duration-300 flex items-center gap-3 text-lg cursor-pointer select-none"
+                >
+                  🚀 Register for AUNSF 4.0
+                </motion.button>
+              </Link>
+            </motion.div>
 
             {/* Description */}
             <motion.p
