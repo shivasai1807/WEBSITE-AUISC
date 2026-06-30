@@ -17,13 +17,12 @@ const Register = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileLabel, setFileLabel] = useState("Click or Drag to upload payment screenshot");
   const [submittingState, setSubmittingState] = useState(false);
-  const [viewStateMode, setViewStateMode] = useState("form"); // Options: "form" or "success"
+  const [viewStateMode, setViewStateMode] = useState("form");
   const [systemAlertMessage, setSystemAlertMessage] = useState({ visible: false, text: "" });
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const dropdownRef = useRef(null);
 
-  // Close custom dropdown safely if clicking anywhere outside the component canvas
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -143,7 +142,6 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 flex items-center justify-center p-4 md:p-8 antialiased selection:bg-blue-500/10 font-['Plus_Jakarta_Sans',sans-serif]">
 
-      {/* FIXED: Replaced standard HTML comments with valid JSX comment brackets */}
       <div className="relative w-full max-w-2xl bg-white border border-slate-200/80 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] rounded-3xl p-6 md:p-10 overflow-hidden transition-all duration-500">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-gradient-to-b from-blue-500/5 to-transparent blur-2xl pointer-events-none rounded-full"></div>
 
@@ -183,7 +181,6 @@ const Register = () => {
                   <label htmlFor="college" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Institution / College *</label>
                   <input type="text" id="college" required value={formData.college} onChange={handleTextValueChange} placeholder="e.g., ANURAG UNI" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase" />
                 </div>
-                {/* FIXED: Replaced standard 'class' syntax attributes with 'className' throughout form rows */}
                 <div className="md:col-span-3 space-y-1">
                   <label htmlFor="branch" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Branch *</label>
                   <input type="text" id="branch" required value={formData.branch} onChange={handleTextValueChange} placeholder="e.g., CSE" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase" />
@@ -238,24 +235,20 @@ const Register = () => {
             </form>
           </div>
         ) : (
-          <div className="text-center py-8 space-y-6 opacity-100 transform scale-100 transition-all duration-500">
-            <div className="mx-auto w-16 h-16 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center shadow-md shadow-emerald-500/5">
-              <span className="text-emerald-500 text-2xl font-black">✓</span>
+          /* REFIXED SUCCESS VIEW: Clean, ultra-minimal, premium statement */
+          <div className="text-center py-12 space-y-6">
+            <div className="mx-auto w-14 h-16 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center shadow-sm shadow-emerald-500/5">
+              <span class="text-emerald-500 text-2xl font-black">✓</span>
             </div>
-            <div className="space-y-1">
-              <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">Submission Received Successfully</h2>
-              <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest select-none">Secure Transaction Logged</p>
+            <div className="space-y-2">
+              <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">Submitted Successfully!</h2>
+              <p className="text-sm font-medium text-slate-500 max-w-sm mx-auto">Your registration status and other details will be sent to your email id shortly.</p>
             </div>
-            <div className="max-w-md mx-auto bg-slate-50 rounded-2xl p-6 border border-slate-200/60 text-left space-y-4 text-xs font-medium leading-relaxed text-slate-600">
-              <p>Thank you for completing your application. Your documentation, profile parameters, and UPI transaction reference number logs have been securely written to our registry infrastructure.</p>
-              <div className="p-4 bg-white border border-slate-200 rounded-xl space-y-1.5 shadow-sm">
-                <div className="text-[10px] text-indigo-600 font-black uppercase tracking-wider">Next Step Operations</div>
-                <p className="text-slate-500 leading-normal">Our audit committee is verifying your payment. Once cleared, your confirmed entry pass credentials and QR barcode scanner ticket will be automatically dispatched to your email address.</p>
-              </div>
+            <div className="pt-4">
+              <button onClick={triggerStateViewReset} className="bg-white hover:bg-slate-50 text-slate-500 font-bold text-xs py-3 px-6 rounded-xl transition border border-slate-200 cursor-pointer shadow-sm">
+                Lodge Another Registration
+              </button>
             </div>
-            <button onClick={triggerStateViewReset} className="mt-4 bg-white hover:bg-slate-50 text-slate-500 font-bold text-xs py-3 px-6 rounded-xl transition border border-slate-200 cursor-pointer shadow-sm">
-              ↩ Lodge Another Registration
-            </button>
           </div>
         )}
       </div>
