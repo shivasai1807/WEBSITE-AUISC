@@ -22,6 +22,8 @@ const Register = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const dropdownRef = useRef(null);
+  // Reference anchor link to pull attention up to active message states
+  const alertContainerRef = useRef(null);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -32,6 +34,16 @@ const Register = () => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
+
+  // Monitor alert visibility to immediately slide the user view smoothly to the message panel
+  useEffect(() => {
+    if (systemAlertMessage.visible && alertContainerRef.current) {
+      alertContainerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+  }, [systemAlertMessage]);
 
   const handleTextValueChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -140,31 +152,33 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 flex items-center justify-center p-4 md:p-8 antialiased selection:bg-blue-500/10 font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 flex items-center justify-center p-3 sm:p-4 md:p-8 antialiased selection:bg-blue-500/10 font-['Plus_Jakarta_Sans',sans-serif] w-full box-border">
 
-      <div className="relative w-full max-w-2xl bg-white border border-slate-200/80 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] rounded-3xl p-6 md:p-10 overflow-hidden transition-all duration-500">
+      <div className="relative w-full max-w-2xl bg-white border border-slate-200/80 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] rounded-3xl p-5 sm:p-6 md:p-10 overflow-hidden transition-all duration-500 my-4">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-gradient-to-b from-blue-500/5 to-transparent blur-2xl pointer-events-none rounded-full"></div>
 
         {viewStateMode === "form" ? (
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             <div className="text-center space-y-2">
-              <div className="inline-flex px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-[10px] uppercase tracking-widest font-extrabold text-blue-600">AUNSF Event Platform</div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Event Access Registration</h1>
-              <p className="text-slate-500 text-sm max-w-md mx-auto">Provide your accurate educational profile data and transaction indicators below to secure your entry pass credentials.</p>
+              <div className="inline-flex px-3 py-1 bg-blue-50/80 border border-blue-200 rounded-full text-[10px] uppercase tracking-widest font-extrabold text-blue-600">AUNSF Event Platform</div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 px-1">Event Access Registration</h1>
+              <p className="text-slate-500 text-xs sm:text-sm max-w-md mx-auto px-2">Provide your accurate educational profile data and transaction indicators below to secure your entry pass credentials.</p>
             </div>
 
+            {/* ERROR ALIGNMENT FIX: Dynamic viewport tracking container */}
             {systemAlertMessage.visible && (
-              <div className="p-4 bg-rose-50 text-rose-700 border border-rose-200 rounded-xl text-xs font-semibold transition-all duration-300">
+              <div ref={alertContainerRef} className="p-4 bg-rose-50 text-rose-700 border border-rose-200 rounded-xl text-xs font-semibold transition-all duration-300 scroll-mt-6">
                 {systemAlertMessage.text}
               </div>
             )}
 
-            <form onSubmit={handleFormSubmissionEvent} className="space-y-6">
+            <form onSubmit={handleFormSubmissionEvent} className="space-y-5 sm:space-y-6">
               <div className="space-y-1">
                 <label htmlFor="fullName" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Full Name *</label>
                 <input type="text" id="fullName" required value={formData.fullName} onChange={handleTextValueChange} placeholder="Enter full legal name" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition" />
               </div>
 
+              {/* MOBILE LAYOUT FIX: Grid structures break into stacks automatically on small viewports */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label htmlFor="email" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address *</label>
@@ -176,21 +190,22 @@ const Register = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                <div className="md:col-span-5 space-y-1">
+              {/* MOBILE LAYOUT FIX: Column configurations safely scale across break tiers */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
+                <div className="sm:col-span-1 md:col-span-5 space-y-1">
                   <label htmlFor="college" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Institution / College *</label>
                   <input type="text" id="college" required value={formData.college} onChange={handleTextValueChange} placeholder="e.g., ANURAG UNI" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase" />
                 </div>
-                <div className="md:col-span-3 space-y-1">
+                <div className="sm:col-span-1 md:col-span-3 space-y-1">
                   <label htmlFor="branch" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Branch *</label>
                   <input type="text" id="branch" required value={formData.branch} onChange={handleTextValueChange} placeholder="e.g., CSE" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase" />
                 </div>
 
-                <div className="md:col-span-4 space-y-1 relative" ref={dropdownRef}>
+                <div className="sm:col-span-2 md:col-span-4 space-y-1 relative" ref={dropdownRef}>
                   <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Academic Cohort Year *</label>
                   <div className="relative w-full">
-                    <button type="button" onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer min-w-[175px]">
-                      <span className={`truncate block max-w-[135px] whitespace-nowrap ${formData.year ? "text-slate-950 font-extrabold" : ""}`}>{getDropdownLabelText()}</span>
+                    <button type="button" onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer min-w-full sm:min-w-[175px]">
+                      <span className={`truncate block max-w-[180px] whitespace-nowrap ${formData.year ? "text-slate-950 font-extrabold" : ""}`}>{getDropdownLabelText()}</span>
                       <svg className={`w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1 ${dropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
                       </svg>
@@ -208,9 +223,9 @@ const Register = () => {
                 </div>
               </div>
 
-              <hr className="border-slate-100 my-6" />
+              <hr className="border-slate-100 my-4" />
 
-              <div className="bg-slate-50/60 p-5 rounded-2xl border border-slate-200/60 space-y-4">
+              <div className="bg-slate-50/60 p-4 sm:p-5 rounded-2xl border border-slate-200/60 space-y-4">
                 <div className="text-xs font-black text-blue-600 uppercase tracking-widest flex items-center gap-1.5 select-none">💳 Audit & Remittance Verification</div>
                 <div className="space-y-1">
                   <label htmlFor="utr" className="block text-[10px] font-black text-slate-400 uppercase tracking-wider">UPI / Banking Transaction UTR Reference Number *</label>
@@ -218,10 +233,10 @@ const Register = () => {
                 </div>
                 <div className="space-y-1.5">
                   <label className="block text-[10px] font-black text-slate-400 uppercase tracking-wider">Upload Remittance Receipt Screenshot *</label>
-                  <div className="relative flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-xl p-5 hover:border-slate-300 transition cursor-pointer">
+                  <div className="relative flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-xl p-4 sm:p-5 hover:border-slate-300 transition cursor-pointer">
                     <input type="file" id="screenshotInput" accept="image/png, image/jpeg, image/jpg" required onChange={handleFileUploadStream} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                    <div className="text-center space-y-1">
-                      <p className="text-xs font-semibold text-slate-500">{fileLabel}</p>
+                    <div className="text-center space-y-1 px-2">
+                      <p className="text-xs font-semibold text-slate-500 break-all">{fileLabel}</p>
                       <p className="text-[10px] text-slate-400 uppercase tracking-wide">PNG, JPG, or JPEG up to 4MB</p>
                     </div>
                   </div>
@@ -235,18 +250,17 @@ const Register = () => {
             </form>
           </div>
         ) : (
-          /* REFIXED SUCCESS VIEW: Clean, ultra-minimal, premium statement */
           <div className="text-center py-12 space-y-6">
             <div className="mx-auto w-14 h-16 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center shadow-sm shadow-emerald-500/5">
-              <span class="text-emerald-500 text-2xl font-black">✓</span>
+              <span className="text-emerald-500 text-2xl font-black">✓</span>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 px-2">
               <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">Submitted Successfully!</h2>
-              <p className="text-sm font-medium text-slate-500 max-w-sm mx-auto">Your registration status and other details will be sent to your email id shortly.</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-500 max-w-sm mx-auto">Your registration status and other details will be sent to your email id shortly.</p>
             </div>
             <div className="pt-4">
               <button onClick={triggerStateViewReset} className="bg-white hover:bg-slate-50 text-slate-500 font-bold text-xs py-3 px-6 rounded-xl transition border border-slate-200 cursor-pointer shadow-sm">
-                Lodge Another Registration
+                ↩ Lodge Another Registration
               </button>
             </div>
           </div>
