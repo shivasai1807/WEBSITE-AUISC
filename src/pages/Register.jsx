@@ -229,7 +229,7 @@ const Register = () => {
               </div>
 
               <button type="submit" disabled={submittingState} className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm py-4 px-6 rounded-xl shadow-lg shadow-blue-600/10 transition-all duration-200 tracking-wide cursor-pointer flex items-center justify-center gap-2 group">
-                <span>{submittingState ? "Encrypting Data & Syncing Ledger..." : "Submit Registration Portfolio"}</span>
+                <span>{submittingState ? "Encrypting Data & Submitting..." : "Submit Registration "}</span>
                 <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </button>
             </form>
