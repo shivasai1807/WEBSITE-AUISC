@@ -6,160 +6,353 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AUNSF Event Registration</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800 min-h-screen flex items-center justify-center p-4 md:p-8">
+<body
+  class="bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 min-h-screen flex items-center justify-center p-4 md:p-8 antialiased selection:bg-blue-500/10">
 
-  <div class="bg-white shadow-xl rounded-2xl max-w-2xl w-full p-6 md:p-10 border border-slate-100">
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">TEST Event Registration</h1>
-      <p class="text-slate-500 mt-2">Please complete the form below to secure your spot.</p>
+  <div
+    class="relative w-full max-w-2xl bg-white border border-slate-200/80 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] rounded-3xl p-6 md:p-10 overflow-hidden transition-all duration-500">
+
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-gradient-to-b from-blue-500/5 to-transparent blur-2xl pointer-events-none rounded-full">
     </div>
 
-    <form id="registrationForm" class="space-y-6">
-
-      <div>
-        <label for="fullName" class="block text-sm font-semibold text-slate-700 mb-1">Full Name *</label>
-        <input type="text" id="fullName" required placeholder="John Doe"
-          class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+    <div id="formStateView" class="space-y-8 block">
+      <div class="text-center space-y-2">
+        <div
+          class="inline-flex px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-[10px] uppercase tracking-widest font-extrabold text-blue-600">
+          AUNSF Event Platform</div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Event Access Registration</h1>
+        <p class="text-slate-500 text-sm max-w-md mx-auto">Provide your accurate educational profile data and
+          transaction indicators below to secure your entry pass credentials.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label for="email" class="block text-sm font-semibold text-slate-700 mb-1">Email Address *</label>
-          <input type="email" id="email" required placeholder="you@college.edu"
-            class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+      <div id="formAlertBlock" class="hidden p-4 rounded-xl text-xs font-semibold border transition-all duration-300">
+        <p id="formAlertMessageText"></p>
+      </div>
+
+      <form id="registrationForm" class="space-y-6">
+        <div class="space-y-1">
+          <label for="fullName" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Full Name
+            *</label>
+          <input type="text" id="fullName" required placeholder="Enter full legal name"
+            class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
         </div>
-        <div>
-          <label for="phone" class="block text-sm font-semibold text-slate-700 mb-1">Phone Number *</label>
-          <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="10-digit mobile number"
-            class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-1">
+            <label id="emailLabel" for="email"
+              class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address *</label>
+            <input type="email" id="email" required placeholder="name@domain.com"
+              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
+          </div>
+          <div class="space-y-1">
+            <label id="phoneLabel" for="phone"
+              class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number *</label>
+            <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="10-digit mobile number"
+              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div class="md:col-span-5 space-y-1">
+            <label for="college" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Institution /
+              College *</label>
+            <input type="text" id="college" required placeholder="e.g., ANURAG UNI"
+              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase">
+          </div>
+          <div class="md:col-span-3 space-y-1">
+            <label for="branch" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Branch *</label>
+            <input type="text" id="branch" required placeholder="e.g., CSE"
+              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase">
+          </div>
+
+          <div class="md:col-span-4 space-y-1 relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Academic Cohort Year
+              *</label>
+            <div class="relative w-full">
+              <button type="button" id="customDropdownTriggerBtn"
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer min-w-[175px]">
+                <span id="customDropdownLabel" class="truncate block max-w-[135px] whitespace-nowrap">Select Batch
+                  Year</span>
+                <svg class="w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1"
+                  id="dropdownArrowIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div id="customDropdownMenuDeck"
+                class="hidden absolute left-0 z-50 w-full mt-2 bg-white/95 backdrop-blur-md border border-slate-200/80 rounded-2xl shadow-xl overflow-hidden py-1 transform scale-95 opacity-0 transition-all duration-200 origin-top">
+                <div data-value="1"
+                  class="dropdown-option px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">
+                  1st Year (Freshman)</div>
+                <div data-value="2"
+                  class="dropdown-option px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">
+                  2nd Year (Sophomore)</div>
+                <div data-value="3"
+                  class="dropdown-option px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">
+                  3rd Year (Junior)</div>
+                <div data-value="4"
+                  class="dropdown-option px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">
+                  4th Year (Senior)</div>
+              </div>
+            </div>
+            <input type="hidden" id="year" required>
+          </div>
+        </div>
+
+        <hr class="border-slate-100 my-6">
+
+        <div class="bg-slate-50/60 p-5 rounded-2xl border border-slate-200/60 space-y-4">
+          <div class="text-xs font-black text-blue-600 uppercase tracking-widest flex items-center gap-1.5 select-none">
+            💳 Audit & Remittance Verification
+          </div>
+
+          <div class="space-y-1">
+            <label for="utrField" class="block text-[10px] font-black text-slate-400 uppercase tracking-wider">UPI /
+              Banking Transaction UTR Reference Number *</label>
+            <input type="text" id="utrField" required placeholder="Enter 12-digit UTR verification code"
+              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition uppercase mono tracking-wider">
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider">Upload Remittance
+              Receipt Screenshot *</label>
+            <div
+              class="relative group flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-xl p-5 transition-all hover:border-slate-300 cursor-pointer">
+              <input type="file" id="screenshotInput" accept="image/png, image/jpeg, image/jpg" required
+                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+              <div class="text-center space-y-1 pointer-events-none">
+                <p id="fileLabelText" class="text-xs font-semibold text-slate-500">Click or Drag to upload payment
+                  screenshot</p>
+                <p class="text-[10px] text-slate-400 uppercase tracking-wide">Accepts high-res PNG, JPG, or JPEG up to
+                  4MB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn"
+          class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm py-4 px-6 rounded-xl shadow-lg shadow-blue-600/10 transition-all duration-200 tracking-wide cursor-pointer flex items-center justify-center gap-2 group">
+          <span id="btnText">Submit Registration Portfolio</span>
+          <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        </button>
+
+      </form>
+    </div>
+
+    <div id="successStateView"
+      class="hidden text-center py-8 space-y-6 opacity-0 transition-all duration-500 transform scale-95">
+
+      <div
+        class="mx-auto w-16 h-16 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center shadow-md shadow-emerald-500/5">
+        <span class="text-emerald-500 text-2xl font-black">✓</span>
+      </div>
+
+      <div class="space-y-1">
+        <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">Submission Received Successfully</h2>
+        <p class="text-xs font-bold text-emerald-600 uppercase tracking-widest select-none">Secure Transaction Logged
+        </p>
+      </div>
+
+      <div
+        class="max-w-md mx-auto bg-slate-50 rounded-2xl p-6 border border-slate-200/60 text-left space-y-4 text-xs font-medium leading-relaxed text-slate-600">
+        <p>Thank you for completing your application[cite: 65]. Your documentation, profile parameters, and UPI
+          transaction reference number logs have been securely written to our registry infrastructure[cite: 76].</p>
+
+        <div class="p-4 bg-white border border-slate-200 rounded-xl space-y-1.5 shadow-sm">
+          <div class="text-[10px] text-indigo-600 font-black uppercase tracking-wider">Next Step Operations</div>
+          <p class="text-slate-500 leading-normal">Our audit committee is verifying your payment[cite: 78]. Once
+            cleared, your confirmed entry pass credentials and QR barcode scanner ticket will be automatically
+            dispatched to your email address[cite: 135].</p>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <label for="college" class="block text-sm font-semibold text-slate-700 mb-1">College *</label>
-          <input type="text" id="college" required placeholder="Engineering College"
-            class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-        </div>
-        <div>
-          <label for="branch" class="block text-sm font-semibold text-slate-700 mb-1">Branch *</label>
-          <input type="text" id="branch" required placeholder="CSE, ECE, etc."
-            class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-        </div>
-        <div>
-          <label for="year" class="block text-sm font-semibold text-slate-700 mb-1">Year *</label>
-          <select id="year" required
-            class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-            <option value="" disabled selected>Select Year</option>
-            <option value="1">1st Year</option>
-            <option value="2">2nd Year</option>
-            <option value="3">3rd Year</option>
-            <option value="4">4th Year</option>
-          </select>
-        </div>
+      <div class="pt-4 max-w-xs mx-auto">
+        <button onclick="resetRegistrationFormState()"
+          class="w-full bg-white hover:bg-slate-50 text-slate-500 font-bold text-xs py-3 px-4 rounded-xl transition border border-slate-200 cursor-pointer shadow-sm">
+          Lodge Another Registration
+        </button>
       </div>
 
-      <hr class="border-slate-100 my-6">
+    </div>
 
-      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/60 space-y-4">
-        <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Payment Details</h3>
-
-        <div>
-          <label for="utrField" class="block text-sm font-semibold text-slate-700 mb-1">UTR / Ref Number *</label>
-          <input type="text" id="utrField" required placeholder="Enter 12-digit UTR Ref No."
-            class="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-        </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-1">Upload Payment Screenshot *</label>
-          <input type="file" id="screenshotInput" accept="image/png, image/jpeg, image/jpg" required
-            class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
-          <p class="text-xs text-slate-400 mt-1">Accepts PNG, JPG, or JPEG up to 4MB.</p>
-        </div>
-      </div>
-
-      <button type="submit" id="submitBtn"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition flex items-center justify-center cursor-pointer">
-        <span id="btnText">Submit Registration</span>
-      </button>
-
-    </form>
   </div>
 
   <script>
-    // REPLACE THIS STRING WITH YOUR LIVE DEPLOYED WEB APP URL
-    const BACKEND_URL = "https://script.google.com/macros/s/AKfycby5bz0GI20VxLh_FQOESgzX9V1N54KaPxHuDKlSZT_uu7rswK8QfU0gbxW4k3BSCfqpXQ/exec";
+    const BACKEND_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 
     const form = document.getElementById('registrationForm');
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
+    const screenshotInput = document.getElementById('screenshotInput');
+    const fileLabelText = document.getElementById('fileLabelText');
+
+    const formStateView = document.getElementById('formStateView');
+    const successStateView = document.getElementById('successStateView');
+    const formAlertBlock = document.getElementById('formAlertBlock');
+    const formAlertText = document.getElementById('formAlertMessageText');
+
+    const dropdownBtn = document.getElementById('customDropdownTriggerBtn');
+    const dropdownMenu = document.getElementById('customDropdownMenuDeck');
+    const dropdownArrow = document.getElementById('dropdownArrowIcon');
+    const hiddenYearInput = document.getElementById('year');
+    const dropdownLabel = document.getElementById('customDropdownLabel');
+
+    dropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !dropdownMenu.classList.contains('hidden');
+      if (isOpen) {
+        closeCustomDropdownMenu();
+      } else {
+        dropdownMenu.classList.remove('hidden');
+        dropdownArrow.classList.add('rotate-180');
+        setTimeout(() => {
+          dropdownMenu.classList.remove('scale-95', 'opacity-0');
+          dropdownMenu.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      }
+    });
+
+    document.querySelectorAll('.dropdown-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        const val = e.target.getAttribute('data-value');
+        hiddenYearInput.value = val;
+        dropdownLabel.innerText = e.target.innerText;
+        dropdownLabel.classList.add('text-slate-950', 'font-extrabold');
+        closeCustomDropdownMenu();
+      });
+    });
+
+    document.addEventListener('click', closeCustomDropdownMenu);
+
+    function closeCustomDropdownMenu() {
+      dropdownMenu.classList.remove('scale-100', 'opacity-100');
+      dropdownMenu.classList.add('scale-95', 'opacity-0');
+      dropdownArrow.classList.remove('rotate-180');
+      setTimeout(() => { dropdownMenu.classList.add('hidden'); }, 150);
+    }
+
+    screenshotInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        if (file.size > 4 * 1024 * 1024) {
+          triggerInLineAlert("File bounds exceeded: Selection is larger than the 4MB ceiling limit.", "error");
+          screenshotInput.value = "";
+          fileLabelText.innerText = "Click or Drag to upload payment screenshot";
+          return;
+        }
+        fileLabelText.innerText = `📎 Attached: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+        formAlertBlock.classList.add('hidden');
+      }
+    });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      formAlertBlock.classList.add('hidden');
 
-      const fileInput = document.getElementById('screenshotInput');
-      const file = fileInput.files[0];
-      if (file && file.size > 4 * 1024 * 1024) {
-        alert("File size is too large! Please upload a screenshot under 4MB.");
+      if (!hiddenYearInput.value) {
+        triggerInLineAlert("Form validation error: Academic cohort year selection is required.", "error");
         return;
       }
 
-      // Set UI loading states
+      const file = screenshotInput.files[0];
+      if (!file) {
+        triggerInLineAlert("Form validation error: Remittance screenshot is required.", "error");
+        return;
+      }
+
       submitBtn.disabled = true;
       submitBtn.classList.add('opacity-60', 'cursor-not-allowed');
-      btnText.innerText = "Processing Details & Uploading...";
+      btnText.innerText = "Encrypting Data & Syncing Ledger...";
 
       try {
-        const base64Image = await toBase64(file);
+        const convertedBase64String = await parseFileToBase64(file);
 
-        // Form bundle mapping directly to the script API variables
-        const payload = {
+        const payloadBundle = {
           fullName: document.getElementById('fullName').value,
           email: document.getElementById('email').value,
           phone: document.getElementById('phone').value,
           college: document.getElementById('college').value,
           branch: document.getElementById('branch').value,
-          year: document.getElementById('year').value,
-          utr: document.getElementById('utrField').value, // Completely updated to utr
-          imageBase64: base64Image,
+          year: hiddenYearInput.value,
+          utr: document.getElementById('utrField').value,
+          imageBase64: convertedBase64String,
           imageType: file.type
         };
 
         const response = await fetch(BACKEND_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
-          body: JSON.stringify(payload)
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payloadBundle)
         });
 
         const result = await response.json();
 
         if (result.status === 'success') {
-          alert("Registration submitted successfully! Your submission is pending payment verification.");
-          form.reset();
+          formStateView.classList.add('hidden');
+          successStateView.classList.remove('hidden');
+          setTimeout(() => {
+            successStateView.classList.remove('scale-95', 'opacity-0');
+            successStateView.classList.add('scale-100', 'opacity-100');
+          }, 50);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-          // Remedy 1: Capture and display the clean duplicate error message
-          alert("Submission Blocked: " + result.message);
+          triggerInLineAlert(`Submission Denied: ${result.message}`, "error");
         }
 
       } catch (error) {
-        console.error("Transmission Error:", error);
-        alert("Network Error: If you are encountering errors or resubmitting a corrected entry, do not create a new form. Please contact the organizing committee.");
+        console.error(error);
+        triggerInLineAlert("Network Connectivity Error: Failed to secure database stream connection.", "error");
       } finally {
         submitBtn.disabled = false;
         submitBtn.classList.remove('opacity-60', 'cursor-not-allowed');
-        btnText.innerText = "Submit Registration";
+        btnText.innerText = "Submit Registration Portfolio";
       }
     });
 
-    const toBase64 = file => new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
+    function triggerInLineAlert(message, type) {
+      formAlertBlock.classList.remove('hidden', 'bg-rose-50', 'text-rose-700', 'border-rose-200');
+      if (type === "error") {
+        formAlertBlock.classList.add('bg-rose-50', 'text-rose-700', 'border-rose-200');
+      }
+      formAlertText.innerText = message;
+      formAlertBlock.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function resetRegistrationFormState() {
+      form.reset();
+      hiddenYearInput.value = "";
+      dropdownLabel.innerText = "Select Batch Year";
+      dropdownLabel.className = "text-slate-700 font-normal";
+      fileLabelText.innerText = "Click or Drag to upload payment screenshot";
+      formAlertBlock.classList.add('hidden');
+
+      successStateView.classList.add('scale-95', 'opacity-0', 'hidden');
+      formStateView.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const parseFileToBase64 = file => new Promise((resolve, reject) => {
+      const targetFileReader = new FileReader();
+      targetFileReader.readAsDataURL(file);
+      targetFileReader.onload = () => resolve(targetFileReader.result);
+      targetFileReader.onerror = err => reject(err);
     });
   </script>
 </body>
