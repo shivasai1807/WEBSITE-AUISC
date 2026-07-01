@@ -23,7 +23,7 @@
 </head>
 
 <body
-  class="bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-8 antialiased selection:bg-blue-500/10 w-full box-border">
+  class="bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-8 antialiased selection:bg-blue-500/10 w-full box-border font-medium">
 
   <div
     class="relative w-full max-w-2xl bg-white border border-slate-200/80 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] rounded-3xl p-5 sm:p-6 md:p-10 overflow-hidden transition-all duration-500 my-4">
@@ -34,7 +34,7 @@
     <div id="formStateView" class="space-y-6 md:space-y-8 block">
       <div class="text-center space-y-2">
         <div
-          class="inline-flex px-3 py-1 bg-blue-50/80 border border-blue-200 rounded-full text-[10px] uppercase tracking-widest font-extrabold text-blue-600">
+          class="inline-flex px-3 py-1 bg-blue-50/80 border border-blue-200 rounded-full text-[10px] uppercase tracking-widest font-extrabold text-blue-600 select-none">
           AUNSF Event Platform</div>
         <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 px-1">Event Access Registration
         </h1>
@@ -67,7 +67,7 @@
             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Gender *</label>
             <div class="relative w-full">
               <button type="button" id="genderDropdownBtn"
-                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
                 <span id="genderDropdownLabel" class="truncate text-slate-400">Select</span>
                 <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="genderArrow" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor">
@@ -104,7 +104,7 @@
               *</label>
             <div class="relative w-full">
               <button type="button" id="customDropdownTriggerBtn"
-                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
                 <span id="customDropdownLabel" class="truncate text-slate-400">Select Batch Year</span>
                 <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="dropdownArrowIcon" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor">
@@ -113,18 +113,19 @@
               </button>
               <div id="customDropdownMenuDeck"
                 class="hidden absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1 transform scale-95 opacity-0 transition-all duration-150 origin-top">
+                <!-- Data values mapped strictly to database IDs with clear descriptive view strings labels -->
                 <div data-value="1"
                   class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-                  Fresher</div>
+                  Fresher (Year 1)</div>
                 <div data-value="2"
                   class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-                  Sophomore</div>
+                  Sophomore (Year 2)</div>
                 <div data-value="3"
                   class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-                  Junior</div>
+                  Junior (Year 3)</div>
                 <div data-value="4"
                   class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-                  Senior</div>
+                  Senior (Year 4)</div>
               </div>
             </div>
             <input type="hidden" id="year" required>
@@ -150,7 +151,7 @@
             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Domain Selection *</label>
             <div class="relative w-full">
               <button type="button" id="domainDropdownBtn"
-                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
                 <span id="domainDropdownLabel" class="truncate text-slate-400">Choose Theme Domain</span>
                 <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="domainArrow" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor">
@@ -178,7 +179,7 @@
               *</label>
             <div class="relative w-full">
               <button type="button" id="accomDropdownBtn"
-                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
                 <span id="accomDropdownLabel" class="truncate text-slate-400">Select</span>
                 <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="accomArrow" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor">
@@ -267,7 +268,6 @@
     const formAlertBlock = document.getElementById('formAlertBlock');
     const formAlertText = document.getElementById('formAlertMessageText');
 
-    // UI elements selector engines
     function setupDropdown(btnId, menuId, arrowId, hiddenInputId, labelId, optionClass) {
       const btn = document.getElementById(btnId);
       const menu = document.getElementById(menuId);
