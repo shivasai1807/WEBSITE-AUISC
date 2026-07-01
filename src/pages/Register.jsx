@@ -1,16 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 
-// REPLACE THIS STRING WITH YOUR LIVE DEPLOYED WEB APP URL
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycby5bz0GI20VxLh_FQOESgzX9V1N54KaPxHuDKlSZT_uu7rswK8QfU0gbxW4k3BSCfqpXQ/exec";
+// MASTER GOOGLE APPS SCRIPT TARGET ROUTER INSTANCE
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxV5iYwbY8xBoMnki_N8qKosRk2mu9kukqm8Hqg4quYT6OtFLJyYiQi_rnXTEdjzTr9/exec";
 
 const Register = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
+    gender: "",
     college: "",
     branch: "",
     year: "",
+    domainSelection: "",
+    accommodation: "",
     utr: "",
   });
 
@@ -19,29 +22,33 @@ const Register = () => {
   const [submittingState, setSubmittingState] = useState(false);
   const [viewStateMode, setViewStateMode] = useState("form");
   const [systemAlertMessage, setSystemAlertMessage] = useState({ visible: false, text: "" });
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const dropdownRef = useRef(null);
-  // Reference anchor link to pull attention up to active message states
+  // Custom tracking flags for UI overlay wrappers
+  const [yearDropdownOpen, setYearDropdownOpen] = useState(false);
+  const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
+  const [domainDropdownOpen, setDomainDropdownOpen] = useState(false);
+  const [accomDropdownOpen, setAccomDropdownOpen] = useState(false);
+
+  const yearRef = useRef(null);
+  const genderRef = useRef(null);
+  const domainRef = useRef(null);
+  const accomRef = useRef(null);
   const alertContainerRef = useRef(null);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
+      if (yearRef.current && !yearRef.current.contains(event.target)) setYearDropdownOpen(false);
+      if (genderRef.current && !genderRef.current.contains(event.target)) setGenderDropdownOpen(false);
+      if (domainRef.current && !domainRef.current.contains(event.target)) setDomainDropdownOpen(false);
+      if (accomRef.current && !accomRef.current.contains(event.target)) setAccomDropdownOpen(false);
     };
     document.addEventListener("mousedown", handleOutsideClick);
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
-  // Monitor alert visibility to immediately slide the user view smoothly to the message panel
   useEffect(() => {
     if (systemAlertMessage.visible && alertContainerRef.current) {
-      alertContainerRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
+      alertContainerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [systemAlertMessage]);
 
@@ -49,9 +56,8 @@ const Register = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleDropdownSelect = (value) => {
-    setFormData({ ...formData, year: value });
-    setDropdownOpen(false);
+  const handleCustomSelect = (field, value) => {
+    setFormData({ ...formData, [field]: value });
     setSystemAlertMessage({ visible: false, text: "" });
   };
 
@@ -83,11 +89,22 @@ const Register = () => {
     e.preventDefault();
     setSystemAlertMessage({ visible: false, text: "" });
 
+    if (!formData.gender) {
+      setSystemAlertMessage({ visible: true, text: "Selection Required: Please select your Gender profiling tag." });
+      return;
+    }
     if (!formData.year) {
       setSystemAlertMessage({ visible: true, text: "Selection Required: Please select your academic cohort year." });
       return;
     }
-
+    if (!formData.domainSelection) {
+      setSystemAlertMessage({ visible: true, text: "Selection Required: Please choose your track Domain Selection." });
+      return;
+    }
+    if (!formData.accommodation) {
+      setSystemAlertMessage({ visible: true, text: "Selection Required: Specify accommodation arrangement choice." });
+      return;
+    }
     if (!selectedFile) {
       setSystemAlertMessage({ visible: true, text: "Upload Required: Payment receipt screenshot must be attached." });
       return;
@@ -102,9 +119,12 @@ const Register = () => {
         fullName: formData.fullName,
         email: formData.email,
         phone: formData.phone,
+        gender: formData.gender,
         college: formData.college,
         branch: formData.branch,
         year: formData.year,
+        domainSelection: formData.domainSelection,
+        accommodation: formData.accommodation,
         utr: formData.utr,
         imageBase64: base64DataImageString,
         imageType: selectedFile.type,
@@ -133,7 +153,7 @@ const Register = () => {
   };
 
   const triggerStateViewReset = () => {
-    setFormData({ fullName: "", email: "", phone: "", college: "", branch: "", year: "", utr: "" });
+    setFormData({ fullName: "", email: "", phone: "", gender: "", college: "", branch: "", year: "", domainSelection: "", accommodation: "", utr: "" });
     setSelectedFile(null);
     setFileLabel("Click or Drag to upload payment screenshot");
     setSystemAlertMessage({ visible: false, text: "" });
@@ -141,19 +161,8 @@ const Register = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const getDropdownLabelText = () => {
-    switch (formData.year) {
-      case "1": return "1st Year (Freshman)";
-      case "2": return "2nd Year (Sophomore)";
-      case "3": return "3rd Year (Junior)";
-      case "4": return "4th Year (Senior)";
-      default: return "Select Batch Year";
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 flex items-center justify-center p-3 sm:p-4 md:p-8 antialiased selection:bg-blue-500/10 font-['Plus_Jakarta_Sans',sans-serif] w-full box-border">
-
       <div className="relative w-full max-w-2xl bg-white border border-slate-200/80 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] rounded-3xl p-5 sm:p-6 md:p-10 overflow-hidden transition-all duration-500 my-4">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-gradient-to-b from-blue-500/5 to-transparent blur-2xl pointer-events-none rounded-full"></div>
 
@@ -162,10 +171,9 @@ const Register = () => {
             <div className="text-center space-y-2">
               <div className="inline-flex px-3 py-1 bg-blue-50/80 border border-blue-200 rounded-full text-[10px] uppercase tracking-widest font-extrabold text-blue-600">AUNSF Event Platform</div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 px-1">Event Access Registration</h1>
-              <p className="text-slate-500 text-xs sm:text-sm max-w-md mx-auto px-2">Provide your accurate educational profile data and transaction indicators below to secure your entry pass credentials.</p>
+              <p className="text-slate-500 text-xs sm:text-sm max-w-md mx-auto px-2">Provide your accurate profiling parameters and payment verification identifiers below to secure entry credentials.</p>
             </div>
 
-            {/* ERROR ALIGNMENT FIX: Dynamic viewport tracking container */}
             {systemAlertMessage.visible && (
               <div ref={alertContainerRef} className="p-4 bg-rose-50 text-rose-700 border border-rose-200 rounded-xl text-xs font-semibold transition-all duration-300 scroll-mt-6">
                 {systemAlertMessage.text}
@@ -178,48 +186,92 @@ const Register = () => {
                 <input type="text" id="fullName" required value={formData.fullName} onChange={handleTextValueChange} placeholder="Enter full legal name" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition" />
               </div>
 
-              {/* MOBILE LAYOUT FIX: Grid structures break into stacks automatically on small viewports */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="md:col-span-2 space-y-1">
                   <label htmlFor="email" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address *</label>
                   <input type="email" id="email" required value={formData.email} onChange={handleTextValueChange} placeholder="name@domain.com" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition" />
                 </div>
+
+                <div className="space-y-1 relative" ref={genderRef}>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Gender *</label>
+                  <button type="button" onClick={() => setGenderDropdownOpen(!genderDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                    <span className={`truncate block ${formData.gender ? "text-slate-950 font-extrabold" : "text-slate-400"}`}>{formData.gender || "Select Gender"}</span>
+                    <svg className={`w-4 h-4 text-slate-400 transition-transform ml-1 ${genderDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
+                  </button>
+                  {genderDropdownOpen && (
+                    <div className="absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1">
+                      {["MALE", "FEMALE", "OTHER"].map((g) => (
+                        <div key={g} onClick={() => { handleCustomSelect("gender", g); setGenderDropdownOpen(false); }} className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">{g}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label htmlFor="phone" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number *</label>
                   <input type="tel" id="phone" required pattern="[0-9]{10}" value={formData.phone} onChange={handleTextValueChange} placeholder="10-digit mobile number" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition" />
                 </div>
+
+                <div className="space-y-1 relative" ref={yearRef}>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Academic Cohort Year *</label>
+                  <button type="button" onClick={() => setYearDropdownOpen(!yearDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                    <span className={`truncate block ${formData.year ? "text-slate-950 font-extrabold" : "text-slate-400"}`}>
+                      {formData.year ? `Year ${formData.year}` : "Select Batch Year"}
+                    </span>
+                    <svg className={`w-4 h-4 text-slate-400 transition-transform ml-1 ${yearDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
+                  </button>
+                  {yearDropdownOpen && (
+                    <div className="absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1">
+                      {["1", "2", "3", "4"].map((y) => (
+                        <div key={y} onClick={() => { handleCustomSelect("year", y); setYearDropdownOpen(false); }} className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">Year ${y}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
-              {/* MOBILE LAYOUT FIX: Column configurations safely scale across break tiers */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <div className="sm:col-span-1 md:col-span-5 space-y-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
                   <label htmlFor="college" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Institution / College *</label>
                   <input type="text" id="college" required value={formData.college} onChange={handleTextValueChange} placeholder="e.g., ANURAG UNI" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase" />
                 </div>
-                <div className="sm:col-span-1 md:col-span-3 space-y-1">
+                <div className="space-y-1">
                   <label htmlFor="branch" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Branch *</label>
                   <input type="text" id="branch" required value={formData.branch} onChange={handleTextValueChange} placeholder="e.g., CSE" className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase" />
                 </div>
+              </div>
 
-                <div className="sm:col-span-2 md:col-span-4 space-y-1 relative" ref={dropdownRef}>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Academic Cohort Year *</label>
-                  <div className="relative w-full">
-                    <button type="button" onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer min-w-full sm:min-w-[175px]">
-                      <span className={`truncate block max-w-[180px] whitespace-nowrap ${formData.year ? "text-slate-950 font-extrabold" : ""}`}>{getDropdownLabelText()}</span>
-                      <svg className={`w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1 ${dropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1 relative" ref={domainRef}>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Domain Selection *</label>
+                  <button type="button" onClick={() => setDomainDropdownOpen(!domainDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                    <span className={`truncate block ${formData.domainSelection ? "text-slate-950 font-extrabold" : "text-slate-400"}`}>{formData.domainSelection || "Choose Theme Domain"}</span>
+                    <svg className={`w-4 h-4 text-slate-400 transition-transform ml-1 ${domainDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
+                  </button>
+                  {domainDropdownOpen && (
+                    <div className="absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1">
+                      {["Blue Economy", "Mindspace", "Arts & Culture"].map((d) => (
+                        <div key={d} onClick={() => { handleCustomSelect("domainSelection", d); setDomainDropdownOpen(false); }} className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">{d}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
-                    {dropdownOpen && (
-                      <div className="absolute left-0 z-50 w-full mt-2 bg-white/95 backdrop-blur-md border border-slate-200/80 rounded-2xl shadow-xl overflow-hidden py-1 transform scale-100 opacity-100 transition-all duration-200 origin-top">
-                        <div onClick={() => handleDropdownSelect("1")} className="px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">1st Year (Freshman)</div>
-                        <div onClick={() => handleDropdownSelect("2")} className="px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">2nd Year (Sophomore)</div>
-                        <div onClick={() => handleDropdownSelect("3")} className="px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">3rd Year (Junior)</div>
-                        <div onClick={() => handleDropdownSelect("4")} className="px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">4th Year (Senior)</div>
-                      </div>
-                    )}
-                  </div>
+                <div className="space-y-1 relative" ref={accomRef}>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Accommodation Required *</label>
+                  <button type="button" onClick={() => setAccomDropdownOpen(!accomDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                    <span className={`truncate block ${formData.accommodation ? "text-slate-950 font-extrabold" : "text-slate-400"}`}>{formData.accommodation ? `${formData.accommodation} Needed` : "Select Accommodation"}</span>
+                    <svg className={`w-4 h-4 text-slate-400 transition-transform ml-1 ${accomDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
+                  </button>
+                  {accomDropdownOpen && (
+                    <div className="absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1">
+                      {["YES", "NO"].map((a) => (
+                        <div key={a} onClick={() => { handleCustomSelect("accommodation", a); setAccomDropdownOpen(false); }} className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">{a}</div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
 
