@@ -108,21 +108,6 @@ const Aunsf4 = () => {
               AUNSF 4.0 is on the way!
             </motion.h2>
 
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-lg md:text-xl text-gray-700 leading-10 max-w-4xl mx-auto"
-            >
-              Stay tuned for the next edition of innovation,
-              sustainability, leadership, and groundbreaking ideas.
-              AUNSF 4.0 will bring together brilliant minds,
-              impactful discussions, and transformative experiences
-              bigger than ever before.
-            </motion.p>
-
             {/* Register AUNSF 4.0 CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -138,6 +123,21 @@ const Aunsf4 = () => {
                 Register AUNSF 4.0
               </Link>
             </motion.div>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-lg md:text-xl text-gray-700 leading-10 max-w-4xl mx-auto"
+            >
+              Stay tuned for the next edition of innovation,
+              sustainability, leadership, and groundbreaking ideas.
+              AUNSF 4.0 will bring together brilliant minds,
+              impactful discussions, and transformative experiences
+              bigger than ever before.
+            </motion.p>
 
             {/* Feature Card */}
             <motion.div

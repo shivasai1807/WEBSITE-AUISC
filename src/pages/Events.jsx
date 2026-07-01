@@ -210,35 +210,21 @@ const Events = () => {
                         </div>
 
                         {event.registrationLink && (
-                          <a
-                            href={event.registrationLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <Link
+                            to="/register"
                             className="inline-flex items-center gap-2 bg-bright-orange text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-yellow transition-colors duration-300"
                           >
                             Register Now
                             <ArrowRight size={20} />
-                          </a>
+                          </Link>
                         )}
                       </div>
 
                       <div className="relative">
-                        <div className="relative w-full max-w-2xl mx-auto">
-                          <div className="relative h-[500px] overflow-hidden rounded-xl shadow-lg">
-                            <a
-                              href="https://linktr.ee/aunsf"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="block w-full h-full cursor-pointer"
-                            >
-                              <img
-                                src="/poster.webp"
-                                alt="AUNSF 3.0 Event Poster"
-                                className="w-full h-full object-contain"
-                              />
-                            </a>
-                          </div>
-                        </div>
+                        <CustomEventCarousel
+                          images={event.images}
+                          title={event.title}
+                        />
                       </div>
                     </div>
                   </div>
