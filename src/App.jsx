@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import { Suspense, lazy, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
@@ -93,11 +93,10 @@ function AppContent() {
 
                 {/* Banner Image */}
                 <div className="w-full h-full relative">
-                  <a 
-                    href="https://linktr.ee/aunsf" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                  <Link
+                    to="/register"
                     className="block cursor-pointer"
+                    onClick={() => setShowWelcomeModal(false)}
                   >
                     <img
                       src="/poster.webp"
@@ -105,16 +104,11 @@ function AppContent() {
                       className="w-full h-full object-contain"
                     />
                     <div className="absolute bottom-0 left-0 right-0 bg-dark-blue-purple/70 py-2 text-center">
-                      <a 
-                        href="https://anurag.edu.in/event-itinerary" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-white text-lg font-semibold hover:text-gray-200 transition-colors duration-300"
-                      >
-                        Click to Register!
-                      </a>
+                      <span className="text-white text-lg font-semibold hover:text-gray-200 transition-colors duration-300">
+                        Register AUNSF 4.0
+                      </span>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </motion.div>
             </motion.div>

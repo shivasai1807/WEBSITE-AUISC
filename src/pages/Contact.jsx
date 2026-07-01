@@ -24,8 +24,8 @@ const Contact = () => {
       return;
     }
     if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(formData.email)) {
-       alert('Please enter a valid email address.');
-       return;
+      alert('Please enter a valid email address.');
+      return;
     }
 
     emailjs
@@ -55,15 +55,15 @@ const Contact = () => {
     },
     {
       role: "President",
-      name: "Aishwarya Alechalla",
-      phone: "+91 78935 17093",
-      email: "aishwaryaalechalla@gmail.com",
+      name: "Sukruth Baikan",
+      phone: "+91 9390205929",
+      email: "sukruth2232@gmail.com",
     },
     {
       role: "Vice President",
-      name: "Eshwar Karne",
-      phone: "+91 91821 04900",
-      email: "Karneeshwar3812@gmail.com",
+      name: "Thanughna Dhatrika",
+      phone: "+91 9347247165",
+      email: "Thanughnadhatrika03@gmail.com",
     },
   ];
 
@@ -186,7 +186,7 @@ const Contact = () => {
                 <div>
                   <p className="text-sm text-dark-blue-purple/70 mb-1">WhatsApp</p>
                   <a
-                    href="https://www.whatsapp.com/channel/0029VacEQKs9cDDaV22u2K2g" 
+                    href="https://www.whatsapp.com/channel/0029VacEQKs9cDDaV22u2K2g"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-dark-blue-purple hover:text-medium-blue transition text-sm md:text-base"
