@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Aunsf4 = () => {
   return (
@@ -121,6 +122,22 @@ const Aunsf4 = () => {
               impactful discussions, and transformative experiences
               bigger than ever before.
             </motion.p>
+
+            {/* Register AUNSF 4.0 CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              viewport={{ once: true }}
+              className="mt-10 flex justify-center"
+            >
+              <Link
+                to="/register"
+                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#FF5722] to-[#FFB74D] text-white font-bold text-lg rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
+              >
+                Register AUNSF 4.0
+              </Link>
+            </motion.div>
 
             {/* Feature Card */}
             <motion.div

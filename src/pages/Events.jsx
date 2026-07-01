@@ -63,13 +63,13 @@ const Events = () => {
     }
 
     const nextSlide = () => {
-      setCurrentIndex((prevIndex) => 
+      setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
     };
 
     const prevSlide = () => {
-      setCurrentIndex((prevIndex) => 
+      setCurrentIndex((prevIndex) =>
         prevIndex === 0 ? images.length - 1 : prevIndex - 1
       );
     };
@@ -119,8 +119,7 @@ const Events = () => {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? 'bg-bright-orange scale-125' : 'bg-orange-yellow hover:bg-orange-yellow'}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-bright-orange scale-125' : 'bg-orange-yellow hover:bg-orange-yellow'}
               }`}
             />
           ))}
@@ -139,9 +138,9 @@ const Events = () => {
         <div className="absolute inset-0 bg-[url('/pics_png/pattern.png')] opacity-10"></div>
         <div className="container mx-auto px-4 relative">
           <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             className="text-center"
           >
             <h1 className="text-6xl font-bold text-white mb-6 tracking-tight">Our Events</h1>
@@ -205,7 +204,7 @@ const Events = () => {
                             )}
                           </div>
                         </div>
-                        
+
                         <div className="prose prose-lg text-dark-blue-purple">
                           <p className="leading-relaxed">{event.description}</p>
                         </div>
@@ -226,9 +225,9 @@ const Events = () => {
                       <div className="relative">
                         <div className="relative w-full max-w-2xl mx-auto">
                           <div className="relative h-[500px] overflow-hidden rounded-xl shadow-lg">
-                            <a 
-                              href="https://linktr.ee/aunsf" 
-                              target="_blank" 
+                            <a
+                              href="https://linktr.ee/aunsf"
+                              target="_blank"
                               rel="noopener noreferrer"
                               className="block w-full h-full cursor-pointer"
                             >
@@ -304,15 +303,15 @@ const Events = () => {
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="prose prose-lg text-dark-blue-purple">
                         <p className="leading-relaxed">{event.description}</p>
                       </div>
                     </div>
 
                     <div className="relative">
-                      <CustomEventCarousel 
-                        images={event.images} 
+                      <CustomEventCarousel
+                        images={event.images}
                         title={event.title}
                       />
                     </div>
@@ -324,28 +323,10 @@ const Events = () => {
         </div>
       </div>
 
-      {/* Temporary AUNSF4 Button */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="pb-16 flex flex-col items-center"
-      >
-        <Link to="/register">
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
-            whileTap={{ scale: 0.95 }}
-            className="px-10 py-5 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] hover:from-[#c23d20] hover:to-[#e04c2a] text-white font-extrabold rounded-2xl shadow-xl transition-all duration-300 flex items-center gap-3 text-lg cursor-pointer"
-          >
-            🚀 Register for AUNSF4
-          </motion.button>
-        </Link>
-      </motion.div>
-
       {/* Image Modal */}
-      <ImageModal 
-        image={selectedImage} 
-        onClose={(() => setSelectedImage(null))} 
+      <ImageModal
+        image={selectedImage}
+        onClose={(() => setSelectedImage(null))}
       />
     </div>
   );
