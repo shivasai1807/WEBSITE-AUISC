@@ -27,7 +27,6 @@
 
   <div
     class="relative w-full max-w-2xl bg-white border border-slate-200/80 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] rounded-3xl p-5 sm:p-6 md:p-10 overflow-hidden transition-all duration-500 my-4">
-
     <div
       class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-gradient-to-b from-blue-500/5 to-transparent blur-2xl pointer-events-none rounded-full">
     </div>
@@ -56,65 +55,147 @@
             class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="space-y-1">
-            <label id="emailLabel" for="email"
-              class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address *</label>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="md:col-span-2 space-y-1">
+            <label for="email" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address
+              *</label>
             <input type="email" id="email" required placeholder="name@domain.com"
               class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
           </div>
-          <div class="space-y-1">
-            <label id="phoneLabel" for="phone"
-              class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number *</label>
-            <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="10-digit mobile number"
-              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
+
+          <div class="space-y-1 relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Gender *</label>
+            <div class="relative w-full">
+              <button type="button" id="genderDropdownBtn"
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                <span id="genderDropdownLabel" class="truncate text-slate-400">Select</span>
+                <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="genderArrow" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id="genderMenu"
+                class="hidden absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1 transform scale-95 opacity-0 transition-all duration-150 origin-top">
+                <div data-value="MALE"
+                  class="gender-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  MALE</div>
+                <div data-value="FEMALE"
+                  class="gender-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  FEMALE</div>
+                <div data-value="OTHER"
+                  class="gender-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  OTHER</div>
+              </div>
+            </div>
+            <input type="hidden" id="gender" required>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
-          <div class="sm:col-span-1 md:col-span-5 space-y-1">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-1">
+            <label for="phone" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number
+              *</label>
+            <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="10-digit mobile number"
+              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
+          </div>
+
+          <div class="space-y-1 relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Academic Cohort Year
+              *</label>
+            <div class="relative w-full">
+              <button type="button" id="customDropdownTriggerBtn"
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                <span id="customDropdownLabel" class="truncate text-slate-400">Select Batch Year</span>
+                <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="dropdownArrowIcon" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id="customDropdownMenuDeck"
+                class="hidden absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1 transform scale-95 opacity-0 transition-all duration-150 origin-top">
+                <div data-value="1"
+                  class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Year 1</div>
+                <div data-value="2"
+                  class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Year 2</div>
+                <div data-value="3"
+                  class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Year 3</div>
+                <div data-value="4"
+                  class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Year 4</div>
+              </div>
+            </div>
+            <input type="hidden" id="year" required>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="sm:col-span-1 space-y-1">
             <label for="college" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Institution /
               College *</label>
             <input type="text" id="college" required placeholder="e.g., ANURAG UNI"
               class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase">
           </div>
-          <div class="sm:col-span-1 md:col-span-3 space-y-1">
+          <div class="sm:col-span-1 space-y-1">
             <label for="branch" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Branch *</label>
             <input type="text" id="branch" required placeholder="e.g., CSE"
               class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase">
           </div>
+        </div>
 
-          <div class="sm:col-span-2 md:col-span-4 space-y-1 relative">
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Academic Cohort Year
-              *</label>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-1 relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Domain Selection *</label>
             <div class="relative w-full">
-              <button type="button" id="customDropdownTriggerBtn"
-                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer min-w-full sm:min-w-[175px]">
-                <span id="customDropdownLabel" class="truncate block max-w-[180px] whitespace-nowrap">Select Batch
-                  Year</span>
-                <svg class="w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1"
-                  id="dropdownArrowIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+              <button type="button" id="domainDropdownBtn"
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                <span id="domainDropdownLabel" class="truncate text-slate-400">Choose Theme Domain</span>
+                <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="domainArrow" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-
-              <div id="customDropdownMenuDeck"
-                class="hidden absolute left-0 z-50 w-full mt-2 bg-white/95 backdrop-blur-md border border-slate-200/80 rounded-2xl shadow-xl overflow-hidden py-1 transform scale-95 opacity-0 transition-all duration-200 origin-top">
-                <div data-value="1"
-                  class="dropdown-option px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">
-                  1st Year (Freshman)</div>
-                <div data-value="2"
-                  class="dropdown-option px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">
-                  2nd Year (Sophomore)</div>
-                <div data-value="3"
-                  class="dropdown-option px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">
-                  3rd Year (Junior)</div>
-                <div data-value="4"
-                  class="dropdown-option px-4 py-3 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap">
-                  4th Year (Senior)</div>
+              <div id="domainMenu"
+                class="hidden absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1 transform scale-95 opacity-0 transition-all duration-150 origin-top">
+                <div data-value="Blue Economy"
+                  class="domain-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Blue Economy</div>
+                <div data-value="Mindspace"
+                  class="domain-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Mindspace</div>
+                <div data-value="Arts & Culture"
+                  class="domain-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Arts & Culture</div>
               </div>
             </div>
-            <input type="hidden" id="year" required>
+            <input type="hidden" id="domainSelection" required>
+          </div>
+
+          <div class="space-y-1 relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Accommodation Required
+              *</label>
+            <div class="relative w-full">
+              <button type="button" id="accomDropdownBtn"
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                <span id="accomDropdownLabel" class="truncate text-slate-400">Select</span>
+                <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="accomArrow" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id="accomMenu"
+                class="hidden absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1 transform scale-95 opacity-0 transition-all duration-150 origin-top">
+                <div data-value="YES"
+                  class="accom-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  YES</div>
+                <div data-value="NO"
+                  class="accom-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  NO</div>
+              </div>
+            </div>
+            <input type="hidden" id="accommodation" required>
           </div>
         </div>
 
@@ -122,16 +203,13 @@
 
         <div class="bg-slate-50/60 p-4 sm:p-5 rounded-2xl border border-slate-200/60 space-y-4">
           <div class="text-xs font-black text-blue-600 uppercase tracking-widest flex items-center gap-1.5 select-none">
-            💳 Audit & Remittance Verification
-          </div>
-
+            💳 Audit & Remittance Verification</div>
           <div class="space-y-1">
             <label for="utrField" class="block text-[10px] font-black text-slate-400 uppercase tracking-wider">UPI /
               Banking Transaction UTR Reference Number *</label>
             <input type="text" id="utrField" required placeholder="Enter 12-digit UTR verification code"
               class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition uppercase mono tracking-wider">
           </div>
-
           <div class="space-y-1.5">
             <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider">Upload Remittance
               Receipt Screenshot *</label>
@@ -154,7 +232,6 @@
           <span id="btnText">Submit Registration Portfolio</span>
           <span class="transition-transform group-hover:translate-x-0.5">→</span>
         </button>
-
       </form>
     </div>
 
@@ -162,8 +239,7 @@
       class="hidden text-center py-12 space-y-6 opacity-0 transition-all duration-500 transform scale-95">
       <div
         class="mx-auto w-14 h-16 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center shadow-sm shadow-emerald-500/5">
-        <span class="text-emerald-500 text-2xl font-black">✓</span>
-      </div>
+        <span class="text-emerald-500 text-2xl font-black">✓</span></div>
       <div class="space-y-2 px-2">
         <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">Submitted Successfully!</h2>
         <p class="text-xs sm:text-sm font-medium text-slate-500 max-w-sm mx-auto">Your registration status and other
@@ -171,68 +247,74 @@
       </div>
       <div class="pt-4">
         <button onclick="resetRegistrationFormState()"
-          class="bg-white hover:bg-slate-50 text-slate-500 font-bold text-xs py-3 px-6 rounded-xl transition border border-slate-200 cursor-pointer shadow-sm">
-          ↩ Lodge Another Registration
-        </button>
+          class="bg-white hover:bg-slate-50 text-slate-500 font-bold text-xs py-3 px-6 rounded-xl transition border border-slate-200 cursor-pointer shadow-sm">↩
+          Lodge Another Registration</button>
       </div>
     </div>
-
   </div>
 
   <script>
-    const BACKEND_URL = "https://script.google.com/macros/s/AKfycby5bz0GI20VxLh_FQOESgzX9V1N54KaPxHuDKlSZT_uu7rswK8QfU0gbxW4k3BSCfqpXQ/exec";
+    const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxV5iYwbY8xBoMnki_N8qKosRk2mu9kukqm8Hqg4quYT6OtFLJyYiQi_rnXTEdjzTr9/exec";
 
     const form = document.getElementById('registrationForm');
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     const screenshotInput = document.getElementById('screenshotInput');
     const fileLabelText = document.getElementById('fileLabelText');
-
     const formStateView = document.getElementById('formStateView');
     const successStateView = document.getElementById('successStateView');
     const formAlertBlock = document.getElementById('formAlertBlock');
     const formAlertText = document.getElementById('formAlertMessageText');
 
-    const dropdownBtn = document.getElementById('customDropdownTriggerBtn');
-    const dropdownMenu = document.getElementById('customDropdownMenuDeck');
-    const dropdownArrow = document.getElementById('dropdownArrowIcon');
-    const hiddenYearInput = document.getElementById('year');
-    const dropdownLabel = document.getElementById('customDropdownLabel');
+    // UI elements selector engines
+    function setupDropdown(btnId, menuId, arrowId, hiddenInputId, labelId, optionClass) {
+      const btn = document.getElementById(btnId);
+      const menu = document.getElementById(menuId);
+      const arrow = document.getElementById(arrowId);
+      const hiddenInput = document.getElementById(hiddenInputId);
+      const label = document.getElementById(labelId);
 
-    dropdownBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = !dropdownMenu.classList.contains('hidden');
-      if (isOpen) {
-        closeCustomDropdownMenu();
-      } else {
-        dropdownMenu.classList.remove('hidden');
-        dropdownArrow.classList.add('rotate-180');
-        setTimeout(() => {
-          dropdownMenu.classList.remove('scale-95', 'opacity-0');
-          dropdownMenu.classList.add('scale-100', 'opacity-100');
-        }, 10);
-      }
-    });
-
-    document.querySelectorAll('.dropdown-option').forEach(option => {
-      option.addEventListener('click', (e) => {
-        const val = e.target.getAttribute('data-value');
-        hiddenYearInput.value = val;
-        dropdownLabel.innerText = e.target.innerText;
-        dropdownLabel.classList.add('text-slate-950', 'font-extrabold');
-        closeCustomDropdownMenu();
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = menu.classList.contains('hidden');
+        closeAllDropdowns();
+        if (isHidden) {
+          menu.classList.remove('hidden');
+          arrow.classList.add('rotate-180');
+          setTimeout(() => menu.classList.remove('scale-95', 'opacity-0'), 10);
+        }
       });
-    });
 
-    document.addEventListener('click', closeCustomDropdownMenu);
+      document.querySelectorAll(`.${optionClass}`).forEach(opt => {
+        opt.addEventListener('click', (e) => {
+          const val = e.target.getAttribute('data-value');
+          hiddenInput.value = val;
+          label.innerText = e.target.innerText;
+          label.className = "text-slate-950 font-extrabold truncate block";
+          closeAllDropdowns();
+        });
+      });
+    }
 
-    function closeCustomDropdownMenu() {
-      if (!dropdownMenu.classList.contains('hidden')) {
-        dropdownMenu.classList.remove('scale-100', 'opacity-100');
-        dropdownMenu.classList.add('scale-95', 'opacity-0');
-        dropdownArrow.classList.remove('rotate-180');
-        setTimeout(() => { dropdownMenu.classList.add('hidden'); }, 150);
-      }
+    setupDropdown('genderDropdownBtn', 'genderMenu', 'genderArrow', 'gender', 'genderDropdownLabel', 'gender-option');
+    setupDropdown('customDropdownTriggerBtn', 'customDropdownMenuDeck', 'dropdownArrowIcon', 'year', 'customDropdownLabel', 'dropdown-option');
+    setupDropdown('domainDropdownBtn', 'domainMenu', 'domainArrow', 'domainSelection', 'domainDropdownLabel', 'domain-option');
+    setupDropdown('accomDropdownBtn', 'accomMenu', 'accomArrow', 'accommodation', 'accomDropdownLabel', 'accom-option');
+
+    document.addEventListener('click', closeAllDropdowns);
+
+    function closeAllDropdowns() {
+      ['genderMenu', 'customDropdownMenuDeck', 'domainMenu', 'accomMenu'].forEach(id => {
+        const m = document.getElementById(id);
+        if (m && !m.classList.contains('hidden')) {
+          m.classList.add('scale-95', 'opacity-0');
+          setTimeout(() => m.classList.add('hidden'), 150);
+        }
+      });
+      ['genderArrow', 'dropdownArrowIcon', 'domainArrow', 'accomArrow'].forEach(id => {
+        const a = document.getElementById(id);
+        if (a) a.classList.remove('rotate-180');
+      });
     }
 
     screenshotInput.addEventListener('change', (e) => {
@@ -253,16 +335,13 @@
       e.preventDefault();
       formAlertBlock.classList.add('hidden');
 
-      if (!hiddenYearInput.value) {
-        triggerInLineAlert("Form validation error: Academic cohort year selection is required.", "error");
-        return;
-      }
+      if (!document.getElementById('gender').value) return triggerInLineAlert("Selection required: Please select gender.", "error");
+      if (!document.getElementById('year').value) return triggerInLineAlert("Selection required: Please select cohort batch year.", "error");
+      if (!document.getElementById('domainSelection').value) return triggerInLineAlert("Selection required: Please select theme domain track.", "error");
+      if (!document.getElementById('accommodation').value) return triggerInLineAlert("Selection required: Please select accommodation option.", "error");
 
       const file = screenshotInput.files[0];
-      if (!file) {
-        triggerInLineAlert("Form validation error: Remittance screenshot is required.", "error");
-        return;
-      }
+      if (!file) return triggerInLineAlert("Form validation error: Remittance screenshot is required.", "error");
 
       submitBtn.disabled = true;
       submitBtn.classList.add('opacity-60', 'cursor-not-allowed');
@@ -275,9 +354,12 @@
           fullName: document.getElementById('fullName').value,
           email: document.getElementById('email').value,
           phone: document.getElementById('phone').value,
+          gender: document.getElementById('gender').value,
           college: document.getElementById('college').value,
           branch: document.getElementById('branch').value,
-          year: hiddenYearInput.value,
+          year: document.getElementById('year').value,
+          domainSelection: document.getElementById('domainSelection').value,
+          accommodation: document.getElementById('accommodation').value,
           utr: document.getElementById('utrField').value,
           imageBase64: convertedBase64String,
           imageType: file.type
@@ -294,15 +376,11 @@
         if (result.status === 'success') {
           formStateView.classList.add('hidden');
           successStateView.classList.remove('hidden');
-          setTimeout(() => {
-            successStateView.classList.remove('scale-95', 'opacity-0');
-            successStateView.classList.add('scale-100', 'opacity-100');
-          }, 50);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => successStateView.classList.remove('scale-95', 'opacity-0'), 50);
+          window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
           triggerInLineAlert(`Submission Denied: ${result.message}`, "error");
         }
-
       } catch (error) {
         console.error(error);
         triggerInLineAlert("Network Connectivity Error: Failed to secure database stream connection.", "error");
@@ -313,12 +391,9 @@
       }
     });
 
-    // ERROR ALIGNMENT FIX: Focus automatically moves up to the validation field container
     function triggerInLineAlert(message, type) {
       formAlertBlock.classList.remove('hidden', 'bg-rose-50', 'text-rose-700', 'border-rose-200');
-      if (type === "error") {
-        formAlertBlock.classList.add('bg-rose-50', 'text-rose-700', 'border-rose-200');
-      }
+      if (type === "error") formAlertBlock.classList.add('bg-rose-50', 'text-rose-700', 'border-rose-200');
       formAlertText.innerText = message;
       formAlertBlock.classList.remove('hidden');
       formAlertBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -326,12 +401,18 @@
 
     function resetRegistrationFormState() {
       form.reset();
-      hiddenYearInput.value = "";
-      dropdownLabel.innerText = "Select Batch Year";
-      dropdownLabel.className = "text-slate-700 font-normal";
+      ['gender', 'year', 'domainSelection', 'accommodation'].forEach(id => document.getElementById(id).value = "");
+      document.getElementById('genderDropdownLabel').innerText = "Select";
+      document.getElementById('customDropdownLabel').innerText = "Select Batch Year";
+      document.getElementById('domainDropdownLabel').innerText = "Choose Theme Domain";
+      document.getElementById('accomDropdownLabel').innerText = "Select";
+
+      ['genderDropdownLabel', 'customDropdownLabel', 'domainDropdownLabel', 'accomDropdownLabel'].forEach(id => {
+        document.getElementById(id).className = "text-slate-400 font-normal";
+      });
+
       fileLabelText.innerText = "Click or Drag to upload payment screenshot";
       formAlertBlock.classList.add('hidden');
-
       successStateView.classList.add('scale-95', 'opacity-0', 'hidden');
       formStateView.classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
