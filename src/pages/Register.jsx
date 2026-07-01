@@ -35,6 +35,14 @@ const Register = () => {
   const accomRef = useRef(null);
   const alertContainerRef = useRef(null);
 
+  // Updated array configuration with combined Year and Text naming tiers
+  const cohortOptions = [
+    { value: "1", label: "Fresher (Year 1)" },
+    { value: "2", label: "Sophomore (Year 2)" },
+    { value: "3", label: "Junior (Year 3)" },
+    { value: "4", label: "Senior (Year 4)" }
+  ];
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (yearRef.current && !yearRef.current.contains(event.target)) setYearDropdownOpen(false);
@@ -162,14 +170,14 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 flex items-center justify-center p-3 sm:p-4 md:p-8 antialiased selection:bg-blue-500/10 font-['Plus_Jakarta_Sans',sans-serif] w-full box-border">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 flex items-center justify-center p-3 sm:p-4 md:p-8 antialiased selection:bg-blue-500/10 font-['Plus_Jakarta_Sans',sans-serif] w-full box-border font-medium">
       <div className="relative w-full max-w-2xl bg-white border border-slate-200/80 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] rounded-3xl p-5 sm:p-6 md:p-10 overflow-hidden transition-all duration-500 my-4">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-gradient-to-b from-blue-500/5 to-transparent blur-2xl pointer-events-none rounded-full"></div>
 
         {viewStateMode === "form" ? (
           <div className="space-y-6 md:space-y-8">
             <div className="text-center space-y-2">
-              <div className="inline-flex px-3 py-1 bg-blue-50/80 border border-blue-200 rounded-full text-[10px] uppercase tracking-widest font-extrabold text-blue-600">AUNSF Event Platform</div>
+              <div className="inline-flex px-3 py-1 bg-blue-50/80 border border-blue-200 rounded-full text-[10px] uppercase tracking-widest font-extrabold text-blue-600 select-none">AUNSF Event Platform</div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 px-1">Event Access Registration</h1>
               <p className="text-slate-500 text-xs sm:text-sm max-w-md mx-auto px-2">Provide your accurate profiling parameters and payment verification identifiers below to secure entry credentials.</p>
             </div>
@@ -194,7 +202,7 @@ const Register = () => {
 
                 <div className="space-y-1 relative" ref={genderRef}>
                   <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Gender *</label>
-                  <button type="button" onClick={() => setGenderDropdownOpen(!genderDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                  <button type="button" onClick={() => setGenderDropdownOpen(!genderDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
                     <span className={`truncate block ${formData.gender ? "text-slate-950 font-extrabold" : "text-slate-400"}`}>{formData.gender || "Select Gender"}</span>
                     <svg className={`w-4 h-4 text-slate-400 transition-transform ml-1 ${genderDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
                   </button>
@@ -216,16 +224,16 @@ const Register = () => {
 
                 <div className="space-y-1 relative" ref={yearRef}>
                   <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Academic Cohort Year *</label>
-                  <button type="button" onClick={() => setYearDropdownOpen(!yearDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                  <button type="button" onClick={() => setYearDropdownOpen(!yearDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
                     <span className={`truncate block ${formData.year ? "text-slate-950 font-extrabold" : "text-slate-400"}`}>
-                      {formData.year ? `Year ${formData.year}` : "Select Batch Year"}
+                      {formData.year ? cohortOptions.find(c => c.value === formData.year)?.label : "Select Batch Year"}
                     </span>
                     <svg className={`w-4 h-4 text-slate-400 transition-transform ml-1 ${yearDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
                   </button>
                   {yearDropdownOpen && (
                     <div className="absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1">
-                      {["1", "2", "3", "4"].map((y) => (
-                        <div key={y} onClick={() => { handleCustomSelect("year", y); setYearDropdownOpen(false); }} className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">Year ${y}</div>
+                      {cohortOptions.map((opt) => (
+                        <div key={opt.value} onClick={() => { handleCustomSelect("year", opt.value); setYearDropdownOpen(false); }} className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">{opt.label}</div>
                       ))}
                     </div>
                   )}
@@ -246,7 +254,7 @@ const Register = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1 relative" ref={domainRef}>
                   <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Domain Selection *</label>
-                  <button type="button" onClick={() => setDomainDropdownOpen(!domainDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                  <button type="button" onClick={() => setDomainDropdownOpen(!domainDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
                     <span className={`truncate block ${formData.domainSelection ? "text-slate-950 font-extrabold" : "text-slate-400"}`}>{formData.domainSelection || "Choose Theme Domain"}</span>
                     <svg className={`w-4 h-4 text-slate-400 transition-transform ml-1 ${domainDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
                   </button>
@@ -261,7 +269,7 @@ const Register = () => {
 
                 <div className="space-y-1 relative" ref={accomRef}>
                   <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Accommodation Required *</label>
-                  <button type="button" onClick={() => setAccomDropdownOpen(!accomDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer">
+                  <button type="button" onClick={() => setAccomDropdownOpen(!accomDropdownOpen)} className="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
                     <span className={`truncate block ${formData.accommodation ? "text-slate-950 font-extrabold" : "text-slate-400"}`}>{formData.accommodation ? `${formData.accommodation} Needed` : "Select Accommodation"}</span>
                     <svg className={`w-4 h-4 text-slate-400 transition-transform ml-1 ${accomDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
                   </button>
