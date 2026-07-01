@@ -85,4 +85,67 @@ export const achievements = [
     "We are proud to announce that Anurag University IUCEE Student Chapter (AUISC) has received the Best Student Chapter Award. This recognition reflects the enthusiasm, commitment, and consistent efforts of the AUISC team in creating meaningful impact through innovation and collaboration. Congratulations to everyone who contributed to this achievement. We sincerely thank our Management, leadership team, faculty, and staff for their unwavering support, and extend special gratitude to Dean SOE, Prof. Vijay Kumar Sir, for his constant guidance and encouragement.",
   icon: "🏆"
 },
+{
+id: 13,
+title: "Another Proud Achievement – IASF 2026",
+date: "March 18, 2026",
+description:
+"Team Blue Genesis secured a cash prize of ₹10,000 at IASF 2026 – Student Project Expo. Despite evaluation schedule changes, the team successfully presented virtually with the support of Krishna Sir and earned this recognition through innovation, resilience, and dedication.",
+icon: "🚀"
+},
+
+{
+id: 14,
+title: "INNOFIESTA – 2026 Achievement",
+date: "2026",
+description:
+"Students of Anurag University IUCEE Student Chapter participated in INNOFIESTA – 2026 conducted by Hyderabad Institute of Technology and Management. Team InsightDash emerged as Winners for their outstanding performance and innovative presentation.",
+icon: "🏆"
+},
+
+{
+id: 15,
+title: "Aavishkaran Manthan 2025",
+date: "2025",
+description:
+"Students of AUISC participated in Aavishkaran Manthan hosted by Malnad College of Engineering and showcased excellence across multiple events through innovation, creativity, and communication.",
+icon: "💡"
+},
+
+{
+id: 16,
+title: "Ideathon – Second Prize",
+date: "2025",
+description:
+"Team Gajanan secured Second Prize in the Ideathon event for their innovative ideas and impactful presentation. Participants: Shaik Ayesha & Neeraj.",
+icon: "🥈"
+},
+
+{
+id: 17,
+title: "Elocution – Second Prize",
+date: "2025",
+description:
+"Team Stark achieved Second Prize in the Elocution event with their excellent communication and presentation skills. Participants: Noel & Rajith.",
+icon: "🎤"
+},
+
+{
+id: 18,
+title: "Ideathon – Special Mention",
+date: "2025",
+description:
+"Health IQ received a Special Mention in the Ideathon event for their creative and impactful idea. Participants: Akhil, Uma Sree & Vijayalakshmi.",
+icon: "⭐"
+},
+
+{
+id: 19,
+title: "Ideathon – Internship Offer by Smile Essentials",
+date: "2025",
+description:
+"Team Shouryanga received an Internship Offer from Smile Essentials during the Ideathon event. Participants: Ram Swaroop, Sricharan & Rishi.",
+icon: "🎯"
+}
+
 ]; 

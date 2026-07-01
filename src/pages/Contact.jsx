@@ -55,15 +55,15 @@ const Contact = () => {
     },
     {
       role: "President",
-      name: "Aishwarya Alechalla",
-      phone: "+91 78935 17093",
-      email: "aishwaryaalechalla@gmail.com",
+      name: "Sukruth Baikan",
+      phone: "9390205929",
+      email: "sukruth2232@gmail.com",
     },
     {
       role: "Vice President",
-      name: "Eshwar Karne",
-      phone: "+91 91821 04900",
-      email: "Karneeshwar3812@gmail.com",
+      name: "Thanughna Dhatrika",
+      phone: "9347247165",
+      email: "Thanughnadhatrika03@gmail.com",
     },
   ];
 
