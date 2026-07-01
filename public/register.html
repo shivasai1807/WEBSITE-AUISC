@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AUNSF Event Registration</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-gradient-to-br from-slate-50 via-white to-blue-50/60 text-slate-800 min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-8 antialiased selection:bg-blue-500/10 w-full box-border font-medium">
+
+  <div
+    class="relative w-full max-w-2xl bg-white border border-slate-200/80 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] rounded-3xl p-5 sm:p-6 md:p-10 overflow-hidden transition-all duration-500 my-4">
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-gradient-to-b from-blue-500/5 to-transparent blur-2xl pointer-events-none rounded-full">
+    </div>
+
+    <div id="formStateView" class="space-y-6 md:space-y-8 block">
+      <div class="text-center space-y-2">
+        <div
+          class="inline-flex px-3 py-1 bg-blue-50/80 border border-blue-200 rounded-full text-[10px] uppercase tracking-widest font-extrabold text-blue-600 select-none">
+          AUNSF Event Platform</div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 px-1">Event Access Registration
+        </h1>
+        <p class="text-slate-500 text-xs sm:text-sm max-w-md mx-auto px-2">Provide your accurate educational profile
+          data and transaction indicators below to secure your entry pass credentials.</p>
+      </div>
+
+      <div id="formAlertBlock"
+        class="hidden p-4 rounded-xl text-xs font-semibold border transition-all duration-300 scroll-mt-6">
+        <p id="formAlertMessageText"></p>
+      </div>
+
+      <form id="registrationForm" class="space-y-5 sm:space-y-6">
+        <div class="space-y-1">
+          <label for="fullName" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Full Name
+            *</label>
+          <input type="text" id="fullName" required placeholder="Enter full legal name"
+            class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="md:col-span-2 space-y-1">
+            <label for="email" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address
+              *</label>
+            <input type="email" id="email" required placeholder="name@domain.com"
+              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
+          </div>
+
+          <div class="space-y-1 relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Gender *</label>
+            <div class="relative w-full">
+              <button type="button" id="genderDropdownBtn"
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
+                <span id="genderDropdownLabel" class="truncate text-slate-400">Select</span>
+                <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="genderArrow" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id="genderMenu"
+                class="hidden absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1 transform scale-95 opacity-0 transition-all duration-150 origin-top">
+                <div data-value="MALE"
+                  class="gender-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  MALE</div>
+                <div data-value="FEMALE"
+                  class="gender-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  FEMALE</div>
+                <div data-value="OTHER"
+                  class="gender-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  OTHER</div>
+              </div>
+            </div>
+            <input type="hidden" id="gender" required>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-1">
+            <label for="phone" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number
+              *</label>
+            <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="10-digit mobile number"
+              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition">
+          </div>
+
+          <div class="space-y-1 relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Academic Cohort Year
+              *</label>
+            <div class="relative w-full">
+              <button type="button" id="customDropdownTriggerBtn"
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
+                <span id="customDropdownLabel" class="truncate text-slate-400">Select Batch Year</span>
+                <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="dropdownArrowIcon" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id="customDropdownMenuDeck"
+                class="hidden absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1 transform scale-95 opacity-0 transition-all duration-150 origin-top">
+                <!-- Data values mapped strictly to database IDs with clear descriptive view strings labels -->
+                <div data-value="1"
+                  class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Fresher (Year 1)</div>
+                <div data-value="2"
+                  class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Sophomore (Year 2)</div>
+                <div data-value="3"
+                  class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Junior (Year 3)</div>
+                <div data-value="4"
+                  class="dropdown-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Senior (Year 4)</div>
+              </div>
+            </div>
+            <input type="hidden" id="year" required>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="sm:col-span-1 space-y-1">
+            <label for="college" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Institution /
+              College *</label>
+            <input type="text" id="college" required placeholder="e.g., ANURAG UNI"
+              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase">
+          </div>
+          <div class="sm:col-span-1 space-y-1">
+            <label for="branch" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Branch *</label>
+            <input type="text" id="branch" required placeholder="e.g., CSE"
+              class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition uppercase">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-1 relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Domain Selection *</label>
+            <div class="relative w-full">
+              <button type="button" id="domainDropdownBtn"
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
+                <span id="domainDropdownLabel" class="truncate text-slate-400">Choose Theme Domain</span>
+                <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="domainArrow" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id="domainMenu"
+                class="hidden absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1 transform scale-95 opacity-0 transition-all duration-150 origin-top">
+                <div data-value="Blue Economy"
+                  class="domain-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Blue Economy</div>
+                <div data-value="Mindspace"
+                  class="domain-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Mindspace</div>
+                <div data-value="Arts & Culture"
+                  class="domain-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  Arts & Culture</div>
+              </div>
+            </div>
+            <input type="hidden" id="domainSelection" required>
+          </div>
+
+          <div class="space-y-1 relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Accommodation Required
+              *</label>
+            <div class="relative w-full">
+              <button type="button" id="accomDropdownBtn"
+                class="flex items-center justify-between w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition text-left cursor-pointer font-medium">
+                <span id="accomDropdownLabel" class="truncate text-slate-400">Select</span>
+                <svg class="w-4 h-4 text-slate-400 transition-transform ml-1" id="accomArrow" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id="accomMenu"
+                class="hidden absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl py-1 transform scale-95 opacity-0 transition-all duration-150 origin-top">
+                <div data-value="YES"
+                  class="accom-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  YES</div>
+                <div data-value="NO"
+                  class="accom-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                  NO</div>
+              </div>
+            </div>
+            <input type="hidden" id="accommodation" required>
+          </div>
+        </div>
+
+        <hr class="border-slate-100 my-4">
+
+        <div class="bg-slate-50/60 p-4 sm:p-5 rounded-2xl border border-slate-200/60 space-y-4">
+          <div class="text-xs font-black text-blue-600 uppercase tracking-widest flex items-center gap-1.5 select-none">
+            💳 Audit & Remittance Verification</div>
+          <div class="space-y-1">
+            <label for="utrField" class="block text-[10px] font-black text-slate-400 uppercase tracking-wider">UPI /
+              Banking Transaction UTR Reference Number *</label>
+            <input type="text" id="utrField" required placeholder="Enter 12-digit UTR verification code"
+              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition uppercase mono tracking-wider">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider">Upload Remittance
+              Receipt Screenshot *</label>
+            <div
+              class="relative group flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-xl p-4 sm:p-5 transition-all hover:border-slate-300 cursor-pointer">
+              <input type="file" id="screenshotInput" accept="image/png, image/jpeg, image/jpg" required
+                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+              <div class="text-center space-y-1 pointer-events-none px-2">
+                <p id="fileLabelText" class="text-xs font-semibold text-slate-500 break-all">Click or Drag to upload
+                  payment screenshot</p>
+                <p class="text-[10px] text-slate-400 uppercase tracking-wide">Accepts high-res PNG, JPG, or JPEG up to
+                  4MB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn"
+          class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm py-4 px-6 rounded-xl shadow-lg shadow-blue-600/10 transition-all duration-200 tracking-wide cursor-pointer flex items-center justify-center gap-2 group">
+          <span id="btnText">Submit Registration Portfolio</span>
+          <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        </button>
+      </form>
+    </div>
+
+    <div id="successStateView"
+      class="hidden text-center py-12 space-y-6 opacity-0 transition-all duration-500 transform scale-95">
+      <div
+        class="mx-auto w-14 h-16 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center shadow-sm shadow-emerald-500/5">
+        <span class="text-emerald-500 text-2xl font-black">✓</span>
+      </div>
+      <div class="space-y-2 px-2">
+        <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">Submitted Successfully!</h2>
+        <p class="text-xs sm:text-sm font-medium text-slate-500 max-w-sm mx-auto">Your registration status and other
+          details will be sent to your email id shortly.</p>
+      </div>
+      <div class="pt-4">
+        <button onclick="resetRegistrationFormState()"
+          class="bg-white hover:bg-slate-50 text-slate-500 font-bold text-xs py-3 px-6 rounded-xl transition border border-slate-200 cursor-pointer shadow-sm">↩
+          Lodge Another Registration</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxV5iYwbY8xBoMnki_N8qKosRk2mu9kukqm8Hqg4quYT6OtFLJyYiQi_rnXTEdjzTr9/exec";
+
+    const form = document.getElementById('registrationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const screenshotInput = document.getElementById('screenshotInput');
+    const fileLabelText = document.getElementById('fileLabelText');
+    const formStateView = document.getElementById('formStateView');
+    const successStateView = document.getElementById('successStateView');
+    const formAlertBlock = document.getElementById('formAlertBlock');
+    const formAlertText = document.getElementById('formAlertMessageText');
+
+    function setupDropdown(btnId, menuId, arrowId, hiddenInputId, labelId, optionClass) {
+      const btn = document.getElementById(btnId);
+      const menu = document.getElementById(menuId);
+      const arrow = document.getElementById(arrowId);
+      const hiddenInput = document.getElementById(hiddenInputId);
+      const label = document.getElementById(labelId);
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = menu.classList.contains('hidden');
+        closeAllDropdowns();
+        if (isHidden) {
+          menu.classList.remove('hidden');
+          arrow.classList.add('rotate-180');
+          setTimeout(() => menu.classList.remove('scale-95', 'opacity-0'), 10);
+        }
+      });
+
+      document.querySelectorAll(`.${optionClass}`).forEach(opt => {
+        opt.addEventListener('click', (e) => {
+          const val = e.target.getAttribute('data-value');
+          hiddenInput.value = val;
+          label.innerText = e.target.innerText;
+          label.className = "text-slate-950 font-extrabold truncate block";
+          closeAllDropdowns();
+        });
+      });
+    }
+
+    setupDropdown('genderDropdownBtn', 'genderMenu', 'genderArrow', 'gender', 'genderDropdownLabel', 'gender-option');
+    setupDropdown('customDropdownTriggerBtn', 'customDropdownMenuDeck', 'dropdownArrowIcon', 'year', 'customDropdownLabel', 'dropdown-option');
+    setupDropdown('domainDropdownBtn', 'domainMenu', 'domainArrow', 'domainSelection', 'domainDropdownLabel', 'domain-option');
+    setupDropdown('accomDropdownBtn', 'accomMenu', 'accomArrow', 'accommodation', 'accomDropdownLabel', 'accom-option');
+
+    document.addEventListener('click', closeAllDropdowns);
+
+    function closeAllDropdowns() {
+      ['genderMenu', 'customDropdownMenuDeck', 'domainMenu', 'accomMenu'].forEach(id => {
+        const m = document.getElementById(id);
+        if (m && !m.classList.contains('hidden')) {
+          m.classList.add('scale-95', 'opacity-0');
+          setTimeout(() => m.classList.add('hidden'), 150);
+        }
+      });
+      ['genderArrow', 'dropdownArrowIcon', 'domainArrow', 'accomArrow'].forEach(id => {
+        const a = document.getElementById(id);
+        if (a) a.classList.remove('rotate-180');
+      });
+    }
+
+    screenshotInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        if (file.size > 4 * 1024 * 1024) {
+          triggerInLineAlert("File bounds exceeded: Selection is larger than the 4MB ceiling limit.", "error");
+          screenshotInput.value = "";
+          fileLabelText.innerText = "Click or Drag to upload payment screenshot";
+          return;
+        }
+        fileLabelText.innerText = `📎 Attached: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+        formAlertBlock.classList.add('hidden');
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formAlertBlock.classList.add('hidden');
+
+      if (!document.getElementById('gender').value) return triggerInLineAlert("Selection required: Please select gender.", "error");
+      if (!document.getElementById('year').value) return triggerInLineAlert("Selection required: Please select cohort batch year.", "error");
+      if (!document.getElementById('domainSelection').value) return triggerInLineAlert("Selection required: Please select theme domain track.", "error");
+      if (!document.getElementById('accommodation').value) return triggerInLineAlert("Selection required: Please select accommodation option.", "error");
+
+      const file = screenshotInput.files[0];
+      if (!file) return triggerInLineAlert("Form validation error: Remittance screenshot is required.", "error");
+
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-60', 'cursor-not-allowed');
+      btnText.innerText = "Encrypting Data & Syncing Ledger...";
+
+      try {
+        const convertedBase64String = await parseFileToBase64(file);
+
+        const payloadBundle = {
+          fullName: document.getElementById('fullName').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          gender: document.getElementById('gender').value,
+          college: document.getElementById('college').value,
+          branch: document.getElementById('branch').value,
+          year: document.getElementById('year').value,
+          domainSelection: document.getElementById('domainSelection').value,
+          accommodation: document.getElementById('accommodation').value,
+          utr: document.getElementById('utrField').value,
+          imageBase64: convertedBase64String,
+          imageType: file.type
+        };
+
+        const response = await fetch(BACKEND_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payloadBundle)
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          formStateView.classList.add('hidden');
+          successStateView.classList.remove('hidden');
+          setTimeout(() => successStateView.classList.remove('scale-95', 'opacity-0'), 50);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          triggerInLineAlert(`Submission Denied: ${result.message}`, "error");
+        }
+      } catch (error) {
+        console.error(error);
+        triggerInLineAlert("Network Connectivity Error: Failed to secure database stream connection.", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+        btnText.innerText = "Submit Registration Portfolio";
+      }
+    });
+
+    function triggerInLineAlert(message, type) {
+      formAlertBlock.classList.remove('hidden', 'bg-rose-50', 'text-rose-700', 'border-rose-200');
+      if (type === "error") formAlertBlock.classList.add('bg-rose-50', 'text-rose-700', 'border-rose-200');
+      formAlertText.innerText = message;
+      formAlertBlock.classList.remove('hidden');
+      formAlertBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function resetRegistrationFormState() {
+      form.reset();
+      ['gender', 'year', 'domainSelection', 'accommodation'].forEach(id => document.getElementById(id).value = "");
+      document.getElementById('genderDropdownLabel').innerText = "Select";
+      document.getElementById('customDropdownLabel').innerText = "Select Batch Year";
+      document.getElementById('domainDropdownLabel').innerText = "Choose Theme Domain";
+      document.getElementById('accomDropdownLabel').innerText = "Select";
+
+      ['genderDropdownLabel', 'customDropdownLabel', 'domainDropdownLabel', 'accomDropdownLabel'].forEach(id => {
+        document.getElementById(id).className = "text-slate-400 font-normal";
+      });
+
+      fileLabelText.innerText = "Click or Drag to upload payment screenshot";
+      formAlertBlock.classList.add('hidden');
+      successStateView.classList.add('scale-95', 'opacity-0', 'hidden');
+      formStateView.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const parseFileToBase64 = file => new Promise((resolve, reject) => {
+      const targetFileReader = new FileReader();
+      targetFileReader.readAsDataURL(file);
+      targetFileReader.onload = () => resolve(targetFileReader.result);
+      targetFileReader.onerror = err => reject(err);
+    });
+  </script>
+</body>
+
+</html>

@@ -14,11 +14,13 @@ const Team = lazy(() => import('./pages/Team'));
 const Contact = lazy(() => import('./pages/Contact'));
 const AUNSF = lazy(() => import('./pages/AUNSF'));
 const EPICS = lazy(() => import('./pages/EPICS'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 const Aunsf1 = lazy(() => import('./pages/Aunsf1'));
 const Aunsf2 = lazy(() => import('./pages/Aunsf2'));
 const Aunsf3 = lazy(() => import('./pages/Aunsf3'));
 const Aunsf4 = lazy(() => import('./pages/Aunsf4'));
+const Register = lazy(() => import('./pages/Register'));
 
 function AppContent() {
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
@@ -49,7 +51,9 @@ function AppContent() {
           <Route path="/aunsf-2" element={<Aunsf2 />} />
           <Route path="/aunsf-3" element={<Aunsf3 />} />
           <Route path="/aunsf-4" element={<Aunsf4 />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/epics" element={<EPICS />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </Layout>
 
