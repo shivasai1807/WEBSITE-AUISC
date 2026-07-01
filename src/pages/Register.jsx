@@ -315,18 +315,10 @@ const Register = () => {
     }
   };
 
-  // Header Letter animations
-  const titleText = "Event Registration";
-  const titleContainer = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.03 }
-    }
-  };
-  const titleLetter = {
-    hidden: { opacity: 0, y: 12 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 150, damping: 12 } }
+  // Heading animation (fade + slide)
+  const headingVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
   return (
@@ -392,16 +384,12 @@ const Register = () => {
               </motion.div>
 
               <motion.h1
-                variants={titleContainer}
+                variants={headingVariants}
                 initial="hidden"
-                animate="show"
+                animate="visible"
                 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-black tracking-tight bg-gradient-to-b from-[#0D47A1] to-slate-900 bg-clip-text text-transparent px-1 select-none"
               >
-                {titleText.split("").map((char, index) => (
-                  <motion.span key={index} variants={titleLetter} className="inline-block">
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
+                Event Registration
               </motion.h1>
 
               <motion.p
@@ -485,7 +473,7 @@ const Register = () => {
                             <span className="text-xl font-black text-slate-800 mt-1">₹999</span>
                           </div>
                           <a
-                            href="https://linktr.ee/aunsf?type=early_bird_no_accommodation"
+                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
@@ -504,7 +492,7 @@ const Register = () => {
                             <span className="text-xl font-black text-orange-600 mt-1">₹1599</span>
                           </div>
                           <a
-                            href="https://linktr.ee/aunsf?type=early_bird_with_accommodation"
+                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
@@ -548,7 +536,7 @@ const Register = () => {
                             <span className="text-xl font-black text-slate-800 mt-1">₹1199</span>
                           </div>
                           <a
-                            href="https://linktr.ee/aunsf?type=regular_no_accommodation"
+                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-center py-2.5 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
@@ -567,7 +555,7 @@ const Register = () => {
                             <span className="text-xl font-black text-blue-600 mt-1">₹1799</span>
                           </div>
                           <a
-                            href="https://linktr.ee/aunsf?type=regular_with_accommodation"
+                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-center py-2.5 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
