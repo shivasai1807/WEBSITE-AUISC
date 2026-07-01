@@ -1,16 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  School, 
-  Award, 
-  ChevronDown, 
-  Check, 
-  AlertTriangle, 
-  Upload, 
-  CreditCard, 
+import {
+  User,
+  Mail,
+  Phone,
+  School,
+  Award,
+  ChevronDown,
+  Check,
+  AlertTriangle,
+  Upload,
+  CreditCard,
   ArrowRight,
   Zap,
   Calendar,
@@ -43,25 +43,23 @@ const FloatingInput = ({ id, label, icon: Icon, value, onChange, type = "text", 
           onChange={onChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className={`w-full bg-slate-50/50 border rounded-2xl ${Icon ? 'pl-11' : 'px-4'} pr-4 py-3.5 text-sm text-slate-800 placeholder-transparent outline-none transition-all duration-300 ${
-            isFocused
-              ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white'
-              : 'border-slate-200 hover:border-slate-300'
-          }`}
+          className={`w-full bg-slate-50/50 border rounded-2xl ${Icon ? 'pl-11' : 'px-4'} pr-4 py-3.5 text-sm text-slate-800 placeholder-transparent outline-none transition-all duration-300 ${isFocused
+            ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white'
+            : 'border-slate-200 hover:border-slate-300'
+            }`}
           placeholder={label}
           {...props}
         />
         <label
           htmlFor={id}
-          className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${
-            isFocused || hasValue
-              ? `-translate-y-7 scale-90 ${isFocused ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-              : `translate-y-4 ${Icon ? 'translate-x-11' : 'translate-x-4'} text-slate-400`
-          }`}
+          className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${isFocused || hasValue
+            ? `-translate-y-7 scale-90 ${isFocused ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+            : `translate-y-4 ${Icon ? 'translate-x-11' : 'translate-x-4'} text-slate-400`
+            }`}
         >
           {label}
         </label>
-        
+
         {/* Animated bottom line */}
         <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${isFocused ? 'w-[90%]' : 'w-0'}`} />
       </div>
@@ -88,7 +86,7 @@ const Register = () => {
   const [submittingState, setSubmittingState] = useState(false);
   const [viewStateMode, setViewStateMode] = useState("form");
   const [systemAlertMessage, setSystemAlertMessage] = useState({ visible: false, text: "" });
-  
+
   const [yearDropdownOpen, setYearDropdownOpen] = useState(false);
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
   const [domainDropdownOpen, setDomainDropdownOpen] = useState(false);
@@ -333,14 +331,14 @@ const Register = () => {
 
   return (
     <div className="min-h-screen text-slate-800 flex items-center justify-center p-3 sm:p-4 md:p-8 antialiased selection:bg-blue-500/10 font-['Plus_Jakarta_Sans',sans-serif] w-full box-border relative z-0">
-      
+
       {/* Background Layer with soft blue glow and blurred circles */}
       <div className="fixed inset-0 bg-gradient-to-br from-light-blue-purple via-white to-light-blue-purple -z-50 select-none pointer-events-none overflow-hidden">
         {/* Soft Grid Overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-40" />
 
         {/* Ambient subtle light circles */}
-        <motion.div 
+        <motion.div
           animate={{
             x: [0, 20, -10, 0],
             y: [0, -20, 20, 0],
@@ -354,7 +352,7 @@ const Register = () => {
           className="absolute top-[10%] left-[10%] w-[35vw] h-[35vw] rounded-full bg-blue-400/10 blur-[80px]"
         />
 
-        <motion.div 
+        <motion.div
           animate={{
             x: [0, -20, 20, 0],
             y: [0, 20, -10, 0],
@@ -381,10 +379,10 @@ const Register = () => {
 
         {viewStateMode === "form" ? (
           <div className="space-y-8">
-            
+
             {/* Header Section */}
             <div className="text-center space-y-3.5">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, type: "spring" }}
@@ -393,7 +391,7 @@ const Register = () => {
                 <Zap size={10} className="fill-blue-600 text-blue-600" /> AUNSF Event Platform
               </motion.div>
 
-              <motion.h1 
+              <motion.h1
                 variants={titleContainer}
                 initial="hidden"
                 animate="show"
@@ -406,13 +404,14 @@ const Register = () => {
                 ))}
               </motion.h1>
 
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="text-slate-500 text-xs sm:text-sm max-w-lg mx-auto px-2 leading-relaxed font-semibold"
               >
-                Complete the registration form below to secure your participation in AUNSF 4.0.
+                " *Teams will be thoughtfully formed by the organizers to encourage participants to connect and collaborate with new people.
+                To ensure a fair and smooth experience for everyone, team allocations will be final and requests for changes or grouping with friends cannot be accommodated."*
               </motion.p>
             </div>
 
@@ -422,15 +421,15 @@ const Register = () => {
                 <motion.div
                   ref={alertContainerRef}
                   initial={{ opacity: 0, y: -15, scale: 0.97 }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0, 
+                  animate={{
+                    opacity: 1,
+                    y: 0,
                     scale: 1,
                     x: [0, -8, 8, -8, 8, 0]
                   }}
                   exit={{ opacity: 0, y: -15, scale: 0.97 }}
-                  transition={{ 
-                    type: "spring", 
+                  transition={{
+                    type: "spring",
                     duration: 0.5,
                     x: { type: "tween", duration: 0.4 }
                   }}
@@ -445,7 +444,7 @@ const Register = () => {
             </AnimatePresence>
 
             <form onSubmit={handleFormSubmissionEvent} className="space-y-8">
-              
+
               {/* SECTION 1: REGISTRATION FEE STRUCTURE */}
               <div className="space-y-4">
                 <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none font-sans border-l-2 border-[#0D47A1] pl-3">
@@ -453,9 +452,9 @@ const Register = () => {
                 </div>
 
                 <div className="flex flex-col gap-6 mt-2">
-                  
+
                   {/* Card 1: Early Bird */}
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.01, y: -2 }}
                     transition={{ type: "spring", stiffness: 350, damping: 25 }}
                     className="relative overflow-hidden bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm group"
@@ -477,7 +476,7 @@ const Register = () => {
                       <h3 className="text-base font-extrabold text-slate-800 select-none mb-4">
                         Early Bird Registration
                       </h3>
-                      
+
                       <div className="flex flex-col gap-5">
                         {/* Option 1: Without Accommodation */}
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
@@ -485,7 +484,6 @@ const Register = () => {
                             <span className="text-xs font-semibold text-slate-500 font-sans">Without Accommodation</span>
                             <span className="text-xl font-black text-slate-800 mt-1">₹999</span>
                           </div>
-                          {/* Pay Now - Without Accommodation */}
                           <a
                             href="https://linktr.ee/aunsf?type=early_bird_no_accommodation"
                             target="_blank"
@@ -505,7 +503,6 @@ const Register = () => {
                             <span className="text-xs font-semibold text-slate-500 font-sans">With Accommodation</span>
                             <span className="text-xl font-black text-orange-600 mt-1">₹1599</span>
                           </div>
-                          {/* Pay Now - With Accommodation */}
                           <a
                             href="https://linktr.ee/aunsf?type=early_bird_with_accommodation"
                             target="_blank"
@@ -520,7 +517,7 @@ const Register = () => {
                   </motion.div>
 
                   {/* Card 2: Standard Registration */}
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.01, y: -2 }}
                     transition={{ type: "spring", stiffness: 350, damping: 25 }}
                     className="relative overflow-hidden bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm group"
@@ -542,7 +539,7 @@ const Register = () => {
                       <h3 className="text-base font-extrabold text-slate-800 select-none mb-4">
                         Regular Registration
                       </h3>
-                      
+
                       <div className="flex flex-col gap-5">
                         {/* Option 1: Without Accommodation */}
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
@@ -550,7 +547,6 @@ const Register = () => {
                             <span className="text-xs font-semibold text-slate-500 font-sans">Without Accommodation</span>
                             <span className="text-xl font-black text-slate-800 mt-1">₹1199</span>
                           </div>
-                          {/* Pay Now - Without Accommodation */}
                           <a
                             href="https://linktr.ee/aunsf?type=regular_no_accommodation"
                             target="_blank"
@@ -570,7 +566,6 @@ const Register = () => {
                             <span className="text-xs font-semibold text-slate-500 font-sans">With Accommodation</span>
                             <span className="text-xl font-black text-blue-600 mt-1">₹1799</span>
                           </div>
-                          {/* Pay Now - With Accommodation */}
                           <a
                             href="https://linktr.ee/aunsf?type=regular_with_accommodation"
                             target="_blank"
@@ -594,78 +589,76 @@ const Register = () => {
                 </div>
 
                 <div className="space-y-5">
-                  <FloatingInput 
-                    id="fullName" 
-                    label="Full Name *" 
-                    icon={User} 
-                    value={formData.fullName} 
+                  <FloatingInput
+                    id="fullName"
+                    label="Full Name *"
+                    icon={User}
+                    value={formData.fullName}
                     onChange={handleTextValueChange}
                   />
 
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
                     <div className="md:col-span-5">
-                      <FloatingInput 
-                        id="email" 
-                        label="Email Address *" 
-                        icon={Mail} 
+                      <FloatingInput
+                        id="email"
+                        label="Email Address *"
+                        icon={Mail}
                         type="email"
-                        value={formData.email} 
+                        value={formData.email}
                         onChange={handleTextValueChange}
                       />
                     </div>
                     <div className="md:col-span-4">
-                      <FloatingInput 
-                        id="phone" 
-                        label="Phone Number *" 
-                        icon={Phone} 
+                      <FloatingInput
+                        id="phone"
+                        label="Phone Number *"
+                        icon={Phone}
                         type="tel"
                         pattern="[0-9]{10}"
-                        value={formData.phone} 
+                        value={formData.phone}
                         onChange={handleTextValueChange}
                       />
                     </div>
-                    
+
                     {/* Dropdown with Floating Label and Light Theme matching inputs */}
                     <div className="md:col-span-3 relative group w-full font-sans" ref={genderDropdownRef}>
                       <div className="relative flex items-center">
                         <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${genderDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
                           <Users size={18} />
                         </div>
-                        
+
                         <button
                           type="button"
                           onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
-                          className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${
-                            genderDropdownOpen
-                              ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                              : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                          }`}
+                          className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${genderDropdownOpen
+                            ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
+                            : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                            }`}
                         >
                           <span className={`truncate block whitespace-nowrap ${formData.gender ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
                             {getGenderDropdownLabelText()}
                           </span>
-                          
+
                           <div className="absolute right-4 top-1/2 -translate-y-1/2">
                             <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${genderDropdownOpen ? "rotate-180" : ""}`} />
                           </div>
                         </button>
-                        
+
                         <label
-                          className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${
-                            genderDropdownOpen || (formData.gender && formData.gender.length > 0)
-                              ? `-translate-y-7 scale-90 ${genderDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                              : `translate-y-4 translate-x-11 text-slate-400`
-                          }`}
+                          className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${genderDropdownOpen || (formData.gender && formData.gender.length > 0)
+                            ? `-translate-y-7 scale-90 ${genderDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+                            : `translate-y-4 translate-x-11 text-slate-400`
+                            }`}
                         >
                           Gender *
                         </label>
-                        
+
                         <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${genderDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
                       </div>
 
                       <AnimatePresence>
                         {genderDropdownOpen && (
-                          <motion.div 
+                          <motion.div
                             initial={{ opacity: 0, scale: 0.95, y: -10 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -691,21 +684,21 @@ const Register = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-5">
                   <div className="sm:col-span-1 md:col-span-5">
-                    <FloatingInput 
-                      id="college" 
-                      label="Institution / College *" 
-                      icon={School} 
-                      value={formData.college} 
+                    <FloatingInput
+                      id="college"
+                      label="Institution / College *"
+                      icon={School}
+                      value={formData.college}
                       onChange={handleTextValueChange}
                     />
                   </div>
 
                   <div className="sm:col-span-1 md:col-span-3">
-                    <FloatingInput 
-                      id="branch" 
-                      label="Branch *" 
-                      icon={Award} 
-                      value={formData.branch} 
+                    <FloatingInput
+                      id="branch"
+                      label="Branch *"
+                      icon={Award}
+                      value={formData.branch}
                       onChange={handleTextValueChange}
                     />
                   </div>
@@ -716,41 +709,39 @@ const Register = () => {
                       <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${yearDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
                         <Calendar size={18} />
                       </div>
-                      
+
                       <button
                         type="button"
                         onClick={() => setYearDropdownOpen(!yearDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${
-                          yearDropdownOpen
-                            ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                            : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                        }`}
+                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${yearDropdownOpen
+                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                          }`}
                       >
                         <span className={`truncate block whitespace-nowrap ${formData.year ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
                           {getYearDropdownLabelText()}
                         </span>
-                        
+
                         <div className="absolute right-4 top-1/2 -translate-y-1/2">
                           <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${yearDropdownOpen ? "rotate-180" : ""}`} />
                         </div>
                       </button>
-                      
+
                       <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${
-                          yearDropdownOpen || (formData.year && formData.year.length > 0)
-                            ? `-translate-y-7 scale-90 ${yearDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                            : `translate-y-4 translate-x-11 text-slate-400`
-                        }`}
+                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${yearDropdownOpen || (formData.year && formData.year.length > 0)
+                          ? `-translate-y-7 scale-90 ${yearDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+                          : `translate-y-4 translate-x-11 text-slate-400`
+                          }`}
                       >
                         Academic Year *
                       </label>
-                      
+
                       <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${yearDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
                     </div>
 
                     <AnimatePresence>
                       {yearDropdownOpen && (
-                        <motion.div 
+                        <motion.div
                           initial={{ opacity: 0, scale: 0.95, y: -10 }}
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -774,41 +765,39 @@ const Register = () => {
                       <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${domainDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
                         <Target size={18} />
                       </div>
-                      
+
                       <button
                         type="button"
                         onClick={() => setDomainDropdownOpen(!domainDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${
-                          domainDropdownOpen
-                            ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                            : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                        }`}
+                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${domainDropdownOpen
+                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                          }`}
                       >
                         <span className={`truncate block whitespace-nowrap ${formData.domainSelection ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
                           {formData.domainSelection || "Choose Theme Domain"}
                         </span>
-                        
+
                         <div className="absolute right-4 top-1/2 -translate-y-1/2">
                           <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${domainDropdownOpen ? "rotate-180" : ""}`} />
                         </div>
                       </button>
-                      
+
                       <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${
-                          domainDropdownOpen || (formData.domainSelection && formData.domainSelection.length > 0)
-                            ? `-translate-y-7 scale-90 ${domainDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                            : `translate-y-4 translate-x-11 text-slate-400`
-                        }`}
+                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${domainDropdownOpen || (formData.domainSelection && formData.domainSelection.length > 0)
+                          ? `-translate-y-7 scale-90 ${domainDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+                          : `translate-y-4 translate-x-11 text-slate-400`
+                          }`}
                       >
                         Domain Selection *
                       </label>
-                      
+
                       <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${domainDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
                     </div>
 
                     <AnimatePresence>
-                      {domainDropdownOpen && (
-                        <motion.div 
+                      {DropdownOpen && (
+                        <motion.div
                           initial={{ opacity: 0, scale: 0.95, y: -10 }}
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -829,41 +818,39 @@ const Register = () => {
                       <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${accomDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
                         <Home size={18} />
                       </div>
-                      
+
                       <button
                         type="button"
                         onClick={() => setAccomDropdownOpen(!accomDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${
-                          accomDropdownOpen
-                            ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                            : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                        }`}
+                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${accomDropdownOpen
+                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                          }`}
                       >
                         <span className={`truncate block whitespace-nowrap ${formData.accommodation ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
                           {getAccomDropdownLabelText()}
                         </span>
-                        
+
                         <div className="absolute right-4 top-1/2 -translate-y-1/2">
                           <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${accomDropdownOpen ? "rotate-180" : ""}`} />
                         </div>
                       </button>
-                      
+
                       <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${
-                          accomDropdownOpen || (formData.accommodation && formData.accommodation.length > 0)
-                            ? `-translate-y-7 scale-90 ${accomDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                            : `translate-y-4 translate-x-11 text-slate-400`
-                        }`}
+                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${accomDropdownOpen || (formData.accommodation && formData.accommodation.length > 0)
+                          ? `-translate-y-7 scale-90 ${accomDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+                          : `translate-y-4 translate-x-11 text-slate-400`
+                          }`}
                       >
                         Accommodation Required *
                       </label>
-                      
+
                       <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${accomDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
                     </div>
 
                     <AnimatePresence>
                       {accomDropdownOpen && (
-                        <motion.div 
+                        <motion.div
                           initial={{ opacity: 0, scale: 0.95, y: -10 }}
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -886,14 +873,14 @@ const Register = () => {
                 </div>
 
                 <div className="bg-slate-50/60 border border-slate-200/80 p-5 sm:p-6 rounded-[2rem] space-y-6">
-                  
+
                   {/* UTR Number field */}
                   <div className="space-y-2">
-                    <FloatingInput 
-                      id="utr" 
-                      label="UPI / Banking Transaction UTR Reference Number *" 
-                      icon={CreditCard} 
-                      value={formData.utr} 
+                    <FloatingInput
+                      id="utr"
+                      label="UPI / Banking Transaction UTR Reference Number *"
+                      icon={CreditCard}
+                      value={formData.utr}
                       onChange={handleTextValueChange}
                     />
                   </div>
@@ -903,31 +890,31 @@ const Register = () => {
                     <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 select-none">
                       Upload Remittance Receipt Screenshot *
                     </label>
-                    
+
                     <div className="relative flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 hover:bg-slate-50/80 hover:border-blue-500/40 transition-all duration-300 cursor-pointer group min-h-[140px]">
-                      <input 
-                        type="file" 
-                        id="screenshotInput" 
-                        accept="image/png, image/jpeg, image/jpg" 
-                        required 
-                        onChange={handleFileUploadStream} 
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+                      <input
+                        type="file"
+                        id="screenshotInput"
+                        accept="image/png, image/jpeg, image/jpg"
+                        required
+                        onChange={handleFileUploadStream}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                       />
-                      
+
                       {filePreview ? (
                         <div className="relative w-full h-40 rounded-xl overflow-hidden flex items-center justify-center bg-slate-50 pointer-events-none">
                           <img src={filePreview} alt="Receipt preview" className="w-full h-full object-contain" />
                           <div className="absolute inset-0 bg-slate-950/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <span className="text-white text-xs font-semibold px-3 py-1.5 bg-slate-900/80 rounded-full border border-slate-800">Change Screenshot</span>
                           </div>
-                          
+
                           <div className="absolute top-2 right-2 w-7 h-7 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg border border-emerald-400">
                             <Check size={14} strokeWidth={3} />
                           </div>
                         </div>
                       ) : (
                         <div className="text-center space-y-3 px-2 pointer-events-none">
-                          <motion.div 
+                          <motion.div
                             animate={{ y: [0, -4, 0] }}
                             transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
                             className="w-12 h-12 bg-slate-100 border border-slate-200 rounded-full flex items-center justify-center mx-auto text-slate-400 group-hover:text-blue-500 group-hover:bg-blue-50 group-hover:border-blue-500/20 transition-all duration-300"
@@ -942,7 +929,7 @@ const Register = () => {
                       {/* simulated progress bar */}
                       {submittingState && (
                         <div className="absolute bottom-0 left-0 w-full h-1.5 bg-slate-100 rounded-b-2xl overflow-hidden pointer-events-none">
-                          <motion.div 
+                          <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${uploadProgress}%` }}
                             transition={{ duration: 0.2 }}
@@ -959,9 +946,9 @@ const Register = () => {
 
               {/* Submit CTA button */}
               <div className="pt-2">
-                <button 
-                  type="submit" 
-                  disabled={submittingState} 
+                <button
+                  type="submit"
+                  disabled={submittingState}
                   className="relative w-full overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-[size:200%_auto] hover:bg-right text-white font-extrabold text-sm py-4 px-6 rounded-2xl shadow-[0_4px_25px_rgba(13,71,161,0.12)] hover:shadow-[0_4px_30px_rgba(13,71,161,0.25)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-300 tracking-wide cursor-pointer flex items-center justify-center gap-2 group disabled:opacity-75 disabled:pointer-events-none select-none"
                   style={{ transition: "background-position 0.6s ease, transform 0.2s ease, box-shadow 0.3s ease" }}
                 >
@@ -1002,41 +989,42 @@ const Register = () => {
           >
             {/* Pulsing Emerald circles */}
             <div className="relative">
-              <motion.div 
+              <motion.div
                 animate={{ scale: [1, 1.25, 1], opacity: [0.3, 0, 0.3] }}
                 transition={{ repeat: Infinity, duration: 2 }}
                 className="absolute inset-0 w-24 h-24 bg-emerald-500/10 rounded-full -m-4 blur-md pointer-events-none"
               />
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 220, damping: 18 }}
                 className="relative w-16 h-16 bg-emerald-50/60 border border-emerald-500/25 text-emerald-600 rounded-full flex items-center justify-center shadow-md shadow-emerald-500/5"
               >
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <motion.path 
+                  <motion.path
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth="3" 
-                    d="M5 13l4 4L19 7" 
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="3"
+                    d="M5 13l4 4L19 7"
                   />
                 </svg>
               </motion.div>
             </div>
-            
+
             <div className="space-y-3">
               <h2 className="text-2xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent select-none">Submitted Successfully!</h2>
               <p className="text-slate-500 text-xs sm:text-sm font-semibold max-w-sm mx-auto leading-relaxed">
                 Your registration profile and transaction indicators have been securely logged. Your pass credentials will be transmitted to your email address shortly.
+                ⚠️ **Check your Spam folder:** If your ticket lands there, you **must** click **"Move to Inbox"** or **"Report as Not Spam"** to unblock and view your entry QR code!
               </p>
             </div>
-            
+
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="pt-4">
-              <button 
-                onClick={triggerStateViewReset} 
+              <button
+                onClick={triggerStateViewReset}
                 className="bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-700 font-extrabold text-xs py-3.5 px-8 rounded-xl transition border border-slate-200 cursor-pointer shadow-sm select-none flex items-center gap-1.5"
               >
                 Lodge Another Registration
