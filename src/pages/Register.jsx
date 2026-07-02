@@ -25,10 +25,9 @@ const BACKEND_URL = "https://script.google.com/macros/s/AKfycbvV5iYwbY8xBoMnki_N
 // Premium Custom Floating Input Component in Light Theme
 const FloatingInput = ({ id, label, icon: Icon, value, onChange, type = "text", required = true, ...props }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const hasValue = value && value.length > 0;
 
   return (
-    <div className="relative space-y-1 group w-full font-sans">
+    <div className="relative w-full font-sans pt-5">
       <div className="relative flex items-center">
         {Icon && (
           <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${isFocused ? 'text-blue-600' : 'text-slate-400'}`}>
@@ -43,7 +42,7 @@ const FloatingInput = ({ id, label, icon: Icon, value, onChange, type = "text", 
           onChange={onChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className={`w-full bg-slate-50/50 border rounded-2xl ${Icon ? 'pl-11' : 'px-4'} pr-4 py-3.5 text-sm text-slate-800 placeholder-transparent outline-none transition-all duration-300 ${isFocused
+          className={`peer w-full bg-slate-50/50 border rounded-2xl ${Icon ? 'pl-11' : 'px-4'} pr-4 py-3.5 text-sm text-slate-800 placeholder-transparent outline-none transition-all duration-300 ${isFocused
             ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white'
             : 'border-slate-200 hover:border-slate-300'
             }`}
@@ -52,10 +51,7 @@ const FloatingInput = ({ id, label, icon: Icon, value, onChange, type = "text", 
         />
         <label
           htmlFor={id}
-          className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${isFocused || hasValue
-            ? `-translate-y-7 scale-90 ${isFocused ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-            : `translate-y-4 ${Icon ? 'translate-x-11' : 'translate-x-4'} text-slate-400`
-            }`}
+          className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left text-slate-400 translate-y-4 ${Icon ? 'translate-x-11' : 'translate-x-4'} peer-focus:-translate-y-7 peer-focus:scale-[0.85] peer-focus:text-blue-600 peer-focus:font-bold peer-focus:translate-x-0 peer-[:not(:placeholder-shown)]:-translate-y-7 peer-[:not(:placeholder-shown)]:scale-[0.85] peer-[:not(:placeholder-shown)]:text-slate-500 peer-[:not(:placeholder-shown)]:translate-x-0`}
         >
           {label}
         </label>
@@ -433,8 +429,294 @@ const Register = () => {
 
             <form onSubmit={handleFormSubmissionEvent} className="space-y-8">
 
+
+              {/* SECTION 2: PERSONAL DETAILS */}
+              <div className="space-y-4 pt-2">
+                <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none font-sans border-l-2 border-[#0D47A1] pl-3">
+                  👤 Personal Details
+                </div>
+
+                <div className="space-y-5">
+                  <FloatingInput
+                    id="fullName"
+                    label="Full Name *"
+                    icon={User}
+                    value={formData.fullName}
+                    onChange={handleTextValueChange}
+                  />
+
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+                    <div className="md:col-span-5">
+                      <FloatingInput
+                        id="email"
+                        label="Email Address *"
+                        icon={Mail}
+                        type="email"
+                        value={formData.email}
+                        onChange={handleTextValueChange}
+                      />
+                    </div>
+                    <div className="md:col-span-4">
+                      <FloatingInput
+                        id="phone"
+                        label="Phone Number *"
+                        icon={Phone}
+                        type="tel"
+                        pattern="[0-9]{10}"
+                        value={formData.phone}
+                        onChange={handleTextValueChange}
+                      />
+                    </div>
+
+                    {/* Dropdown with Floating Label and Light Theme matching inputs */}
+                    <div className="md:col-span-3 relative group w-full font-sans pt-5" ref={genderDropdownRef}>
+                      <div className="relative flex items-center">
+                        <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${genderDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
+                          <Users size={18} />
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
+                          className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${genderDropdownOpen
+                            ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
+                            : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                            }`}
+                        >
+                          <span className={`truncate block whitespace-nowrap ${formData.gender ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
+                            {getGenderDropdownLabelText()}
+                          </span>
+
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                            <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${genderDropdownOpen ? "rotate-180" : ""}`} />
+                          </div>
+                        </button>
+
+                        <label
+                          className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${genderDropdownOpen || (formData.gender && formData.gender.length > 0)
+                            ? `-translate-y-7 scale-[0.85] translate-x-0 ${genderDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+                            : `translate-y-4 translate-x-11 text-slate-400`
+                            }`}
+                        >
+                          Gender *
+                        </label>
+
+                        <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${genderDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
+                      </div>
+
+                      <AnimatePresence>
+                        {genderDropdownOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                            transition={{ type: "spring", duration: 0.3 }}
+                            className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
+                          >
+                            <div onClick={() => { handleCustomSelect("gender", "MALE"); setGenderDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Male</div>
+                            <div onClick={() => { handleCustomSelect("gender", "FEMALE"); setGenderDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Female</div>
+                            <div onClick={() => { handleCustomSelect("gender", "OTHER"); setGenderDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Other</div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* SECTION 3: ACADEMIC DETAILS */}
+              <div className="space-y-4 pt-2">
+                <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none border-l-2 border-[#0D47A1] pl-3">
+                  🎓 Academic Details
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-5">
+                  <div className="sm:col-span-1 md:col-span-5">
+                    <FloatingInput
+                      id="college"
+                      label="Institution / College *"
+                      icon={School}
+                      value={formData.college}
+                      onChange={handleTextValueChange}
+                    />
+                  </div>
+
+                  <div className="sm:col-span-1 md:col-span-3">
+                    <FloatingInput
+                      id="branch"
+                      label="Branch *"
+                      icon={Award}
+                      value={formData.branch}
+                      onChange={handleTextValueChange}
+                    />
+                  </div>
+
+                  {/* Dropdown with Floating Label and Light Theme matching inputs */}
+                  <div className="sm:col-span-2 md:col-span-4 relative group w-full font-sans pt-5" ref={yearDropdownRef}>
+                    <div className="relative flex items-center">
+                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${yearDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
+                        <Calendar size={18} />
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setYearDropdownOpen(!yearDropdownOpen)}
+                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${yearDropdownOpen
+                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                          }`}
+                      >
+                        <span className={`truncate block whitespace-nowrap ${formData.year ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
+                          {getYearDropdownLabelText()}
+                        </span>
+
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${yearDropdownOpen ? "rotate-180" : ""}`} />
+                        </div>
+                      </button>
+
+                      <label
+                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${yearDropdownOpen || (formData.year && formData.year.length > 0)
+                          ? `-translate-y-7 scale-[0.85] translate-x-0 ${yearDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+                          : `translate-y-4 translate-x-11 text-slate-400`
+                          }`}
+                      >
+                        Academic Year *
+                      </label>
+
+                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${yearDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
+                    </div>
+
+                    <AnimatePresence>
+                      {yearDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                          transition={{ type: "spring", duration: 0.3 }}
+                          className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
+                        >
+                          <div onClick={() => { handleCustomSelect("year", "1"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">1st Year (Freshman)</div>
+                          <div onClick={() => { handleCustomSelect("year", "2"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">2nd Year (Sophomore)</div>
+                          <div onClick={() => { handleCustomSelect("year", "3"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">3rd Year (Junior)</div>
+                          <div onClick={() => { handleCustomSelect("year", "4"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">4th Year (Senior)</div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+                  {/* Dropdown for Domain Selection */}
+                  <div className="relative group w-full font-sans pt-5" ref={domainDropdownRef}>
+                    <div className="relative flex items-center">
+                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${domainDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
+                        <Target size={18} />
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setDomainDropdownOpen(!domainDropdownOpen)}
+                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${domainDropdownOpen
+                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                          }`}
+                      >
+                        <span className={`truncate block whitespace-nowrap ${formData.domainSelection ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
+                          {formData.domainSelection || "Choose Theme Domain"}
+                        </span>
+
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${domainDropdownOpen ? "rotate-180" : ""}`} />
+                        </div>
+                      </button>
+
+                      <label
+                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${domainDropdownOpen || (formData.domainSelection && formData.domainSelection.length > 0)
+                          ? `-translate-y-7 scale-[0.85] translate-x-0 ${domainDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+                          : `translate-y-4 translate-x-11 text-slate-400`
+                          }`}
+                      >
+                        Domain Selection *
+                      </label>
+
+                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${domainDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
+                    </div>
+
+                    <AnimatePresence>
+                      {domainDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                          transition={{ type: "spring", duration: 0.3 }}
+                          className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
+                        >
+                          {["Blue Economy", "Mindspace", "Arts & Culture"].map((d) => (
+                            <div key={d} onClick={() => { handleCustomSelect("domainSelection", d); setDomainDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">{d}</div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Dropdown for Accommodation Required */}
+                  <div className="relative group w-full font-sans pt-5" ref={accomDropdownRef}>
+                    <div className="relative flex items-center">
+                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${accomDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
+                        <Home size={18} />
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setAccomDropdownOpen(!accomDropdownOpen)}
+                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${accomDropdownOpen
+                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                          }`}
+                      >
+                        <span className={`truncate block whitespace-nowrap ${formData.accommodation ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
+                          {getAccomDropdownLabelText()}
+                        </span>
+
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${accomDropdownOpen ? "rotate-180" : ""}`} />
+                        </div>
+                      </button>
+
+                      <label
+                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${accomDropdownOpen || (formData.accommodation && formData.accommodation.length > 0)
+                          ? `-translate-y-7 scale-[0.85] translate-x-0 ${accomDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+                          : `translate-y-4 translate-x-11 text-slate-400`
+                          }`}
+                      >
+                        Accommodation Required *
+                      </label>
+
+                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${accomDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
+                    </div>
+
+                    <AnimatePresence>
+                      {accomDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                          transition={{ type: "spring", duration: 0.3 }}
+                          className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
+                        >
+                          <div onClick={() => { handleCustomSelect("accommodation", "YES"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Yes, Accommodation Needed</div>
+                          <div onClick={() => { handleCustomSelect("accommodation", "NO"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">No, Accommodation Not Needed</div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+
+
               {/* SECTION 1: REGISTRATION FEE STRUCTURE */}
-              <div className="space-y-4">
+              <div className="space-y-4 pt-2">
                 <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none font-sans border-l-2 border-[#0D47A1] pl-3">
                   🏷️ Registration Fee Structure
                 </div>
@@ -570,294 +852,10 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* SECTION 2: PERSONAL DETAILS */}
-              <div className="space-y-4 pt-2">
-                <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none font-sans border-l-2 border-[#0D47A1] pl-3">
-                  👤 Personal Details
-                </div>
-
-                <div className="space-y-5">
-                  <FloatingInput
-                    id="fullName"
-                    label="Full Name *"
-                    icon={User}
-                    value={formData.fullName}
-                    onChange={handleTextValueChange}
-                  />
-
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-                    <div className="md:col-span-5">
-                      <FloatingInput
-                        id="email"
-                        label="Email Address *"
-                        icon={Mail}
-                        type="email"
-                        value={formData.email}
-                        onChange={handleTextValueChange}
-                      />
-                    </div>
-                    <div className="md:col-span-4">
-                      <FloatingInput
-                        id="phone"
-                        label="Phone Number *"
-                        icon={Phone}
-                        type="tel"
-                        pattern="[0-9]{10}"
-                        value={formData.phone}
-                        onChange={handleTextValueChange}
-                      />
-                    </div>
-
-                    {/* Dropdown with Floating Label and Light Theme matching inputs */}
-                    <div className="md:col-span-3 relative group w-full font-sans" ref={genderDropdownRef}>
-                      <div className="relative flex items-center">
-                        <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${genderDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
-                          <Users size={18} />
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
-                          className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${genderDropdownOpen
-                            ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                            : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                            }`}
-                        >
-                          <span className={`truncate block whitespace-nowrap ${formData.gender ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
-                            {getGenderDropdownLabelText()}
-                          </span>
-
-                          <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                            <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${genderDropdownOpen ? "rotate-180" : ""}`} />
-                          </div>
-                        </button>
-
-                        <label
-                          className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${genderDropdownOpen || (formData.gender && formData.gender.length > 0)
-                            ? `-translate-y-7 scale-90 ${genderDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                            : `translate-y-4 translate-x-11 text-slate-400`
-                            }`}
-                        >
-                          Gender *
-                        </label>
-
-                        <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${genderDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
-                      </div>
-
-                      <AnimatePresence>
-                        {genderDropdownOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                            transition={{ type: "spring", duration: 0.3 }}
-                            className="absolute left-0 z-50 w-full mt-2 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
-                          >
-                            <div onClick={() => { handleCustomSelect("gender", "MALE"); setGenderDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Male</div>
-                            <div onClick={() => { handleCustomSelect("gender", "FEMALE"); setGenderDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Female</div>
-                            <div onClick={() => { handleCustomSelect("gender", "OTHER"); setGenderDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Other</div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* SECTION 3: ACADEMIC DETAILS */}
-              <div className="space-y-4 pt-2">
-                <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none border-l-2 border-[#0D47A1] pl-3">
-                  🎓 Academic Details
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-5">
-                  <div className="sm:col-span-1 md:col-span-5">
-                    <FloatingInput
-                      id="college"
-                      label="Institution / College *"
-                      icon={School}
-                      value={formData.college}
-                      onChange={handleTextValueChange}
-                    />
-                  </div>
-
-                  <div className="sm:col-span-1 md:col-span-3">
-                    <FloatingInput
-                      id="branch"
-                      label="Branch *"
-                      icon={Award}
-                      value={formData.branch}
-                      onChange={handleTextValueChange}
-                    />
-                  </div>
-
-                  {/* Dropdown with Floating Label and Light Theme matching inputs */}
-                  <div className="sm:col-span-2 md:col-span-4 relative group w-full font-sans" ref={yearDropdownRef}>
-                    <div className="relative flex items-center">
-                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${yearDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
-                        <Calendar size={18} />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setYearDropdownOpen(!yearDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${yearDropdownOpen
-                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                          }`}
-                      >
-                        <span className={`truncate block whitespace-nowrap ${formData.year ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
-                          {getYearDropdownLabelText()}
-                        </span>
-
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${yearDropdownOpen ? "rotate-180" : ""}`} />
-                        </div>
-                      </button>
-
-                      <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${yearDropdownOpen || (formData.year && formData.year.length > 0)
-                          ? `-translate-y-7 scale-90 ${yearDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                          : `translate-y-4 translate-x-11 text-slate-400`
-                          }`}
-                      >
-                        Academic Year *
-                      </label>
-
-                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${yearDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
-                    </div>
-
-                    <AnimatePresence>
-                      {yearDropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                          transition={{ type: "spring", duration: 0.3 }}
-                          className="absolute left-0 z-50 w-full mt-2 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
-                        >
-                          <div onClick={() => { handleCustomSelect("year", "1"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">1st Year (Freshman)</div>
-                          <div onClick={() => { handleCustomSelect("year", "2"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">2nd Year (Sophomore)</div>
-                          <div onClick={() => { handleCustomSelect("year", "3"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">3rd Year (Junior)</div>
-                          <div onClick={() => { handleCustomSelect("year", "4"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">4th Year (Senior)</div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
-                  {/* Dropdown for Domain Selection */}
-                  <div className="relative group w-full font-sans" ref={domainDropdownRef}>
-                    <div className="relative flex items-center">
-                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${domainDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
-                        <Target size={18} />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setDomainDropdownOpen(!domainDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${domainDropdownOpen
-                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                          }`}
-                      >
-                        <span className={`truncate block whitespace-nowrap ${formData.domainSelection ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
-                          {formData.domainSelection || "Choose Theme Domain"}
-                        </span>
-
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${domainDropdownOpen ? "rotate-180" : ""}`} />
-                        </div>
-                      </button>
-
-                      <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${domainDropdownOpen || (formData.domainSelection && formData.domainSelection.length > 0)
-                          ? `-translate-y-7 scale-90 ${domainDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                          : `translate-y-4 translate-x-11 text-slate-400`
-                          }`}
-                      >
-                        Domain Selection *
-                      </label>
-
-                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${domainDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
-                    </div>
-
-                    <AnimatePresence>
-                      {domainDropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                          transition={{ type: "spring", duration: 0.3 }}
-                          className="absolute left-0 z-50 w-full mt-2 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
-                        >
-                          {["Blue Economy", "Mindspace", "Arts & Culture"].map((d) => (
-                            <div key={d} onClick={() => { handleCustomSelect("domainSelection", d); setDomainDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">{d}</div>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Dropdown for Accommodation Required */}
-                  <div className="relative group w-full font-sans" ref={accomDropdownRef}>
-                    <div className="relative flex items-center">
-                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${accomDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
-                        <Home size={18} />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setAccomDropdownOpen(!accomDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${accomDropdownOpen
-                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                          }`}
-                      >
-                        <span className={`truncate block whitespace-nowrap ${formData.accommodation ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
-                          {getAccomDropdownLabelText()}
-                        </span>
-
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${accomDropdownOpen ? "rotate-180" : ""}`} />
-                        </div>
-                      </button>
-
-                      <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-xs font-semibold ${accomDropdownOpen || (formData.accommodation && formData.accommodation.length > 0)
-                          ? `-translate-y-7 scale-90 ${accomDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                          : `translate-y-4 translate-x-11 text-slate-400`
-                          }`}
-                      >
-                        Accommodation Required *
-                      </label>
-
-                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${accomDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
-                    </div>
-
-                    <AnimatePresence>
-                      {accomDropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                          transition={{ type: "spring", duration: 0.3 }}
-                          className="absolute left-0 z-50 w-full mt-2 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
-                        >
-                          <div onClick={() => { handleCustomSelect("accommodation", "YES"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Yes, Accommodation Needed</div>
-                          <div onClick={() => { handleCustomSelect("accommodation", "NO"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">No, Accommodation Not Needed</div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </div>
-
               {/* SECTION 4: UPI UTR TRANSACTION & SCREENSHOT */}
               <div className="space-y-4 pt-2">
                 <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none font-sans border-l-2 border-[#0D47A1] pl-3">
-                  💳 Remittance Verification
+                  💳 Payment Verification
                 </div>
 
                 <div className="bg-slate-50/60 border border-slate-200/80 p-5 sm:p-6 rounded-[2rem] space-y-6">
@@ -866,7 +864,7 @@ const Register = () => {
                   <div className="space-y-2">
                     <FloatingInput
                       id="utr"
-                      label="UPI / Banking Transaction UTR Reference Number *"
+                      label="UPI / Transaction UTR Reference Number *"
                       icon={CreditCard}
                       value={formData.utr}
                       onChange={handleTextValueChange}
@@ -901,7 +899,7 @@ const Register = () => {
                       ) : (
                         <div className="flex flex-col items-center justify-center space-y-2 pointer-events-none text-slate-500">
                           <Upload size={24} className="text-slate-400 group-hover:text-blue-500 transition-colors" />
-                          <span className="text-xs font-semibold text-slate-600 group-hover:text-blue-600 transition-colors">{fileLabel}</span>
+                          <span className="text-xs font-semibold text-slate-600 group-hover:text-blue-600 transition-colors text-center break-all px-4">{fileLabel}</span>
                           <span className="text-[10px] text-slate-400 font-medium">JPEG, JPG, or PNG up to 4MB</span>
                         </div>
                       )}
@@ -914,10 +912,16 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={submittingState}
-                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-105 active:scale-[0.98] text-white font-bold text-sm py-4 px-6 rounded-2xl shadow-lg shadow-blue-500/10 transition-all duration-200 tracking-wide cursor-pointer flex items-center justify-center gap-2 group"
+                className="relative overflow-hidden w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-105 active:scale-[0.98] text-white font-bold text-sm py-4 px-6 rounded-2xl shadow-lg shadow-blue-500/10 transition-all duration-200 tracking-wide cursor-pointer flex items-center justify-center gap-2 group"
               >
-                <span>{submittingState ? `Uploading... ${uploadProgress}%` : "Submit Registration Portfolio"}</span>
+                <span>{submittingState ? `Uploading... ${uploadProgress}%` : "Submit Registration "}</span>
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+                {submittingState && (
+                  <div
+                    className="absolute bottom-0 left-0 h-1 bg-white/40 transition-all duration-300 ease-out"
+                    style={{ width: `${uploadProgress}%` }}
+                  />
+                )}
               </button>
 
             </form>
@@ -937,6 +941,7 @@ const Register = () => {
               <h2 className="text-2xl font-black tracking-tight text-slate-900">Submitted Successfully!</h2>
               <p className="text-xs sm:text-sm font-semibold text-slate-500 max-w-sm mx-auto leading-relaxed">
                 Your registration status and other details will be sent to your email id shortly.
+                ⚠️ *Check your Spam folder:* If your ticket lands there, you *must* click *"Move to Inbox"* or *"Report as Not Spam"* to unblock and view your entry QR code!
               </p>
             </div>
             <div className="pt-4">
