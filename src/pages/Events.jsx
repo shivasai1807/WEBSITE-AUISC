@@ -174,18 +174,23 @@ const Events = () => {
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-6">
                         <div>
-                          <h2 className="text-3xl font-bold text-dark-blue-purple mb-4">{event.title}</h2>
+                          <h2 className="text-3xl font-bold text-dark-blue-purple mb-4">
+                            {event.title}
+                          </h2>
+
                           <div className="flex flex-wrap gap-4 text-dark-blue-purple">
                             <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
                               <Calendar size={18} className="text-dark-blue-purple" />
                               <span className="text-sm font-medium">{event.date}</span>
                             </div>
+
                             {event.location && (
                               <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
                                 <MapPin size={18} className="text-dark-blue-purple" />
                                 <span className="text-sm font-medium">{event.location}</span>
                               </div>
                             )}
+
                             {event.isUpcoming ? null : (
                               <>
                                 {event.time && (
@@ -194,10 +199,13 @@ const Events = () => {
                                     <span className="text-sm font-medium">{event.time}</span>
                                   </div>
                                 )}
+
                                 {event.participants && (
                                   <div className="flex items-center gap-2 bg-orange-yellow px-3 py-1.5 rounded-full">
                                     <Users size={18} className="text-dark-blue-purple" />
-                                    <span className="text-sm font-medium">{event.participants} Participants</span>
+                                    <span className="text-sm font-medium">
+                                      {event.participants} Participants
+                                    </span>
                                   </div>
                                 )}
                               </>
@@ -233,12 +241,56 @@ const Events = () => {
             </div>
           ) : (
             <div className="bg-white rounded-2xl p-8 text-center">
-              <div className="max-w-md mx-auto">
-                <CalendarClock size={48} className="text-bright-orange mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-dark-blue-purple mb-2">No Upcoming Events</h3>
-                <p className="text-dark-blue-purple">
-                  We're currently planning our next exciting events. Stay tuned for updates!
-                </p>
+              <div className="max-w-3xl mx-auto">
+                <CalendarClock
+                  size={48}
+                  className="text-bright-orange mx-auto mb-5"
+                />
+
+                <h3 className="text-3xl font-bold text-dark-blue-purple mb-6">
+                  🚀 AUNSF 4.0 – Coming Soon
+                </h3>
+
+                <div className="space-y-5 text-dark-blue-purple leading-relaxed text-lg">
+                  <p>
+                    <strong>AUNSF 4.0</strong> is more than just a hackathon—it's a
+                    platform where <strong>innovation meets impact</strong>. We invite
+                    students, innovators, developers, designers, and entrepreneurs to
+                    collaborate on real-world challenges and build solutions that create
+                    meaningful change.
+                  </p>
+
+                  <p>
+                    Whether your passion lies in <strong>sustainability</strong>,
+                    <strong> technology</strong>, <strong> creativity</strong>, or
+                    <strong> improving society</strong>, AUNSF 4.0 offers you the
+                    opportunity to showcase your ideas, learn from industry experts,
+                    network with like-minded innovators, and compete for exciting
+                    rewards.
+                  </p>
+
+                  <p>
+                    Explore innovative domains including <strong>Blue Economy</strong>,
+                    <strong> Mindspace</strong>,
+                    <strong> Arts &amp; Culture</strong>, and
+                    <strong> Human Behaviour &amp; Civic Innovation</strong>. Turn your
+                    ideas into impactful solutions that address real-world challenges.
+                  </p>
+
+                  <p className="font-semibold text-bright-orange text-xl">
+                    Be a part of AUNSF 4.0.
+                    <br />
+                    Innovate. Collaborate. Transform the Future.
+                  </p>
+                </div>
+
+                <Link
+                  to="/register"
+                  className="inline-flex items-center gap-2 bg-bright-orange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-yellow transition-colors duration-300 mt-8"
+                >
+                  Register for AUNSF 4.0
+                  <ArrowRight size={20} />
+                </Link>
               </div>
             </div>
           )}
