@@ -16,7 +16,9 @@ import {
   Calendar,
   Users,
   Home,
-  Target
+  Target,
+  Info,
+  X
 } from "lucide-react";
 
 // REPLACE THIS STRING WITH YOUR LIVE DEPLOYED WEB APP URL
@@ -75,6 +77,9 @@ const Register = () => {
     domainSelection: "",
     accommodation: "",
     utr: "",
+    foodPreference: "",
+    idCardNumber: "",
+    referredBy: "",
   });
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -82,6 +87,14 @@ const Register = () => {
   const [submittingState, setSubmittingState] = useState(false);
   const [viewStateMode, setViewStateMode] = useState("form");
   const [systemAlertMessage, setSystemAlertMessage] = useState({ visible: false, text: "" });
+
+  const [collegeIdCard, setCollegeIdCard] = useState(null);
+  const [collegeIdLabel, setCollegeIdLabel] = useState("Click or Drag to upload college ID card");
+  const [collegeIdPreview, setCollegeIdPreview] = useState(null);
+
+  const [aadhaarCard, setAadhaarCard] = useState(null);
+  const [aadhaarLabel, setAadhaarLabel] = useState("Click or Drag to upload Aadhaar card");
+  const [aadhaarPreview, setAadhaarPreview] = useState(null);
 
   const [yearDropdownOpen, setYearDropdownOpen] = useState(false);
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
@@ -107,6 +120,26 @@ const Register = () => {
     setFilePreview(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
+
+  useEffect(() => {
+    if (!collegeIdCard) {
+      setCollegeIdPreview(null);
+      return;
+    }
+    const objectUrl = URL.createObjectURL(collegeIdCard);
+    setCollegeIdPreview(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [collegeIdCard]);
+
+  useEffect(() => {
+    if (!aadhaarCard) {
+      setAadhaarPreview(null);
+      return;
+    }
+    const objectUrl = URL.createObjectURL(aadhaarCard);
+    setAadhaarPreview(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [aadhaarCard]);
 
   // Simulated Upload Progress
   useEffect(() => {
@@ -161,7 +194,19 @@ const Register = () => {
   };
 
   const handleCustomSelect = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => {
+      const updated = { ...prev, [field]: value };
+      return updated;
+    });
+    setSystemAlertMessage({ visible: false, text: "" });
+    if (field === "accommodation" && value === "NO") {
+      setAadhaarCard(null);
+      setAadhaarLabel("Click or Drag to upload Aadhaar card");
+    }
+  };
+
+  const handleFoodPreferenceChange = (value) => {
+    setFormData(prev => ({ ...prev, foodPreference: value }));
     setSystemAlertMessage({ visible: false, text: "" });
   };
 
@@ -177,6 +222,38 @@ const Register = () => {
       }
       setSelectedFile(file);
       setFileLabel(`📎 Attached: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`);
+      setSystemAlertMessage({ visible: false, text: "" });
+    }
+  };
+
+  const handleCollegeIdFileUploadStream = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 4 * 1024 * 1024) {
+        setSystemAlertMessage({ visible: true, text: "File size limit exceeded: Please upload a college ID card under 4MB." });
+        e.target.value = null;
+        setCollegeIdCard(null);
+        setCollegeIdLabel("Click or Drag to upload college ID card");
+        return;
+      }
+      setCollegeIdCard(file);
+      setCollegeIdLabel(`📎 Attached: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`);
+      setSystemAlertMessage({ visible: false, text: "" });
+    }
+  };
+
+  const handleAadhaarFileUploadStream = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 4 * 1024 * 1024) {
+        setSystemAlertMessage({ visible: true, text: "File size limit exceeded: Please upload an Aadhaar card under 4MB." });
+        e.target.value = null;
+        setAadhaarCard(null);
+        setAadhaarLabel("Click or Drag to upload Aadhaar card");
+        return;
+      }
+      setAadhaarCard(file);
+      setAadhaarLabel(`📎 Attached: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`);
       setSystemAlertMessage({ visible: false, text: "" });
     }
   };
@@ -198,6 +275,31 @@ const Register = () => {
       return;
     }
 
+    if (!formData.foodPreference) {
+      setSystemAlertMessage({ visible: true, text: "Selection Required: Food preference must be selected." });
+      return;
+    }
+
+    if (!formData.accommodation) {
+      setSystemAlertMessage({ visible: true, text: "Selection Required: Specify accommodation arrangement choice." });
+      return;
+    }
+
+    if (formData.accommodation === "YES" && !aadhaarCard) {
+      setSystemAlertMessage({ visible: true, text: "Upload Required: Aadhaar card must be attached." });
+      return;
+    }
+
+    if (!formData.idCardNumber) {
+      setSystemAlertMessage({ visible: true, text: "Input Required: Please enter your ID card number." });
+      return;
+    }
+
+    if (!collegeIdCard) {
+      setSystemAlertMessage({ visible: true, text: "Upload Required: College ID card must be attached." });
+      return;
+    }
+
     if (!formData.year) {
       setSystemAlertMessage({ visible: true, text: "Selection Required: Please select your academic cohort year." });
       return;
@@ -205,11 +307,6 @@ const Register = () => {
 
     if (!formData.domainSelection) {
       setSystemAlertMessage({ visible: true, text: "Selection Required: Please choose your track Domain Selection." });
-      return;
-    }
-
-    if (!formData.accommodation) {
-      setSystemAlertMessage({ visible: true, text: "Selection Required: Specify accommodation arrangement choice." });
       return;
     }
 
@@ -222,6 +319,14 @@ const Register = () => {
 
     try {
       const base64DataImageString = await parseFileToBase64(selectedFile);
+      const collegeIdCardBase64 = await parseFileToBase64(collegeIdCard);
+      let aadhaarBase64 = "";
+      let aadhaarType = "";
+
+      if (formData.accommodation === "YES" && aadhaarCard) {
+        aadhaarBase64 = await parseFileToBase64(aadhaarCard);
+        aadhaarType = aadhaarCard.type;
+      }
 
       const payloadBundle = {
         fullName: formData.fullName,
@@ -236,6 +341,12 @@ const Register = () => {
         utr: formData.utr,
         imageBase64: base64DataImageString,
         imageType: selectedFile.type,
+        foodPreference: formData.foodPreference,
+        collegeIdCardBase64: collegeIdCardBase64,
+        collegeIdCardType: collegeIdCard.type,
+        aadhaarBase64: aadhaarBase64,
+        aadhaarType: aadhaarType,
+        referredBy: formData.referredBy,
       };
 
       const networkResponse = await fetch(BACKEND_URL, {
@@ -274,10 +385,17 @@ const Register = () => {
       year: "",
       domainSelection: "",
       accommodation: "",
-      utr: ""
+      utr: "",
+      foodPreference: "",
+      idCardNumber: "",
+      referredBy: ""
     });
     setSelectedFile(null);
     setFileLabel("Click or Drag to upload payment screenshot");
+    setCollegeIdCard(null);
+    setCollegeIdLabel("Click or Drag to upload college ID card");
+    setAadhaarCard(null);
+    setAadhaarLabel("Click or Drag to upload Aadhaar card");
     setSystemAlertMessage({ visible: false, text: "" });
     setViewStateMode("form");
     setUploadProgress(0);
@@ -305,8 +423,8 @@ const Register = () => {
 
   const getAccomDropdownLabelText = () => {
     switch (formData.accommodation) {
-      case "YES": return "Yes, Accommodation Needed";
-      case "NO": return "No, Accommodation Not Needed";
+      case "YES": return "Yes";
+      case "NO": return "No";
       default: return "Select Accommodation";
     }
   };
@@ -521,6 +639,199 @@ const Register = () => {
                       </AnimatePresence>
                     </div>
                   </div>
+
+                  <FloatingInput
+                    id="referredBy"
+                    label="Referred By (Optional)"
+                    icon={Users}
+                    value={formData.referredBy}
+                    onChange={handleTextValueChange}
+                    required={false}
+                  />
+
+                  {/* Food Preference */}
+                  <div className="space-y-3 pt-2">
+                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 select-none">
+                      Food Preference *
+                    </label>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button
+                        type="button"
+                        onClick={() => handleFoodPreferenceChange("VEG")}
+                        className={`flex items-center gap-3 px-5 py-4 border rounded-2xl cursor-pointer transition-all duration-300 w-full sm:w-1/2 ${formData.foodPreference === "VEG"
+                          ? "border-blue-500 bg-white text-blue-600 shadow-[0_0_15px_rgba(13,71,161,0.06)]"
+                          : "border-slate-200 hover:border-slate-300 text-slate-700 bg-slate-50/50"
+                          }`}
+                      >
+                        <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all duration-300 ${formData.foodPreference === "VEG"
+                          ? "border-blue-500 bg-blue-500 text-white"
+                          : "border-slate-300 bg-white text-transparent"
+                          }`}>
+                          <Check size={14} className="stroke-[3]" />
+                        </div>
+                        <span className="text-sm font-semibold select-none font-sans">Veg</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleFoodPreferenceChange("NON-VEG")}
+                        className={`flex items-center gap-3 px-5 py-4 border rounded-2xl cursor-pointer transition-all duration-300 w-full sm:w-1/2 ${formData.foodPreference === "NON-VEG"
+                          ? "border-blue-500 bg-white text-blue-600 shadow-[0_0_15px_rgba(13,71,161,0.06)]"
+                          : "border-slate-200 hover:border-slate-300 text-slate-700 bg-slate-50/50"
+                          }`}
+                      >
+                        <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all duration-300 ${formData.foodPreference === "NON-VEG"
+                          ? "border-blue-500 bg-blue-500 text-white"
+                          : "border-slate-300 bg-white text-transparent"
+                          }`}>
+                          <Check size={14} className="stroke-[3]" />
+                        </div>
+                        <span className="text-sm font-semibold select-none font-sans">Non-Veg</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Dropdown for Accommodation */}
+                  <div className="relative group w-full font-sans pt-5" ref={accomDropdownRef}>
+                    <div className="relative flex items-center">
+                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${accomDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
+                        <Home size={18} />
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setAccomDropdownOpen(!accomDropdownOpen)}
+                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${accomDropdownOpen
+                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                          }`}
+                      >
+                        <span className={`truncate block whitespace-nowrap ${formData.accommodation ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
+                          {getAccomDropdownLabelText()}
+                        </span>
+
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${accomDropdownOpen ? "rotate-180" : ""}`} />
+                        </div>
+                      </button>
+
+                      <label
+                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${accomDropdownOpen || (formData.accommodation && formData.accommodation.length > 0)
+                          ? `-translate-y-7 scale-[0.85] translate-x-0 ${accomDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
+                          : `translate-y-4 translate-x-11 text-slate-400`
+                          }`}
+                      >
+                        Accommodation *
+                      </label>
+
+                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${accomDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
+                    </div>
+
+                    <AnimatePresence>
+                      {accomDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                          transition={{ type: "spring", duration: 0.3 }}
+                          className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
+                        >
+                          <div onClick={() => { handleCustomSelect("accommodation", "YES"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Yes</div>
+                          <div onClick={() => { handleCustomSelect("accommodation", "NO"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">No</div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Conditional Aadhaar Card Upload */}
+                  <AnimatePresence>
+                    {formData.accommodation === "YES" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ type: "spring", duration: 0.4, bounce: 0 }}
+                        className="space-y-2 pt-2 overflow-hidden"
+                      >
+                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 select-none">
+                          Upload Aadhaar Card *
+                        </label>
+
+                        <div className="relative flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 hover:bg-slate-50/80 hover:border-blue-500/40 transition-all duration-300 cursor-pointer group min-h-[140px]">
+                          <input
+                            type="file"
+                            id="aadhaarCardInput"
+                            accept="image/png, image/jpeg, image/jpg"
+                            required
+                            onChange={handleAadhaarFileUploadStream}
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                          />
+
+                          {aadhaarPreview ? (
+                            <div className="relative w-full h-40 rounded-xl overflow-hidden flex items-center justify-center bg-slate-50 pointer-events-none">
+                              <img src={aadhaarPreview} alt="Aadhaar preview" className="w-full h-full object-contain" />
+                              <div className="absolute inset-0 bg-slate-950/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <span className="text-white text-xs font-semibold px-3 py-1.5 bg-slate-900/80 rounded-full border border-white/20 select-none">
+                                  Change Aadhaar Card
+                                </span>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="flex flex-col items-center justify-center space-y-2 pointer-events-none text-slate-500">
+                              <Upload size={24} className="text-slate-400 group-hover:text-blue-500 transition-colors" />
+                              <span className="text-xs font-semibold text-slate-600 group-hover:text-blue-600 transition-colors text-center break-all px-4">{aadhaarLabel}</span>
+                              <span className="text-[10px] text-slate-400 font-medium">JPEG, JPG, or PNG up to 4MB</span>
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Enter ID Card Number */}
+                  <FloatingInput
+                    id="idCardNumber"
+                    label="Enter ID Card Number *"
+                    icon={CreditCard}
+                    value={formData.idCardNumber}
+                    onChange={handleTextValueChange}
+                  />
+
+                  {/* Upload College ID Card */}
+                  <div className="space-y-2 pt-2">
+                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 select-none">
+                      Upload College ID Card *
+                    </label>
+
+                    <div className="relative flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 hover:bg-slate-50/80 hover:border-blue-500/40 transition-all duration-300 cursor-pointer group min-h-[140px]">
+                      <input
+                        type="file"
+                        id="collegeIdCardInput"
+                        accept="image/png, image/jpeg, image/jpg"
+                        required
+                        onChange={handleCollegeIdFileUploadStream}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                      />
+
+                      {collegeIdPreview ? (
+                        <div className="relative w-full h-40 rounded-xl overflow-hidden flex items-center justify-center bg-slate-50 pointer-events-none">
+                          <img src={collegeIdPreview} alt="College ID preview" className="w-full h-full object-contain" />
+                          <div className="absolute inset-0 bg-slate-950/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="text-white text-xs font-semibold px-3 py-1.5 bg-slate-900/80 rounded-full border border-white/20 select-none">
+                              Change College ID Card
+                            </span>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center justify-center space-y-2 pointer-events-none text-slate-500">
+                          <Upload size={24} className="text-slate-400 group-hover:text-blue-500 transition-colors" />
+                          <span className="text-xs font-semibold text-slate-600 group-hover:text-blue-600 transition-colors text-center break-all px-4">{collegeIdLabel}</span>
+                          <span className="text-[10px] text-slate-400 font-medium">JPEG, JPG, or PNG up to 4MB</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
@@ -606,8 +917,8 @@ const Register = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
-                  {/* Dropdown for Domain Selection */}
+                <div className="mt-5">
+                  {/* Dropdown for   Selection */}
                   <div className="relative group w-full font-sans pt-5" ref={domainDropdownRef}>
                     <div className="relative flex items-center">
                       <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${domainDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
@@ -652,7 +963,7 @@ const Register = () => {
                           transition={{ type: "spring", duration: 0.3 }}
                           className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
                         >
-                          {["Blue Economy", "Mindspace", "Arts & Culture"].map((d) => (
+                          {["Blue Economy", "Human Behaviour & Civic Innovation", "Arts & Culture"].map((d) => (
                             <div key={d} onClick={() => { handleCustomSelect("domainSelection", d); setDomainDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">{d}</div>
                           ))}
                         </motion.div>
@@ -660,60 +971,47 @@ const Register = () => {
                     </AnimatePresence>
                   </div>
 
-                  {/* Dropdown for Accommodation Required */}
-                  <div className="relative group w-full font-sans pt-5" ref={accomDropdownRef}>
-                    <div className="relative flex items-center">
-                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${accomDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
-                        <Home size={18} />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setAccomDropdownOpen(!accomDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${accomDropdownOpen
-                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                          }`}
+                  {/* Automatic Domain Selection Info Card */}
+                  <AnimatePresence>
+                    {formData.domainSelection && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, y: -10 }}
+                        animate={{ opacity: 1, height: "auto", y: 0 }}
+                        exit={{ opacity: 0, height: 0, y: -10 }}
+                        transition={{ type: "spring", duration: 0.4 }}
+                        className="mt-4 overflow-hidden"
                       >
-                        <span className={`truncate block whitespace-nowrap ${formData.accommodation ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
-                          {getAccomDropdownLabelText()}
-                        </span>
-
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${accomDropdownOpen ? "rotate-180" : ""}`} />
+                        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-xs text-slate-600 font-sans space-y-2 shadow-sm">
+                          {formData.domainSelection === "Blue Economy" && (
+                            <div>
+                              <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">🌊 Blue Economy</span>
+                              <p className="leading-relaxed text-slate-500">
+                                The Blue Economy promotes the sustainable use of water resources while protecting aquatic ecosystems. It encourages innovation to keep our oceans clean, conserve aquatic life and support communities
+                              </p>
+                            </div>
+                          )}
+                          {formData.domainSelection === "Human Behaviour & Civic Innovation" && (
+                            <div>
+                              <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">👥Human Behaviour & Civic Innovation</span>
+                              <p className="leading-relaxed text-slate-500">
+                                Human Behaviour & Civic Innovation focuses on promoting responsible digital behaviour, critical thinking and meaningful human connections. It encourages innovative solutions that help individuals and communities build a healthier, more informed and socially responsible society.
+                              </p>
+                            </div>
+                          )}
+                          {formData.domainSelection === "Arts & Culture" && (
+                            <div>
+                              <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">🎨 Arts & Culture</span>
+                              <p className="leading-relaxed text-slate-500">
+                                Arts & Culture is about preserving our traditions, culture, art and heritage using technology. It encourages innovative ideas that protect our cultural identity, make it accessible to everyone, and inspire future generations
+                              </p>
+                            </div>
+                          )}
                         </div>
-                      </button>
-
-                      <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${accomDropdownOpen || (formData.accommodation && formData.accommodation.length > 0)
-                          ? `-translate-y-7 scale-[0.85] translate-x-0 ${accomDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                          : `translate-y-4 translate-x-11 text-slate-400`
-                          }`}
-                      >
-                        Accommodation Required *
-                      </label>
-
-                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${accomDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
-                    </div>
-
-                    <AnimatePresence>
-                      {accomDropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                          transition={{ type: "spring", duration: 0.3 }}
-                          className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
-                        >
-                          <div onClick={() => { handleCustomSelect("accommodation", "YES"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Yes, Accommodation Needed</div>
-                          <div onClick={() => { handleCustomSelect("accommodation", "NO"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">No, Accommodation Not Needed</div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
-
 
               {/* SECTION 1: REGISTRATION FEE STRUCTURE */}
               <div className="space-y-4 pt-2">
@@ -740,7 +1038,7 @@ const Register = () => {
                     <div>
                       <div className="flex items-center justify-between mb-3">
                         <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-orange-50 border border-orange-200 text-orange-600 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                          🔥 Valid until 18th July
+                          🔥 Valid until 22th July
                         </div>
                       </div>
                       <h3 className="text-base font-extrabold text-slate-800 select-none mb-4">
@@ -755,7 +1053,7 @@ const Register = () => {
                             <span className="text-xl font-black text-slate-800 mt-1">₹999</span>
                           </div>
                           <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
+                            href="https://aupulse.campx.in/aupulse/ums/public/form/6a50a02675510ba4edced6f8"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
@@ -774,7 +1072,7 @@ const Register = () => {
                             <span className="text-xl font-black text-orange-600 mt-1">₹1599</span>
                           </div>
                           <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
+                            href="https://aupulse.campx.in/aupulse/ums/public/form/6a50a140aec4293e6fb25ead"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
