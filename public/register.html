@@ -249,8 +249,7 @@
           <div class="space-y-1">
             <label for="idCardNumber" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">College ID
               Card Number *</label>
-            <input type="text" id="idCardNumber" required
-              placeholder="Enter institutional alphanumeric student identification code"
+            <input type="text" id="idCardNumber" required placeholder="Enter institutional student identification code"
               class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-blue-500 focus:bg-white transition uppercase">
           </div>
 
@@ -405,8 +404,6 @@
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      document.getElementById('formAlertBlock').classList.add('hidden');
-
       const file = screenshotInput.files[0];
       const colIdFile = collegeIdCardInput.files[0];
       const aadharFile = aadhaarInput.files[0];
@@ -435,6 +432,7 @@
           utr: document.getElementById('utrField').value,
           foodPreference: document.getElementById('foodPreference').value,
           referredBy: document.getElementById('referredBy').value,
+          // CRITICAL BUGFIX: The parameter name matches the 'idCardNumber' schema inside Code.gs
           idCardNumber: document.getElementById('idCardNumber').value,
           imageBase64: base64Receipt,
           imageType: file.type,
