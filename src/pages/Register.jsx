@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 
 // REPLACE THIS STRING WITH YOUR LIVE DEPLOYED WEB APP URL
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxV5iYwbY8xBoMnki_N8qKosRk2mu9kukqm8Hqg4quYT6OtFLJyYiQi_rnXTEdjzTr9/exec";
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx30L0n7gS9WPCfRzhj3Y0xRZcCs0XVRz3cm9MLNvZeJ9LTll2iji7sxIBMMjWXAxOgSA/exec";
 
 // Premium Custom Floating Input Component in Light Theme
 const FloatingInput = ({ id, label, icon: Icon, value, onChange, type = "text", required = true, ...props }) => {
