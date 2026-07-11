@@ -347,6 +347,7 @@ const Register = () => {
         aadhaarBase64: aadhaarBase64,
         aadhaarType: aadhaarType,
         referredBy: formData.referredBy,
+        idCardNumber: formData.idCardNumber,
       };
 
       const networkResponse = await fetch(BACKEND_URL, {
