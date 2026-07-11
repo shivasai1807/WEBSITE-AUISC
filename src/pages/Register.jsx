@@ -284,7 +284,7 @@ const Register = () => {
         imageType: selectedFile.type,
         collegeIdCardBase64: collegeIdCardBase64,
         collegeIdCardType: collegeIdCard.type,
-        aadhaarBase64: aadhaarBase64,
+        aadhaarBase64: base64Base64,
         aadhaarType: aadhaarType
       };
 
