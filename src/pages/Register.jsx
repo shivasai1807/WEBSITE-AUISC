@@ -17,14 +17,11 @@ import {
   Users,
   Home,
   Target,
-  Info,
   X
 } from "lucide-react";
 
-// REPLACE THIS STRING WITH YOUR LIVE DEPLOYED WEB APP URL
 const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxV5iYwbY8xBoMnki_N8qKosRk2mu9kukqm8Hqg4quYT6OtFLJyYiQi_rnXTEdjzTr9/exec";
 
-// Premium Custom Floating Input Component in Light Theme
 const FloatingInput = ({ id, label, icon: Icon, value, onChange, type = "text", required = true, ...props }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -57,8 +54,6 @@ const FloatingInput = ({ id, label, icon: Icon, value, onChange, type = "text", 
         >
           {label}
         </label>
-
-        {/* Animated bottom line */}
         <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${isFocused ? 'w-[90%]' : 'w-0'}`} />
       </div>
     </div>
@@ -110,7 +105,6 @@ const Register = () => {
   const accomDropdownRef = useRef(null);
   const alertContainerRef = useRef(null);
 
-  // File Preview Stream
   useEffect(() => {
     if (!selectedFile) {
       setFilePreview(null);
@@ -141,7 +135,6 @@ const Register = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [aadhaarCard]);
 
-  // Simulated Upload Progress
   useEffect(() => {
     let interval;
     if (submittingState) {
@@ -163,18 +156,10 @@ const Register = () => {
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (yearDropdownRef.current && !yearDropdownRef.current.contains(event.target)) {
-        setYearDropdownOpen(false);
-      }
-      if (genderDropdownRef.current && !genderDropdownRef.current.contains(event.target)) {
-        setGenderDropdownOpen(false);
-      }
-      if (domainDropdownRef.current && !domainDropdownRef.current.contains(event.target)) {
-        setDomainDropdownOpen(false);
-      }
-      if (accomDropdownRef.current && !accomDropdownRef.current.contains(event.target)) {
-        setAccomDropdownOpen(false);
-      }
+      if (yearDropdownRef.current && !yearDropdownRef.current.contains(event.target)) setYearDropdownOpen(false);
+      if (genderDropdownRef.current && !genderDropdownRef.current.contains(event.target)) setGenderDropdownOpen(false);
+      if (domainDropdownRef.current && !domainDropdownRef.current.contains(event.target)) setDomainDropdownOpen(false);
+      if (accomDropdownRef.current && !accomDropdownRef.current.contains(event.target)) setAccomDropdownOpen(false);
     };
     document.addEventListener("mousedown", handleOutsideClick);
     return () => document.removeEventListener("mousedown", handleOutsideClick);
@@ -182,10 +167,7 @@ const Register = () => {
 
   useEffect(() => {
     if (systemAlertMessage.visible && alertContainerRef.current) {
-      alertContainerRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
+      alertContainerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [systemAlertMessage]);
 
@@ -194,10 +176,7 @@ const Register = () => {
   };
 
   const handleCustomSelect = (field, value) => {
-    setFormData(prev => {
-      const updated = { ...prev, [field]: value };
-      return updated;
-    });
+    setFormData(prev => ({ ...prev, [field]: value }));
     setSystemAlertMessage({ visible: false, text: "" });
     if (field === "accommodation" && value === "NO") {
       setAadhaarCard(null);
@@ -215,13 +194,10 @@ const Register = () => {
     if (file) {
       if (file.size > 4 * 1024 * 1024) {
         setSystemAlertMessage({ visible: true, text: "File size limit exceeded: Please upload a screenshot under 4MB." });
-        e.target.value = null;
-        setSelectedFile(null);
-        setFileLabel("Click or Drag to upload payment screenshot");
         return;
       }
       setSelectedFile(file);
-      setFileLabel(`📎 Attached: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`);
+      setFileLabel(`📎 Attached: ${file.name}`);
       setSystemAlertMessage({ visible: false, text: "" });
     }
   };
@@ -230,14 +206,11 @@ const Register = () => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 4 * 1024 * 1024) {
-        setSystemAlertMessage({ visible: true, text: "File size limit exceeded: Please upload a college ID card under 4MB." });
-        e.target.value = null;
-        setCollegeIdCard(null);
-        setCollegeIdLabel("Click or Drag to upload college ID card");
+        setSystemAlertMessage({ visible: true, text: "File size limit exceeded: Please upload a card under 4MB." });
         return;
       }
       setCollegeIdCard(file);
-      setCollegeIdLabel(`📎 Attached: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`);
+      setCollegeIdLabel(`📎 Attached: ${file.name}`);
       setSystemAlertMessage({ visible: false, text: "" });
     }
   };
@@ -246,14 +219,11 @@ const Register = () => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 4 * 1024 * 1024) {
-        setSystemAlertMessage({ visible: true, text: "File size limit exceeded: Please upload an Aadhaar card under 4MB." });
-        e.target.value = null;
-        setAadhaarCard(null);
-        setAadhaarLabel("Click or Drag to upload Aadhaar card");
+        setSystemAlertMessage({ visible: true, text: "File size limit exceeded: Please upload a card under 4MB." });
         return;
       }
       setAadhaarCard(file);
-      setAadhaarLabel(`📎 Attached: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`);
+      setAadhaarLabel(`📎 Attached: ${file.name}`);
       setSystemAlertMessage({ visible: false, text: "" });
     }
   };
@@ -270,50 +240,15 @@ const Register = () => {
     e.preventDefault();
     setSystemAlertMessage({ visible: false, text: "" });
 
-    if (!formData.gender) {
-      setSystemAlertMessage({ visible: true, text: "Selection Required: Please select your Gender profiling tag." });
-      return;
-    }
-
-    if (!formData.foodPreference) {
-      setSystemAlertMessage({ visible: true, text: "Selection Required: Food preference must be selected." });
-      return;
-    }
-
-    if (!formData.accommodation) {
-      setSystemAlertMessage({ visible: true, text: "Selection Required: Specify accommodation arrangement choice." });
-      return;
-    }
-
-    if (formData.accommodation === "YES" && !aadhaarCard) {
-      setSystemAlertMessage({ visible: true, text: "Upload Required: Aadhaar card must be attached." });
-      return;
-    }
-
-    if (!formData.idCardNumber) {
-      setSystemAlertMessage({ visible: true, text: "Input Required: Please enter your ID card number." });
-      return;
-    }
-
-    if (!collegeIdCard) {
-      setSystemAlertMessage({ visible: true, text: "Upload Required: College ID card must be attached." });
-      return;
-    }
-
-    if (!formData.year) {
-      setSystemAlertMessage({ visible: true, text: "Selection Required: Please select your academic cohort year." });
-      return;
-    }
-
-    if (!formData.domainSelection) {
-      setSystemAlertMessage({ visible: true, text: "Selection Required: Please choose your track Domain Selection." });
-      return;
-    }
-
-    if (!selectedFile) {
-      setSystemAlertMessage({ visible: true, text: "Upload Required: Payment receipt screenshot must be attached." });
-      return;
-    }
+    if (!formData.gender) return setSystemAlertMessage({ visible: true, text: "Gender is required." });
+    if (!formData.foodPreference) return setSystemAlertMessage({ visible: true, text: "Food preference is required." });
+    if (!formData.accommodation) return setSystemAlertMessage({ visible: true, text: "Accommodation selection is required." });
+    if (formData.accommodation === "YES" && !aadhaarCard) return setSystemAlertMessage({ visible: true, text: "Aadhaar card upload is required." });
+    if (!formData.idCardNumber) return setSystemAlertMessage({ visible: true, text: "College ID card number is required." });
+    if (!collegeIdCard) return setSystemAlertMessage({ visible: true, text: "College ID card upload is required." });
+    if (!formData.year) return setSystemAlertMessage({ visible: true, text: "Academic year selection is required." });
+    if (!formData.domainSelection) return setSystemAlertMessage({ visible: true, text: "Domain track selection is required." });
+    if (!selectedFile) return setSystemAlertMessage({ visible: true, text: "Payment receipt screenshot is required." });
 
     setSubmittingState(true);
 
@@ -329,24 +264,28 @@ const Register = () => {
       }
 
       const payloadBundle = {
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
         gender: formData.gender,
-        college: formData.college,
-        branch: formData.branch,
+        college: formData.college.trim(),
+        branch: formData.branch.trim(),
         year: formData.year,
         domainSelection: formData.domainSelection,
         accommodation: formData.accommodation,
-        utr: formData.utr,
+        utr: formData.utr.trim(),
+        foodPreference: formData.foodPreference,
+        referredBy: formData.referredBy.trim(),
+
+        // BUGFIX FILED: Explicitly bind the missing input identifier parameter payload
+        idCardNumber: formData.idCardNumber.trim(),
+
         imageBase64: base64DataImageString,
         imageType: selectedFile.type,
-        foodPreference: formData.foodPreference,
         collegeIdCardBase64: collegeIdCardBase64,
         collegeIdCardType: collegeIdCard.type,
         aadhaarBase64: aadhaarBase64,
-        aadhaarType: aadhaarType,
-        referredBy: formData.referredBy,
+        aadhaarType: aadhaarType
       };
 
       const networkResponse = await fetch(BACKEND_URL, {
@@ -367,38 +306,18 @@ const Register = () => {
         setSystemAlertMessage({ visible: true, text: `Submission Rejected: ${outcomeDataResult.message}` });
       }
     } catch (error) {
-      console.error(error);
-      setSystemAlertMessage({ visible: true, text: "Connection Timeout: Failed to sync with the primary registration ledger." });
+      setSystemAlertMessage({ visible: true, text: "Connection Timeout: Failed to sync with the registration ledger." });
     } finally {
       setSubmittingState(false);
     }
   };
 
   const triggerStateViewReset = () => {
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      gender: "",
-      college: "",
-      branch: "",
-      year: "",
-      domainSelection: "",
-      accommodation: "",
-      utr: "",
-      foodPreference: "",
-      idCardNumber: "",
-      referredBy: ""
-    });
-    setSelectedFile(null);
-    setFileLabel("Click or Drag to upload payment screenshot");
-    setCollegeIdCard(null);
-    setCollegeIdLabel("Click or Drag to upload college ID card");
-    setAadhaarCard(null);
-    setAadhaarLabel("Click or Drag to upload Aadhaar card");
-    setSystemAlertMessage({ visible: false, text: "" });
-    setViewStateMode("form");
-    setUploadProgress(0);
+    setFormData({ fullName: "", email: "", phone: "", gender: "", college: "", branch: "", year: "", domainSelection: "", accommodation: "", utr: "", foodPreference: "", idCardNumber: "", referredBy: "" });
+    setSelectedFile(null); setFileLabel("Click or Drag to upload payment screenshot");
+    setCollegeIdCard(null); setCollegeIdLabel("Click or Drag to upload college ID card");
+    setAadhaarCard(null); setAadhaarLabel("Click or Drag to upload Aadhaar card");
+    setSystemAlertMessage({ visible: false, text: "" }); setViewStateMode("form"); setUploadProgress(0);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -412,847 +331,144 @@ const Register = () => {
     }
   };
 
-  const getGenderDropdownLabelText = () => {
-    switch (formData.gender) {
-      case "MALE": return "Male";
-      case "FEMALE": return "Female";
-      case "OTHER": return "Other";
-      default: return "Select Gender";
-    }
-  };
-
-  const getAccomDropdownLabelText = () => {
-    switch (formData.accommodation) {
-      case "YES": return "Yes";
-      case "NO": return "No";
-      default: return "Select Accommodation";
-    }
-  };
-
-  // Heading animation (fade + slide)
-  const headingVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
-
   return (
-    <div className="min-h-screen text-slate-800 flex items-center justify-center p-3 sm:p-4 md:p-8 antialiased selection:bg-blue-500/10 font-['Plus_Jakarta_Sans',sans-serif] w-full box-border relative z-0">
-
-      {/* Background Layer with soft blue glow and blurred circles */}
-      <div className="fixed inset-0 bg-gradient-to-br from-light-blue-purple via-white to-light-blue-purple -z-50 select-none pointer-events-none overflow-hidden">
-        {/* Soft Grid Overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-40" />
-
-        {/* Ambient subtle light circles */}
-        <motion.div
-          animate={{
-            x: [0, 20, -10, 0],
-            y: [0, -20, 20, 0],
-            scale: [1, 1.05, 0.95, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-[10%] left-[10%] w-[35vw] h-[35vw] rounded-full bg-blue-400/10 blur-[80px]"
-        />
-
-        <motion.div
-          animate={{
-            x: [0, -20, 20, 0],
-            y: [0, 20, -10, 0],
-            scale: [1, 0.95, 1.05, 1],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute bottom-[10%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-purple-400/10 blur-[90px]"
-        />
-      </div>
-
-      {/* Main Page Entry Container (White Glassmorphism) */}
-      <motion.div
-        initial={{ opacity: 0, filter: "blur(8px)", scale: 0.97 }}
-        animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-        transition={{ type: "spring", duration: 1, bounce: 0.1 }}
-        className="relative w-full max-w-3xl bg-white/80 backdrop-blur-xl border border-slate-200 shadow-[0_20px_50px_rgba(13,71,161,0.06)] rounded-[2rem] p-5 sm:p-8 md:p-12 overflow-hidden my-6 box-border"
-      >
-        {/* Decorative subtle header light effect */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-gradient-to-b from-blue-500/5 to-transparent blur-3xl pointer-events-none rounded-full" />
-
+    <div class="min-h-screen text-slate-800 flex items-center justify-center p-3 sm:p-4 animate-fade-in w-full box-border relative">
+      <div class="w-full max-w-3xl bg-white/80 border border-slate-200 shadow-[0_20px_50px_rgba(13,71,161,0.06)] rounded-[2rem] p-5 sm:p-8 md:p-12 overflow-hidden my-6">
         {viewStateMode === "form" ? (
-          <div className="space-y-8">
-
-            {/* Header Section */}
-            <div className="text-center space-y-3.5">
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, type: "spring" }}
-                className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200/60 rounded-full text-[10px] uppercase tracking-widest font-black text-blue-600 select-none"
-              >
-                <Zap size={10} className="fill-blue-600 text-blue-600" /> AUNSF Event Platform
-              </motion.div>
-
-              <motion.h1
-                variants={headingVariants}
-                initial="hidden"
-                animate="visible"
-                className="text-3xl sm:text-4xl lg:text-[2.6rem] font-black tracking-tight bg-gradient-to-b from-[#0D47A1] to-slate-900 bg-clip-text text-transparent px-1 select-none"
-              >
-                Event Registration
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-slate-500 text-xs sm:text-sm max-w-lg mx-auto px-2 leading-relaxed font-semibold"
-              >
-                " *Teams will be thoughtfully formed by the organizers to encourage participants to connect and collaborate with new people.
-                To ensure a fair and smooth experience for everyone, team allocations will be final and requests for changes or grouping with friends cannot be accommodated."*
-              </motion.p>
+          <div class="space-y-8">
+            <div class="text-center space-y-3.5">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-[10px] uppercase font-black text-blue-600 tracking-widest"><Zap size={10} /> AUNSF Event Platform</div>
+              <h1 class="text-3xl font-black text-slate-900">Event Registration</h1>
             </div>
 
-            {/* Error alerts with elegant spring animations */}
             <AnimatePresence>
               {systemAlertMessage.visible && (
-                <motion.div
-                  ref={alertContainerRef}
-                  initial={{ opacity: 0, y: -15, scale: 0.97 }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    x: [0, -8, 8, -8, 8, 0]
-                  }}
-                  exit={{ opacity: 0, y: -15, scale: 0.97 }}
-                  transition={{
-                    type: "spring",
-                    duration: 0.5,
-                    x: { type: "tween", duration: 0.4 }
-                  }}
-                  className="p-4 bg-rose-500/5 backdrop-blur-md text-rose-800 border border-rose-500/20 rounded-2xl text-xs font-semibold scroll-mt-24 shadow-md shadow-rose-900/5"
-                >
-                  <div className="flex items-center gap-2">
-                    <AlertTriangle size={16} className="text-rose-600 shrink-0" />
-                    <span>{systemAlertMessage.text}</span>
-                  </div>
+                <motion.div ref={alertContainerRef} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} class="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-xs font-semibold text-rose-800 flex items-center gap-2">
+                  <AlertTriangle size={16} class="text-rose-600" /> <span>{systemAlertMessage.text}</span>
                 </motion.div>
               )}
             </AnimatePresence>
 
-            <form onSubmit={handleFormSubmissionEvent} className="space-y-8">
+            <form onSubmit={handleFormSubmissionEvent} class="space-y-6">
+              <div class="text-xs font-black text-[#0D47A1] uppercase tracking-widest border-l-2 border-[#0D47A1] pl-3">👤 Personal Profile</div>
+              <FloatingInput id="fullName" label="Full Name *" icon={User} value={formData.fullName} onChange={handleTextValueChange} />
 
+              <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                <div class="md:col-span-5"><FloatingInput id="email" label="Email Address *" icon={Mail} type="email" value={formData.email} onChange={handleTextValueChange} /></div>
+                <div class="md:col-span-4"><FloatingInput id="phone" label="Phone Number *" icon={Phone} type="tel" pattern="[0-9]{10}" value={formData.phone} onChange={handleTextValueChange} /></div>
 
-              {/* SECTION 2: PERSONAL DETAILS */}
-              <div className="space-y-4 pt-2">
-                <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none font-sans border-l-2 border-[#0D47A1] pl-3">
-                  👤 Personal Details
-                </div>
-
-                <div className="space-y-5">
-                  <FloatingInput
-                    id="fullName"
-                    label="Full Name *"
-                    icon={User}
-                    value={formData.fullName}
-                    onChange={handleTextValueChange}
-                  />
-
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-                    <div className="md:col-span-5">
-                      <FloatingInput
-                        id="email"
-                        label="Email Address *"
-                        icon={Mail}
-                        type="email"
-                        value={formData.email}
-                        onChange={handleTextValueChange}
-                      />
+                <div class="md:col-span-3 relative font-sans pt-5" ref={genderDropdownRef}>
+                  <button type="button" onClick={() => setGenderDropdownOpen(!genderDropdownOpen)} class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl px-4 py-3.5 text-sm text-left font-bold text-slate-800">{formData.gender ? formData.gender : "Gender *"}</button>
+                  {genderDropdownOpen && (
+                    <div class="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg">
+                      <div onClick={() => handleCustomSelect("gender", "MALE")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">Male</div>
+                      <div onClick={() => handleCustomSelect("gender", "FEMALE")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">Female</div>
                     </div>
-                    <div className="md:col-span-4">
-                      <FloatingInput
-                        id="phone"
-                        label="Phone Number *"
-                        icon={Phone}
-                        type="tel"
-                        pattern="[0-9]{10}"
-                        value={formData.phone}
-                        onChange={handleTextValueChange}
-                      />
-                    </div>
-
-                    {/* Dropdown with Floating Label and Light Theme matching inputs */}
-                    <div className="md:col-span-3 relative group w-full font-sans pt-5" ref={genderDropdownRef}>
-                      <div className="relative flex items-center">
-                        <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${genderDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
-                          <Users size={18} />
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
-                          className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${genderDropdownOpen
-                            ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                            : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                            }`}
-                        >
-                          <span className={`truncate block whitespace-nowrap ${formData.gender ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
-                            {getGenderDropdownLabelText()}
-                          </span>
-
-                          <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                            <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${genderDropdownOpen ? "rotate-180" : ""}`} />
-                          </div>
-                        </button>
-
-                        <label
-                          className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${genderDropdownOpen || (formData.gender && formData.gender.length > 0)
-                            ? `-translate-y-7 scale-[0.85] translate-x-0 ${genderDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                            : `translate-y-4 translate-x-11 text-slate-400`
-                            }`}
-                        >
-                          Gender *
-                        </label>
-
-                        <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${genderDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
-                      </div>
-
-                      <AnimatePresence>
-                        {genderDropdownOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                            transition={{ type: "spring", duration: 0.3 }}
-                            className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
-                          >
-                            <div onClick={() => { handleCustomSelect("gender", "MALE"); setGenderDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Male</div>
-                            <div onClick={() => { handleCustomSelect("gender", "FEMALE"); setGenderDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Female</div>
-                            <div onClick={() => { handleCustomSelect("gender", "OTHER"); setGenderDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Other</div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </div>
-
-                  <FloatingInput
-                    id="referredBy"
-                    label="Referred By (Optional)"
-                    icon={Users}
-                    value={formData.referredBy}
-                    onChange={handleTextValueChange}
-                    required={false}
-                  />
-
-                  {/* Food Preference */}
-                  <div className="space-y-3 pt-2">
-                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 select-none">
-                      Food Preference *
-                    </label>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <button
-                        type="button"
-                        onClick={() => handleFoodPreferenceChange("VEG")}
-                        className={`flex items-center gap-3 px-5 py-4 border rounded-2xl cursor-pointer transition-all duration-300 w-full sm:w-1/2 ${formData.foodPreference === "VEG"
-                          ? "border-blue-500 bg-white text-blue-600 shadow-[0_0_15px_rgba(13,71,161,0.06)]"
-                          : "border-slate-200 hover:border-slate-300 text-slate-700 bg-slate-50/50"
-                          }`}
-                      >
-                        <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all duration-300 ${formData.foodPreference === "VEG"
-                          ? "border-blue-500 bg-blue-500 text-white"
-                          : "border-slate-300 bg-white text-transparent"
-                          }`}>
-                          <Check size={14} className="stroke-[3]" />
-                        </div>
-                        <span className="text-sm font-semibold select-none font-sans">Veg</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => handleFoodPreferenceChange("NON-VEG")}
-                        className={`flex items-center gap-3 px-5 py-4 border rounded-2xl cursor-pointer transition-all duration-300 w-full sm:w-1/2 ${formData.foodPreference === "NON-VEG"
-                          ? "border-blue-500 bg-white text-blue-600 shadow-[0_0_15px_rgba(13,71,161,0.06)]"
-                          : "border-slate-200 hover:border-slate-300 text-slate-700 bg-slate-50/50"
-                          }`}
-                      >
-                        <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all duration-300 ${formData.foodPreference === "NON-VEG"
-                          ? "border-blue-500 bg-blue-500 text-white"
-                          : "border-slate-300 bg-white text-transparent"
-                          }`}>
-                          <Check size={14} className="stroke-[3]" />
-                        </div>
-                        <span className="text-sm font-semibold select-none font-sans">Non-Veg</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Dropdown for Accommodation */}
-                  <div className="relative group w-full font-sans pt-5" ref={accomDropdownRef}>
-                    <div className="relative flex items-center">
-                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${accomDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
-                        <Home size={18} />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setAccomDropdownOpen(!accomDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${accomDropdownOpen
-                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                          }`}
-                      >
-                        <span className={`truncate block whitespace-nowrap ${formData.accommodation ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
-                          {getAccomDropdownLabelText()}
-                        </span>
-
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${accomDropdownOpen ? "rotate-180" : ""}`} />
-                        </div>
-                      </button>
-
-                      <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${accomDropdownOpen || (formData.accommodation && formData.accommodation.length > 0)
-                          ? `-translate-y-7 scale-[0.85] translate-x-0 ${accomDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                          : `translate-y-4 translate-x-11 text-slate-400`
-                          }`}
-                      >
-                        Accommodation *
-                      </label>
-
-                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${accomDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
-                    </div>
-
-                    <AnimatePresence>
-                      {accomDropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                          transition={{ type: "spring", duration: 0.3 }}
-                          className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
-                        >
-                          <div onClick={() => { handleCustomSelect("accommodation", "YES"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">Yes</div>
-                          <div onClick={() => { handleCustomSelect("accommodation", "NO"); setAccomDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">No</div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Conditional Aadhaar Card Upload */}
-                  <AnimatePresence>
-                    {formData.accommodation === "YES" && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ type: "spring", duration: 0.4, bounce: 0 }}
-                        className="space-y-2 pt-2 overflow-hidden"
-                      >
-                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 select-none">
-                          Upload Aadhaar Card *
-                        </label>
-
-                        <div className="relative flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 hover:bg-slate-50/80 hover:border-blue-500/40 transition-all duration-300 cursor-pointer group min-h-[140px]">
-                          <input
-                            type="file"
-                            id="aadhaarCardInput"
-                            accept="image/png, image/jpeg, image/jpg"
-                            required
-                            onChange={handleAadhaarFileUploadStream}
-                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                          />
-
-                          {aadhaarPreview ? (
-                            <div className="relative w-full h-40 rounded-xl overflow-hidden flex items-center justify-center bg-slate-50 pointer-events-none">
-                              <img src={aadhaarPreview} alt="Aadhaar preview" className="w-full h-full object-contain" />
-                              <div className="absolute inset-0 bg-slate-950/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <span className="text-white text-xs font-semibold px-3 py-1.5 bg-slate-900/80 rounded-full border border-white/20 select-none">
-                                  Change Aadhaar Card
-                                </span>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="flex flex-col items-center justify-center space-y-2 pointer-events-none text-slate-500">
-                              <Upload size={24} className="text-slate-400 group-hover:text-blue-500 transition-colors" />
-                              <span className="text-xs font-semibold text-slate-600 group-hover:text-blue-600 transition-colors text-center break-all px-4">{aadhaarLabel}</span>
-                              <span className="text-[10px] text-slate-400 font-medium">JPEG, JPG, or PNG up to 4MB</span>
-                            </div>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  {/* Enter ID Card Number */}
-                  <FloatingInput
-                    id="idCardNumber"
-                    label="Enter ID Card Number *"
-                    icon={CreditCard}
-                    value={formData.idCardNumber}
-                    onChange={handleTextValueChange}
-                  />
-
-                  {/* Upload College ID Card */}
-                  <div className="space-y-2 pt-2">
-                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 select-none">
-                      Upload College ID Card *
-                    </label>
-
-                    <div className="relative flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 hover:bg-slate-50/80 hover:border-blue-500/40 transition-all duration-300 cursor-pointer group min-h-[140px]">
-                      <input
-                        type="file"
-                        id="collegeIdCardInput"
-                        accept="image/png, image/jpeg, image/jpg"
-                        required
-                        onChange={handleCollegeIdFileUploadStream}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                      />
-
-                      {collegeIdPreview ? (
-                        <div className="relative w-full h-40 rounded-xl overflow-hidden flex items-center justify-center bg-slate-50 pointer-events-none">
-                          <img src={collegeIdPreview} alt="College ID preview" className="w-full h-full object-contain" />
-                          <div className="absolute inset-0 bg-slate-950/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span className="text-white text-xs font-semibold px-3 py-1.5 bg-slate-900/80 rounded-full border border-white/20 select-none">
-                              Change College ID Card
-                            </span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex flex-col items-center justify-center space-y-2 pointer-events-none text-slate-500">
-                          <Upload size={24} className="text-slate-400 group-hover:text-blue-500 transition-colors" />
-                          <span className="text-xs font-semibold text-slate-600 group-hover:text-blue-600 transition-colors text-center break-all px-4">{collegeIdLabel}</span>
-                          <span className="text-[10px] text-slate-400 font-medium">JPEG, JPG, or PNG up to 4MB</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
+                  )}
                 </div>
               </div>
 
-              {/* SECTION 3: ACADEMIC DETAILS */}
-              <div className="space-y-4 pt-2">
-                <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none border-l-2 border-[#0D47A1] pl-3">
-                  🎓 Academic Details
-                </div>
+              <FloatingInput id="referredBy" label="Referred By (Optional)" icon={Users} value={formData.referredBy} onChange={handleTextValueChange} required={false} />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-5">
-                  <div className="sm:col-span-1 md:col-span-5">
-                    <FloatingInput
-                      id="college"
-                      label="Institution / College *"
-                      icon={School}
-                      value={formData.college}
-                      onChange={handleTextValueChange}
-                    />
-                  </div>
-
-                  <div className="sm:col-span-1 md:col-span-3">
-                    <FloatingInput
-                      id="branch"
-                      label="Branch *"
-                      icon={Award}
-                      value={formData.branch}
-                      onChange={handleTextValueChange}
-                    />
-                  </div>
-
-                  {/* Dropdown with Floating Label and Light Theme matching inputs */}
-                  <div className="sm:col-span-2 md:col-span-4 relative group w-full font-sans pt-5" ref={yearDropdownRef}>
-                    <div className="relative flex items-center">
-                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${yearDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
-                        <Calendar size={18} />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setYearDropdownOpen(!yearDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${yearDropdownOpen
-                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                          }`}
-                      >
-                        <span className={`truncate block whitespace-nowrap ${formData.year ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
-                          {getYearDropdownLabelText()}
-                        </span>
-
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${yearDropdownOpen ? "rotate-180" : ""}`} />
-                        </div>
-                      </button>
-
-                      <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${yearDropdownOpen || (formData.year && formData.year.length > 0)
-                          ? `-translate-y-7 scale-[0.85] translate-x-0 ${yearDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                          : `translate-y-4 translate-x-11 text-slate-400`
-                          }`}
-                      >
-                        Academic Year *
-                      </label>
-
-                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${yearDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
-                    </div>
-
-                    <AnimatePresence>
-                      {yearDropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                          transition={{ type: "spring", duration: 0.3 }}
-                          className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
-                        >
-                          <div onClick={() => { handleCustomSelect("year", "1"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">1st Year (Freshman)</div>
-                          <div onClick={() => { handleCustomSelect("year", "2"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">2nd Year (Sophomore)</div>
-                          <div onClick={() => { handleCustomSelect("year", "3"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">3rd Year (Junior)</div>
-                          <div onClick={() => { handleCustomSelect("year", "4"); setYearDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">4th Year (Senior)</div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </div>
-
-                <div className="mt-5">
-                  {/* Dropdown for   Selection */}
-                  <div className="relative group w-full font-sans pt-5" ref={domainDropdownRef}>
-                    <div className="relative flex items-center">
-                      <div className={`absolute left-4 z-20 pointer-events-none transition-colors duration-300 ${domainDropdownOpen ? 'text-blue-600' : 'text-slate-400'}`}>
-                        <Target size={18} />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setDomainDropdownOpen(!domainDropdownOpen)}
-                        className={`w-full bg-slate-50/50 border rounded-2xl pl-11 pr-10 py-3.5 text-sm outline-none transition-all duration-300 text-left cursor-pointer min-w-full ${domainDropdownOpen
-                          ? 'border-blue-500 shadow-[0_0_15px_rgba(13,71,161,0.06)] bg-white text-slate-800'
-                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                          }`}
-                      >
-                        <span className={`truncate block whitespace-nowrap ${formData.domainSelection ? "text-slate-900 font-extrabold" : "text-transparent"}`}>
-                          {formData.domainSelection || "Choose Theme Domain"}
-                        </span>
-
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                          <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 shrink-0 ${domainDropdownOpen ? "rotate-180" : ""}`} />
-                        </div>
-                      </button>
-
-                      <label
-                        className={`absolute left-0 top-0 transition-all duration-300 pointer-events-none text-sm font-semibold origin-top-left ${domainDropdownOpen || (formData.domainSelection && formData.domainSelection.length > 0)
-                          ? `-translate-y-7 scale-[0.85] translate-x-0 ${domainDropdownOpen ? 'text-blue-600 font-bold' : 'text-slate-500'}`
-                          : `translate-y-4 translate-x-11 text-slate-400`
-                          }`}
-                      >
-                        Domain Selection *
-                      </label>
-
-                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 -translate-x-1/2 ${domainDropdownOpen ? 'w-[90%]' : 'w-0'}`} />
-                    </div>
-
-                    <AnimatePresence>
-                      {domainDropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                          transition={{ type: "spring", duration: 0.3 }}
-                          className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
-                        >
-                          {["Blue Economy", "Human Behaviour & Civic Innovation", "Arts & Culture"].map((d) => (
-                            <div key={d} onClick={() => { handleCustomSelect("domainSelection", d); setDomainDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">{d}</div>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Automatic Domain Selection Info Card */}
-                  <AnimatePresence>
-                    {formData.domainSelection && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0, y: -10 }}
-                        animate={{ opacity: 1, height: "auto", y: 0 }}
-                        exit={{ opacity: 0, height: 0, y: -10 }}
-                        transition={{ type: "spring", duration: 0.4 }}
-                        className="mt-4 overflow-hidden"
-                      >
-                        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-xs text-slate-600 font-sans space-y-2 shadow-sm">
-                          {formData.domainSelection === "Blue Economy" && (
-                            <div>
-                              <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">🌊 Blue Economy</span>
-                              <p className="leading-relaxed text-slate-500">
-                                The Blue Economy promotes the sustainable use of water resources while protecting aquatic ecosystems. It encourages innovation to keep our oceans clean, conserve aquatic life and support communities
-                              </p>
-                            </div>
-                          )}
-                          {formData.domainSelection === "Human Behaviour & Civic Innovation" && (
-                            <div>
-                              <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">👥Human Behaviour & Civic Innovation</span>
-                              <p className="leading-relaxed text-slate-500">
-                                Human Behaviour & Civic Innovation focuses on promoting responsible digital behaviour, critical thinking and meaningful human connections. It encourages innovative solutions that help individuals and communities build a healthier, more informed and socially responsible society.
-                              </p>
-                            </div>
-                          )}
-                          {formData.domainSelection === "Arts & Culture" && (
-                            <div>
-                              <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">🎨 Arts & Culture</span>
-                              <p className="leading-relaxed text-slate-500">
-                                Arts & Culture is about preserving our traditions, culture, art and heritage using technology. It encourages innovative ideas that protect our cultural identity, make it accessible to everyone, and inspire future generations
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+              <div class="space-y-2">
+                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest">Food Preference *</label>
+                <div class="flex gap-4">
+                  <button type="button" onClick={() => handleFoodPreferenceChange("VEG")} class={`p-4 border rounded-2xl w-1/2 font-bold text-sm ${formData.foodPreference === 'VEG' ? 'border-blue-500 bg-blue-50/20 text-blue-600' : 'border-slate-200'}`}>Veg</button>
+                  <button type="button" onClick={() => handleFoodPreferenceChange("NON-VEG")} class={`p-4 border rounded-2xl w-1/2 font-bold text-sm ${formData.foodPreference === 'NON-VEG' ? 'border-blue-500 bg-blue-50/20 text-blue-600' : 'border-slate-200'}`}>Non-Veg</button>
                 </div>
               </div>
 
-              {/* SECTION 1: REGISTRATION FEE STRUCTURE */}
-              <div className="space-y-4 pt-2">
-                <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none font-sans border-l-2 border-[#0D47A1] pl-3">
-                  🏷️ Registration Fee Structure
-                </div>
-
-                <div className="flex flex-col gap-6 mt-2">
-
-                  {/* Card 1: Early Bird */}
-                  <motion.div
-                    whileHover={{ scale: 1.01, y: -2 }}
-                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                    className="relative overflow-hidden bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm group"
-                  >
-                    {/* Animated shine sweep on card hover */}
-                    <motion.div
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: "100%" }}
-                      transition={{ duration: 1, ease: "easeInOut" }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent transform -skew-x-12 pointer-events-none"
-                    />
-
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-orange-50 border border-orange-200 text-orange-600 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                          🔥 Valid until 22th July
-                        </div>
-                      </div>
-                      <h3 className="text-base font-extrabold text-slate-800 select-none mb-4">
-                        Early Bird Registration
-                      </h3>
-
-                      <div className="flex flex-col gap-5">
-                        {/* Option 1: Without Accommodation */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
-                          <div className="flex flex-col">
-                            <span className="text-xs font-semibold text-slate-500 font-sans">Without Accommodation</span>
-                            <span className="text-xl font-black text-slate-800 mt-1">₹999</span>
-                          </div>
-                          <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/6a50a02675510ba4edced6f8"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
-                          >
-                            Pay Now <ArrowRight size={14} />
-                          </a>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border-t border-slate-100 my-1 w-full" />
-
-                        {/* Option 2: With Accommodation */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
-                          <div className="flex flex-col">
-                            <span className="text-xs font-semibold text-slate-500 font-sans">With Accommodation</span>
-                            <span className="text-xl font-black text-orange-600 mt-1">₹1599</span>
-                          </div>
-                          <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/6a50a140aec4293e6fb25ead"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
-                          >
-                            Pay Now <ArrowRight size={14} />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Card 2: Standard Registration */}
-                  <motion.div
-                    whileHover={{ scale: 1.01, y: -2 }}
-                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                    className="relative overflow-hidden bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm group"
-                  >
-                    {/* Animated shine sweep on card hover */}
-                    <motion.div
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: "100%" }}
-                      transition={{ duration: 1, ease: "easeInOut" }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent transform -skew-x-12 pointer-events-none"
-                    />
-
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-blue-50 border border-blue-200 text-blue-600 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                          Standard Registration
-                        </div>
-                      </div>
-                      <h3 className="text-base font-extrabold text-slate-800 select-none mb-4">
-                        Regular Registration
-                      </h3>
-
-                      <div className="flex flex-col gap-5">
-                        {/* Option 1: Without Accommodation */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
-                          <div className="flex flex-col">
-                            <span className="text-xs font-semibold text-slate-500 font-sans">Without Accommodation</span>
-                            <span className="text-xl font-black text-slate-800 mt-1">₹1199</span>
-                          </div>
-                          <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-center py-2.5 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
-                          >
-                            Pay Now <ArrowRight size={14} />
-                          </a>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border-t border-slate-100 my-1 w-full" />
-
-                        {/* Option 2: With Accommodation */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
-                          <div className="flex flex-col">
-                            <span className="text-xs font-semibold text-slate-500 font-sans">With Accommodation</span>
-                            <span className="text-xl font-black text-blue-600 mt-1">₹1799</span>
-                          </div>
-                          <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-center py-2.5 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
-                          >
-                            Pay Now <ArrowRight size={14} />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                </div>
-              </div>
-
-              {/* SECTION 4: UPI UTR TRANSACTION & SCREENSHOT */}
-              <div className="space-y-4 pt-2">
-                <div className="text-xs font-black text-[#0D47A1] uppercase tracking-widest flex items-center gap-2 select-none font-sans border-l-2 border-[#0D47A1] pl-3">
-                  💳 Payment Verification
-                </div>
-
-                <div className="bg-slate-50/60 border border-slate-200/80 p-5 sm:p-6 rounded-[2rem] space-y-6">
-
-                  {/* UTR Number field */}
-                  <div className="space-y-2">
-                    <FloatingInput
-                      id="utr"
-                      label="UPI / Transaction UTR Reference Number *"
-                      icon={CreditCard}
-                      value={formData.utr}
-                      onChange={handleTextValueChange}
-                    />
+              <div class="relative font-sans pt-3" ref={accomDropdownRef}>
+                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Accommodation *</label>
+                <button type="button" onClick={() => setAccomDropdownOpen(!accomDropdownOpen)} class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl px-4 py-3.5 text-sm text-left font-bold text-slate-800">{formData.accommodation ? `Required: ${formData.accommodation}` : "Select Option"}</button>
+                {accomDropdownOpen && (
+                  <div class="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg">
+                    <div onClick={() => handleCustomSelect("accommodation", "YES")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">Yes</div>
+                    <div onClick={() => handleCustomSelect("accommodation", "NO")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">No</div>
                   </div>
-
-                  {/* Upload Receipt drag box */}
-                  <div className="space-y-2">
-                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 select-none">
-                      Upload Remittance Receipt Screenshot *
-                    </label>
-
-                    <div className="relative flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 hover:bg-slate-50/80 hover:border-blue-500/40 transition-all duration-300 cursor-pointer group min-h-[140px]">
-                      <input
-                        type="file"
-                        id="screenshotInput"
-                        accept="image/png, image/jpeg, image/jpg"
-                        required
-                        onChange={handleFileUploadStream}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                      />
-
-                      {filePreview ? (
-                        <div className="relative w-full h-40 rounded-xl overflow-hidden flex items-center justify-center bg-slate-50 pointer-events-none">
-                          <img src={filePreview} alt="Receipt preview" className="w-full h-full object-contain" />
-                          <div className="absolute inset-0 bg-slate-950/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span className="text-white text-xs font-semibold px-3 py-1.5 bg-slate-900/80 rounded-full border border-white/20 select-none">
-                              Change Screenshot
-                            </span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex flex-col items-center justify-center space-y-2 pointer-events-none text-slate-500">
-                          <Upload size={24} className="text-slate-400 group-hover:text-blue-500 transition-colors" />
-                          <span className="text-xs font-semibold text-slate-600 group-hover:text-blue-600 transition-colors text-center break-all px-4">{fileLabel}</span>
-                          <span className="text-[10px] text-slate-400 font-medium">JPEG, JPG, or PNG up to 4MB</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Form Submission Button */}
-              <button
-                type="submit"
-                disabled={submittingState}
-                className="relative overflow-hidden w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-105 active:scale-[0.98] text-white font-bold text-sm py-4 px-6 rounded-2xl shadow-lg shadow-blue-500/10 transition-all duration-200 tracking-wide cursor-pointer flex items-center justify-center gap-2 group"
-              >
-                <span>{submittingState ? `Uploading... ${uploadProgress}%` : "Submit Registration "}</span>
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-                {submittingState && (
-                  <div
-                    className="absolute bottom-0 left-0 h-1 bg-white/40 transition-all duration-300 ease-out"
-                    style={{ width: `${uploadProgress}%` }}
-                  />
                 )}
-              </button>
+              </div>
 
+              {formData.accommodation === "YES" && (
+                <div class="space-y-2 pt-2">
+                  <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest">Upload Aadhaar Card *</label>
+                  <div class="relative flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 cursor-pointer">
+                    <input type="file" accept="image/*" required onChange={handleAadhaarFileUploadStream} class="absolute inset-0 opacity-0 cursor-pointer z-10" />
+                    <span class="text-xs font-semibold text-slate-600">{aadhaarLabel}</span>
+                  </div>
+                </div>
+              )}
+
+              <div class="text-xs font-black text-[#0D47A1] uppercase tracking-widest border-l-2 border-[#0D47A1] pl-3 pt-4">🎓 Academic Information</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <FloatingInput id="college" label="Institution / College *" icon={School} value={formData.college} onChange={handleTextValueChange} />
+                <FloatingInput id="branch" label="Branch *" icon={Award} value={formData.branch} onChange={handleTextValueChange} />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div class="relative font-sans" ref={yearDropdownRef}>
+                  <button type="button" onClick={() => setYearDropdownOpen(!yearDropdownOpen)} class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl px-4 py-3.5 text-sm text-left font-bold text-slate-800">{getYearDropdownLabelText()}</button>
+                  {yearDropdownOpen && (
+                    <div class="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg">
+                      <div onClick={() => handleCustomSelect("year", "1")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">1st Year</div>
+                      <div onClick={() => handleCustomSelect("year", "2")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">2nd Year</div>
+                      <div onClick={() => handleCustomSelect("year", "3")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">3rd Year</div>
+                      <div onClick={() => handleCustomSelect("year", "4")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">4th Year</div>
+                    </div>
+                  )}
+                </div>
+
+                <div class="relative font-sans" ref={domainDropdownRef}>
+                  <button type="button" onClick={() => setDomainDropdownOpen(!domainDropdownOpen)} class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl px-4 py-3.5 text-sm text-left font-bold text-slate-800 truncate">{formData.domainSelection || "Choose Theme Domain *"}</button>
+                  {domainDropdownOpen && (
+                    <div class="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg">
+                      <div onClick={() => handleCustomSelect("domainSelection", "Blue Economy")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">Blue Economy</div>
+                      <div onClick={() => handleCustomSelect("domainSelection", "Human Behaviour & Civic Innovation")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">Human Behaviour & Civic Innovation</div>
+                      <div onClick={() => handleCustomSelect("domainSelection", "Arts & Culture")} class="px-4 py-2 text-xs font-semibold hover:bg-blue-50 cursor-pointer">Arts & Culture</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div class="space-y-4 pt-2">
+                <FloatingInput id="idCardNumber" label="College ID Card Number *" icon={CreditCard} value={formData.idCardNumber} onChange={handleTextValueChange} />
+                <div class="space-y-2">
+                  <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest">Upload College ID Card *</label>
+                  <div class="relative flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 cursor-pointer">
+                    <input type="file" accept="image/*" required onChange={handleCollegeIdFileUploadStream} class="absolute inset-0 opacity-0 cursor-pointer z-10" />
+                    <span class="text-xs font-semibold text-slate-600">{collegeIdLabel}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-xs font-black text-[#0D47A1] uppercase tracking-widest border-l-2 border-[#0D47A1] pl-3 pt-4">💳 Payment Verification</div>
+              <FloatingInput id="utr" label="Transaction UTR Reference Number *" icon={CreditCard} value={formData.utr} onChange={handleTextValueChange} />
+
+              <div class="space-y-2">
+                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest">Upload Remittance Receipt Screenshot *</label>
+                <div class="relative flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 cursor-pointer">
+                  <input type="file" accept="image/*" required onChange={handleFileUploadStream} class="absolute inset-0 opacity-0 cursor-pointer z-10" />
+                  <span class="text-xs font-semibold text-slate-600">{fileLabel}</span>
+                </div>
+              </div>
+
+              <button type="submit" disabled={submittingState} class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-sm py-4 rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
+                <span>{submittingState ? `Processing Outbound Payload... ${uploadProgress}%` : "Submit Registration "}</span>
+                <ArrowRight size={16} />
+              </button>
             </form>
           </div>
         ) : (
-          /* Success Screen Mode with framer-motion animations */
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: "spring", duration: 0.5 }}
-            className="text-center py-12 space-y-6"
-          >
-            <div className="mx-auto w-16 h-16 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center shadow-md shadow-emerald-500/5">
-              <Check className="text-emerald-500" size={28} />
+          <div class="text-center py-12 space-y-6">
+            <div class="mx-auto w-16 h-16 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center shadow-md"><Check class="text-emerald-500" size={28} /></div>
+            <div>
+              <h2 class="text-2xl font-black text-slate-900">Submitted Successfully!</h2>
+              <p class="text-sm font-semibold text-slate-500 max-w-sm mx-auto mt-2">Your registration parameters were securely synced with the core master ledger database sheets.</p>
             </div>
-            <div className="space-y-2 px-2">
-              <h2 className="text-2xl font-black tracking-tight text-slate-900">Submitted Successfully!</h2>
-              <p className="text-xs sm:text-sm font-semibold text-slate-500 max-w-sm mx-auto leading-relaxed">
-                Your registration status and other details will be sent to your email id shortly.
-                ⚠️ *Check your Spam folder:* If your ticket lands there, you *must* click *"Move to Inbox"* or *"Report as Not Spam"* to unblock and view your entry QR code!
-              </p>
-            </div>
-            <div className="pt-4">
-              <button
-                onClick={triggerStateViewReset}
-                className="bg-white hover:bg-slate-50 text-slate-600 font-bold text-xs py-3.5 px-6 rounded-2xl transition border border-slate-200 cursor-pointer shadow-sm active:scale-95"
-              >
-                ↩ Lodge Another Registration
-              </button>
-            </div>
-          </motion.div>
+            <button onClick={triggerStateViewReset} class="bg-white text-slate-600 font-bold text-xs py-3.5 px-6 rounded-2xl border border-slate-200 shadow-sm">Lodge Another Registration</button>
+          </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 };

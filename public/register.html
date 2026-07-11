@@ -48,6 +48,7 @@
       </div>
 
       <form id="registrationForm" class="space-y-5 sm:space-y-6">
+        <!-- FULL LEGAL NAME -->
         <div class="space-y-1">
           <label for="fullName" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Full Name
             *</label>
@@ -55,6 +56,7 @@
             class="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-blue-500 focus:bg-white transition">
         </div>
 
+        <!-- EMAIL & GENDER TRACKS -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="md:col-span-2 space-y-1">
             <label for="email" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address
@@ -91,6 +93,7 @@
           </div>
         </div>
 
+        <!-- PHONE NUMBER & REFERENCE TRACKS -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="space-y-1">
             <label for="phone" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number
@@ -107,6 +110,7 @@
           </div>
         </div>
 
+        <!-- FOOD SELECTIONS & ACCOMMODATION LAYOUTS -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="space-y-1 relative">
             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Food Preference *</label>
@@ -158,7 +162,7 @@
           </div>
         </div>
 
-        <!-- Dynamic Slide Wrapper Module Block Hook -->
+        <!-- CONDITIONAL SLIDE OVERLAY: AADHAAR PASS LINK MODULE -->
         <div id="aadhaarBlockContainer" class="hidden space-y-1.5 transition-all duration-300">
           <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider">Upload Aadhaar Card
             Screenshot *</label>
@@ -171,6 +175,7 @@
           </div>
         </div>
 
+        <!-- ACADEMIC CAMPUS FIELDS -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="space-y-1">
             <label for="college" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Institution /
@@ -185,6 +190,7 @@
           </div>
         </div>
 
+        <!-- COHORT BATCHES & UPDATED TRACK OPTIONS DROPDOWN -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="space-y-1 relative">
             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Academic Cohort Year
@@ -233,6 +239,7 @@
                 <div data-value="Blue Economy"
                   class="domain-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
                   Blue Economy</div>
+                <!-- CRITICAL CORRECTION: Clean rename applied cleanly across the option selectors -->
                 <div data-value="Human Behaviour & Civic Innovation"
                   class="domain-option px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
                   Human Behaviour & Civic Innovation</div>
@@ -245,6 +252,7 @@
           </div>
         </div>
 
+        <!-- COLLEGE STUDENT ALPHANUMERIC METRICS SUB-CARDS -->
         <div class="grid grid-cols-1 gap-4">
           <div class="space-y-1">
             <label for="idCardNumber" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">College ID
@@ -268,6 +276,7 @@
 
         <hr class="border-slate-100 my-4">
 
+        <!-- AUDIT BLOCK RECEIPT -->
         <div class="bg-slate-50/60 p-4 sm:p-5 rounded-2xl border border-slate-200/60 space-y-4">
           <div class="text-xs font-black text-blue-600 uppercase tracking-widest flex items-center gap-1.5 select-none">
             💳 Audit & Remittance Verification</div>
@@ -302,12 +311,12 @@
       </form>
     </div>
 
+    <!-- RE-STAGE INTAKE RESPONSE VIEW -->
     <div id="successStateView"
       class="hidden text-center py-12 space-y-6 opacity-0 transition-all duration-500 transform scale-95">
       <div
         class="mx-auto w-14 h-16 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center shadow-sm">
-        <span class="text-emerald-500 text-2xl font-black">✓</span>
-      </div>
+        <span class="text-emerald-500 text-2xl font-black">✓</span></div>
       <div class="space-y-2 px-2">
         <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">Submitted Successfully!</h2>
         <p class="text-xs sm:text-sm font-medium text-slate-500 max-w-sm mx-auto">Your details were processed. Check
@@ -405,44 +414,64 @@
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const file = screenshotInput.files[0];
-      const colIdFile = collegeIdCardInput.files[0];
+
+      // 1. Capture the explicit binary file references immediately upon execution
+      const receiptFile = screenshotInput.files[0];
+      const collegeIdFile = collegeIdCardInput.files[0];
       const aadharFile = aadhaarInput.files[0];
 
-      if (document.getElementById('accommodation').value === 'YES' && !aadharFile) { alert("Aadhaar file required."); return; }
+      // 2. Perform rigorous frontend verification checks before processing
+      if (!receiptFile || !collegeIdFile) {
+        alert("Form Validation Error: Please attach all required documentation files.");
+        return;
+      }
+      if (document.getElementById('accommodation').value === 'YES' && !aadharFile) {
+        alert("Form Validation Error: An Aadhaar file attachment is required when choosing accommodation.");
+        return;
+      }
 
+      // 3. Freeze controls to prevent race conditions or double submissions
       submitBtn.disabled = true;
       btnText.innerText = "Encrypting Data & Syncing Ledger...";
 
       try {
-        var base64Receipt = await parseFileToBase64(file);
-        var base64ColId = await parseFileToBase64(colIdFile);
+        // 4. Convert media files sequentially into base64 strings
+        var base64Receipt = await parseFileToBase64(receiptFile);
+        var base64CollegeId = await parseFileToBase64(collegeIdFile);
         var base64Aadhaar = "";
-        if (aadharFile) base64Aadhaar = await parseFileToBase64(aadharFile);
+        if (aadharFile) {
+          base64Aadhaar = await parseFileToBase64(aadharFile);
+        }
 
+        // 5. Construct the payload bundle with EXACT variable keys matching Code.gs
         const payloadBundle = {
-          fullName: document.getElementById('fullName').value,
-          email: document.getElementById('email').value,
-          phone: document.getElementById('phone').value,
+          fullName: document.getElementById('fullName').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
           gender: document.getElementById('gender').value,
-          college: document.getElementById('college').value,
-          branch: document.getElementById('branch').value,
+          college: document.getElementById('college').value.trim(),
+          branch: document.getElementById('branch').value.trim(),
           year: document.getElementById('year').value,
           domainSelection: document.getElementById('domainSelection').value,
           accommodation: document.getElementById('accommodation').value,
-          utr: document.getElementById('utrField').value,
+          utr: document.getElementById('utrField').value.trim(),
           foodPreference: document.getElementById('foodPreference').value,
-          referredBy: document.getElementById('referredBy').value,
-          // CRITICAL BUGFIX: The parameter name matches the 'idCardNumber' schema inside Code.gs
-          idCardNumber: document.getElementById('idCardNumber').value,
+          referredBy: document.getElementById('referredBy').value.trim(),
+
+          // CRITICAL FIXED KEYS: Bound explicitly to match backend expectations exactly
+          idCardNumber: document.getElementById('idCardNumber').value.trim(),
+
           imageBase64: base64Receipt,
-          imageType: file.type,
-          collegeIdCardBase64: base64ColId,
-          collegeIdCardType: colIdFile.type,
+          imageType: receiptFile.type,
+
+          collegeIdCardBase64: base64CollegeId,
+          collegeIdCardType: collegeIdFile.type,
+
           aadhaarBase64: base64Aadhaar,
           aadhaarType: aadharFile ? aadharFile.type : ""
         };
 
+        // 6. Dispatch the bundle payload to your live Apps Script Web App
         const response = await fetch(BACKEND_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -451,13 +480,22 @@
         const result = await response.json();
 
         if (result.status === 'success') {
-          formStateView.classList.add('hidden'); successStateView.classList.remove('hidden');
+          formStateView.classList.add('hidden');
+          successStateView.classList.remove('hidden');
           setTimeout(() => successStateView.classList.remove('scale-95', 'opacity-0'), 50);
           window.scrollTo({ top: 0, behavior: "smooth" });
-        } else { alert("Denied: " + result.message); submitBtn.disabled = false; btnText.innerText = "Submit Registration Portfolio"; }
-      } catch (error) { alert("Network fault."); submitBtn.disabled = false; btnText.innerText = "Submit Registration Portfolio"; }
+        } else {
+          alert("Submission Denied by Server: " + result.message);
+          submitBtn.disabled = false;
+          btnText.innerText = "Submit Registration Portfolio";
+        }
+      } catch (error) {
+        console.error("Transmission breakdown trace: ", error);
+        alert("Network connectivity error: Failed to secure database stream connection.");
+        submitBtn.disabled = false;
+        btnText.innerText = "Submit Registration Portfolio";
+      }
     });
-
     const parseFileToBase64 = file => new Promise((resolve, reject) => {
       const fr = new FileReader(); fr.readAsDataURL(file); fr.onload = () => resolve(fr.result); fr.onerror = err => reject(err);
     });
