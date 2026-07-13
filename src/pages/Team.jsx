@@ -9,27 +9,21 @@ const getLiveTeamData = () => {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (!parsed.facultyCoordinator && parsed.facultyCoordinators) {
-          parsed.facultyCoordinator = parsed.facultyCoordinators.map(fc => {
-            if (typeof fc === 'object' && fc !== null) {
-              const slug = fc.id || fc.name.toLowerCase().replace(/[^a-z0-9]/g, '') || 'faculty_coordinator';
-              if (!parsed.membersPool.find(m => m.id === slug)) {
-                parsed.membersPool.push({
-                  id: slug,
-                  name: fc.name,
-                  role: fc.role || 'Faculty Coordinator',
-                  image: fc.image || '',
-                  linkedin: fc.linkedin || ''
-                });
-              }
-              return slug;
-            }
-            return fc;
-          });
+        // Strict schema validation check:
+        // Invalidate if facultyCoordinator is missing, not an array, or contains objects instead of string slugs
+        const isInvalid = 
+          !parsed.facultyCoordinator || 
+          !Array.isArray(parsed.facultyCoordinator) || 
+          parsed.facultyCoordinator.some(fc => typeof fc !== 'string');
+
+        if (isInvalid) {
+          localStorage.removeItem('auisc_working_data');
+          return teamDataJson;
         }
         return parsed;
       } catch (e) {
-        console.error("Failed to parse localStorage data", e);
+        localStorage.removeItem('auisc_working_data');
+        return teamDataJson;
       }
     }
   }
