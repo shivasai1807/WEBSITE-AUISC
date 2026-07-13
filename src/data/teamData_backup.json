@@ -557,18 +557,10 @@
       "linkedin": "https://www.linkedin.com/in/dr-narendhar-singh-ba7188178/"
     },
     {
-      "id": "newfaculty",
-      "name": "New Faculty",
-      "role": "Rol",
-      "designation": "Rol",
-      "image": "",
-      "linkedin": ""
-    },
-    {
-      "id": "shaheedamam",
-      "name": "Dr. Shaik Shaheeda",
+      "id": "shaheda_mam",
+      "name": "Dr. Shaik Shaheda",
       "role": "Faculty Coordinator",
-      "image": "/team_pics/shaheedamam.webp",
+      "image": "/team_pics/shaheda_mam.webp",
       "linkedin": "https://www.linkedin.com/in/shaik-shaheda-808815248"
     }
   ],
@@ -698,7 +690,7 @@
   ],
   "facultyTitle": "Faculty Coordinator",
   "facultyCoordinator": [
-    "shaheedamam",
+    "shaheda_mam",
     "drnarendarsingh"
   ]
 }
