@@ -8,6 +8,10 @@ const TARGET_HASH = "be04cd6239e05b6a82ad866e5be5d00bffd2fa87da533bb855e41656c23
 const TARGET_USERNAME = "AUISC@2026";
 
 const processAndUploadImage = async (file, filename) => {
+  const isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+  if (!isLocal) {
+    throw new Error("Direct image upload is only supported when running the project locally. In production, please reference existing image names or add the image file to public/team_pics/ manually via Git.");
+  }
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -168,6 +172,11 @@ const AdminDashboard = () => {
   };
 
   const publishData = async () => {
+    const isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    if (!isLocal) {
+      alert("Note: Direct publishing to the codebase is only available when running the website locally.\n\nPlease click the 'Compile & Copy Production JSON' button to copy your configuration, paste it into src/data/teamData.json in your local repository, and commit/push to GitHub.");
+      return;
+    }
     if (window.confirm("WARNING: This will permanently overwrite the live codebase with your current dashboard state. Are you sure you want to deploy these changes?")) {
       try {
         const res = await fetch('/api/publish-data', {
@@ -184,6 +193,11 @@ const AdminDashboard = () => {
   };
 
   const backupData = async () => {
+    const isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    if (!isLocal) {
+      alert("Note: Local server backups are only available when running locally.\n\nYour working changes are automatically saved in your browser's local storage.");
+      return;
+    }
     try {
       const res = await fetch('/api/backup-data', {
         method: 'POST',
@@ -199,6 +213,13 @@ const AdminDashboard = () => {
 
   const resetData = async () => {
     if (window.confirm('Are you sure you want to discard unsaved changes and restore the last backed up or published state?')) {
+      const isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+      if (!isLocal) {
+        // Discard local changes and reload
+        localStorage.removeItem('auisc_working_data');
+        window.location.reload();
+        return;
+      }
       try {
         const res = await fetch('/api/get-backup');
         if (res.ok) {
