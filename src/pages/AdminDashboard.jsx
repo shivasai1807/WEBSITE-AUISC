@@ -76,71 +76,27 @@ const AdminDashboard = () => {
 
   const [data, setData] = useState(() => {
     const saved = localStorage.getItem('auisc_working_data');
-    let parsedData = teamDataJson;
     if (saved) {
       try {
-        parsedData = JSON.parse(saved);
-      } catch (e) { }
-    }
+        const parsed = JSON.parse(saved);
+        // Strict schema validation check:
+        // Invalidate if facultyCoordinator is missing, not an array, or contains objects instead of string slugs
+        const isInvalid = 
+          !parsed.facultyCoordinator || 
+          !Array.isArray(parsed.facultyCoordinator) || 
+          parsed.facultyCoordinator.some(fc => typeof fc !== 'string');
 
-    if (!parsedData.membersPool) {
-      parsedData.membersPool = [];
-    }
-
-    // Auto-migrate old faculty format
-    if (!parsedData.facultyCoordinator) {
-      if (parsedData.facultyCoordinators) {
-        parsedData.facultyCoordinator = parsedData.facultyCoordinators.map(fc => {
-          if (typeof fc === 'object' && fc !== null) {
-            const slug = fc.id || fc.name.toLowerCase().replace(/[^a-z0-9]/g, '') || 'faculty_coordinator';
-            if (!parsedData.membersPool.find(m => m.id === slug)) {
-              parsedData.membersPool.push({
-                id: slug,
-                name: fc.name,
-                role: fc.role || fc.designation || 'Faculty Coordinator',
-                designation: fc.designation || fc.role || 'Faculty Coordinator',
-                image: fc.image || '',
-                linkedin: fc.linkedin || ''
-              });
-            }
-            return slug;
-          }
-          return fc;
-        });
-        delete parsedData.facultyCoordinators;
-      } else {
-        parsedData.facultyCoordinator = [];
-      }
-    } else if (!Array.isArray(parsedData.facultyCoordinator)) {
-      if (typeof parsedData.facultyCoordinator === 'string') {
-        parsedData.facultyCoordinator = [parsedData.facultyCoordinator];
-      } else {
-        const fc = parsedData.facultyCoordinator;
-        const slug = fc.id || fc.name.toLowerCase().replace(/[^a-z0-9]/g, '') || 'faculty_coordinator';
-        if (!parsedData.membersPool.find(m => m.id === slug)) {
-          parsedData.membersPool.push({
-            id: slug,
-            name: fc.name,
-            role: fc.role || fc.designation || 'Faculty Coordinator',
-            designation: fc.designation || fc.role || 'Faculty Coordinator',
-            image: fc.image || '',
-            linkedin: fc.linkedin || ''
-          });
+        if (isInvalid) {
+          localStorage.removeItem('auisc_working_data');
+          return teamDataJson;
         }
-        parsedData.facultyCoordinator = [slug];
+        return parsed;
+      } catch (e) {
+        localStorage.removeItem('auisc_working_data');
+        return teamDataJson;
       }
     }
-    if (!parsedData.facultyTitle) parsedData.facultyTitle = "Faculty Coordinator";
-
-    // Auto-migrate Executive Board leads to members since they have no leads
-    const ebIndex = parsedData.teams.findIndex(t => t.teamName === "Executive Board");
-    if (ebIndex !== -1 && parsedData.teams[ebIndex].leads && parsedData.teams[ebIndex].leads.length > 0) {
-      const eb = parsedData.teams[ebIndex];
-      eb.members = [...eb.leads, ...(eb.members || [])];
-      eb.leads = [];
-    }
-
-    return parsedData;
+    return teamDataJson;
   });
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
