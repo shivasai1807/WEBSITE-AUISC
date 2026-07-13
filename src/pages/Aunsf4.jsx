@@ -105,7 +105,7 @@ const Aunsf4 = () => {
               viewport={{ once: true }}
               className="text-4xl md:text-5xl font-black text-[#0E3B91] mb-8"
             >
-              AUNSF 4.0 is on the way!
+              READY  SET  GO!!
             </motion.h2>
 
             {/* Register AUNSF 4.0 CTA Button */}
@@ -133,9 +133,9 @@ const Aunsf4 = () => {
               className="text-lg md:text-xl text-gray-700 leading-10 max-w-4xl mx-auto"
             >
               Stay tuned for the next edition of innovation,
-              sustainability, leadership, and groundbreaking ideas.
+              sustainability, leadership and groundbreaking ideas.
               AUNSF 4.0 will bring together brilliant minds,
-              impactful discussions, and transformative experiences
+              impactful discussions and transformative experiences
               bigger than ever before.
             </motion.p>
 
@@ -161,7 +161,7 @@ const Aunsf4 = () => {
                 }}
                 className="text-3xl md:text-4xl font-black mb-5"
               >
-                ✨ Something Amazing is Coming
+                Its Happening - AUNSF 4.0
               </motion.h3>
 
               <p className="text-blue-100 text-lg leading-9 max-w-3xl mx-auto">

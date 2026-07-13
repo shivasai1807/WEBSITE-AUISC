@@ -248,14 +248,14 @@ const Events = () => {
                 />
 
                 <h3 className="text-3xl font-bold text-dark-blue-purple mb-6">
-                  🚀 AUNSF 4.0 – Coming Soon
+                  🚀 AUNSF 4.0 - Bigger Better Bolder
                 </h3>
 
                 <div className="space-y-5 text-dark-blue-purple leading-relaxed text-lg">
                   <p>
-                    <strong>AUNSF 4.0</strong> is more than just a hackathon—it's a
+                    <strong>AUNSF 4.0</strong> is more than just a hackathon - it's a
                     platform where <strong>innovation meets impact</strong>. We invite
-                    students, innovators, developers, designers, and entrepreneurs to
+                    students, innovators, developers, designers and entrepreneurs to
                     collaborate on real-world challenges and build solutions that create
                     meaningful change.
                   </p>
@@ -265,14 +265,14 @@ const Events = () => {
                     <strong> technology</strong>, <strong> creativity</strong>, or
                     <strong> improving society</strong>, AUNSF 4.0 offers you the
                     opportunity to showcase your ideas, learn from industry experts,
-                    network with like-minded innovators, and compete for exciting
+                    network with like-minded innovators and compete for exciting
                     rewards.
                   </p>
 
                   <p>
                     Explore innovative domains including <strong>Blue Economy</strong>,
                     <strong> Mindspace</strong>,
-                    <strong> Arts &amp; Culture</strong>, and
+                    <strong> Arts &amp; Culture</strong> and
                     <strong> Human Behaviour &amp; Civic Innovation</strong>. Turn your
                     ideas into impactful solutions that address real-world challenges.
                   </p>
