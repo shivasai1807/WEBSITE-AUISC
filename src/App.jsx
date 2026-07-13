@@ -59,56 +59,56 @@ function AppContent() {
         </Routes>
       </Layout>
 
-      {/* Welcome Modal (Temporarily Disabled)
+      {/* Welcome Modal (Temporarily Disabled) */}
 
-{showWelcomeModal && (
-  <motion.div
-    key="welcome-modal"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.2 }}
-    className="fixed inset-0 z-50 flex items-center justify-center"
-  >
-    <div
-      className="absolute inset-0 bg-dark-blue-purple/80 backdrop-blur-sm"
-      onClick={() => setShowWelcomeModal(false)}
-    />
-
-    <motion.div
-      initial={{ scale: 0.95 }}
-      animate={{ scale: 1 }}
-      transition={{ type: "spring", duration: 0.3 }}
-      className="relative w-[90%] max-w-[331px] max-h-[468px] md:max-w-[496px] md:max-h-[702px] rounded-2xl overflow-hidden shadow-2xl"
-    >
-      <div className="w-full h-full relative">
-        <img
-          src="/events/aunsf_4.0_poster.jpeg"
-          alt="Welcome to AUISC"
-          className="w-full h-full object-contain"
-        />
-
-        <div className="absolute bottom-6 left-0 right-0 flex justify-center px-4 z-20">
-          <Link
-            to="/register"
+      {showWelcomeModal && (
+        <motion.div
+          key="welcome-modal"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 flex items-center justify-center"
+        >
+          <div
+            className="absolute inset-0 bg-dark-blue-purple/80 backdrop-blur-sm"
             onClick={() => setShowWelcomeModal(false)}
-            className="w-full max-w-[240px] text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-sm py-3 px-6 rounded-xl shadow-lg hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 cursor-pointer"
+          />
+
+          <motion.div
+            initial={{ scale: 0.95 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", duration: 0.3 }}
+            className="relative w-[90%] max-w-[331px] max-h-[468px] md:max-w-[496px] md:max-h-[702px] rounded-2xl overflow-hidden shadow-2xl"
           >
-            Register AUNSF 4.0
-          </Link>
-        </div>
-      </div>
+            <div className="w-full h-full relative">
+              <img
+                src="/events/aunsf_4.0_poster.jpeg"
+                alt="Welcome to AUISC"
+                className="w-full h-full object-contain"
+              />
 
-      <button
-        onClick={() => setShowWelcomeModal(false)}
-        className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white text-dark-blue-purple hover:bg-gray-100 transition-colors shadow-lg cursor-pointer"
-      >
-        <X size={24} strokeWidth={2.5} />
-      </button>
-    </motion.div>
-  </motion.div>
-)}
+              <div className="absolute bottom-6 left-0 right-0 flex justify-center px-4 z-20">
+                <Link
+                  to="/register"
+                  onClick={() => setShowWelcomeModal(false)}
+                  className="w-full max-w-[240px] text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-sm py-3 px-6 rounded-xl shadow-lg hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 cursor-pointer"
+                >
+                  Register AUNSF 4.0
+                </Link>
+              </div>
+            </div>
 
-*/}
+            <button
+              onClick={() => setShowWelcomeModal(false)}
+              className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white text-dark-blue-purple hover:bg-gray-100 transition-colors shadow-lg cursor-pointer"
+            >
+              <X size={24} strokeWidth={2.5} />
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
+
+
 
 
     </>
