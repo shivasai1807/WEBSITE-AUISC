@@ -5,7 +5,7 @@ import teamDataJson from '../data/teamData.json';
 
 // Corrected SHA-256 production hash for A01b02z26y25@AUISC
 const TARGET_HASH = "be04cd6239e05b6a82ad866e5be5d00bffd2fa87da533bb855e41656c230b01a";
-const TARGET_USERNAME = "AUISC@2022";
+const TARGET_USERNAME = "AUISC@2026";
 
 const processAndUploadImage = async (file, filename) => {
   return new Promise((resolve, reject) => {
@@ -79,12 +79,52 @@ const AdminDashboard = () => {
       } catch (e) { }
     }
 
+    if (!parsedData.membersPool) {
+      parsedData.membersPool = [];
+    }
+
     // Auto-migrate old faculty format
-    if (parsedData.facultyCoordinator && !Array.isArray(parsedData.facultyCoordinator)) {
-      parsedData.facultyCoordinators = [parsedData.facultyCoordinator];
-      delete parsedData.facultyCoordinator;
-    } else if (!parsedData.facultyCoordinators) {
-      parsedData.facultyCoordinators = [];
+    if (!parsedData.facultyCoordinator) {
+      if (parsedData.facultyCoordinators) {
+        parsedData.facultyCoordinator = parsedData.facultyCoordinators.map(fc => {
+          if (typeof fc === 'object' && fc !== null) {
+            const slug = fc.id || fc.name.toLowerCase().replace(/[^a-z0-9]/g, '') || 'faculty_coordinator';
+            if (!parsedData.membersPool.find(m => m.id === slug)) {
+              parsedData.membersPool.push({
+                id: slug,
+                name: fc.name,
+                role: fc.role || fc.designation || 'Faculty Coordinator',
+                designation: fc.designation || fc.role || 'Faculty Coordinator',
+                image: fc.image || '',
+                linkedin: fc.linkedin || ''
+              });
+            }
+            return slug;
+          }
+          return fc;
+        });
+        delete parsedData.facultyCoordinators;
+      } else {
+        parsedData.facultyCoordinator = [];
+      }
+    } else if (!Array.isArray(parsedData.facultyCoordinator)) {
+      if (typeof parsedData.facultyCoordinator === 'string') {
+        parsedData.facultyCoordinator = [parsedData.facultyCoordinator];
+      } else {
+        const fc = parsedData.facultyCoordinator;
+        const slug = fc.id || fc.name.toLowerCase().replace(/[^a-z0-9]/g, '') || 'faculty_coordinator';
+        if (!parsedData.membersPool.find(m => m.id === slug)) {
+          parsedData.membersPool.push({
+            id: slug,
+            name: fc.name,
+            role: fc.role || fc.designation || 'Faculty Coordinator',
+            designation: fc.designation || fc.role || 'Faculty Coordinator',
+            image: fc.image || '',
+            linkedin: fc.linkedin || ''
+          });
+        }
+        parsedData.facultyCoordinator = [slug];
+      }
     }
     if (!parsedData.facultyTitle) parsedData.facultyTitle = "Faculty Coordinator";
 
@@ -257,14 +297,15 @@ const AdminDashboard = () => {
   };
 
   const hardDeleteMember = (slug) => {
-    if (!window.confirm(`Are you sure you want to permanently delete member '${slug}'? This will remove them from all assigned teams.`)) return;
+    if (!window.confirm(`Are you sure you want to permanently delete member '${slug}'? This will remove them from all assigned teams and faculty coordinator roles.`)) return;
     const newPool = data.membersPool.filter(m => m.id !== slug);
     const newTeams = data.teams.map(t => ({
       ...t,
       leads: t.leads ? t.leads.filter(id => id !== slug) : [],
       members: t.members ? t.members.filter(id => id !== slug) : []
     }));
-    setData({ ...data, membersPool: newPool, teams: newTeams });
+    const newFaculty = (data.facultyCoordinator || []).filter(id => id !== slug);
+    setData({ ...data, membersPool: newPool, teams: newTeams, facultyCoordinator: newFaculty });
   };
 
   const updateMemberPool = (oldSlug, updatedMember) => {
@@ -289,6 +330,9 @@ const AdminDashboard = () => {
       if (team.leads) team.leads.forEach(slug => used.add(slug));
       if (team.members) team.members.forEach(slug => used.add(slug));
     });
+    if (data.facultyCoordinator) {
+      data.facultyCoordinator.forEach(slug => used.add(slug));
+    }
     return used;
   };
 
@@ -387,6 +431,56 @@ const AdminDashboard = () => {
 
 
 
+  const FacultyMemberCard = ({ slug, index }) => {
+    const member = getMemberObj(slug);
+    
+    const moveFaculty = (direction) => {
+      const newFc = moveItem(data.facultyCoordinator || [], index, direction);
+      setData({ ...data, facultyCoordinator: newFc });
+    };
+
+    const removeFaculty = () => {
+      const newFc = [...(data.facultyCoordinator || [])];
+      newFc.splice(index, 1);
+      setData({ ...data, facultyCoordinator: newFc });
+    };
+
+    const swapFaculty = (newSlug) => {
+      const newFc = [...(data.facultyCoordinator || [])];
+      newFc[index] = newSlug;
+      setData({ ...data, facultyCoordinator: newFc });
+    };
+
+    return (
+      <div className="flex flex-col gap-3 bg-white/5 p-4 rounded-xl border border-white/10 transition-colors hover:bg-white/10 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-1rem)] max-w-sm">
+        <div className="flex items-center gap-4">
+          <img src={member.image ? (member.image.startsWith('/') ? member.image : `/${member.image}`) : 'https://via.placeholder.com/150'} alt={member.name} className="w-12 h-12 rounded-full object-cover border-2 border-purple-500/50 flex-shrink-0" />
+          <div className="flex-1 min-w-0">
+            <p className="font-semibold text-white text-sm truncate">{member.name}</p>
+            <p className="text-xs text-gray-400 truncate">{slug}</p>
+          </div>
+          <div className="flex flex-col gap-1 ml-auto">
+            <button onClick={() => moveFaculty('up')} className="text-gray-400 hover:text-white bg-black/30 rounded p-1"><ChevronUp size={14} /></button>
+            <button onClick={() => moveFaculty('down')} className="text-gray-400 hover:text-white bg-black/30 rounded p-1"><ChevronDown size={14} /></button>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 border-t border-white/10 pt-3 mt-1">
+          <select
+            className="bg-black/40 text-xs text-white border border-white/20 rounded p-2 outline-none flex-1 truncate"
+            value={slug}
+            onChange={(e) => swapFaculty(e.target.value)}
+          >
+            {sortedMembers.map(m => <option key={m.id} value={m.id} className="bg-slate-800">{m.name} ({m.id})</option>)}
+          </select>
+          <button onClick={removeFaculty} className="text-red-400 hover:text-red-300 p-2 bg-red-400/10 rounded flex-shrink-0" title="Remove Faculty Coordinator">
+            <Trash2 size={16} />
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   const EditFacultySection = () => {
     const [titleEditing, setTitleEditing] = useState(false);
     const [title, setTitle] = useState(data.facultyTitle || "Faculty Coordinator");
@@ -396,34 +490,16 @@ const AdminDashboard = () => {
       setTitleEditing(false);
     };
 
-    const addFc = () => {
-      setData({ ...data, facultyCoordinators: [...data.facultyCoordinators, { name: 'New Faculty', role: 'Role', image: '' }] });
-    };
-
-    const updateFc = (index, field, value) => {
-      const newFc = [...data.facultyCoordinators];
-      newFc[index][field] = value;
-      setData({ ...data, facultyCoordinators: newFc });
-    };
-
-    const deleteFc = (index) => {
-      if (window.confirm("Delete this faculty coordinator?")) {
-        const newFc = [...data.facultyCoordinators];
-        newFc.splice(index, 1);
-        setData({ ...data, facultyCoordinators: newFc });
+    const addFaculty = (slug) => {
+      if (!slug) return;
+      const newFc = [...(data.facultyCoordinator || [])];
+      if (!newFc.includes(slug)) {
+        newFc.push(slug);
       }
+      setData({ ...data, facultyCoordinator: newFc });
     };
 
-    const handleFcImageChange = async (index, file) => {
-      if (!file) return;
-      const slug = data.facultyCoordinators[index].name.toLowerCase().replace(/[^a-z0-9]/g, '') || `faculty_${Date.now()}`;
-      try {
-        const finalImagePath = await processAndUploadImage(file, `${slug}.webp`);
-        updateFc(index, 'image', finalImagePath);
-      } catch (err) {
-        alert("Image upload failed: " + err);
-      }
-    };
+    const facultyList = data.facultyCoordinator || [];
 
     return (
       <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl relative mb-8">
@@ -439,31 +515,21 @@ const AdminDashboard = () => {
               <button onClick={() => setTitleEditing(true)} className="text-gray-400 hover:text-white opacity-0 group-hover:opacity-100 p-1"><Edit size={16} /></button>
             </div>
           )}
-          <button onClick={addFc} className="bg-purple-500/20 text-purple-300 px-3 py-1.5 rounded text-sm font-semibold hover:bg-purple-500/30 border border-purple-500/30">+ Add Faculty</button>
+          <select
+            className="bg-purple-500/20 text-xs text-purple-200 border border-purple-500/30 rounded p-1.5 outline-none font-medium cursor-pointer max-w-[150px]"
+            onChange={(e) => { addFaculty(e.target.value); e.target.value = ''; }}
+            defaultValue=""
+          >
+            <option value="" disabled className="bg-slate-800">Add Faculty Coordinator...</option>
+            {sortedMembers.map(m => <option key={m.id} value={m.id} className="bg-slate-800">{m.name} ({m.id})</option>)}
+          </select>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {data.facultyCoordinators.map((fc, i) => (
-            <div key={i} className="bg-black/30 p-4 rounded-xl border border-white/10 flex items-start gap-4 relative">
-              <button onClick={() => deleteFc(i)} className="absolute top-2 right-2 text-red-400 hover:bg-red-400/10 p-1.5 rounded"><Trash2 size={16} /></button>
-              <img src={fc.image ? (fc.image.startsWith('/') ? fc.image : `/${fc.image}`) : 'https://via.placeholder.com/150'} className="w-16 h-16 rounded-full object-cover border-2 border-purple-500/50 flex-shrink-0" />
-              <div className="flex-1 space-y-2 pr-6 min-w-0">
-                <div><label className="text-[10px] text-gray-500 uppercase font-bold">Name</label><input value={fc.name} onChange={e => updateFc(i, 'name', e.target.value)} className="bg-white/5 text-white text-sm px-2 py-1 rounded outline-none border border-white/10 w-full focus:border-purple-500" /></div>
-                <div><label className="text-[10px] text-gray-500 uppercase font-bold">Designation</label><input value={fc.role} onChange={e => updateFc(i, 'role', e.target.value)} className="bg-white/5 text-white text-sm px-2 py-1 rounded outline-none border border-white/10 w-full focus:border-purple-500" /></div>
-                <div>
-                  <label className="text-[10px] text-gray-500 uppercase font-bold flex justify-between items-center mb-1">
-                    Image Path
-                    <label className="text-purple-400 hover:text-purple-300 cursor-pointer flex items-center gap-1">
-                      <Edit size={10} /> Upload
-                      <input type="file" accept="image/*" onChange={e => handleFcImageChange(i, e.target.files[0])} className="hidden" />
-                    </label>
-                  </label>
-                  <input value={fc.image} onChange={e => updateFc(i, 'image', e.target.value)} className="bg-white/5 text-white text-sm px-2 py-1 rounded outline-none border border-white/10 w-full focus:border-purple-500" />
-                </div>
-              </div>
-            </div>
+        <div className="flex flex-wrap gap-4 mt-3 justify-center md:justify-start">
+          {facultyList.map((slug, idx) => (
+            <FacultyMemberCard key={`faculty-${slug}-${idx}`} slug={slug} index={idx} />
           ))}
-          {data.facultyCoordinators.length === 0 && <p className="text-gray-500 italic col-span-2 text-sm">No faculty coordinators added.</p>}
+          {facultyList.length === 0 && <p className="text-gray-500 italic py-2 w-full text-center">No faculty coordinators added.</p>}
         </div>
       </div>
     );
@@ -553,8 +619,8 @@ const AdminDashboard = () => {
                 <div className="space-y-1">
                   <p className="text-sm"><span className="text-gray-400">Name:</span> <span className="font-semibold text-white">{editedMember.name}</span></p>
                   <p className="text-xs font-mono"><span className="text-gray-400">Unique ID:</span> <span className="text-gray-300">{editedMember.id}</span></p>
-                  {editedMember.role && (
-                    <p className="text-xs"><span className="text-gray-400">Designation:</span> <span className="text-blue-300">{editedMember.role}</span></p>
+                  {(editedMember.role || editedMember.designation) && (
+                    <p className="text-xs"><span className="text-gray-400">Designation:</span> <span className="text-blue-300">{editedMember.designation || editedMember.role}</span></p>
                   )}
                   {editedMember.linkedin && (
                     <p className="text-xs truncate max-w-[200px]"><span className="text-gray-400">LinkedIn:</span> <a href={editedMember.linkedin} target="_blank" rel="noreferrer" className="text-blue-400 hover:underline">{editedMember.linkedin}</a></p>
@@ -576,13 +642,13 @@ const AdminDashboard = () => {
         {editMode && (
           <div className="text-xs space-y-2 mt-2 pt-2 border-t border-white/10">
             <div>
-              <label className="block text-gray-400 mb-1">Designation / Role (optional)</label>
+              <label className="block text-gray-400 mb-1">Designation</label>
               <input
                 type="text"
-                value={editedMember.role || ''}
-                onChange={e => setEditedMember({ ...editedMember, role: e.target.value })}
+                value={editedMember.designation || editedMember.role || ''}
+                onChange={e => setEditedMember({ ...editedMember, role: e.target.value, designation: e.target.value })}
                 className="bg-black/50 text-white px-2 py-1.5 rounded outline-none border border-white/20 w-full"
-                placeholder="e.g. Research And Development Team Head"
+                placeholder="e.g. Faculty Coordinator"
               />
             </div>
             <div>
@@ -720,6 +786,20 @@ const AdminDashboard = () => {
                 <Save size={16} /> Backup Data
               </button>
             </div>
+            <button
+              onClick={() => {
+                const jsonStr = JSON.stringify(data, null, 2);
+                navigator.clipboard.writeText(jsonStr)
+                  .then(() => alert("Production JSON compiled and copied to clipboard successfully!"))
+                  .catch(err => {
+                    console.error("Failed to copy JSON: ", err);
+                    alert("Failed to copy JSON to clipboard. Please copy manually.");
+                  });
+              }}
+              className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 px-6 py-4 rounded-xl font-bold shadow-lg shadow-purple-500/30 transition-all h-full"
+            >
+              <Copy size={20} /> Compile & Copy Production JSON
+            </button>
             <button
               onClick={publishData}
               className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 px-6 py-4 rounded-xl font-bold shadow-lg shadow-green-500/30 transition-all h-full"

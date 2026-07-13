@@ -8,7 +8,26 @@ const getLiveTeamData = () => {
     const saved = localStorage.getItem('auisc_working_data');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (!parsed.facultyCoordinator && parsed.facultyCoordinators) {
+          parsed.facultyCoordinator = parsed.facultyCoordinators.map(fc => {
+            if (typeof fc === 'object' && fc !== null) {
+              const slug = fc.id || fc.name.toLowerCase().replace(/[^a-z0-9]/g, '') || 'faculty_coordinator';
+              if (!parsed.membersPool.find(m => m.id === slug)) {
+                parsed.membersPool.push({
+                  id: slug,
+                  name: fc.name,
+                  role: fc.role || 'Faculty Coordinator',
+                  image: fc.image || '',
+                  linkedin: fc.linkedin || ''
+                });
+              }
+              return slug;
+            }
+            return fc;
+          });
+        }
+        return parsed;
       } catch (e) {
         console.error("Failed to parse localStorage data", e);
       }
@@ -40,6 +59,10 @@ const Team = () => {
     }
   };
 
+  const facultyMembers = (Array.isArray(teamData.facultyCoordinator) ? teamData.facultyCoordinator : [])
+    .map(id => teamData.membersPool.find(m => m.id === id))
+    .filter(Boolean);
+
   return (
     <div className="min-h-screen pt-20 pb-20 bg-light-blue-purple">
       <div className="container mx-auto px-4">
@@ -60,7 +83,7 @@ const Team = () => {
           className="bg-white shadow-md rounded-lg mb-8 p-4"
         >
           <div className="flex flex-wrap justify-center gap-2">
-            {teamData.facultyCoordinators && teamData.facultyCoordinators.length > 0 && (
+            {facultyMembers.length > 0 && (
               <motion.button
                 onClick={() => scrollToTeam("faculty-coordinator")}
                 className="px-4 py-2 bg-white hover:bg-light-blue-purple text-dark-blue-purple rounded-full text-sm font-medium"
@@ -86,7 +109,7 @@ const Team = () => {
         </motion.div>
 
         <div className="space-y-16">
-          {teamData.facultyCoordinators && teamData.facultyCoordinators.length > 0 && (
+          {facultyMembers.length > 0 && (
             <motion.div
               id="faculty-coordinator"
               initial={{ opacity: 0, y: 50 }}
@@ -96,16 +119,8 @@ const Team = () => {
             >
               <h2 className="text-2xl font-bold mb-6 text-center">{teamData.facultyTitle || "Faculty Coordinator"}</h2>
               <div className="flex flex-wrap justify-center gap-8">
-                {teamData.facultyCoordinators.map((fc, idx) => (
-                  <TeamCard
-                    key={`fc-${idx}`}
-                    member={{
-                      name: fc.name,
-                      role: fc.role,
-                      image: fc.image,
-                      linkedin: fc.linkedin || ""
-                    }}
-                  />
+                {facultyMembers.map((member) => (
+                  <TeamCard key={member.id} member={member} />
                 ))}
               </div>
             </motion.div>
