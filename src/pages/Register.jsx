@@ -1240,7 +1240,6 @@ const Register = () => {
               <h2 className="text-2xl font-black tracking-tight text-slate-900">Submitted Successfully!</h2>
               <p className="text-xs sm:text-sm font-semibold text-slate-500 max-w-sm mx-auto leading-relaxed">
                 Your registration status and other details will be sent to your email id shortly.
-                ⚠️ *Check your Spam folder:* If your ticket lands there, you *must* click *"Move to Inbox"* or *"Report as Not Spam"* to unblock and view your entry QR code!
               </p>
             </div>
             <div className="pt-4">
