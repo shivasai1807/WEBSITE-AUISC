@@ -1239,13 +1239,15 @@ const Register = () => {
             <div className="space-y-2 px-2">
               <h2 className="text-2xl font-black tracking-tight text-slate-900">Submitted Successfully!</h2>
               <p className="text-xs sm:text-sm font-semibold text-slate-500 max-w-sm mx-auto leading-relaxed">
-                🎉 Registration Successful!
-
-                    Thank you for registering for AUNSF 4.0.
-
-                    We've received your registration successfully. A confirmation email will be sent to your registered email address shortly. The email will also contain the link to your official WhatsApp group. Please join the group to receive all future updates and important announcements.
-
-                    Thank you for your patience. We look forward to welcoming you to AUNSF 4.0!
+               <b> 🎉 Registration Successful!</b>
+                   <br/>
+                    Thank you for registering for <b>AUNSF 4.0</b>.
+                    We've received your registration successfully.
+                    A confirmation email will be sent to your registered email within <b>24 hours</b>. 
+                    The email will also contain the link to your official WhatsApp group. 
+                    Please join the group to receive all future updates and important announcements.
+                    <br/>
+                    Thank you for your <b>patience</b>. We look forward to welcoming you to AUNSF 4.0!
               </p>
             </div>
             <div className="pt-4">
