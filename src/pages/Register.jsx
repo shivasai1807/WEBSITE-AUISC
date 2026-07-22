@@ -347,6 +347,7 @@ const Register = () => {
         aadhaarBase64: aadhaarBase64,
         aadhaarType: aadhaarType,
         referredBy: formData.referredBy,
+        anuragian: formData.college && (formData.college.trim().toLowerCase().replace(/\s+/g, ' ') === "anurag university" || formData.college.trim().toLowerCase().replace(/\s+/g, ' ') === "au") ? "YES" : "NO",
       };
 
       const networkResponse = await fetch(BACKEND_URL, {
@@ -427,6 +428,19 @@ const Register = () => {
       case "NO": return "No";
       default: return "Select Accommodation";
     }
+  };
+
+  const getNormalizedCollege = () => {
+    return formData.college ? formData.college.trim().toLowerCase().replace(/\s+/g, " ") : "";
+  };
+
+  const isEarlyBirdEligible = () => {
+    const normalized = getNormalizedCollege();
+    return normalized === "anurag university" || normalized === "au";
+  };
+
+  const hasEnteredCollege = () => {
+    return formData.college && formData.college.trim().length > 0;
   };
 
   // Heading animation (fade + slide)
@@ -963,7 +977,7 @@ const Register = () => {
                           transition={{ type: "spring", duration: 0.3 }}
                           className="absolute left-0 z-50 w-full mt-2 top-full bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden py-1 origin-top"
                         >
-                          {["Blue Economy", "Human Behaviour & Civic Innovation", "Arts & Culture"].map((d) => (
+                          {["Blue Economy", /*"Human Behaviour & Civic Innovation",*/ "Arts & Culture"].map((d) => (
                             <div key={d} onClick={() => { handleCustomSelect("domainSelection", d); setDomainDropdownOpen(false); }} className="px-4 py-3 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition whitespace-nowrap font-sans">{d}</div>
                           ))}
                         </motion.div>
@@ -990,6 +1004,8 @@ const Register = () => {
                               </p>
                             </div>
                           )}
+                          {/*
+                          
                           {formData.domainSelection === "Human Behaviour & Civic Innovation" && (
                             <div>
                               <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">👥Human Behaviour & Civic Innovation</span>
@@ -997,7 +1013,9 @@ const Register = () => {
                                 Human Behaviour & Civic Innovation focuses on promoting responsible digital behaviour, critical thinking and meaningful human connections. It encourages innovative solutions that help individuals and communities build a healthier, more informed and socially responsible society.
                               </p>
                             </div>
-                          )}
+                          )} 
+                           
+                           */}
                           {formData.domainSelection === "Arts & Culture" && (
                             <div>
                               <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">🎨 Arts & Culture</span>
@@ -1021,131 +1039,151 @@ const Register = () => {
 
                 <div className="flex flex-col gap-6 mt-2">
 
-                  {/* Card 1: Early Bird */}
-                  <motion.div
-                    whileHover={{ scale: 1.01, y: -2 }}
-                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                    className="relative overflow-hidden bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm group"
-                  >
-                    {/* Animated shine sweep on card hover */}
+                  {!hasEnteredCollege() && (
                     <motion.div
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: "100%" }}
-                      transition={{ duration: 1, ease: "easeInOut" }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent transform -skew-x-12 pointer-events-none"
-                    />
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-blue-50/50 border border-blue-200 rounded-3xl p-6 text-center shadow-sm"
+                    >
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <Info size={24} />
+                      </div>
+                      <h3 className="text-sm font-bold text-slate-800 mb-2">Registration Fee Information</h3>
+                      <p className="text-xs font-medium text-slate-500">
+                        Please enter your Institution / College to view the applicable registration fee.
+                      </p>
+                    </motion.div>
+                  )}
 
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-orange-50 border border-orange-200 text-orange-600 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                          🔥 Valid until 22th July
+                  {/* Card 1: Early Bird */}
+                  {hasEnteredCollege() && isEarlyBirdEligible() && (
+                    <motion.div
+                      whileHover={{ scale: 1.01, y: -2 }}
+                      transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                      className="relative overflow-hidden bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm group"
+                    >
+                      {/* Animated shine sweep on card hover */}
+                      <motion.div
+                        initial={{ x: "-100%" }}
+                        whileHover={{ x: "100%" }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent transform -skew-x-12 pointer-events-none"
+                      />
+
+                      <div>
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-orange-50 border border-orange-200 text-orange-600 text-[10px] font-bold rounded-full uppercase tracking-wider">
+                            🔥 Valid until 22th July
+                          </div>
+                        </div>
+                        <h3 className="text-base font-extrabold text-slate-800 select-none mb-4">
+                          Early Bird Registration
+                        </h3>
+
+                        <div className="flex flex-col gap-5">
+                          {/* Option 1: Without Accommodation */}
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
+                            <div className="flex flex-col">
+                              <span className="text-xs font-semibold text-slate-500 font-sans">Without Accommodation</span>
+                              <span className="text-xl font-black text-slate-800 mt-1">₹999</span>
+                            </div>
+                            <a
+                              href="https://aupulse.campx.in/aupulse/ums/public/form/6a50a02675510ba4edced6f8"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
+                            >
+                              Pay Now <ArrowRight size={14} />
+                            </a>
+                          </div>
+
+                          {/* Divider */}
+                          <div className="border-t border-slate-100 my-1 w-full" />
+
+                          {/* Option 2: With Accommodation */}
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
+                            <div className="flex flex-col">
+                              <span className="text-xs font-semibold text-slate-500 font-sans">With Accommodation</span>
+                              <span className="text-xl font-black text-orange-600 mt-1">₹1599</span>
+                            </div>
+                            <a
+                              href="https://aupulse.campx.in/aupulse/ums/public/form/6a50a140aec4293e6fb25ead"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
+                            >
+                              Pay Now <ArrowRight size={14} />
+                            </a>
+                          </div>
                         </div>
                       </div>
-                      <h3 className="text-base font-extrabold text-slate-800 select-none mb-4">
-                        Early Bird Registration
-                      </h3>
-
-                      <div className="flex flex-col gap-5">
-                        {/* Option 1: Without Accommodation */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
-                          <div className="flex flex-col">
-                            <span className="text-xs font-semibold text-slate-500 font-sans">Without Accommodation</span>
-                            <span className="text-xl font-black text-slate-800 mt-1">₹999</span>
-                          </div>
-                          <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/6a50a02675510ba4edced6f8"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
-                          >
-                            Pay Now <ArrowRight size={14} />
-                          </a>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border-t border-slate-100 my-1 w-full" />
-
-                        {/* Option 2: With Accommodation */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
-                          <div className="flex flex-col">
-                            <span className="text-xs font-semibold text-slate-500 font-sans">With Accommodation</span>
-                            <span className="text-xl font-black text-orange-600 mt-1">₹1599</span>
-                          </div>
-                          <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/6a50a140aec4293e6fb25ead"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-center py-2.5 px-6 bg-gradient-to-r from-[#D94B2B] to-[#FF5A36] text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
-                          >
-                            Pay Now <ArrowRight size={14} />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
+                    </motion.div>
+                  )}
 
                   {/* Card 2: Standard Registration */}
-                  <motion.div
-                    whileHover={{ scale: 1.01, y: -2 }}
-                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                    className="relative overflow-hidden bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm group"
-                  >
-                    {/* Animated shine sweep on card hover */}
+                  {hasEnteredCollege() && !isEarlyBirdEligible() && (
                     <motion.div
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: "100%" }}
-                      transition={{ duration: 1, ease: "easeInOut" }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent transform -skew-x-12 pointer-events-none"
-                    />
+                      whileHover={{ scale: 1.01, y: -2 }}
+                      transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                      className="relative overflow-hidden bg-white border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm group"
+                    >
+                      {/* Animated shine sweep on card hover */}
+                      <motion.div
+                        initial={{ x: "-100%" }}
+                        whileHover={{ x: "100%" }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent transform -skew-x-12 pointer-events-none"
+                      />
 
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-blue-50 border border-blue-200 text-blue-600 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                          Standard Registration
+                      <div>
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-blue-50 border border-blue-200 text-blue-600 text-[10px] font-bold rounded-full uppercase tracking-wider">
+                            Standard Registration
+                          </div>
+                        </div>
+                        <h3 className="text-base font-extrabold text-slate-800 select-none mb-4">
+                          Regular Registration
+                        </h3>
+
+                        <div className="flex flex-col gap-5">
+                          {/* Option 1: Without Accommodation */}
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
+                            <div className="flex flex-col">
+                              <span className="text-xs font-semibold text-slate-500 font-sans">Without Accommodation</span>
+                              <span className="text-xl font-black text-slate-800 mt-1">₹1199</span>
+                            </div>
+                            <a
+                              href="https://aupulse.campx.in/aupulse/ums/public/form/6a5f3c1912f7fbb57f253616"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-center py-2.5 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
+                            >
+                              Pay Now <ArrowRight size={14} />
+                            </a>
+                          </div>
+
+                          {/* Divider */}
+                          <div className="border-t border-slate-100 my-1 w-full" />
+
+                          {/* Option 2: With Accommodation */}
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
+                            <div className="flex flex-col">
+                              <span className="text-xs font-semibold text-slate-500 font-sans">With Accommodation</span>
+                              <span className="text-xl font-black text-blue-600 mt-1">₹1799</span>
+                            </div>
+                            <a
+                              href="https://aupulse.campx.in/aupulse/ums/public/form/6a5f3cdf12f7fbb57f2570f8"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-center py-2.5 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
+                            >
+                              Pay Now <ArrowRight size={14} />
+                            </a>
+                          </div>
                         </div>
                       </div>
-                      <h3 className="text-base font-extrabold text-slate-800 select-none mb-4">
-                        Regular Registration
-                      </h3>
-
-                      <div className="flex flex-col gap-5">
-                        {/* Option 1: Without Accommodation */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
-                          <div className="flex flex-col">
-                            <span className="text-xs font-semibold text-slate-500 font-sans">Without Accommodation</span>
-                            <span className="text-xl font-black text-slate-800 mt-1">₹1199</span>
-                          </div>
-                          <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-center py-2.5 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
-                          >
-                            Pay Now <ArrowRight size={14} />
-                          </a>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border-t border-slate-100 my-1 w-full" />
-
-                        {/* Option 2: With Accommodation */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-slate-50/50 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors duration-300 w-full">
-                          <div className="flex flex-col">
-                            <span className="text-xs font-semibold text-slate-500 font-sans">With Accommodation</span>
-                            <span className="text-xl font-black text-blue-600 mt-1">₹1799</span>
-                          </div>
-                          <a
-                            href="https://aupulse.campx.in/aupulse/ums/public/form/686cc9c48d6189f7c0f34b1a"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-center py-2.5 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-xl shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 select-none flex items-center justify-center gap-1.5 sm:w-auto w-full"
-                          >
-                            Pay Now <ArrowRight size={14} />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
+                    </motion.div>
+                  )}
 
                 </div>
               </div>
@@ -1238,15 +1276,15 @@ const Register = () => {
             <div className="space-y-2 px-2">
               <h2 className="text-2xl font-black tracking-tight text-slate-900">Submitted Successfully!</h2>
               <p className="text-xs sm:text-sm font-semibold text-slate-500 max-w-sm mx-auto leading-relaxed">
-               <b> 🎉 Registration Successful!</b>
-                   <br/>
-                    Thank you for registering for <b>AUNSF 4.0</b>.
-                    We've received your registration successfully.
-                    A confirmation email will be sent to your registered email within <b>24 hours</b>. 
-                    The email will also contain the link to your official WhatsApp group. 
-                    Please join the group to receive all future updates and important announcements.
-                    <br/>
-                    Thank you for your <b>patience</b>. We look forward to welcoming you to AUNSF 4.0!
+                <b> 🎉 Registration Successful!</b>
+                <br />
+                Thank you for registering for <b>AUNSF 4.0</b>.
+                We've received your registration successfully.
+                A confirmation email will be sent to your registered email within <b>24 hours</b>.
+                The email will also contain the link to your official WhatsApp group.
+                Please join the group to receive all future updates and important announcements.
+                <br />
+                Thank you for your <b>patience</b>. We look forward to welcoming you to AUNSF 4.0!
               </p>
             </div>
             <div className="pt-4">
@@ -1254,7 +1292,7 @@ const Register = () => {
                 onClick={triggerStateViewReset}
                 className="bg-white hover:bg-slate-50 text-slate-600 font-bold text-xs py-3.5 px-6 rounded-2xl transition border border-slate-200 cursor-pointer shadow-sm active:scale-95"
               >
-                ↩ Lodge Another Registration
+                <b>↩ Lodge Another Registration</b>
               </button>
             </div>
           </motion.div>
