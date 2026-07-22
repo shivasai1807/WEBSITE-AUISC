@@ -1004,8 +1004,6 @@ const Register = () => {
                               </p>
                             </div>
                           )}
-                          {/*
-                          
                           {formData.domainSelection === "Human Behaviour & Civic Innovation" && (
                             <div>
                               <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">👥Human Behaviour & Civic Innovation</span>
@@ -1013,9 +1011,7 @@ const Register = () => {
                                 Human Behaviour & Civic Innovation focuses on promoting responsible digital behaviour, critical thinking and meaningful human connections. It encourages innovative solutions that help individuals and communities build a healthier, more informed and socially responsible society.
                               </p>
                             </div>
-                          )} 
-                           
-                           */}
+                          )}
                           {formData.domainSelection === "Arts & Culture" && (
                             <div>
                               <span className="font-extrabold text-[#0D47A1] text-sm block mb-1">🎨 Arts & Culture</span>
