@@ -8,9 +8,22 @@ const getLiveTeamData = () => {
     const saved = localStorage.getItem('auisc_working_data');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // Strict schema validation check:
+        // Invalidate if facultyCoordinator is missing, not an array, or contains objects instead of string slugs
+        const isInvalid = 
+          !parsed.facultyCoordinator || 
+          !Array.isArray(parsed.facultyCoordinator) || 
+          parsed.facultyCoordinator.some(fc => typeof fc !== 'string');
+
+        if (isInvalid) {
+          localStorage.removeItem('auisc_working_data');
+          return teamDataJson;
+        }
+        return parsed;
       } catch (e) {
-        console.error("Failed to parse localStorage data", e);
+        localStorage.removeItem('auisc_working_data');
+        return teamDataJson;
       }
     }
   }
@@ -40,6 +53,10 @@ const Team = () => {
     }
   };
 
+  const facultyMembers = (Array.isArray(teamData.facultyCoordinator) ? teamData.facultyCoordinator : [])
+    .map(id => teamData.membersPool.find(m => m.id === id))
+    .filter(Boolean);
+
   return (
     <div className="min-h-screen pt-20 pb-20 bg-light-blue-purple">
       <div className="container mx-auto px-4">
@@ -60,7 +77,7 @@ const Team = () => {
           className="bg-white shadow-md rounded-lg mb-8 p-4"
         >
           <div className="flex flex-wrap justify-center gap-2">
-            {teamData.facultyCoordinators && teamData.facultyCoordinators.length > 0 && (
+            {facultyMembers.length > 0 && (
               <motion.button
                 onClick={() => scrollToTeam("faculty-coordinator")}
                 className="px-4 py-2 bg-white hover:bg-light-blue-purple text-dark-blue-purple rounded-full text-sm font-medium"
@@ -86,7 +103,7 @@ const Team = () => {
         </motion.div>
 
         <div className="space-y-16">
-          {teamData.facultyCoordinators && teamData.facultyCoordinators.length > 0 && (
+          {facultyMembers.length > 0 && (
             <motion.div
               id="faculty-coordinator"
               initial={{ opacity: 0, y: 50 }}
@@ -96,16 +113,8 @@ const Team = () => {
             >
               <h2 className="text-2xl font-bold mb-6 text-center">{teamData.facultyTitle || "Faculty Coordinator"}</h2>
               <div className="flex flex-wrap justify-center gap-8">
-                {teamData.facultyCoordinators.map((fc, idx) => (
-                  <TeamCard
-                    key={`fc-${idx}`}
-                    member={{
-                      name: fc.name,
-                      role: fc.role,
-                      image: fc.image,
-                      linkedin: fc.linkedin || ""
-                    }}
-                  />
+                {facultyMembers.map((member) => (
+                  <TeamCard key={member.id} member={member} />
                 ))}
               </div>
             </motion.div>

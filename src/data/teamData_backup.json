@@ -547,6 +547,21 @@
       "image": "team_pics/abhay.webp",
       "role": "Social Media Team Head",
       "linkedin": "https://www.linkedin.com/in/abhay-ramagiri?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      "id": "drnarendarsingh",
+      "name": "Dr.Narendar Singh",
+      "role": "Former Faculty Coordinator",
+      "designation": "Former Faculty Coordinator",
+      "image": "/team_pics/ns_sir.webp",
+      "linkedin": "https://www.linkedin.com/in/dr-narendhar-singh-ba7188178/"
+    },
+    {
+      "id": "shaheda_mam",
+      "name": "Dr. Shaik Shaheda",
+      "role": "Faculty Coordinator",
+      "image": "/team_pics/shaheda_mam.webp",
+      "linkedin": "https://www.linkedin.com/in/shaik-shaheda-808815248"
     }
   ],
   "teams": [
@@ -673,13 +688,9 @@
       ]
     }
   ],
-  "facultyCoordinators": [
-    {
-      "name": "Dr.Narendar Singh",
-      "role": "Faculty Coordinator",
-      "image": "/team_pics/ns_sir.webp",
-      "linkedin": "https://www.linkedin.com/in/dr-narendhar-singh-ba7188178/"
-    }
-  ],
-  "facultyTitle": "Faculty Coordinator"
+  "facultyTitle": "Faculty Coordinator",
+  "facultyCoordinator": [
+    "shaheda_mam",
+    "drnarendarsingh"
+  ]
 }
