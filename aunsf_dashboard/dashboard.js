@@ -1,5 +1,5 @@
 const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbx30L0n7gS9WPCfRzhj3Y0xRZcCs0XVRz3cm9MLNvZeJ9LTll2iji7sxIBMMjWXAxOgSA/exec"; 
-const MERGE_API_URL = "YOUR_MERGE_API_URL_HERE";
+const MERGE_API_URL = "https://script.google.com/macros/s/AKfycbxtCRnrQ4Tt6ZjUgV7dssJ8p-9IOc21RnKv7rofNLfa1bScDc1IJ30EShTsbzrSt3M/exec";
 
 let masterRecordsCache = [];
 let rawSyncRecordsList = [];
