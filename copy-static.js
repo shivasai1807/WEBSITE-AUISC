@@ -6,8 +6,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function copyFolderSync(from, to) {
-  const fromPathResolved = path.resolve(__dirname, from);
-  const toPathResolved = path.resolve(__dirname, to);
+  const fromPathResolved = path.isAbsolute(from) ? from : path.resolve(__dirname, from);
+  const toPathResolved = path.isAbsolute(to) ? to : path.resolve(__dirname, to);
 
   if (!fs.existsSync(fromPathResolved)) {
     console.warn(`Source folder does not exist: ${fromPathResolved}`);
@@ -27,9 +27,8 @@ function copyFolderSync(from, to) {
 }
 
 try {
-  copyFolderSync('ADMIN', 'dist/ADMIN');
   copyFolderSync('aunsf_dashboard', 'dist/aunsf_dashboard');
-  console.log('Successfully copied ADMIN and aunsf_dashboard to dist/');
+  console.log('Successfully copied aunsf_dashboard to dist/');
 } catch (err) {
   console.error('Error copying static assets to dist:', err);
   process.exit(1);

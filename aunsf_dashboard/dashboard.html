@@ -63,6 +63,7 @@
       <button id="btnLookoverMode" class="bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition cursor-pointer whitespace-nowrap">🎟️ Gate Attendance</button>
       <button id="btnRevenueMode" class="bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition cursor-pointer whitespace-nowrap">💰 Financials & Analytics</button>
       <button id="btnCustomExportMode" class="bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition cursor-pointer whitespace-nowrap">📤 Custom Export</button>
+      <button id="btnMergeMode" class="bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition cursor-pointer whitespace-nowrap">🏢 Merge Institutions</button>
     </div>
 
     <!-- CORE ACTION CONTROLS -->
@@ -195,7 +196,7 @@
     </section>
 
     <!-- CORE WORKSPACE BOUNDARY (GRID WITH SPLIT DRILLDOWNS) -->
-    <div class="flex flex-col lg:flex-row gap-6 items-start w-full">
+    <div id="mainWorkspaceGrid" class="flex flex-col lg:flex-row gap-6 items-start w-full">
       
       <!-- TIMELINE SEGMENT BYPASS BANNER -->
       <div class="flex-1 w-full space-y-3 overflow-hidden">
@@ -295,6 +296,24 @@
 
       </aside>
     </div>
+
+    <!-- COLLEGE MERGING WORKSPACE (READ ONLY) -->
+    <section id="mergeModeContainer" class="hidden bg-slate-900/30 border border-slate-800/80 p-6 rounded-2xl space-y-6">
+      <div>
+        <h2 class="text-sm font-black uppercase text-blue-400 tracking-wider">Institution Merge Registry</h2>
+        <p class="text-xs text-slate-400 mt-1">Below is the registry of raw college names mapped and consolidated under standardized institutional names for this analytics portal. This view is read-only.</p>
+      </div>
+
+      <!-- Active Merge Mappings Grouped Cards (Read-only) -->
+      <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
+        <div class="border-b border-slate-800/60 pb-2">
+          <h3 class="text-xs font-black uppercase text-slate-300 font-semibold">Active Institutional Combinations</h3>
+        </div>
+        <div id="mergeRulesCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Dynamically populated card blocks -->
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="/aunsf_dashboard/dashboard.js"></script>
