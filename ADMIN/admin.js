@@ -17,31 +17,6 @@ let systemConfigState = {
 window.onload = () => {
   handleStructuralViewLayoutAlterators();
 
-  // Bind Login Form listeners immediately
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const u = document.getElementById('usernameInput').value;
-      const p = document.getElementById('passwordInput').value;
-      if (u === "AUNSF@2026" && p === "AUNSF4.0") {
-        localStorage.setItem('aunsf_dashboard_authenticated', 'true');
-        const overlay = document.getElementById('loginOverlay');
-        if (overlay) overlay.classList.add('hidden');
-        bootstrapDashboard();
-      } else {
-        const err = document.getElementById('loginError');
-        if (err) err.classList.remove('hidden');
-      }
-    });
-  }
-
-  if (localStorage.getItem('aunsf_dashboard_authenticated') === 'true') {
-    bootstrapDashboard();
-  }
-};
-
-function bootstrapDashboard() {
   // Instant Bootstrapping from Local Cache
   const cachedLocalRecordDataString = localStorage.getItem('aunsf_master_system_cache');
   if (cachedLocalRecordDataString) {
@@ -59,16 +34,14 @@ function bootstrapDashboard() {
   document.getElementById('exportCsvBtn').addEventListener('click', () => processCsvExportTask("GLOBAL_ALL"));
   document.getElementById('clearFiltersBtn').addEventListener('click', clearAllActiveFilters);
   document.getElementById('btnResetScopeBypass').addEventListener('click', clearDayTimelineScopeBypass);
+  document.getElementById('saveConfigBtn').addEventListener('click', dispatchConfigUpdateToServer);
 
   setupModeButtonsViewRoutingControlEngine();
   setupAttendanceDomainTabEngine();
 
-  ['searchInput', 'filterStatus', 'filterCollege', 'filterBranch', 'filterYear', 'filterDomain', 'filterAccommodation', 'filterGender'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('change', renderTargetedDataGrid);
-      el.addEventListener('input', renderTargetedDataGrid);
-    }
+  ['searchInput', 'filterStatus', 'filterCollege', 'filterBranch', 'filterYear', 'filterDomain'].forEach(id => {
+    document.getElementById(id).addEventListener('change', renderTargetedDataGrid);
+    document.getElementById(id).addEventListener('input', renderTargetedDataGrid);
   });
 
   // Execute Immediate Foreground Sync Pipeline
@@ -76,11 +49,9 @@ function bootstrapDashboard() {
   
   // Set Rapid 5-Second Background Poll (Sub-second delta rendering)
   setInterval(() => { synchronizeCloudLedger(true); }, 5000);
-}
+};
 
 async function synchronizeCloudLedger(isSilentBackgroundPoll = false) {
-  if (localStorage.getItem('aunsf_dashboard_authenticated') !== 'true') return;
-
   const btn = document.getElementById('refreshBtn');
   if (!isSilentBackgroundPoll) {
     btn.disabled = true;
@@ -101,7 +72,9 @@ async function synchronizeCloudLedger(isSilentBackgroundPoll = false) {
       localStorage.setItem('aunsf_master_system_cache', JSON.stringify(masterRecordsCache));
       localStorage.setItem('aunsf_master_hash', incomingDataHash);
       
-      if (parsedResult.config) {
+      // FIXED CONFIG REVERTING BUG: Only pull price structures if a foreground refresh is requested 
+      // or if you are not currently focusing on an editing operation
+      if (parsedResult.config && (!isSilentBackgroundPoll || document.activeElement.tagName !== "INPUT")) {
         systemConfigState = parsedResult.config;
         updateConfigFieldsInAdminUI();
       }
@@ -129,10 +102,37 @@ function updateConfigFieldsInAdminUI() {
   const accomInput = document.getElementById('accommodationPriceInput');
   const toggleInput = document.getElementById('earlyBirdModeToggle');
 
-  if (regInput && document.activeElement !== regInput) regInput.value = systemConfigState.regularPrice;
-  if (ebInput && document.activeElement !== ebInput) ebInput.value = systemConfigState.earlyBirdPrice;
-  if (accomInput && document.activeElement !== accomInput) accomInput.value = systemConfigState.accommodationPrice;
-  if (toggleInput && document.activeElement !== toggleInput) toggleInput.checked = systemConfigState.earlyBirdModeActive;
+  if (document.activeElement !== regInput) regInput.value = systemConfigState.regularPrice;
+  if (document.activeElement !== ebInput) ebInput.value = systemConfigState.earlyBirdPrice;
+  if (document.activeElement !== accomInput) accomInput.value = systemConfigState.accommodationPrice;
+  if (document.activeElement !== toggleInput) toggleInput.checked = systemConfigState.earlyBirdModeActive;
+}
+
+async function dispatchConfigUpdateToServer() {
+  const saveBtn = document.getElementById('saveConfigBtn');
+  saveBtn.disabled = true;
+  saveBtn.innerText = "Saving...";
+
+  const payload = {
+    action: "updateConfig",
+    regularPrice: parseInt(document.getElementById('regularPriceInput').value, 10) || 0,
+    earlyBirdPrice: parseInt(document.getElementById('earlyBirdPriceInput').value, 10) || 0,
+    accommodationPrice: parseInt(document.getElementById('accommodationPriceInput').value, 10) || 0,
+    earlyBirdModeActive: document.getElementById('earlyBirdModeToggle').checked
+  };
+
+  try {
+    const response = await fetch(BACKEND_API_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json();
+    if (result.status === "success") {
+      alert("✨ Price structure updated and flushed to core sheets!");
+      synchronizeCloudLedger(false);
+    }
+  } catch (error) { alert("Config Save Exception: " + error.toString()); }
+  finally { saveBtn.disabled = false; saveBtn.innerText = "💾 Save Configurations"; }
 }
 
 function setupModeButtonsViewRoutingControlEngine() {
@@ -194,8 +194,6 @@ function clearAllActiveFilters() {
   document.getElementById('searchInput').value = ""; document.getElementById('filterStatus').value = "All";
   document.getElementById('filterCollege').value = "All"; document.getElementById('filterBranch').value = "All";
   document.getElementById('filterYear').value = "All"; document.getElementById('filterDomain').value = "All";
-  const fa = document.getElementById('filterAccommodation'); if (fa) fa.value = "All";
-  const fg = document.getElementById('filterGender'); if (fg) fg.value = "All";
   activeDayFilterScope = null; renderTargetedDataGrid();
 }
 
@@ -233,21 +231,6 @@ function calculateSystemMetricsAndDistributions() {
   let colRevMap = {}, brCountMap = {}, yrCountMap = {}, domRevMap = {}, trendTotalMap = {}, trendApprovedMap = {};
   let nestedBranchRevPool = {}, nestedYearRevPool = {};   
 
-  // Real-time count tracking maps for view-only dashboard
-  let colCountMap = {}, brCountMapReal = {}, yrCountMapReal = {}, domCountMap = {};
-  let nestedBranchCountPool = {};
-
-  let maleCount = 0, maleRev = 0;
-  let maleAccomCount = 0, maleAccomRev = 0;
-  let maleNonAccomCount = 0, maleNonAccomRev = 0;
-
-  let femaleCount = 0, femaleRev = 0;
-  let femaleAccomCount = 0, femaleAccomRev = 0;
-  let femaleNonAccomCount = 0, femaleNonAccomRev = 0;
-
-  let accomCount = 0, accomRev = 0;
-  let nonAccomCount = 0, nonAccomRev = 0;
-
   for (let i = 0; i < masterRecordsCache.length; i++) {
     let r = masterRecordsCache[i];
     if (r.status === 'Duplicate') continue;
@@ -267,55 +250,12 @@ function calculateSystemMetricsAndDistributions() {
     if (isApprovedUser) {
       aggregateRevenueCalculated += userInstanceCost;
       colRevMap[cleanColKey] = (colRevMap[cleanColKey] || 0) + userInstanceCost;
-      colCountMap[cleanColKey] = (colCountMap[cleanColKey] || 0) + 1;
-
       brCountMap[cleanBrKey] = (brCountMap[cleanBrKey] || 0) + userInstanceCost;
-      brCountMapReal[cleanBrKey] = (brCountMapReal[cleanBrKey] || 0) + 1;
-
       yrCountMap[cleanYrKey] = (yrCountMap[cleanYrKey] || 0) + userInstanceCost;
-      yrCountMapReal[cleanYrKey] = (yrCountMapReal[cleanYrKey] || 0) + 1;
-
       domRevMap[cleanDomKey] = (domRevMap[cleanDomKey] || 0) + userInstanceCost;
-      domCountMap[cleanDomKey] = (domCountMap[cleanDomKey] || 0) + 1;
-
-      const cleanGender = (r.gender || '').trim().toUpperCase();
-      const cleanAccom = (r.accommodation || '').trim().toUpperCase();
-
-      if (cleanAccom === 'YES') {
-        accomCount++;
-        accomRev += userInstanceCost;
-        if (cleanGender === 'MALE') {
-          maleCount++;
-          maleRev += userInstanceCost;
-          maleAccomCount++;
-          maleAccomRev += userInstanceCost;
-        } else if (cleanGender === 'FEMALE') {
-          femaleCount++;
-          femaleRev += userInstanceCost;
-          femaleAccomCount++;
-          femaleAccomRev += userInstanceCost;
-        }
-      } else {
-        nonAccomCount++;
-        nonAccomRev += userInstanceCost;
-        if (cleanGender === 'MALE') {
-          maleCount++;
-          maleRev += userInstanceCost;
-          maleNonAccomCount++;
-          maleNonAccomRev += userInstanceCost;
-        } else if (cleanGender === 'FEMALE') {
-          femaleCount++;
-          femaleRev += userInstanceCost;
-          femaleNonAccomCount++;
-          femaleNonAccomRev += userInstanceCost;
-        }
-      }
 
       if (!nestedBranchRevPool[cleanColKey]) nestedBranchRevPool[cleanColKey] = {};
       nestedBranchRevPool[cleanColKey][cleanBrKey] = (nestedBranchRevPool[cleanColKey][cleanBrKey] || 0) + userInstanceCost;
-
-      if (!nestedBranchCountPool[cleanColKey]) nestedBranchCountPool[cleanColKey] = {};
-      nestedBranchCountPool[cleanColKey][cleanBrKey] = (nestedBranchCountPool[cleanColKey][cleanBrKey] || 0) + 1;
 
       const compositeYearKey = `${cleanColKey}_${cleanBrKey}_${cleanYrKey}`;
       nestedYearRevPool[compositeYearKey] = (nestedYearRevPool[compositeYearKey] || 0) + userInstanceCost;
@@ -340,62 +280,17 @@ function calculateSystemMetricsAndDistributions() {
     if (isExpanded && nestedBranchRevPool[colKey]) {
       drilldownHtml = `<div class="bg-slate-900/60 p-2 mt-1 rounded-xl border border-slate-700/40 space-y-1 text-[10px]">`;
       Object.keys(nestedBranchRevPool[colKey]).sort().forEach(branchKey => {
-        const branchCount = nestedBranchCountPool[colKey] ? (nestedBranchCountPool[colKey][branchKey] || 0) : 0;
-        drilldownHtml += `<div class="font-bold border-b border-slate-800/40 text-slate-300 flex justify-between"><span>📌 ${branchKey} (${branchCount})</span><span class="text-purple-400">₹${nestedBranchRevPool[colKey][branchKey]}</span></div>`;
+        drilldownHtml += `<div class="font-bold border-b border-slate-800/40 text-slate-300 flex justify-between"><span>📌 ${branchKey}</span><span class="text-purple-400">₹${nestedBranchRevPool[colKey][branchKey]}</span></div>`;
       });
       drilldownHtml += `</div>`;
     }
-    return `<div class="border-b border-slate-700/30 py-1"><div onclick="toggleCollegeDrilldownView('${colKey}')" class="flex justify-between cursor-pointer text-slate-300 text-xs"><span>${isExpanded ? '▼' : '▶'} ${colKey} (${colCountMap[colKey] || 0})</span><span class="text-blue-400 font-bold">₹${colRevMap[colKey]}</span></div>${drilldownHtml}</div>`;
+    return `<div class="border-b border-slate-700/30 py-1"><div onclick="toggleCollegeDrilldownView('${colKey}')" class="flex justify-between cursor-pointer text-slate-300 text-xs"><span>${isExpanded ? '▼' : '▶'} ${colKey}</span><span class="text-blue-400 font-bold">₹${colRevMap[colKey]}</span></div>${drilldownHtml}</div>`;
   }).join('');
 
-  document.getElementById('distributionBranchArea').innerHTML = Object.keys(brCountMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300"><span>${k} (${brCountMapReal[k] || 0})</span><span class="text-purple-400">₹${brCountMap[k]}</span></div>`).join('');
-  document.getElementById('distributionYearArea').innerHTML = Object.keys(yrCountMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300"><span>${k} (${yrCountMapReal[k] || 0})</span><span class="text-emerald-400">₹${yrCountMap[k]}</span></div>`).join('');
-  document.getElementById('distributionDomainArea').innerHTML = Object.keys(domRevMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300 uppercase text-[10px]"><span>${k} (${domCountMap[k] || 0})</span><span class="text-purple-400 font-bold">₹${domRevMap[k]}</span></div>`).join('');
+  document.getElementById('distributionBranchArea').innerHTML = Object.keys(brCountMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300"><span>${k}</span><span class="text-purple-400">₹${brCountMap[k]}</span></div>`).join('');
+  document.getElementById('distributionYearArea').innerHTML = Object.keys(yrCountMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300"><span>${k}</span><span class="text-emerald-400">₹${yrCountMap[k]}</span></div>`).join('');
+  document.getElementById('distributionDomainArea').innerHTML = Object.keys(domRevMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300 uppercase text-[10px]"><span>${k}</span><span class="text-purple-400 font-bold">₹${domRevMap[k]}</span></div>`).join('');
   document.getElementById('distributionTrendsArea').innerHTML = Object.keys(trendTotalMap).map(k => `<div onclick="filterByRegistrationDateTimelineScope('${k}')" class="flex justify-between py-1 border-b border-slate-700/20 cursor-pointer text-slate-300"><span>${k} (${trendTotalMap[k]})</span><span class="text-emerald-400">₹${trendApprovedMap[k] || 0}</span></div>`).join('');
-
-  const demoArea = document.getElementById('distributionDemographicsArea');
-  if (demoArea) {
-    demoArea.innerHTML = `
-      <div class="flex justify-between py-0.5 text-slate-300">
-        <span>🏠 Accommodations</span>
-        <span class="text-slate-400 font-bold">${accomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-emerald-400">₹${accomRev.toLocaleString('en-IN')}</span></span>
-      </div>
-      <div class="flex justify-between py-0.5 text-slate-300">
-        <span>🚫 Non Accommodations</span>
-        <span class="text-slate-400 font-bold">${nonAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-emerald-400">₹${nonAccomRev.toLocaleString('en-IN')}</span></span>
-      </div>
-      
-      <div class="border-t border-slate-800/40 my-2 pt-2">
-        <div class="flex justify-between py-0.5 text-slate-300 font-semibold">
-          <span>👨 Male Total</span>
-          <span class="text-slate-400 font-bold">${maleCount} <span class="text-slate-500 font-normal">|</span> <span class="text-blue-400">₹${maleRev.toLocaleString('en-IN')}</span></span>
-        </div>
-        <div class="flex justify-between py-0.5 text-slate-400 pl-3 text-[11px]">
-          <span>• Accommodation</span>
-          <span class="font-bold">${maleAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-blue-400/80">₹${maleAccomRev.toLocaleString('en-IN')}</span></span>
-        </div>
-        <div class="flex justify-between py-0.5 text-slate-400 pl-3 text-[11px]">
-          <span>• Non Accommodation</span>
-          <span class="font-bold">${maleNonAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-blue-400/80">₹${maleNonAccomRev.toLocaleString('en-IN')}</span></span>
-        </div>
-      </div>
-
-      <div class="border-t border-slate-800/40 my-2 pt-2">
-        <div class="flex justify-between py-0.5 text-slate-300 font-semibold">
-          <span>👩 Female Total</span>
-          <span class="text-slate-400 font-bold">${femaleCount} <span class="text-slate-500 font-normal">|</span> <span class="text-rose-400">₹${femaleRev.toLocaleString('en-IN')}</span></span>
-        </div>
-        <div class="flex justify-between py-0.5 text-slate-400 pl-3 text-[11px]">
-          <span>• Accommodation</span>
-          <span class="font-bold">${femaleAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-rose-400/80">₹${femaleAccomRev.toLocaleString('en-IN')}</span></span>
-        </div>
-        <div class="flex justify-between py-0.5 text-slate-400 pl-3 text-[11px]">
-          <span>• Non Accommodation</span>
-          <span class="font-bold">${femaleNonAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-rose-400/80">₹${femaleNonAccomRev.toLocaleString('en-IN')}</span></span>
-        </div>
-      </div>
-    `;
-  }
 }
 
 function renderTargetedDataGrid() {
@@ -408,10 +303,6 @@ function renderTargetedDataGrid() {
   const branchFilterValue = document.getElementById('filterBranch').value;
   const yearFilterValue = document.getElementById('filterYear').value;
   const domainFilterValue = document.getElementById('filterDomain').value;
-  const accomFilterEl = document.getElementById('filterAccommodation');
-  const genderFilterEl = document.getElementById('filterGender');
-  const accomFilterValue = accomFilterEl ? accomFilterEl.value : "All";
-  const genderFilterValue = genderFilterEl ? genderFilterEl.value : "All";
 
   let filteredRecordDataset = masterRecordsCache.filter(row => {
     if (activeDayFilterScope && row.dateOfReg !== activeDayFilterScope) return false;
@@ -430,8 +321,6 @@ function renderTargetedDataGrid() {
     if (branchFilterValue !== "All" && row.branch !== branchFilterValue) return false;
     if (yearFilterValue !== "All" && row.year.toString() !== yearFilterValue.toString()) return false;
     if (domainFilterValue !== "All" && row.domainSelection !== domainFilterValue) return false;
-    if (accomFilterValue !== "All" && (row.accommodation || '').trim().toUpperCase() !== accomFilterValue.toUpperCase()) return false;
-    if (genderFilterValue !== "All" && (row.gender || '').trim().toUpperCase() !== genderFilterValue.toUpperCase()) return false;
     
     if (queryValue) {
       return [row.regId, row.fullName, row.email, row.phone, row.college, row.branch, row.utr, row.idCardNumber]
@@ -458,15 +347,24 @@ function renderTargetedDataGrid() {
       </tr>`).join('');
 
   } else if (dashboardViewMode === "registration") {
-    // Actions column has been completely removed
-    headBlock.innerHTML = `<tr class="bg-slate-900/40 text-slate-400 text-[11px] font-bold"><th class="px-4 py-3">Ticket ID</th><th class="px-4 py-3">Participant Details</th><th class="px-4 py-3">College / Year</th><th class="px-4 py-3">Domain Selection</th><th class="px-4 py-3 text-center">Accom.</th><th class="px-4 py-3">UTR / Verification Links</th><th class="px-4 py-3 text-center">Date</th><th class="px-4 py-3 text-center">EarlyBird</th><th class="px-4 py-3 text-center">Fees</th><th class="px-4 py-3 text-center">Status</th></tr>`;
+    headBlock.innerHTML = `<tr class="bg-slate-900/40 text-slate-400 text-[11px] font-bold"><th class="px-4 py-3">Ticket ID</th><th class="px-4 py-3">Participant Details</th><th class="px-4 py-3">College / Year</th><th class="px-4 py-3">Domain Selection</th><th class="px-4 py-3 text-center">Accom.</th><th class="px-4 py-3">UTR / Verification Links</th><th class="px-4 py-3 text-center">Date</th><th class="px-4 py-3 text-center">EarlyBird</th><th class="px-4 py-3 text-center">Fees</th><th class="px-4 py-3 text-center">Status</th><th class="px-4 py-3 text-right pr-6">Actions</th></tr>`;
     bodyBlock.innerHTML = filteredRecordDataset.map(user => {
       let trID = user.regId ? `<span class="font-mono font-bold text-slate-200 select-all">${user.regId}</span>` : `<span class="text-slate-600 italic">Unassigned</span>`;
       let badgeStyleClass = user.status === "Approved" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : (user.status === "Rejected" ? "bg-rose-500/10 text-rose-400 border border-rose-500/20" : (user.status === "Checked-in" ? "bg-blue-500/10 text-blue-400 border border-blue-500/20" : "bg-amber-500/10 text-amber-400 border border-amber-500/20"));
       
       let birdValue = user.earlyBird ? user.earlyBird.toString().trim().toUpperCase() : "NO";
-      let birdBtnHtml = `<span class="text-[10px] font-mono font-bold text-slate-400">${birdValue}</span>`;
+      let birdBtnHtml = `<button onclick="dispatchEarlyBirdToggleState(${user.rowNumber}, '${birdValue === 'YES' ? 'NO' : 'YES'}', '${user.accommodation}')" class="text-[10px] px-2 py-0.5 font-bold rounded cursor-pointer ${birdValue === 'YES' ? 'bg-emerald-600 text-white' : 'bg-slate-700 text-slate-300'}">${birdValue}</button>`;
 
+      let baseTicketRate = (birdValue === "YES" || systemConfigState.earlyBirdModeActive) ? systemConfigState.earlyBirdPrice : systemConfigState.regularPrice;
+      let hostAccomodationRate = (user.accommodation === "YES") ? systemConfigState.accommodationPrice : 0;
+      let finalLiveSuggestedPrice = baseTicketRate + hostAccomodationRate;
+
+      let actionColumnHtml = user.status === "Pending" ? `
+        <button onclick="dispatchApprovalActionWithLockedPrice(${user.rowNumber}, ${finalLiveSuggestedPrice})" class="bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg cursor-pointer transition">Approve (₹${finalLiveSuggestedPrice})</button>
+        <button onclick="dispatchAdminOperationAction(${user.rowNumber}, 'reject')" class="bg-rose-600/20 text-rose-400 text-[10px] font-bold px-2 py-1 rounded-lg cursor-pointer transition ml-1">Reject</button>
+      ` : `<span class="text-slate-500 text-[10px] font-mono select-none">Processed</span>`;
+
+      // 🎯 UI CHANGE (2nd PIC): Email address successfully stacked inside the sub-container block directly below the phone number element
       return `
         <tr class="hover:bg-slate-950/20 border-b border-slate-800/40 text-xs">
           <td class="px-4 py-3">${trID}</td>
@@ -483,15 +381,16 @@ function renderTargetedDataGrid() {
           <td class="px-4 py-3 text-center">${birdBtnHtml}</td>
           <td class="px-4 py-3 text-center font-bold text-slate-200">${user.amountReceived ? '₹' + user.amountReceived : '—'}</td>
           <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${badgeStyleClass}">${user.status}</span></td>
+          <td class="px-4 py-3 text-right whitespace-nowrap">${actionColumnHtml}</td>
         </tr>`;
     }).join('');
 
   } else {
-    // Attendance tab: Gate Operations column is renamed to Check-in Time and shows only static info
-    headBlock.innerHTML = `<tr class="bg-slate-900/40 text-slate-400 text-[11px] font-bold"><th class="px-4 py-3">Ticket ID</th><th class="px-4 py-3">Participant Details</th><th class="px-4 py-3">Institution & Department</th><th class="px-4 py-3 text-center">Cohort Year</th><th class="px-4 py-3 text-center">Date</th><th class="px-4 py-3">Flow Status</th><th class="px-4 py-3 text-right pr-6">Check-in Time</th></tr>`;
+    headBlock.innerHTML = `<tr class="bg-slate-900/40 text-slate-400 text-[11px] font-bold"><th class="px-4 py-3">Ticket ID</th><th class="px-4 py-3">Participant Details</th><th class="px-4 py-3">Institution & Department</th><th class="px-4 py-3 text-center">Cohort Year</th><th class="px-4 py-3 text-center">Date</th><th class="px-4 py-3">Flow Status</th><th class="px-4 py-3 text-right pr-6">Gate Operations</th></tr>`;
     bodyBlock.innerHTML = filteredRecordDataset.map(user => {
       let isCheckedIn = (user.status === "Checked-in");
       
+      // 🎯 UI CHANGE (1st PIC): Cohort code descriptor text appended inside parentheses [e.g., SOPHOMORE (Y2)]
       let rawLabelName = cohortLabels[user.year] || "UNKNOWN";
       let shortCodeTag = shortCohortCodes[user.year] ? ` (${shortCohortCodes[user.year]})` : "";
       let fullyCompiledCohortDisplayValue = rawLabelName + shortCodeTag;
@@ -505,11 +404,66 @@ function renderTargetedDataGrid() {
           <td class="px-4 py-3 text-center text-slate-500">${user.dateOfReg}</td>
           <td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${isCheckedIn ? 'bg-blue-500/10 text-blue-400' : 'bg-emerald-500/10 text-emerald-400'}">${user.status}</span></td>
           <td class="px-4 py-3 text-right pr-6">
-            ${isCheckedIn ? `<span class="font-mono text-emerald-400 text-[11px] font-bold">⏱️ ${user.checkInTime}</span>` : `<span class="text-slate-500 text-[10px] font-mono select-none">—</span>`}
+            ${!isCheckedIn ? `
+              <button onclick="dispatchManualAttendanceCheckIn(${user.rowNumber}, '${user.fullName}')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] px-2.5 py-1 rounded-lg cursor-pointer transition shadow">Mark Gate Entry</button>
+            ` : `<span class="font-mono text-emerald-400 text-[11px] font-bold">⏱️ ${user.checkInTime}</span>`}
           </td>
         </tr>`;
     }).join('');
   }
+}
+
+async function dispatchApprovalActionWithLockedPrice(rowNumber, Price) {
+  if (!confirm(`Approve line reference row #${rowNumber} at locked tier price of ₹${Price}?`)) return;
+  try {
+    const response = await fetch(BACKEND_API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: "approve", rowNumber: rowNumber, costPerHead: Price })
+    });
+    const result = await response.json(); alert(result.message); synchronizeCloudLedger(false);
+  } catch (error) { alert("Fault: " + error.toString()); }
+}
+
+async function dispatchEarlyBirdToggleState(rowNumber, targetValueString, userAccomodationTagValue) {
+  let ticketRateComponent = (targetValueString === "YES") ? systemConfigState.earlyBirdPrice : systemConfigState.regularPrice;
+  let accomodationRateComponent = (userAccomodationTagValue === "YES") ? systemConfigState.accommodationPrice : 0;
+  
+  try {
+    await fetch(BACKEND_API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ 
+        action: "toggleEarlyBird", 
+        rowNumber: rowNumber, 
+        earlyBirdValue: targetValueString,
+        calculatedPrice: ticketRateComponent + accomodationRateComponent 
+      })
+    });
+    synchronizeCloudLedger(true);
+  } catch (error) { console.error(error); }
+}
+
+async function dispatchManualAttendanceCheckIn(rowNumber, attendeeName) {
+  if (!confirm(`Log manual entry gate confirmation for ${attendeeName}?`)) return;
+  try {
+    const response = await fetch(BACKEND_API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: "checkin", rowNumber: parseInt(rowNumber, 10) }) 
+    });
+    const result = await response.json(); 
+    alert(result.message); 
+    synchronizeCloudLedger(false);
+  } catch (error) { alert("Error updating row attendance: " + error.toString()); }
+}
+
+async function dispatchAdminOperationAction(rowNumber, actionName) {
+  if (!confirm(`Execute action: [${actionName.toUpperCase()}] on row index line reference #${rowNumber}?`)) return;
+  try {
+    const response = await fetch(BACKEND_API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: actionName, rowNumber: rowNumber })
+    });
+    const result = await response.json(); alert(result.message); synchronizeCloudLedger(false);
+  } catch (error) { alert("Error: " + error.toString()); }
 }
 
 function processCsvExportTask(filterDomainScopeName = "GLOBAL_ALL") {

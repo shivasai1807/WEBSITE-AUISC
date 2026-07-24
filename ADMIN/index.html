@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AUNSF 4.0 - Public Analytics Ledger</title>
+  <title>AUNSF 4.0 - Master Control Center</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,40 +12,8 @@
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0b0f19; }
     .mono { font-family: 'JetBrains Mono', monospace; }
   </style>
-  <script>
-    // Rapid initial check to hide login overlay if user is already authenticated
-    if (localStorage.getItem('aunsf_dashboard_authenticated') === 'true') {
-      document.write('<style>#loginOverlay { display: none !important; }</style>');
-    }
-  </script>
 </head>
 <body class="text-slate-100 min-h-screen antialiased flex flex-col selection:bg-blue-600/20 box-border">
-
-  <!-- ================= AUTHENTICATION OVERLAY ================= -->
-  <div id="loginOverlay" class="fixed inset-0 bg-[#0b0f19]/98 backdrop-blur-lg z-50 flex items-center justify-center p-4">
-    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl shadow-2xl max-w-md w-full p-8 space-y-6">
-      <div class="text-center">
-        <div class="h-12 w-12 bg-blue-600 rounded-xl flex items-center justify-center font-black text-white text-lg shadow-lg shadow-blue-600/20 mx-auto mb-4">A</div>
-        <h2 class="text-lg font-black tracking-tight text-white uppercase select-none">AUNSF 4.0 HQ Dashboard</h2>
-        <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-1">View-Only Authentication Terminal</p>
-      </div>
-
-      <form id="loginForm" class="space-y-4">
-        <div class="space-y-1">
-          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Username</label>
-          <input type="text" id="usernameInput" placeholder="Enter username" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder:text-slate-600 outline-none focus:border-blue-500 transition">
-        </div>
-        <div class="space-y-1">
-          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Password</label>
-          <input type="password" id="passwordInput" placeholder="Enter password" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder:text-slate-600 outline-none focus:border-blue-500 transition">
-        </div>
-        <div id="loginError" class="text-[11px] font-bold text-rose-400 hidden text-center">
-          ⚠️ Invalid credentials. Access denied.
-        </div>
-        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs py-3 rounded-xl shadow-lg transition cursor-pointer">AUTHENTICATE SYSTEM</button>
-      </form>
-    </div>
-  </div>
 
   <!-- TOP RUNTIME BANNER PLATFORM -->
   <header class="border-b border-slate-800/60 bg-slate-900/40 backdrop-blur-md sticky top-0 z-40 px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -53,7 +21,7 @@
       <div class="h-9 w-9 bg-blue-600 rounded-xl flex items-center justify-center font-black text-white shadow-lg shadow-blue-600/20">A</div>
       <div>
         <h1 class="text-base font-black tracking-tight text-white select-none">AUNSF 4.0 HQ Ledger</h1>
-        <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-0.5">Public Analytics Terminal</p>
+        <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-0.5">Management Execution Terminal</p>
       </div>
     </div>
     
@@ -105,7 +73,7 @@
         <button id="clearFiltersBtn" class="text-[11px] font-bold text-rose-400 hover:underline cursor-pointer">🧹 Clear All Filters</button>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-8 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
         <div class="space-y-1">
           <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Search Parameter</label>
           <input type="text" id="searchInput" placeholder="Search ID, Name, UTR, Ref..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder:text-slate-600 outline-none focus:border-blue-500 transition">
@@ -150,22 +118,6 @@
             <option value="2">Year 2 (Sophomore)</option>
             <option value="3">Year 3 (Junior)</option>
             <option value="4">Year 4 (Senior)</option>
-          </select>
-        </div>
-        <div class="space-y-1">
-          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Accommodation</label>
-          <select id="filterAccommodation" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-2 text-xs text-slate-300 outline-none focus:border-blue-500 cursor-pointer">
-            <option value="All">All Lodging</option>
-            <option value="YES">Yes</option>
-            <option value="NO">No</option>
-          </select>
-        </div>
-        <div class="space-y-1">
-          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Gender</label>
-          <select id="filterGender" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-2 text-xs text-slate-300 outline-none focus:border-blue-500 cursor-pointer">
-            <option value="All">All Genders</option>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
           </select>
         </div>
       </div>
@@ -217,24 +169,25 @@
           <div class="space-y-2.5 text-xs">
             <div class="flex justify-between items-center">
               <span class="text-slate-400">Regular Ticket:</span>
-              <input type="number" id="regularPriceInput" disabled class="w-20 bg-slate-900 border border-slate-800 rounded px-2 py-1 text-center font-mono font-bold text-slate-400 outline-none cursor-not-allowed">
+              <input type="number" id="regularPriceInput" class="w-20 bg-slate-900 border border-slate-800 rounded px-2 py-1 text-center font-mono font-bold text-white outline-none">
             </div>
             <div class="flex justify-between items-center">
               <span class="text-slate-400">Early Bird:</span>
-              <input type="number" id="earlyBirdPriceInput" disabled class="w-20 bg-slate-900 border border-slate-800 rounded px-2 py-1 text-center font-mono font-bold text-slate-400 outline-none cursor-not-allowed">
+              <input type="number" id="earlyBirdPriceInput" class="w-20 bg-slate-900 border border-slate-800 rounded px-2 py-1 text-center font-mono font-bold text-white outline-none">
             </div>
             <div class="flex justify-between items-center">
               <span class="text-slate-400">Accommodation:</span>
-              <input type="number" id="accommodationPriceInput" disabled class="w-20 bg-slate-900 border border-slate-800 rounded px-2 py-1 text-center font-mono font-bold text-slate-400 outline-none cursor-not-allowed">
+              <input type="number" id="accommodationPriceInput" class="w-20 bg-slate-900 border border-slate-800 rounded px-2 py-1 text-center font-mono font-bold text-white outline-none">
             </div>
             <div class="flex justify-between items-center border-t border-slate-800/60 pt-2">
               <span class="text-slate-400 font-bold">Force Early Bird:</span>
-              <label class="relative inline-flex items-center cursor-not-allowed">
-                <input type="checkbox" id="earlyBirdModeToggle" disabled class="sr-only peer">
-                <div class="w-9 h-5 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600/40 peer-checked:after:bg-slate-400"></div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="earlyBirdModeToggle" class="sr-only peer">
+                <div class="w-9 h-5 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600 peer-checked:after:bg-white"></div>
               </label>
             </div>
           </div>
+          <button id="saveConfigBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 rounded-lg transition shadow-md cursor-pointer mt-1">💾 Save Configuration</button>
         </div>
 
         <!-- THEME TRACK CAPITAL DISTRIBUTION BREAKDOWN -->
@@ -247,12 +200,6 @@
         <div class="space-y-3">
           <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider select-none">🎓 Cohort Yields</h3>
           <div id="distributionYearArea" class="text-xs font-mono space-y-1"></div>
-        </div>
-
-        <!-- DEMOGRAPHICS & ACCOMMODATION YIELDS -->
-        <div class="space-y-3">
-          <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider select-none">👥 Demographics & Lodging</h3>
-          <div id="distributionDemographicsArea" class="text-xs font-mono space-y-1"></div>
         </div>
 
         <!-- HISTORICAL TIMELINE INTAKE FLOW AND DATES -->
@@ -277,6 +224,6 @@
     </div>
   </main>
 
-  <script src="dashboard.js"></script>
+  <script src="admin.js"></script>
 </body>
 </html>
