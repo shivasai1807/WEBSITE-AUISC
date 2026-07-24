@@ -30,6 +30,7 @@
       <button id="btnRegMode" class="bg-blue-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow cursor-pointer transition whitespace-nowrap">📋 Registrations</button>
       <button id="btnLookoverMode" class="bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition cursor-pointer whitespace-nowrap">🎟️ Gate Attendance</button>
       <button id="btnRevenueMode" class="bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition cursor-pointer whitespace-nowrap">💰 Financials & Analytics</button>
+      <button id="btnCustomExportMode" class="bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition cursor-pointer whitespace-nowrap">📤 Custom Export</button>
     </div>
 
     <!-- CORE ACTION CONTROLS -->
@@ -73,7 +74,7 @@
         <button id="clearFiltersBtn" class="text-[11px] font-bold text-rose-400 hover:underline cursor-pointer">🧹 Clear All Filters</button>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         <div class="space-y-1">
           <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Search Parameter</label>
           <input type="text" id="searchInput" placeholder="Search ID, Name, UTR, Ref..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder:text-slate-600 outline-none focus:border-blue-500 transition">
@@ -120,6 +121,30 @@
             <option value="4">Year 4 (Senior)</option>
           </select>
         </div>
+        <div class="space-y-1">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Accommodation</label>
+          <select id="filterAccommodation" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-2 text-xs text-slate-300 outline-none focus:border-blue-500 cursor-pointer">
+            <option value="All">All Lodging</option>
+            <option value="YES">Yes</option>
+            <option value="NO">No</option>
+          </select>
+        </div>
+        <div class="space-y-1">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Gender</label>
+          <select id="filterGender" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-2 text-xs text-slate-300 outline-none focus:border-blue-500 cursor-pointer">
+            <option value="All">All Genders</option>
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+          </select>
+        </div>
+        <div class="space-y-1">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Attendance</label>
+          <select id="filterAttendance" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-2 text-xs text-slate-300 outline-none focus:border-blue-500 cursor-pointer">
+            <option value="All">All Attendance</option>
+            <option value="Checked-in">Checked-in</option>
+            <option value="Not Checked-in">Not Checked-in</option>
+          </select>
+        </div>
       </div>
     </section>
 
@@ -142,6 +167,17 @@
       
       <!-- TIMELINE SEGMENT BYPASS BANNER -->
       <div class="flex-1 w-full space-y-3 overflow-hidden">
+        <!-- CUSTOM EXPORT ACTIONS PANEL -->
+        <div id="customExportContainer" class="hidden bg-slate-900/40 border border-slate-800 p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h2 class="text-sm font-black uppercase text-blue-400 tracking-wider">Custom Segment Data Export</h2>
+            <p class="text-xs text-slate-400 mt-1">Configure your query filters above to isolate a specific segment of records, then download the custom spreadsheet.</p>
+          </div>
+          <button id="customExportCsvBtn" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-105 text-white font-extrabold text-xs px-6 py-3.5 rounded-xl shadow-lg transition cursor-pointer flex items-center gap-2 whitespace-nowrap">
+            📥 Export Segment CSV (<span id="customExportCount">0</span> Matches)
+          </button>
+        </div>
+
         <div id="activeScopeBanner" class="hidden bg-blue-600/10 border border-blue-500/30 p-3.5 rounded-xl flex items-center justify-between gap-2 text-xs font-bold text-blue-400">
           <span id="activeScopeText"></span>
           <button id="btnResetScopeBypass" class="bg-blue-600 hover:bg-blue-500 text-white font-extrabold px-2.5 py-1 rounded-lg transition cursor-pointer">Show All Dates</button>
@@ -200,6 +236,12 @@
         <div class="space-y-3">
           <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider select-none">🎓 Cohort Yields</h3>
           <div id="distributionYearArea" class="text-xs font-mono space-y-1"></div>
+        </div>
+
+        <!-- DEMOGRAPHIC & LODGING ANALYTICS BREAKDOWN -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider select-none">👥 Demographics & Lodging</h3>
+          <div id="distributionDemographicsArea" class="text-xs font-mono space-y-1"></div>
         </div>
 
         <!-- HISTORICAL TIMELINE INTAKE FLOW AND DATES -->

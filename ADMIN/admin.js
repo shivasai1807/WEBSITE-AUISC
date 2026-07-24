@@ -39,10 +39,18 @@ window.onload = () => {
   setupModeButtonsViewRoutingControlEngine();
   setupAttendanceDomainTabEngine();
 
-  ['searchInput', 'filterStatus', 'filterCollege', 'filterBranch', 'filterYear', 'filterDomain'].forEach(id => {
-    document.getElementById(id).addEventListener('change', renderTargetedDataGrid);
-    document.getElementById(id).addEventListener('input', renderTargetedDataGrid);
+  ['searchInput', 'filterStatus', 'filterCollege', 'filterBranch', 'filterYear', 'filterDomain', 'filterAccommodation', 'filterGender', 'filterAttendance'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('change', renderTargetedDataGrid);
+      el.addEventListener('input', renderTargetedDataGrid);
+    }
   });
+
+  const custExportBtn = document.getElementById('customExportCsvBtn');
+  if (custExportBtn) {
+    custExportBtn.addEventListener('click', processCustomFilteredCsvExportTask);
+  }
 
   // Execute Immediate Foreground Sync Pipeline
   synchronizeCloudLedger(false);
@@ -136,16 +144,20 @@ async function dispatchConfigUpdateToServer() {
 }
 
 function setupModeButtonsViewRoutingControlEngine() {
-  const routingMap = { 'btnRegMode': 'registration', 'btnLookoverMode': 'attendance', 'btnRevenueMode': 'revenue' };
+  const routingMap = { 'btnRegMode': 'registration', 'btnLookoverMode': 'attendance', 'btnRevenueMode': 'revenue', 'btnCustomExportMode': 'custom_export' };
   Object.keys(routingMap).forEach(btnId => {
-    document.getElementById(btnId).addEventListener('click', (e) => {
-      Object.keys(routingMap).forEach(id => {
-        document.getElementById(id).className = "view-mode-btn bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition tracking-wide cursor-pointer whitespace-nowrap";
+    const btn = document.getElementById(btnId);
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        Object.keys(routingMap).forEach(id => {
+          const b = document.getElementById(id);
+          if (b) b.className = "view-mode-btn bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition tracking-wide cursor-pointer whitespace-nowrap";
+        });
+        e.target.className = "view-mode-btn bg-blue-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition tracking-wide cursor-pointer whitespace-nowrap";
+        dashboardViewMode = routingMap[btnId];
+        handleStructuralViewLayoutAlterators();
       });
-      e.target.className = "view-mode-btn bg-blue-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition tracking-wide cursor-pointer whitespace-nowrap";
-      dashboardViewMode = routingMap[btnId];
-      handleStructuralViewLayoutAlterators();
-    });
+    }
   });
 }
 
@@ -177,13 +189,20 @@ function handleStructuralViewLayoutAlterators() {
   const metricsGrid = document.getElementById('metricsCountersGrid');
   const toolbarContainer = document.getElementById('filterToolbarContainer');
   const attendanceTabsBlock = document.getElementById('attendanceDomainTabsContainer');
+  const customExportBlock = document.getElementById('customExportContainer');
 
   if (dashboardViewMode === "revenue") {
     sidebar.classList.remove('hidden'); metricsGrid.classList.add('hidden'); toolbarContainer.classList.add('hidden'); attendanceTabsBlock.classList.add('hidden');
+    if (customExportBlock) customExportBlock.classList.add('hidden');
   } else if (dashboardViewMode === "attendance") {
     sidebar.classList.add('hidden'); metricsGrid.classList.remove('hidden'); toolbarContainer.className = toolbarContainer.className.replace("hidden", "").trim(); attendanceTabsBlock.classList.remove('hidden');
+    if (customExportBlock) customExportBlock.classList.add('hidden');
+  } else if (dashboardViewMode === "custom_export") {
+    sidebar.classList.add('hidden'); metricsGrid.classList.add('hidden'); toolbarContainer.className = toolbarContainer.className.replace("hidden", "").trim(); attendanceTabsBlock.classList.add('hidden');
+    if (customExportBlock) customExportBlock.classList.remove('hidden');
   } else {
     sidebar.classList.add('hidden'); metricsGrid.classList.remove('hidden'); toolbarContainer.className = toolbarContainer.className.replace("hidden", "").trim(); attendanceTabsBlock.classList.add('hidden');
+    if (customExportBlock) customExportBlock.classList.add('hidden');
   }
   renderTargetedDataGrid();
 }
@@ -194,6 +213,9 @@ function clearAllActiveFilters() {
   document.getElementById('searchInput').value = ""; document.getElementById('filterStatus').value = "All";
   document.getElementById('filterCollege').value = "All"; document.getElementById('filterBranch').value = "All";
   document.getElementById('filterYear').value = "All"; document.getElementById('filterDomain').value = "All";
+  const fa = document.getElementById('filterAccommodation'); if (fa) fa.value = "All";
+  const fg = document.getElementById('filterGender'); if (fg) fg.value = "All";
+  const fat = document.getElementById('filterAttendance'); if (fat) fat.value = "All";
   activeDayFilterScope = null; renderTargetedDataGrid();
 }
 
@@ -231,6 +253,21 @@ function calculateSystemMetricsAndDistributions() {
   let colRevMap = {}, brCountMap = {}, yrCountMap = {}, domRevMap = {}, trendTotalMap = {}, trendApprovedMap = {};
   let nestedBranchRevPool = {}, nestedYearRevPool = {};   
 
+  // Real-time count tracking maps for admin
+  let colCountMap = {}, brCountMapReal = {}, yrCountMapReal = {}, domCountMap = {};
+  let nestedBranchCountPool = {};
+
+  let maleCount = 0, maleRev = 0;
+  let maleAccomCount = 0, maleAccomRev = 0;
+  let maleNonAccomCount = 0, maleNonAccomRev = 0;
+
+  let femaleCount = 0, femaleRev = 0;
+  let femaleAccomCount = 0, femaleAccomRev = 0;
+  let femaleNonAccomCount = 0, femaleNonAccomRev = 0;
+
+  let accomCount = 0, accomRev = 0;
+  let nonAccomCount = 0, nonAccomRev = 0;
+
   for (let i = 0; i < masterRecordsCache.length; i++) {
     let r = masterRecordsCache[i];
     if (r.status === 'Duplicate') continue;
@@ -250,12 +287,55 @@ function calculateSystemMetricsAndDistributions() {
     if (isApprovedUser) {
       aggregateRevenueCalculated += userInstanceCost;
       colRevMap[cleanColKey] = (colRevMap[cleanColKey] || 0) + userInstanceCost;
+      colCountMap[cleanColKey] = (colCountMap[cleanColKey] || 0) + 1;
+
       brCountMap[cleanBrKey] = (brCountMap[cleanBrKey] || 0) + userInstanceCost;
+      brCountMapReal[cleanBrKey] = (brCountMapReal[cleanBrKey] || 0) + 1;
+
       yrCountMap[cleanYrKey] = (yrCountMap[cleanYrKey] || 0) + userInstanceCost;
+      yrCountMapReal[cleanYrKey] = (yrCountMapReal[cleanYrKey] || 0) + 1;
+
       domRevMap[cleanDomKey] = (domRevMap[cleanDomKey] || 0) + userInstanceCost;
+      domCountMap[cleanDomKey] = (domCountMap[cleanDomKey] || 0) + 1;
+
+      const cleanGender = (r.gender || '').trim().toUpperCase();
+      const cleanAccom = (r.accommodation || '').trim().toUpperCase();
+
+      if (cleanAccom === 'YES') {
+        accomCount++;
+        accomRev += userInstanceCost;
+        if (cleanGender === 'MALE') {
+          maleCount++;
+          maleRev += userInstanceCost;
+          maleAccomCount++;
+          maleAccomRev += userInstanceCost;
+        } else if (cleanGender === 'FEMALE') {
+          femaleCount++;
+          femaleRev += userInstanceCost;
+          femaleAccomCount++;
+          femaleAccomRev += userInstanceCost;
+        }
+      } else {
+        nonAccomCount++;
+        nonAccomRev += userInstanceCost;
+        if (cleanGender === 'MALE') {
+          maleCount++;
+          maleRev += userInstanceCost;
+          maleNonAccomCount++;
+          maleNonAccomRev += userInstanceCost;
+        } else if (cleanGender === 'FEMALE') {
+          femaleCount++;
+          femaleRev += userInstanceCost;
+          femaleNonAccomCount++;
+          femaleNonAccomRev += userInstanceCost;
+        }
+      }
 
       if (!nestedBranchRevPool[cleanColKey]) nestedBranchRevPool[cleanColKey] = {};
       nestedBranchRevPool[cleanColKey][cleanBrKey] = (nestedBranchRevPool[cleanColKey][cleanBrKey] || 0) + userInstanceCost;
+
+      if (!nestedBranchCountPool[cleanColKey]) nestedBranchCountPool[cleanColKey] = {};
+      nestedBranchCountPool[cleanColKey][cleanBrKey] = (nestedBranchCountPool[cleanColKey][cleanBrKey] || 0) + 1;
 
       const compositeYearKey = `${cleanColKey}_${cleanBrKey}_${cleanYrKey}`;
       nestedYearRevPool[compositeYearKey] = (nestedYearRevPool[compositeYearKey] || 0) + userInstanceCost;
@@ -280,17 +360,62 @@ function calculateSystemMetricsAndDistributions() {
     if (isExpanded && nestedBranchRevPool[colKey]) {
       drilldownHtml = `<div class="bg-slate-900/60 p-2 mt-1 rounded-xl border border-slate-700/40 space-y-1 text-[10px]">`;
       Object.keys(nestedBranchRevPool[colKey]).sort().forEach(branchKey => {
-        drilldownHtml += `<div class="font-bold border-b border-slate-800/40 text-slate-300 flex justify-between"><span>📌 ${branchKey}</span><span class="text-purple-400">₹${nestedBranchRevPool[colKey][branchKey]}</span></div>`;
+        const branchCount = nestedBranchCountPool[colKey] ? (nestedBranchCountPool[colKey][branchKey] || 0) : 0;
+        drilldownHtml += `<div class="font-bold border-b border-slate-800/40 text-slate-300 flex justify-between"><span>📌 ${branchKey} (${branchCount})</span><span class="text-purple-400">₹${nestedBranchRevPool[colKey][branchKey]}</span></div>`;
       });
       drilldownHtml += `</div>`;
     }
-    return `<div class="border-b border-slate-700/30 py-1"><div onclick="toggleCollegeDrilldownView('${colKey}')" class="flex justify-between cursor-pointer text-slate-300 text-xs"><span>${isExpanded ? '▼' : '▶'} ${colKey}</span><span class="text-blue-400 font-bold">₹${colRevMap[colKey]}</span></div>${drilldownHtml}</div>`;
+    return `<div class="border-b border-slate-700/30 py-1"><div onclick="toggleCollegeDrilldownView('${colKey}')" class="flex justify-between cursor-pointer text-slate-300 text-xs"><span>${isExpanded ? '▼' : '▶'} ${colKey} (${colCountMap[colKey] || 0})</span><span class="text-blue-400 font-bold">₹${colRevMap[colKey]}</span></div>${drilldownHtml}</div>`;
   }).join('');
 
-  document.getElementById('distributionBranchArea').innerHTML = Object.keys(brCountMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300"><span>${k}</span><span class="text-purple-400">₹${brCountMap[k]}</span></div>`).join('');
-  document.getElementById('distributionYearArea').innerHTML = Object.keys(yrCountMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300"><span>${k}</span><span class="text-emerald-400">₹${yrCountMap[k]}</span></div>`).join('');
-  document.getElementById('distributionDomainArea').innerHTML = Object.keys(domRevMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300 uppercase text-[10px]"><span>${k}</span><span class="text-purple-400 font-bold">₹${domRevMap[k]}</span></div>`).join('');
+  document.getElementById('distributionBranchArea').innerHTML = Object.keys(brCountMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300"><span>${k} (${brCountMapReal[k] || 0})</span><span class="text-purple-400">₹${brCountMap[k]}</span></div>`).join('');
+  document.getElementById('distributionYearArea').innerHTML = Object.keys(yrCountMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300"><span>${k} (${yrCountMapReal[k] || 0})</span><span class="text-emerald-400">₹${yrCountMap[k]}</span></div>`).join('');
+  document.getElementById('distributionDomainArea').innerHTML = Object.keys(domRevMap).sort().map(k => `<div class="flex justify-between py-0.5 text-slate-300 uppercase text-[10px]"><span>${k} (${domCountMap[k] || 0})</span><span class="text-purple-400 font-bold">₹${domRevMap[k]}</span></div>`).join('');
   document.getElementById('distributionTrendsArea').innerHTML = Object.keys(trendTotalMap).map(k => `<div onclick="filterByRegistrationDateTimelineScope('${k}')" class="flex justify-between py-1 border-b border-slate-700/20 cursor-pointer text-slate-300"><span>${k} (${trendTotalMap[k]})</span><span class="text-emerald-400">₹${trendApprovedMap[k] || 0}</span></div>`).join('');
+
+  const demoArea = document.getElementById('distributionDemographicsArea');
+  if (demoArea) {
+    demoArea.innerHTML = `
+      <div class="flex justify-between py-0.5 text-slate-300">
+        <span>🏠 Accommodations</span>
+        <span class="text-slate-400 font-bold">${accomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-emerald-400">₹${accomRev.toLocaleString('en-IN')}</span></span>
+      </div>
+      <div class="flex justify-between py-0.5 text-slate-300">
+        <span>🚫 Non Accommodations</span>
+        <span class="text-slate-400 font-bold">${nonAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-emerald-400">₹${nonAccomRev.toLocaleString('en-IN')}</span></span>
+      </div>
+      
+      <div class="border-t border-slate-800/40 my-2 pt-2">
+        <div class="flex justify-between py-0.5 text-slate-300 font-semibold">
+          <span>👨 Male Total</span>
+          <span class="text-slate-400 font-bold">${maleCount} <span class="text-slate-500 font-normal">|</span> <span class="text-blue-400">₹${maleRev.toLocaleString('en-IN')}</span></span>
+        </div>
+        <div class="flex justify-between py-0.5 text-slate-400 pl-3 text-[11px]">
+          <span>• Accommodation</span>
+          <span class="font-bold">${maleAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-blue-400/80">₹${maleAccomRev.toLocaleString('en-IN')}</span></span>
+        </div>
+        <div class="flex justify-between py-0.5 text-slate-400 pl-3 text-[11px]">
+          <span>• Non Accommodation</span>
+          <span class="font-bold">${maleNonAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-blue-400/80">₹${maleNonAccomRev.toLocaleString('en-IN')}</span></span>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800/40 my-2 pt-2">
+        <div class="flex justify-between py-0.5 text-slate-300 font-semibold">
+          <span>👩 Female Total</span>
+          <span class="text-slate-400 font-bold">${femaleCount} <span class="text-slate-500 font-normal">|</span> <span class="text-rose-400">₹${femaleRev.toLocaleString('en-IN')}</span></span>
+        </div>
+        <div class="flex justify-between py-0.5 text-slate-400 pl-3 text-[11px]">
+          <span>• Accommodation</span>
+          <span class="font-bold">${femaleAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-rose-400/80">₹${femaleAccomRev.toLocaleString('en-IN')}</span></span>
+        </div>
+        <div class="flex justify-between py-0.5 text-slate-400 pl-3 text-[11px]">
+          <span>• Non Accommodation</span>
+          <span class="font-bold">${femaleNonAccomCount} <span class="text-slate-500 font-normal">|</span> <span class="text-rose-400/80">₹${femaleNonAccomRev.toLocaleString('en-IN')}</span></span>
+        </div>
+      </div>
+    `;
+  }
 }
 
 function renderTargetedDataGrid() {
@@ -303,6 +428,12 @@ function renderTargetedDataGrid() {
   const branchFilterValue = document.getElementById('filterBranch').value;
   const yearFilterValue = document.getElementById('filterYear').value;
   const domainFilterValue = document.getElementById('filterDomain').value;
+  const accomFilterEl = document.getElementById('filterAccommodation');
+  const genderFilterEl = document.getElementById('filterGender');
+  const attendanceFilterEl = document.getElementById('filterAttendance');
+  const accomFilterValue = accomFilterEl ? accomFilterEl.value : "All";
+  const genderFilterValue = genderFilterEl ? genderFilterEl.value : "All";
+  const attendanceFilterValue = attendanceFilterEl ? attendanceFilterEl.value : "All";
 
   let filteredRecordDataset = masterRecordsCache.filter(row => {
     if (activeDayFilterScope && row.dateOfReg !== activeDayFilterScope) return false;
@@ -321,12 +452,26 @@ function renderTargetedDataGrid() {
     if (branchFilterValue !== "All" && row.branch !== branchFilterValue) return false;
     if (yearFilterValue !== "All" && row.year.toString() !== yearFilterValue.toString()) return false;
     if (domainFilterValue !== "All" && row.domainSelection !== domainFilterValue) return false;
+    if (accomFilterValue !== "All" && (row.accommodation || '').trim().toUpperCase() !== accomFilterValue.toUpperCase()) return false;
+    if (genderFilterValue !== "All" && (row.gender || '').trim().toUpperCase() !== genderFilterValue.toUpperCase()) return false;
+    if (attendanceFilterValue !== "All") {
+      const isUserCheckedIn = (row.status === "Checked-in");
+      if (attendanceFilterValue === "Checked-in" && !isUserCheckedIn) return false;
+      if (attendanceFilterValue === "Not Checked-in" && isUserCheckedIn) return false;
+    }
     
     if (queryValue) {
       return [row.regId, row.fullName, row.email, row.phone, row.college, row.branch, row.utr, row.idCardNumber]
         .join(" ").toLowerCase().includes(queryValue);
     }
     return true;
+  });
+
+  // Sort by Ticket ID prefix & number ascending
+  filteredRecordDataset.sort((a, b) => {
+    const idA = (a.regId || '').toString();
+    const idB = (b.regId || '').toString();
+    return idA.localeCompare(idB, undefined, { numeric: true, sensitivity: 'base' });
   });
 
   const cohortLabels = { "1": "FRESHER", "2": "SOPHOMORE", "3": "JUNIOR", "4": "SENIOR" };
@@ -346,7 +491,7 @@ function renderTargetedDataGrid() {
         <td class="px-4 py-3 text-right font-mono text-purple-400 font-black pr-6">₹${user.amountReceived}</td>
       </tr>`).join('');
 
-  } else if (dashboardViewMode === "registration") {
+  } else if (dashboardViewMode === "registration" || dashboardViewMode === "custom_export") {
     headBlock.innerHTML = `<tr class="bg-slate-900/40 text-slate-400 text-[11px] font-bold"><th class="px-4 py-3">Ticket ID</th><th class="px-4 py-3">Participant Details</th><th class="px-4 py-3">College / Year</th><th class="px-4 py-3">Domain Selection</th><th class="px-4 py-3 text-center">Accom.</th><th class="px-4 py-3">UTR / Verification Links</th><th class="px-4 py-3 text-center">Date</th><th class="px-4 py-3 text-center">EarlyBird</th><th class="px-4 py-3 text-center">Fees</th><th class="px-4 py-3 text-center">Status</th><th class="px-4 py-3 text-right pr-6">Actions</th></tr>`;
     bodyBlock.innerHTML = filteredRecordDataset.map(user => {
       let trID = user.regId ? `<span class="font-mono font-bold text-slate-200 select-all">${user.regId}</span>` : `<span class="text-slate-600 italic">Unassigned</span>`;
@@ -410,6 +555,11 @@ function renderTargetedDataGrid() {
           </td>
         </tr>`;
     }).join('');
+  }
+
+  const customCountEl = document.getElementById('customExportCount');
+  if (customCountEl) {
+    customCountEl.innerText = filteredRecordDataset.length;
   }
 }
 
@@ -481,6 +631,69 @@ function processCsvExportTask(filterDomainScopeName = "GLOBAL_ALL") {
   const escapeCellString = (val, forceTextLiteral = false) => { if (val === undefined || val === null || val === "null") return '""'; let cleanStr = val.toString().replace(/"/g, '""'); return forceTextLiteral ? `"\t${cleanStr}"` : `"${cleanStr}"`; };
 
   const sanitizedStringRowsArray = targetExportList.map(r => [escapeCellString(r.timestamp), escapeCellString(r.regId, true), escapeCellString(r.fullName), escapeCellString(r.email), escapeCellString(r.phone, true), escapeCellString(r.gender), escapeCellString(r.college), escapeCellString(r.branch), escapeCellString(r.year), escapeCellString(r.domainSelection), escapeCellString(r.accommodation), escapeCellString(r.utr, true), escapeCellString(r.screenshot), escapeCellString(r.dateOfReg), escapeCellString(r.earlyBird), r.amountReceived || 0, escapeCellString(r.status), escapeCellString(r.checkInTime), escapeCellString(r.referredBy), escapeCellString(r.foodPreference), escapeCellString(r.idCardNumber, true), escapeCellString(r.idCardLink), escapeCellString(r.aadhaarLink)].join(","));
+  const fullCsvStringContent = "\uFEFF" + csvHeadersRow.join(",") + "\n" + sanitizedStringRowsArray.join("\n");
+  const binaryMemoryBlob = new Blob([fullCsvStringContent], { type: 'text/csv;charset=utf-8;' });
+  const temporaryBlobDownloadUrlPointer = URL.createObjectURL(binaryMemoryBlob);
+  const anchorDownloadLink = document.createElement("a");
+  
+  anchorDownloadLink.setAttribute("href", temporaryBlobDownloadUrlPointer);
+  anchorDownloadLink.setAttribute("download", compiledFileName);
+  document.body.appendChild(anchorDownloadLink); anchorDownloadLink.click(); document.body.removeChild(anchorDownloadLink);
+}
+
+function processCustomFilteredCsvExportTask() {
+  const queryValue = document.getElementById('searchInput').value.toLowerCase().trim();
+  const statusFilterValue = document.getElementById('filterStatus').value;
+  const collegeFilterValue = document.getElementById('filterCollege').value;
+  const branchFilterValue = document.getElementById('filterBranch').value;
+  const yearFilterValue = document.getElementById('filterYear').value;
+  const domainFilterValue = document.getElementById('filterDomain').value;
+  const accomFilterEl = document.getElementById('filterAccommodation');
+  const genderFilterEl = document.getElementById('filterGender');
+  const attendanceFilterEl = document.getElementById('filterAttendance');
+  const accomFilterValue = accomFilterEl ? accomFilterEl.value : "All";
+  const genderFilterValue = genderFilterEl ? genderFilterEl.value : "All";
+  const attendanceFilterValue = attendanceFilterEl ? attendanceFilterEl.value : "All";
+
+  let filteredRecordDataset = masterRecordsCache.filter(row => {
+    if (activeDayFilterScope && row.dateOfReg !== activeDayFilterScope) return false;
+    if (statusFilterValue !== "All") {
+      if (statusFilterValue === "Approved" && row.status !== "Approved" && row.status !== "Checked-in") return false;
+      if (statusFilterValue !== "Approved" && row.status !== statusFilterValue) return false;
+    }
+    if (collegeFilterValue !== "All" && row.college !== collegeFilterValue) return false;
+    if (branchFilterValue !== "All" && row.branch !== branchFilterValue) return false;
+    if (yearFilterValue !== "All" && row.year.toString() !== yearFilterValue.toString()) return false;
+    if (domainFilterValue !== "All" && row.domainSelection !== domainFilterValue) return false;
+    if (accomFilterValue !== "All" && (row.accommodation || '').trim().toUpperCase() !== accomFilterValue.toUpperCase()) return false;
+    if (genderFilterValue !== "All" && (row.gender || '').trim().toUpperCase() !== genderFilterValue.toUpperCase()) return false;
+    if (attendanceFilterValue !== "All") {
+      const isUserCheckedIn = (row.status === "Checked-in");
+      if (attendanceFilterValue === "Checked-in" && !isUserCheckedIn) return false;
+      if (attendanceFilterValue === "Not Checked-in" && isUserCheckedIn) return false;
+    }
+    
+    if (queryValue) {
+      return [row.regId, row.fullName, row.email, row.phone, row.college, row.branch, row.utr, row.idCardNumber]
+        .join(" ").toLowerCase().includes(queryValue);
+    }
+    return true;
+  });
+
+  if (filteredRecordDataset.length === 0) { alert("No synchronized rows matched criteria scope."); return; }
+
+  // Sort by Ticket ID prefix & number ascending
+  filteredRecordDataset.sort((a, b) => {
+    const idA = (a.regId || '').toString();
+    const idB = (b.regId || '').toString();
+    return idA.localeCompare(idB, undefined, { numeric: true, sensitivity: 'base' });
+  });
+
+  const compiledFileName = "AUNSF_Custom_Segment_Ledger_2026.csv";
+  const csvHeadersRow = ["Timestamp", "Registration ID", "Full Name", "Email Address", "Phone Number", "Gender", "College", "Branch", "Year", "Domain Selection", "Accommodation", "UPI Transaction ID", "Payment Screenshot Link", "Date of Registration", "Early Bird Status", "Amount Received", "Status", "Check-In Timestamp", "Referred By", "Food Preference", "College ID Card Number", "College ID Card Link", "Aadhaar Card Link"];
+  const escapeCellString = (val, forceTextLiteral = false) => { if (val === undefined || val === null || val === "null") return '""'; let cleanStr = val.toString().replace(/"/g, '""'); return forceTextLiteral ? `"\t${cleanStr}"` : `"${cleanStr}"`; };
+
+  const sanitizedStringRowsArray = filteredRecordDataset.map(r => [escapeCellString(r.timestamp), escapeCellString(r.regId, true), escapeCellString(r.fullName), escapeCellString(r.email), escapeCellString(r.phone, true), escapeCellString(r.gender), escapeCellString(r.college), escapeCellString(r.branch), escapeCellString(r.year), escapeCellString(r.domainSelection), escapeCellString(r.accommodation), escapeCellString(r.utr, true), escapeCellString(r.screenshot), escapeCellString(r.dateOfReg), escapeCellString(r.earlyBird), r.amountReceived || 0, escapeCellString(r.status), escapeCellString(r.checkInTime), escapeCellString(r.referredBy), escapeCellString(r.foodPreference), escapeCellString(r.idCardNumber, true), escapeCellString(r.idCardLink), escapeCellString(r.aadhaarLink)].join(","));
   const fullCsvStringContent = "\uFEFF" + csvHeadersRow.join(",") + "\n" + sanitizedStringRowsArray.join("\n");
   const binaryMemoryBlob = new Blob([fullCsvStringContent], { type: 'text/csv;charset=utf-8;' });
   const temporaryBlobDownloadUrlPointer = URL.createObjectURL(binaryMemoryBlob);

@@ -60,10 +60,15 @@ function bootstrapDashboard() {
   document.getElementById('clearFiltersBtn').addEventListener('click', clearAllActiveFilters);
   document.getElementById('btnResetScopeBypass').addEventListener('click', clearDayTimelineScopeBypass);
 
+  const custExportBtn = document.getElementById('customExportCsvBtn');
+  if (custExportBtn) {
+    custExportBtn.addEventListener('click', processCustomFilteredCsvExportTask);
+  }
+
   setupModeButtonsViewRoutingControlEngine();
   setupAttendanceDomainTabEngine();
 
-  ['searchInput', 'filterStatus', 'filterCollege', 'filterBranch', 'filterYear', 'filterDomain', 'filterAccommodation', 'filterGender'].forEach(id => {
+  ['searchInput', 'filterStatus', 'filterCollege', 'filterBranch', 'filterYear', 'filterDomain', 'filterAccommodation', 'filterGender', 'filterAttendance'].forEach(id => {
     const el = document.getElementById(id);
     if (el) {
       el.addEventListener('change', renderTargetedDataGrid);
@@ -136,16 +141,20 @@ function updateConfigFieldsInAdminUI() {
 }
 
 function setupModeButtonsViewRoutingControlEngine() {
-  const routingMap = { 'btnRegMode': 'registration', 'btnLookoverMode': 'attendance', 'btnRevenueMode': 'revenue' };
+  const routingMap = { 'btnRegMode': 'registration', 'btnLookoverMode': 'attendance', 'btnRevenueMode': 'revenue', 'btnCustomExportMode': 'custom_export' };
   Object.keys(routingMap).forEach(btnId => {
-    document.getElementById(btnId).addEventListener('click', (e) => {
-      Object.keys(routingMap).forEach(id => {
-        document.getElementById(id).className = "view-mode-btn bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition tracking-wide cursor-pointer whitespace-nowrap";
+    const btn = document.getElementById(btnId);
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        Object.keys(routingMap).forEach(id => {
+          const b = document.getElementById(id);
+          if (b) b.className = "view-mode-btn bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition tracking-wide cursor-pointer whitespace-nowrap";
+        });
+        e.target.className = "view-mode-btn bg-blue-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition tracking-wide cursor-pointer whitespace-nowrap";
+        dashboardViewMode = routingMap[btnId];
+        handleStructuralViewLayoutAlterators();
       });
-      e.target.className = "view-mode-btn bg-blue-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition tracking-wide cursor-pointer whitespace-nowrap";
-      dashboardViewMode = routingMap[btnId];
-      handleStructuralViewLayoutAlterators();
-    });
+    }
   });
 }
 
@@ -177,13 +186,20 @@ function handleStructuralViewLayoutAlterators() {
   const metricsGrid = document.getElementById('metricsCountersGrid');
   const toolbarContainer = document.getElementById('filterToolbarContainer');
   const attendanceTabsBlock = document.getElementById('attendanceDomainTabsContainer');
+  const customExportBlock = document.getElementById('customExportContainer');
 
   if (dashboardViewMode === "revenue") {
     sidebar.classList.remove('hidden'); metricsGrid.classList.add('hidden'); toolbarContainer.classList.add('hidden'); attendanceTabsBlock.classList.add('hidden');
+    if (customExportBlock) customExportBlock.classList.add('hidden');
   } else if (dashboardViewMode === "attendance") {
     sidebar.classList.add('hidden'); metricsGrid.classList.remove('hidden'); toolbarContainer.className = toolbarContainer.className.replace("hidden", "").trim(); attendanceTabsBlock.classList.remove('hidden');
+    if (customExportBlock) customExportBlock.classList.add('hidden');
+  } else if (dashboardViewMode === "custom_export") {
+    sidebar.classList.add('hidden'); metricsGrid.classList.add('hidden'); toolbarContainer.className = toolbarContainer.className.replace("hidden", "").trim(); attendanceTabsBlock.classList.add('hidden');
+    if (customExportBlock) customExportBlock.classList.remove('hidden');
   } else {
     sidebar.classList.add('hidden'); metricsGrid.classList.remove('hidden'); toolbarContainer.className = toolbarContainer.className.replace("hidden", "").trim(); attendanceTabsBlock.classList.add('hidden');
+    if (customExportBlock) customExportBlock.classList.add('hidden');
   }
   renderTargetedDataGrid();
 }
@@ -196,6 +212,7 @@ function clearAllActiveFilters() {
   document.getElementById('filterYear').value = "All"; document.getElementById('filterDomain').value = "All";
   const fa = document.getElementById('filterAccommodation'); if (fa) fa.value = "All";
   const fg = document.getElementById('filterGender'); if (fg) fg.value = "All";
+  const fat = document.getElementById('filterAttendance'); if (fat) fat.value = "All";
   activeDayFilterScope = null; renderTargetedDataGrid();
 }
 
@@ -410,8 +427,10 @@ function renderTargetedDataGrid() {
   const domainFilterValue = document.getElementById('filterDomain').value;
   const accomFilterEl = document.getElementById('filterAccommodation');
   const genderFilterEl = document.getElementById('filterGender');
+  const attendanceFilterEl = document.getElementById('filterAttendance');
   const accomFilterValue = accomFilterEl ? accomFilterEl.value : "All";
   const genderFilterValue = genderFilterEl ? genderFilterEl.value : "All";
+  const attendanceFilterValue = attendanceFilterEl ? attendanceFilterEl.value : "All";
 
   let filteredRecordDataset = masterRecordsCache.filter(row => {
     if (activeDayFilterScope && row.dateOfReg !== activeDayFilterScope) return false;
@@ -432,12 +451,24 @@ function renderTargetedDataGrid() {
     if (domainFilterValue !== "All" && row.domainSelection !== domainFilterValue) return false;
     if (accomFilterValue !== "All" && (row.accommodation || '').trim().toUpperCase() !== accomFilterValue.toUpperCase()) return false;
     if (genderFilterValue !== "All" && (row.gender || '').trim().toUpperCase() !== genderFilterValue.toUpperCase()) return false;
+    if (attendanceFilterValue !== "All") {
+      const isUserCheckedIn = (row.status === "Checked-in");
+      if (attendanceFilterValue === "Checked-in" && !isUserCheckedIn) return false;
+      if (attendanceFilterValue === "Not Checked-in" && isUserCheckedIn) return false;
+    }
     
     if (queryValue) {
       return [row.regId, row.fullName, row.email, row.phone, row.college, row.branch, row.utr, row.idCardNumber]
         .join(" ").toLowerCase().includes(queryValue);
     }
     return true;
+  });
+
+  // Sort by Ticket ID prefix & number ascending
+  filteredRecordDataset.sort((a, b) => {
+    const idA = (a.regId || '').toString();
+    const idB = (b.regId || '').toString();
+    return idA.localeCompare(idB, undefined, { numeric: true, sensitivity: 'base' });
   });
 
   const cohortLabels = { "1": "FRESHER", "2": "SOPHOMORE", "3": "JUNIOR", "4": "SENIOR" };
@@ -457,7 +488,7 @@ function renderTargetedDataGrid() {
         <td class="px-4 py-3 text-right font-mono text-purple-400 font-black pr-6">₹${user.amountReceived}</td>
       </tr>`).join('');
 
-  } else if (dashboardViewMode === "registration") {
+  } else if (dashboardViewMode === "registration" || dashboardViewMode === "custom_export") {
     // Actions column has been completely removed
     headBlock.innerHTML = `<tr class="bg-slate-900/40 text-slate-400 text-[11px] font-bold"><th class="px-4 py-3">Ticket ID</th><th class="px-4 py-3">Participant Details</th><th class="px-4 py-3">College / Year</th><th class="px-4 py-3">Domain Selection</th><th class="px-4 py-3 text-center">Accom.</th><th class="px-4 py-3">UTR / Verification Links</th><th class="px-4 py-3 text-center">Date</th><th class="px-4 py-3 text-center">EarlyBird</th><th class="px-4 py-3 text-center">Fees</th><th class="px-4 py-3 text-center">Status</th></tr>`;
     bodyBlock.innerHTML = filteredRecordDataset.map(user => {
@@ -510,6 +541,11 @@ function renderTargetedDataGrid() {
         </tr>`;
     }).join('');
   }
+
+  const customCountEl = document.getElementById('customExportCount');
+  if (customCountEl) {
+    customCountEl.innerText = filteredRecordDataset.length;
+  }
 }
 
 function processCsvExportTask(filterDomainScopeName = "GLOBAL_ALL") {
@@ -527,6 +563,69 @@ function processCsvExportTask(filterDomainScopeName = "GLOBAL_ALL") {
   const escapeCellString = (val, forceTextLiteral = false) => { if (val === undefined || val === null || val === "null") return '""'; let cleanStr = val.toString().replace(/"/g, '""'); return forceTextLiteral ? `"\t${cleanStr}"` : `"${cleanStr}"`; };
 
   const sanitizedStringRowsArray = targetExportList.map(r => [escapeCellString(r.timestamp), escapeCellString(r.regId, true), escapeCellString(r.fullName), escapeCellString(r.email), escapeCellString(r.phone, true), escapeCellString(r.gender), escapeCellString(r.college), escapeCellString(r.branch), escapeCellString(r.year), escapeCellString(r.domainSelection), escapeCellString(r.accommodation), escapeCellString(r.utr, true), escapeCellString(r.screenshot), escapeCellString(r.dateOfReg), escapeCellString(r.earlyBird), r.amountReceived || 0, escapeCellString(r.status), escapeCellString(r.checkInTime), escapeCellString(r.referredBy), escapeCellString(r.foodPreference), escapeCellString(r.idCardNumber, true), escapeCellString(r.idCardLink), escapeCellString(r.aadhaarLink)].join(","));
+  const fullCsvStringContent = "\uFEFF" + csvHeadersRow.join(",") + "\n" + sanitizedStringRowsArray.join("\n");
+  const binaryMemoryBlob = new Blob([fullCsvStringContent], { type: 'text/csv;charset=utf-8;' });
+  const temporaryBlobDownloadUrlPointer = URL.createObjectURL(binaryMemoryBlob);
+  const anchorDownloadLink = document.createElement("a");
+  
+  anchorDownloadLink.setAttribute("href", temporaryBlobDownloadUrlPointer);
+  anchorDownloadLink.setAttribute("download", compiledFileName);
+  document.body.appendChild(anchorDownloadLink); anchorDownloadLink.click(); document.body.removeChild(anchorDownloadLink);
+}
+
+function processCustomFilteredCsvExportTask() {
+  const queryValue = document.getElementById('searchInput').value.toLowerCase().trim();
+  const statusFilterValue = document.getElementById('filterStatus').value;
+  const collegeFilterValue = document.getElementById('filterCollege').value;
+  const branchFilterValue = document.getElementById('filterBranch').value;
+  const yearFilterValue = document.getElementById('filterYear').value;
+  const domainFilterValue = document.getElementById('filterDomain').value;
+  const accomFilterEl = document.getElementById('filterAccommodation');
+  const genderFilterEl = document.getElementById('filterGender');
+  const attendanceFilterEl = document.getElementById('filterAttendance');
+  const accomFilterValue = accomFilterEl ? accomFilterEl.value : "All";
+  const genderFilterValue = genderFilterEl ? genderFilterEl.value : "All";
+  const attendanceFilterValue = attendanceFilterEl ? attendanceFilterEl.value : "All";
+
+  let filteredRecordDataset = masterRecordsCache.filter(row => {
+    if (activeDayFilterScope && row.dateOfReg !== activeDayFilterScope) return false;
+    if (statusFilterValue !== "All") {
+      if (statusFilterValue === "Approved" && row.status !== "Approved" && row.status !== "Checked-in") return false;
+      if (statusFilterValue !== "Approved" && row.status !== statusFilterValue) return false;
+    }
+    if (collegeFilterValue !== "All" && row.college !== collegeFilterValue) return false;
+    if (branchFilterValue !== "All" && row.branch !== branchFilterValue) return false;
+    if (yearFilterValue !== "All" && row.year.toString() !== yearFilterValue.toString()) return false;
+    if (domainFilterValue !== "All" && row.domainSelection !== domainFilterValue) return false;
+    if (accomFilterValue !== "All" && (row.accommodation || '').trim().toUpperCase() !== accomFilterValue.toUpperCase()) return false;
+    if (genderFilterValue !== "All" && (row.gender || '').trim().toUpperCase() !== genderFilterValue.toUpperCase()) return false;
+    if (attendanceFilterValue !== "All") {
+      const isUserCheckedIn = (row.status === "Checked-in");
+      if (attendanceFilterValue === "Checked-in" && !isUserCheckedIn) return false;
+      if (attendanceFilterValue === "Not Checked-in" && isUserCheckedIn) return false;
+    }
+    
+    if (queryValue) {
+      return [row.regId, row.fullName, row.email, row.phone, row.college, row.branch, row.utr, row.idCardNumber]
+        .join(" ").toLowerCase().includes(queryValue);
+    }
+    return true;
+  });
+
+  if (filteredRecordDataset.length === 0) { alert("No synchronized rows matched criteria scope."); return; }
+
+  // Sort by Ticket ID prefix & number ascending
+  filteredRecordDataset.sort((a, b) => {
+    const idA = (a.regId || '').toString();
+    const idB = (b.regId || '').toString();
+    return idA.localeCompare(idB, undefined, { numeric: true, sensitivity: 'base' });
+  });
+
+  const compiledFileName = "AUNSF_Custom_Segment_Ledger_2026.csv";
+  const csvHeadersRow = ["Timestamp", "Registration ID", "Full Name", "Email Address", "Phone Number", "Gender", "College", "Branch", "Year", "Domain Selection", "Accommodation", "UPI Transaction ID", "Payment Screenshot Link", "Date of Registration", "Early Bird Status", "Amount Received", "Status", "Check-In Timestamp", "Referred By", "Food Preference", "College ID Card Number", "College ID Card Link", "Aadhaar Card Link"];
+  const escapeCellString = (val, forceTextLiteral = false) => { if (val === undefined || val === null || val === "null") return '""'; let cleanStr = val.toString().replace(/"/g, '""'); return forceTextLiteral ? `"\t${cleanStr}"` : `"${cleanStr}"`; };
+
+  const sanitizedStringRowsArray = filteredRecordDataset.map(r => [escapeCellString(r.timestamp), escapeCellString(r.regId, true), escapeCellString(r.fullName), escapeCellString(r.email), escapeCellString(r.phone, true), escapeCellString(r.gender), escapeCellString(r.college), escapeCellString(r.branch), escapeCellString(r.year), escapeCellString(r.domainSelection), escapeCellString(r.accommodation), escapeCellString(r.utr, true), escapeCellString(r.screenshot), escapeCellString(r.dateOfReg), escapeCellString(r.earlyBird), r.amountReceived || 0, escapeCellString(r.status), escapeCellString(r.checkInTime), escapeCellString(r.referredBy), escapeCellString(r.foodPreference), escapeCellString(r.idCardNumber, true), escapeCellString(r.idCardLink), escapeCellString(r.aadhaarLink)].join(","));
   const fullCsvStringContent = "\uFEFF" + csvHeadersRow.join(",") + "\n" + sanitizedStringRowsArray.join("\n");
   const binaryMemoryBlob = new Blob([fullCsvStringContent], { type: 'text/csv;charset=utf-8;' });
   const temporaryBlobDownloadUrlPointer = URL.createObjectURL(binaryMemoryBlob);
