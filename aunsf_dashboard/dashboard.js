@@ -1,6 +1,9 @@
 const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbx30L0n7gS9WPCfRzhj3Y0xRZcCs0XVRz3cm9MLNvZeJ9LTll2iji7sxIBMMjWXAxOgSA/exec"; 
+const MERGE_API_URL = "YOUR_MERGE_API_URL_HERE";
 
 let masterRecordsCache = [];
+let rawSyncRecordsList = [];
+let collegeMergeMap = JSON.parse(localStorage.getItem('aunsf_college_merge_map')) || {};
 let lastDataHashStr = ""; // Direct memory block footprint to prevent UI resetting anomalies
 let dashboardViewMode = "registration"; 
 let activeAttendanceDomainTab = "Human Behaviour & Civic Innovation"; 
@@ -43,14 +46,12 @@ window.onload = () => {
 
 function bootstrapDashboard() {
   // Instant Bootstrapping from Local Cache
-  const cachedLocalRecordDataString = localStorage.getItem('aunsf_master_system_cache');
+  const cachedLocalRecordDataString = localStorage.getItem('aunsf_master_system_raw_cache') || localStorage.getItem('aunsf_master_system_cache');
   if (cachedLocalRecordDataString) {
     try {
-      masterRecordsCache = JSON.parse(cachedLocalRecordDataString);
+      rawSyncRecordsList = JSON.parse(cachedLocalRecordDataString);
       lastDataHashStr = localStorage.getItem('aunsf_master_hash') || "";
-      calculateSystemMetricsAndDistributions();
-      buildDynamicAlphaSortedFilterDropdowns();
-      renderTargetedDataGrid();
+      applyCollegeMergeMapAndProcessData();
     } catch (err) { console.error("Cache read bypassed: ", err); }
   }
 
@@ -78,9 +79,13 @@ function bootstrapDashboard() {
 
   // Execute Immediate Foreground Sync Pipeline
   synchronizeCloudLedger(false);
-  
-  // Set Rapid 5-Second Background Poll (Sub-second delta rendering)
-  setInterval(() => { synchronizeCloudLedger(true); }, 5000);
+
+  // Set 30-Second Background Poll (Only runs when tab is active/visible to save requests)
+  setInterval(() => {
+    if (document.visibilityState === "visible") {
+      synchronizeCloudLedger(true);
+    }
+  }, 30000);
 }
 
 async function synchronizeCloudLedger(isSilentBackgroundPoll = false) {
@@ -92,6 +97,21 @@ async function synchronizeCloudLedger(isSilentBackgroundPoll = false) {
     btn.innerText = "🔍 Syncing...";
   }
   try {
+    // 1. Fetch college merge rules from Google Apps Script if configured
+    if (MERGE_API_URL && MERGE_API_URL !== "YOUR_MERGE_API_URL_HERE") {
+      try {
+        const mergeResponse = await fetch(MERGE_API_URL);
+        const mergeResult = await mergeResponse.json();
+        if (mergeResult.status === "success" && mergeResult.rules) {
+          collegeMergeMap = mergeResult.rules;
+          localStorage.setItem('aunsf_college_merge_map', JSON.stringify(collegeMergeMap));
+        }
+      } catch (err) {
+        console.warn("Merge sync channel latency: ", err);
+      }
+    }
+
+    // 2. Fetch main registration rows
     const response = await fetch(BACKEND_API_URL, {
       method: 'POST',
       body: JSON.stringify({ action: "getRecords" })
@@ -102,8 +122,8 @@ async function synchronizeCloudLedger(isSilentBackgroundPoll = false) {
       // Compute footprint hash based on string size and array parameters
       const incomingDataHash = JSON.stringify(parsedResult.records).length + "_" + parsedResult.records.length;
       
-      masterRecordsCache = parsedResult.records;
-      localStorage.setItem('aunsf_master_system_cache', JSON.stringify(masterRecordsCache));
+      rawSyncRecordsList = parsedResult.records;
+      localStorage.setItem('aunsf_master_system_raw_cache', JSON.stringify(rawSyncRecordsList));
       localStorage.setItem('aunsf_master_hash', incomingDataHash);
       
       if (parsedResult.config) {
@@ -114,9 +134,7 @@ async function synchronizeCloudLedger(isSilentBackgroundPoll = false) {
       // SPEED FIX: Only force the browser to repaint the DOM elements if new data row entries exist
       if (incomingDataHash !== lastDataHashStr || !isSilentBackgroundPoll) {
         lastDataHashStr = incomingDataHash;
-        buildDynamicAlphaSortedFilterDropdowns();
-        calculateSystemMetricsAndDistributions();
-        renderTargetedDataGrid();
+        applyCollegeMergeMapAndProcessData();
       }
     }
   } catch (error) { console.error("Sync channel timeout latency: ", error); }
@@ -634,4 +652,24 @@ function processCustomFilteredCsvExportTask() {
   anchorDownloadLink.setAttribute("href", temporaryBlobDownloadUrlPointer);
   anchorDownloadLink.setAttribute("download", compiledFileName);
   document.body.appendChild(anchorDownloadLink); anchorDownloadLink.click(); document.body.removeChild(anchorDownloadLink);
+}
+
+function applyCollegeMergeMapAndProcessData() {
+  masterRecordsCache = JSON.parse(JSON.stringify(rawSyncRecordsList));
+  masterRecordsCache.forEach(r => {
+    if (r.college) {
+      const cleanCol = r.college.trim().toUpperCase();
+      if (collegeMergeMap[cleanCol]) {
+        r.college = collegeMergeMap[cleanCol];
+      } else {
+        r.college = cleanCol;
+      }
+    } else {
+      r.college = "N/A";
+    }
+  });
+
+  buildDynamicAlphaSortedFilterDropdowns();
+  calculateSystemMetricsAndDistributions();
+  renderTargetedDataGrid();
 }
