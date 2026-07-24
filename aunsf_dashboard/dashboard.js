@@ -159,7 +159,7 @@ function updateConfigFieldsInAdminUI() {
 }
 
 function setupModeButtonsViewRoutingControlEngine() {
-  const routingMap = { 'btnRegMode': 'registration', 'btnLookoverMode': 'attendance', 'btnRevenueMode': 'revenue', 'btnCustomExportMode': 'custom_export' };
+  const routingMap = { 'btnRegMode': 'registration', 'btnLookoverMode': 'attendance', 'btnRevenueMode': 'revenue', 'btnCustomExportMode': 'custom_export', 'btnMergeMode': 'merge' };
   Object.keys(routingMap).forEach(btnId => {
     const btn = document.getElementById(btnId);
     if (btn) {
@@ -205,19 +205,34 @@ function handleStructuralViewLayoutAlterators() {
   const toolbarContainer = document.getElementById('filterToolbarContainer');
   const attendanceTabsBlock = document.getElementById('attendanceDomainTabsContainer');
   const customExportBlock = document.getElementById('customExportContainer');
+  const mergeBlock = document.getElementById('mergeModeContainer');
+  const mainWorkspaceGrid = document.getElementById('mainWorkspaceGrid');
 
   if (dashboardViewMode === "revenue") {
     sidebar.classList.remove('hidden'); metricsGrid.classList.add('hidden'); toolbarContainer.classList.add('hidden'); attendanceTabsBlock.classList.add('hidden');
     if (customExportBlock) customExportBlock.classList.add('hidden');
+    if (mergeBlock) mergeBlock.classList.add('hidden');
+    if (mainWorkspaceGrid) mainWorkspaceGrid.classList.remove('hidden');
   } else if (dashboardViewMode === "attendance") {
     sidebar.classList.add('hidden'); metricsGrid.classList.remove('hidden'); toolbarContainer.className = toolbarContainer.className.replace("hidden", "").trim(); attendanceTabsBlock.classList.remove('hidden');
     if (customExportBlock) customExportBlock.classList.add('hidden');
+    if (mergeBlock) mergeBlock.classList.add('hidden');
+    if (mainWorkspaceGrid) mainWorkspaceGrid.classList.remove('hidden');
   } else if (dashboardViewMode === "custom_export") {
     sidebar.classList.add('hidden'); metricsGrid.classList.add('hidden'); toolbarContainer.className = toolbarContainer.className.replace("hidden", "").trim(); attendanceTabsBlock.classList.add('hidden');
     if (customExportBlock) customExportBlock.classList.remove('hidden');
+    if (mergeBlock) mergeBlock.classList.add('hidden');
+    if (mainWorkspaceGrid) mainWorkspaceGrid.classList.remove('hidden');
+  } else if (dashboardViewMode === "merge") {
+    sidebar.classList.add('hidden'); metricsGrid.classList.add('hidden'); toolbarContainer.classList.add('hidden'); attendanceTabsBlock.classList.add('hidden');
+    if (customExportBlock) customExportBlock.classList.add('hidden');
+    if (mergeBlock) mergeBlock.classList.remove('hidden');
+    if (mainWorkspaceGrid) mainWorkspaceGrid.classList.add('hidden');
   } else {
     sidebar.classList.add('hidden'); metricsGrid.classList.remove('hidden'); toolbarContainer.className = toolbarContainer.className.replace("hidden", "").trim(); attendanceTabsBlock.classList.add('hidden');
     if (customExportBlock) customExportBlock.classList.add('hidden');
+    if (mergeBlock) mergeBlock.classList.add('hidden');
+    if (mainWorkspaceGrid) mainWorkspaceGrid.classList.remove('hidden');
   }
   renderTargetedDataGrid();
 }
@@ -672,4 +687,50 @@ function applyCollegeMergeMapAndProcessData() {
   buildDynamicAlphaSortedFilterDropdowns();
   calculateSystemMetricsAndDistributions();
   renderTargetedDataGrid();
+  renderMergeRulesListGrid();
+}
+
+function renderMergeRulesListGrid() {
+  const container = document.getElementById('mergeRulesCardsGrid');
+  if (!container) return;
+
+  // Group mappings by target college name
+  const groupedRules = {};
+  Object.keys(collegeMergeMap).forEach(src => {
+    const dst = collegeMergeMap[src];
+    if (!groupedRules[dst]) {
+      groupedRules[dst] = [];
+    }
+    groupedRules[dst].push(src);
+  });
+
+  const targets = Object.keys(groupedRules).sort();
+  if (targets.length === 0) {
+    container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 italic text-xs">No active merge rules configured in the cloud database.</div>`;
+    return;
+  }
+
+  container.innerHTML = targets.map(dst => {
+    const sources = groupedRules[dst].sort();
+    const sourceTagsHtml = sources.map(src => `
+      <div class="flex items-center bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 text-[10px] font-mono text-slate-300">
+        <span class="truncate max-w-[200px] select-all">${src}</span>
+      </div>
+    `).join('');
+
+    return `
+      <div class="bg-slate-900/40 p-4 rounded-xl border border-slate-800/80 flex flex-col justify-between space-y-3">
+        <div class="space-y-1">
+          <div class="flex justify-between items-center text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+            <span>Standardized Group</span>
+            <span>${sources.length} Combined</span>
+          </div>
+          <h4 class="text-xs font-black text-blue-400 font-mono uppercase truncate select-all">${dst}</h4>
+        </div>
+        <div class="flex flex-wrap gap-1.5 pt-1">
+          ${sourceTagsHtml}
+        </div>
+      </div>
+    `;
+  }).join('');
 }
