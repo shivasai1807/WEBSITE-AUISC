@@ -153,14 +153,14 @@ const Home = () => {
   return (
     <div className="w-full overflow-hidden min-h-screen bg-light-blue-purple">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen py-24 flex flex-col items-center justify-center overflow-hidden">
         <ParticleBackground />
         <div
           ref={parallaxRef}
           className="absolute inset-0 bg-gradient-to-b from-medium-blue/20 to-dark-blue-purple/30 backdrop-blur-sm"
         >
         </div>
-        <div className="container mx-auto px-4 text-center relative z-10">
+        <div className="container mx-auto px-4 text-center relative z-10 mt-10">
           <motion.h1
             className="text-4xl sm:text-6xl md:text-7xl font-bold text-dark-blue-purple mb-6 flex flex-wrap justify-center"
             variants={containerVariants}
@@ -181,10 +181,24 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-dark-blue-purple mb-8"
+            className="text-xl text-dark-blue-purple mb-10"
           >
             Anurag University IUCEE Student Chapter
           </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4, type: "spring", bounce: 0.3 }}
+            className="w-full max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl border-4 border-white/40 group"
+          >
+            <img 
+              src="/poster.webp" 
+              alt="AUNSF 4.0 Official Poster" 
+              loading="lazy"
+              className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+            />
+          </motion.div>
         </div>
       </section>
 
