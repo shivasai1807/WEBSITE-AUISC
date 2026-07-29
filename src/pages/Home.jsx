@@ -143,8 +143,8 @@ const Home = () => {
   };
 
   const toggleFaq = (idx) => {
-    setOpenFaqs(prev => 
-      prev.includes(idx) 
+    setOpenFaqs(prev =>
+      prev.includes(idx)
         ? prev.filter(i => i !== idx)
         : [...prev, idx]
     );
@@ -228,7 +228,7 @@ const Home = () => {
       {/* Gallery Section - Modern Collage Style */}
       <section className="py-12 bg-light-blue-purple">
         <div className="container mx-auto px-4">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -239,16 +239,15 @@ const Home = () => {
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[300px] gap-6">
             {galleryImages.map((img, idx) => (
-              <motion.div 
-                key={idx} 
+              <motion.div
+                key={idx}
                 initial={{ opacity: 0, scale: 0.8, y: 50 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 whileHover={{ scale: 1.02 }}
-                className={`relative group overflow-hidden rounded-xl shadow-lg cursor-pointer ${
-                  idx === 0 ? 'md:col-span-2 md:row-span-2' : ''
-                }`}
+                className={`relative group overflow-hidden rounded-xl shadow-lg cursor-pointer ${idx === 0 ? 'md:col-span-2 md:row-span-2' : ''
+                  }`}
                 onClick={() => openLightbox(img)}
               >
                 <motion.img
@@ -258,13 +257,13 @@ const Home = () => {
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                 />
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-dark-blue-purple/80 via-dark-blue-purple/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"
                   initial={false}
                   whileHover={{ opacity: 1 }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                    <motion.span 
+                    <motion.span
                       className="text-white text-lg font-semibold block"
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 1 }}
@@ -274,7 +273,7 @@ const Home = () => {
                     </motion.span>
                   </div>
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="absolute top-4 right-4 bg-white/90 rounded-full p-2 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-500"
                   whileHover={{ rotate: 90 }}
                 >
@@ -304,9 +303,9 @@ const Home = () => {
               className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-lg shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <motion.img 
-                src={lightboxImg} 
-                alt="Full size image" 
+              <motion.img
+                src={lightboxImg}
+                alt="Full size image"
                 className="max-w-full max-h-[90vh] object-contain"
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
