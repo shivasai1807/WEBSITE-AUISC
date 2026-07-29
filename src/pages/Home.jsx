@@ -31,6 +31,12 @@ const galleryImages = [
   "/events/aunsf_2/img2.JPG",
 ];
 
+const eventPosters = [
+  "/poster.webp",
+  "/events/aunsf_4.0_poster.jpeg",
+  "/Itineray.webp"
+];
+
 const faqs = [
   {
     q: "What is AUISC?",
@@ -233,6 +239,48 @@ const Home = () => {
               >
                 <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
                 <p className="text-dark-blue-purple">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Event Posters Section */}
+      <section className="py-16 bg-light-blue-purple/50">
+        <div className="container mx-auto px-4">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl font-bold text-center mb-12 text-dark-blue-purple"
+          >
+            Event Posters
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
+            {eventPosters.map((img, idx) => (
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.15 }}
+                whileHover={{ y: -8 }}
+                className="relative group overflow-hidden rounded-2xl shadow-xl cursor-pointer bg-white flex items-center justify-center border border-white/50"
+                onClick={() => openLightbox(img)}
+              >
+                <img
+                  src={img}
+                  alt={`AUNSF 4.0 Poster ${idx + 1}`}
+                  loading="lazy"
+                  className="w-full h-auto max-h-[600px] object-contain transform group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-blue-purple/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-full p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none flex justify-center">
+                  <span className="bg-white/95 text-dark-blue-purple px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                    Click to Enlarge
+                  </span>
+                </div>
               </motion.div>
             ))}
           </div>
