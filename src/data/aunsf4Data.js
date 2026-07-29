@@ -1,3 +1,9 @@
+import sampuImg from "./sampu.webp";
+import mansiImg from "./mansi.webp";
+import rithikaImg from "./rithika.webp";
+import krishnaVedulaImg from "./krishna vedula.png";
+import archanaMantriImg from "./Dr-Archana-Mantri.png";
+
 const TEAM = "/events/aunsf/aunsf_4.0/team";
 const TEAM_PICS = "/team_pics";
 
@@ -86,7 +92,7 @@ export const domains = [
       name: "Ms. Sampada Pachaury",
       designation: "Director",
       organization: "Anurag Center for Education Innovation (ACEI), Anurag University",
-      photo: "/sampadha.jpg",
+      photo: sampuImg,
     },
   },
   {
@@ -103,7 +109,7 @@ export const domains = [
       name: "Ms. Mansi Chitgopekar",
       designation: "Psychology Research Enthusiast",
       organization: "Mental Advocate",
-      photo: `${TEAM}/mansi-chitgopekar.png`,
+      photo: mansiImg,
     },
   },
   {
@@ -120,7 +126,7 @@ export const domains = [
       name: "Ms. Ritika Chawla",
       designation: "Climate Education & Sustainability Consultant",
       organization: "",
-      photo: "/rithika.webp",
+      photo: rithikaImg,
     },
   },
 ];
@@ -132,7 +138,7 @@ export const chiefGuests = [
     designation: "Executive Director",
     organization: "IUCEE Foundation",
     role: "Chief Guest",
-    photo: "/krishna vedula.png",
+    photo: krishnaVedulaImg,
   },
   {
     id: "archana-mantri",
@@ -140,7 +146,7 @@ export const chiefGuests = [
     designation: "Vice Chancellor",
     organization: "Anurag University",
     role: "Chief Patron",
-    photo: "/Dr-Archana-Mantri.png",
+    photo: archanaMantriImg,
   },
   {
     id: "sampada-pachaury",
@@ -148,7 +154,7 @@ export const chiefGuests = [
     designation: "Director (ACEI)",
     organization: "Anurag University",
     role: "Chief Guest",
-    photo: "/sampadha.jpg",
+    photo: sampuImg,
   },
 ];
 
